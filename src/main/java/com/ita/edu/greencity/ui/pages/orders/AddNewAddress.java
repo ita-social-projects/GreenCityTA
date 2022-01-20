@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
 import java.util.List;
@@ -11,6 +12,11 @@ import java.util.List;
 public class AddNewAddress {
 
     protected WebDriver driver;
+
+    public AddNewAddress(WebDriver driver){
+        PageFactory.initElements(driver,this);
+        this.driver = driver;
+    }
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-info-pop-up-title']")
     private WebElement newAddressTitle;

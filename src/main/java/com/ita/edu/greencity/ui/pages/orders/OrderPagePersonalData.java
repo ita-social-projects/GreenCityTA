@@ -4,10 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class OrderPagePersonalData {
 
     protected WebDriver driver;
+
+    public OrderPagePersonalData(WebDriver driver){
+        PageFactory.initElements(driver,this);
+        this.driver = driver;
+    }
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-data-title']")
     private WebElement personalDataTitle;
