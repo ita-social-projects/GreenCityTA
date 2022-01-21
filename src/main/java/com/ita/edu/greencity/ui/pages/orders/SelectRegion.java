@@ -63,7 +63,7 @@ public class SelectRegion {
         getRegionDropdown().click();
     }
 
-    public void chooseRegionByIndex(int index) {
+    public SelectRegion chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
@@ -73,7 +73,7 @@ public class SelectRegion {
         }
     }
 
-    public void chooseRegionByValue(String value) {
+    public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
