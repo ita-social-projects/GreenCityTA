@@ -1,10 +1,19 @@
 package com.ita.edu.greencity.ui.pages.sign_in;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class SignIn {
+    private WebDriver driver;
+
+    public SignIn(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
+
     @FindBy(how = How.CSS, using = "a.close-modal-window")
     private WebElement close;
 
@@ -28,15 +37,6 @@ public class SignIn {
 
     @FindBy(how = How.CSS, using = "a.ubs-sign-up-link")
     private WebElement signUp;
-
-
-
-
-
-
-
-
-
 
 
 
