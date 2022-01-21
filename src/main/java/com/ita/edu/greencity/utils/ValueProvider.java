@@ -18,5 +18,9 @@ public class ValueProvider {
     public String getBaseURL() {
         return properties.getProperty("baseURL");
     }
+    public String UbsHomePageURL() {
+        return properties.getProperty("UbsHomePageURL");
+    }
+
 
 }

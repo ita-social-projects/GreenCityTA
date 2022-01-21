@@ -8,7 +8,7 @@ public class FirstTest extends TestRun {
     public void firstTest() {
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/";
         String actual = driver.getCurrentUrl();
-
         Assert.assertEquals(actual, expected);
     }
+
 }
