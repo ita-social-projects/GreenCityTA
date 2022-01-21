@@ -5,12 +5,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import java.time.Duration;
 import java.util.List;
 
 public class SelectRegion {
     private WebDriver driver;
+
+    public SelectRegion(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        this.driver = driver;
+    }
 
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
@@ -25,7 +29,7 @@ public class SelectRegion {
     private WebElement regionDropdown;
 
     @FindBy(xpath = "//select[@name='region']/option[@class ='ng-star-inserted']")
-    private List <WebElement> listOfRegions;
+    private List<WebElement> listOfRegions;
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -41,12 +45,6 @@ public class SelectRegion {
 
     public WebElement getRegionDropdown() {
         return regionDropdown;
-    }
-
-
-    public SelectRegion(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     public void clickOnCloseButton() {
@@ -65,26 +63,26 @@ public class SelectRegion {
         getRegionDropdown().click();
     }
 
-    public void chooseRegionByIndex(int index){
+    public void chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
             listOfRegions.get(index).click();
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public void chooseRegionByValue(String value){
+    public void chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
-            for (WebElement option:listOfRegions) {
-                if(option.getText().contains(value.trim()))
+            for (WebElement option : listOfRegions) {
+                if (option.getText().contains(value.trim()))
                     option.click();
                 break;
             }
-        }catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
     }
