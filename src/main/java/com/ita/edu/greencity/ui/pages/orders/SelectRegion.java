@@ -71,6 +71,7 @@ public class SelectRegion {
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
+        return this;
     }
 
     public SelectRegion chooseRegionByValue(String value) {
@@ -85,6 +86,7 @@ public class SelectRegion {
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
+        return  this;
     }
 
 }

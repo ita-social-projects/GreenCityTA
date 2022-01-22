@@ -1,20 +1,23 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.time.Duration;
 import java.util.List;
 
-public class OrderDetailsPage  {
-    WebDriver driver;
+public class OrderDetailsPage  extends BasePage {
 
-    public OrderDetailsPage(WebDriver driver){
-        this.driver = driver;
+
+    public OrderDetailsPage(WebDriver driver) {
+        super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "//button[@class='change-location']")
+
+    @FindBy(xpath = "//button[@class='change-location']")
     private WebElement changeRegionButton;
     @FindBy(xpath = "//select[@name='region']")
     private WebElement changeRegionDropdown;
@@ -26,6 +29,8 @@ public class OrderDetailsPage  {
     private WebElement NumberOfSafeWasteInput;
     @FindBy(xpath = "//input[@id='quantity3']")
     private WebElement NumberOfTextileWaste20lInput;
+    @FindBy(xpath = "//div[@class='main']//span[@class='col-3 bag-name text-right']")
+    private List<WebElement> totalPrice;
     @FindBy(xpath = "input[@class='shadow-none form-control col-12 col-sm-8 my-1 input-border ng-pristine ng-valid ng-touched']")
     private WebElement certificateInput;
     @FindBy(xpath = "button[@class='primary-global-button btn ng-star-inserted']")
@@ -49,14 +54,29 @@ public class OrderDetailsPage  {
     @FindBy(xpath = "//button[@class='primary-global-button btn btn-main']")
     private WebElement nextButton;
 
+
+
     public void clickOnChangeRegionButton(){
         changeRegionButton.click();
     }
     public void clickOnchangeRegionDropdown(){
         changeRegionDropdown.click();
     }
-    public void clickOnRegionButtons(int value){
-        regionButtons.get(value).click();
+    public void clickOnRegionByIndex(int index){
+        regionButtons.get(index).click();
+    }
+    public OrderDetailsPage chooseRegionByValue(String value) {
+        clickOnchangeRegionDropdown();
+        try {
+            for (WebElement option : regionButtons) {
+                if (option.getText().equals(value.trim()))
+                    option.click();
+                break;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println(e.getMessage());
+        }
+        return  this;
     }
     public void EnterNumberOfTextileWaste120lInput(String value){
         NumberOfTextileWaste120lInput.click();
@@ -73,6 +93,16 @@ public class OrderDetailsPage  {
         NumberOfTextileWaste20lInput.clear();
         NumberOfTextileWaste20lInput.sendKeys(value);
     }
+    public String getTextileWaste120lSum(){
+     String[] arr = totalPrice.get(0).getText().split("/s");
+      return arr[0];
+    }
+    public void getSaveWasteSum(){
+        totalPrice.get(1).getText();
+    }
+    public void getTextileWaste20lSum(){
+        totalPrice.get(2).getText();
+    }
     public void EnterCertificateInput(String value){
         certificateInput.click();
         certificateInput.clear();
@@ -81,7 +111,6 @@ public class OrderDetailsPage  {
     public void clickOnActivateCertificateButton(){
         activateCertificateButton.click();
     }
-
     public void ClickOnNoUseBonusesCheckmark(){
         UseBonusesCheckmarks.get(0).click();
     }
@@ -119,6 +148,7 @@ public class OrderDetailsPage  {
     public void clickOnNextButton(){
         nextButton.click();
     }
+
 
 
 
