@@ -1,5 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class UbsHomePage {
-
     @FindBy(how = How.CSS, using = "span.header_lang-switcher-wrp.header_navigation-menu-right-list")
     private WebElement langButton;
 
@@ -26,6 +27,8 @@ public class UbsHomePage {
 
     @FindBy(how = How.CSS, using = "button.primary-global-button")
     private WebElement orderCourier;
+
+
 
 //_________________________________________________________
 
