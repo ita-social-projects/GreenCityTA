@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.sign_in;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.header.SignUpComponent;
+import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,14 +71,16 @@ public class SignInComponent extends BasePage {
         return new ForgotPasswordComponent(driver);
     }
 
-    // ???
-    public void clickSignIn() {
+    public SelectRegion clickSignIn() {
         signIn.click();
+
+        return new SelectRegion(driver);
     }
 
-    // ???
-    public void clickSignInGoogle() {
+    public SelectRegion clickSignInGoogle() {
         signInGoogle.click();
+
+        return new SelectRegion(driver);
     }
 
     public SignUpComponent clickSignUp() {
