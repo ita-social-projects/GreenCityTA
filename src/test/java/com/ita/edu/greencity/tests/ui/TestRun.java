@@ -26,14 +26,14 @@ public class TestRun {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get(provider.getBaseURL());
+        driver.get(provider.UbsHomePageURL());
     }
 
     @AfterMethod
     public void afterMethod(){
-       if (driver != null) {
-           driver.quit();
-       }
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 
