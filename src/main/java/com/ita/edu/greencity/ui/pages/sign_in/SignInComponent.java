@@ -39,6 +39,12 @@ public class SignInComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class = \"missing-account\"]//a[@class = \"ubs-sign-up-link\"]")
     private WebElement signUp;
 
+    @FindBy(how = How.XPATH, using = "//div[@id = \"email-err-msg\"]//app-error//div")
+    private WebElement errorEmail;
+
+    @FindBy(how = How.XPATH, using = "//div[@id = \"pass-err-msg\"]//app-error//div")
+    private WebElement errorPassword;
+
 
 
     public UbsHomePage clickCloseBtn() {
@@ -87,5 +93,13 @@ public class SignInComponent extends BasePage {
         signUp.click();
 
         return new SignUpComponent(driver);
+    }
+
+    public String getErrorEmailMessage() {
+        return errorEmail.getText();
+    }
+
+    public String getErrorPasswordMessage() {
+        return errorPassword.getText();
     }
 }
