@@ -11,11 +11,9 @@ import java.util.List;
 
 public class OrderDetailsPage  extends BasePage {
 
-
     public OrderDetailsPage(WebDriver driver) {
         super(driver);
     }
-
 
     @FindBy(xpath = "//button[@class='change-location']")
     private WebElement changeRegionButton;
@@ -31,8 +29,14 @@ public class OrderDetailsPage  extends BasePage {
     private WebElement NumberOfTextileWaste20lInput;
     @FindBy(xpath = "//div[@class='main']//span[@class='col-3 bag-name text-right']")
     private List<WebElement> totalPrice;
+    @FindBy(xpath = "//div[@class='totalInfo']//strong")
+    private List<WebElement> totalAmount;
     @FindBy(xpath = "input[@class='shadow-none form-control col-12 col-sm-8 my-1 input-border ng-pristine ng-valid ng-touched']")
     private WebElement certificateInput;
+    @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
+    private WebElement minimumOrderAmountAlert;
+    @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][2]//small")
+    private WebElement minimumOrderContainsAlert;
     @FindBy(xpath = "button[@class='primary-global-button btn ng-star-inserted']")
     private WebElement activateCertificateButton;
     @FindBy(xpath = "//div[@class='points']//span[@class='checkmark']")
@@ -53,6 +57,7 @@ public class OrderDetailsPage  extends BasePage {
     private WebElement cancelOrderButton;
     @FindBy(xpath = "//button[@class='primary-global-button btn btn-main']")
     private WebElement nextButton;
+
 
 
 
@@ -97,11 +102,29 @@ public class OrderDetailsPage  extends BasePage {
      String[] arr = totalPrice.get(0).getText().split("/s");
       return arr[0];
     }
-    public void getSaveWasteSum(){
-        totalPrice.get(1).getText();
+    public String getSaveWasteSum(){
+        String[] arr = totalPrice.get(1).getText().split("/s");
+        return arr[0];
     }
-    public void getTextileWaste20lSum(){
-        totalPrice.get(2).getText();
+    public String getTextileWaste20lSum(){
+        String[] arr = totalPrice.get(2).getText().split("/s");
+        return arr[0];
+    }
+    public String getOrderAmount(){
+        String[] arr = totalAmount.get(0).getText().split("/s");
+        return arr[0];
+    }
+    public String getAmountDue(){
+        String[] arr = totalAmount.get(1).getText().split("/s");
+        return arr[0];
+    }
+    public String getMinimumOrderAmountAlertText(){
+        String text = minimumOrderAmountAlert.getText();
+        return text;
+    }
+    public String getMinimumOrderContainsAlertText(){
+        String text = minimumOrderContainsAlert.getText();
+        return text;
     }
     public void EnterCertificateInput(String value){
         certificateInput.click();
@@ -145,8 +168,9 @@ public class OrderDetailsPage  extends BasePage {
     public void clickOnCancelOrderButton(){
         cancelOrderButton.click();
     }
-    public void clickOnNextButton(){
+    public OrderPagePersonalData clickOnNextButton(){
         nextButton.click();
+        return new OrderPagePersonalData(driver);
     }
 
 

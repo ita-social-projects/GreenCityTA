@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.header;
 
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,11 +18,13 @@ public class HeaderSignedOutComponent extends HeaderComponent {
         super(driver);
     }
 
-    public void clickSignIn() {
+    public SignInComponent clickSignIn() {
         signIn.click();
+        return new SignInComponent(driver);
     }
 
-    public void clickSignUp() {
+    public SignUpComponent clickSignUp() {
         signUp.click();
+        return new SignUpComponent(driver);
     }
 }

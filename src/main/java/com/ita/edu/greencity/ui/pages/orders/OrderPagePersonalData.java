@@ -1,19 +1,16 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
-public class OrderPagePersonalData {
 
-    protected WebDriver driver;
 
-    public OrderPagePersonalData(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        this.driver = driver;
-    }
+
+public class OrderPagePersonalData extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-data-title']")
     private WebElement personalDataTitle;
@@ -66,83 +63,94 @@ public class OrderPagePersonalData {
     @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button btn m-0']")
     private WebElement nextButton;
 
-
-
-
-    public void clickOnNextButton(){
-        nextButton.click();
+    public OrderPageConfirmation clickOnNextButton() {
+        return new OrderPageConfirmation(driver);
     }
 
-    public void clickOnCancelButton(){
-        cancelButton.click();
+    public UbsHomePage clickOnCancelButton() {
+        return new UbsHomePage(driver);
     }
 
-    public void clickOnBackButton(){
-        backButton.click();
+    public OrderDetailsPage clickOnBackButton() {
+        return new OrderDetailsPage(driver);
     }
 
-    public void enterAddressComment(final String addressComment){
+    public OrderPagePersonalData enterAddressComment(final String addressComment) {
         addressCommentField.clear();
         addressCommentField.sendKeys(addressComment);
+        return this;
     }
 
-    public String getTextFromCommentTitle(){
+    public String getTextFromCommentTitle() {
         return commentTitle.getText();
     }
 
-    public void clickOnAddAddressButton(){
-        addAddressButton.click();
+    public AddNewAddress clickOnAddAddressButton() {
+        return new AddNewAddress(driver);
     }
 
-    public String getTextFromAddressTitle(){
+    public String getTextFromAddressTitle() {
         return addressTitle.getText();
     }
 
-    public void enterAnotherClientEmail(final String email){
+    public OrderPagePersonalData enterAnotherClientEmail(final String email) {
         anotherClientEmailField.clear();
         anotherClientEmailField.sendKeys(email);
+        return this;
     }
 
-    public void enterAnotherClientPhoneNumber(final String phoneNumber){
+    public OrderPagePersonalData enterAnotherClientPhoneNumber(final String phoneNumber) {
         anotherClientPhoneNumberField.clear();
         anotherClientPhoneNumberField.sendKeys(phoneNumber);
+        return this;
     }
 
-    public void enterAnotherClientLastName(final String lastName){
+    public OrderPagePersonalData enterAnotherClientLastName(final String lastName) {
         anotherClientLastNameField.clear();
         anotherClientLastNameField.sendKeys(lastName);
+        return this;
     }
 
-    public void enterAnotherClientFirstName(final String firstName){
+    public OrderPagePersonalData enterAnotherClientFirstName(final String firstName) {
         anotherClientFirstNameField.clear();
         anotherClientFirstNameField.sendKeys(firstName);
+        return this;
     }
 
-    public void clickOnAnotherClientButton(){
+    public OrderPagePersonalData clickOnAnotherClientButton() {
         anotherClientButton.click();
+        return this;
     }
 
-    public void enterEmail(final String email){
+    public OrderPagePersonalData enterEmail(final String email) {
         emailField.clear();
         emailField.sendKeys(email);
+        return this;
     }
 
-    public void enterPhoneNumber(final String phoneNumber){
+    public OrderPagePersonalData enterPhoneNumber(final String phoneNumber) {
         phoneNumberField.clear();
         phoneNumberField.sendKeys(phoneNumber);
+        return this;
     }
 
-    public void enterLastName(final String lastName){
+    public OrderPagePersonalData enterLastName(final String lastName) {
         lastNameField.clear();
         lastNameField.sendKeys(lastName);
+        return this;
     }
 
-    public void enterFirstName(final String firstName){
+    public OrderPagePersonalData enterFirstName(final String firstName) {
         firstNameField.clear();
         firstNameField.sendKeys(firstName);
+        return this;
     }
 
-    public String getTextFromPersonalDataTitle(){
+    public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
+    }
+
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
     }
 }
