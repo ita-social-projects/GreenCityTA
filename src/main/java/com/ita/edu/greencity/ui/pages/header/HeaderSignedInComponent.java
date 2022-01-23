@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.header;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -18,6 +19,10 @@ public class HeaderSignedInComponent extends HeaderComponent {
     @FindBy(how = How.XPATH, using = "//*[@id='header_user-wrp']/li[4]/a")
     private WebElement ubsUser;
 
+    public HeaderSignedInComponent(WebDriver driver) {
+        super(driver);
+    }
+
     public void clickUserMenu() {
         userMenu.click();
     }
@@ -32,5 +37,9 @@ public class HeaderSignedInComponent extends HeaderComponent {
 
     public void clickUbsUser() {
         ubsUser.click();
+    }
+
+    public String getUserName(WebElement userMenu){
+        return userMenu.getText();
     }
 }

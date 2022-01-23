@@ -1,12 +1,14 @@
 package com.ita.edu.greencity.ui.pages.header;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.util.List;
 
-public class HeaderComponent {
+public class HeaderComponent extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//*[@class='header_logo active-link']")
     private WebElement ubsLogo;
@@ -31,6 +33,10 @@ public class HeaderComponent {
 
     @FindBy(how = How.XPATH, using = "//ul[@class='add-shadow header_lang-switcher-wrp header_navigation-menu-right-list']/li")
     private List<WebElement> languagesList;
+
+    public HeaderComponent(WebDriver driver) {
+        super(driver);
+    }
 
     public void clickUbsLogo() {
         ubsLogo.click();
