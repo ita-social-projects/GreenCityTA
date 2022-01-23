@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ValueProvider {
-    private  Properties properties;
+    private Properties properties;
 
     public ValueProvider() throws IOException {
 
@@ -19,7 +19,7 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
-    public String UbsHomePageURL() {
+    public String getUbsHomePageURL() {
         return properties.getProperty("UbsHomePageURL");
     }
 
@@ -33,5 +33,17 @@ public class ValueProvider {
 
     public String getPassword() {
         return properties.getProperty("password");
+    }
+
+    public String getCardNumber() {
+        return properties.getProperty("cardNumber");
+    }
+
+    public String getExpiryDate() {
+        return properties.getProperty("expiryDate");
+    }
+
+    public String getCVV2() {
+        return properties.getProperty("CVV2");
     }
 }
