@@ -23,8 +23,8 @@ public class HeaderSignedOutComponent extends HeaderComponent {
         return new SignInComponent(driver);
     }
 
-   /* public SignUpComponent clickSignUp() {
+    public SignUpComponent clickSignUp() {
         signUp.click();
         return new SignUpComponent(driver);
-    }*/
+    }
 }
