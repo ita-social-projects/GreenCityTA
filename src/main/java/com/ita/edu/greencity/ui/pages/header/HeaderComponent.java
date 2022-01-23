@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.header;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,9 +39,10 @@ public class HeaderComponent extends BasePage {
         super(driver);
     }
 
-    public void clickUbsLogo() {
+    /*public UbsHomePage clickUbsLogo() {
         ubsLogo.click();
-    }
+        return  new UbsHomePage(driver);
+    }*/
 
     public void clickAboutUs() {
         aboutUs.click();
@@ -62,7 +64,8 @@ public class HeaderComponent extends BasePage {
         search.click();
     }
 
-    public void clickLanguageSwitcher() {
+    /*public UbsHomePage clickLanguageSwitcher() {
         languageSwitcher.click();
-    }
+        return new UbsHomePage(driver);
+    }*/
 }
