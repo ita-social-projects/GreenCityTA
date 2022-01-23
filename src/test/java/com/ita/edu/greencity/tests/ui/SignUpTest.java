@@ -4,14 +4,12 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.header.SignUpComponent;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SignUpTest extends TestRun {
 
     @Test
     public void checkEngLocalSignUpTitle() {
-        driver.get(provider.UbsHomePageURL());
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();
         String expected = "Hello!\n" +
@@ -22,7 +20,6 @@ public class SignUpTest extends TestRun {
 
     @Test
     public void signUpWithBlankConfirmPassword() {
-        driver.get(provider.UbsHomePageURL());
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();
         SignUpComponent signUpComponent = new SignUpComponent(driver)
