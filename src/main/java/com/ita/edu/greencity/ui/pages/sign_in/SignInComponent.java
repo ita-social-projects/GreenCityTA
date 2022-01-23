@@ -46,12 +46,13 @@ public class SignInComponent extends BasePage {
     private WebElement errorPassword;
 
 
-
+    /*
     public UbsHomePage clickCloseBtn() {
         close.click();
 
         return new UbsHomePage(driver);
     }
+     */
 
     public SignInComponent inputEmail(String emailInput) {
         email.sendKeys(emailInput);
@@ -88,12 +89,13 @@ public class SignInComponent extends BasePage {
 
         return new SelectRegion(driver);
     }
-
+    /*
     public SignUpComponent clickSignUp() {
         signUp.click();
 
-        return new SignUpComponent(driver);
+       // return new SignUpComponent(driver);
     }
+     */
 
     public String getErrorEmailMessage() {
         return errorEmail.getText();

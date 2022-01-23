@@ -30,24 +30,28 @@ public class ForgotPasswordComponent extends BasePage {
     private WebElement backToSignIn;
 
 
-
+    /*
     public UbsHomePage clickClose() {
         close.click();
 
         return new UbsHomePage(driver);
     }
 
+     */
+
     public ForgotPasswordComponent inputEmail(String emailInput) {
         email.sendKeys(emailInput);
 
         return this;
     }
-
+    /*
     public UbsHomePage clickSubmit() {
         submit.click();
 
         return new UbsHomePage(driver);
     }
+
+     */
 
     // ???
     public void clickSignInGoogle() {
