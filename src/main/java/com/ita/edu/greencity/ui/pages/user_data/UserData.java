@@ -1,11 +1,16 @@
 package com.ita.edu.greencity.ui.pages.user_data;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.v85.backgroundservice.BackgroundService;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class UserData {
+import java.util.List;
+
+public class UserData extends BasePage {
 
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.edit")
     private WebElement editData;
@@ -22,20 +27,29 @@ public class UserData {
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.delete")
     private WebElement deleteProfile;
 
-    public void clickOnEditDataButton(){
+    public UserData(WebDriver driver) {
+        super(driver);
+    }
+
+    public UserData clickOnEditDataButton(){
         editData.click();
+        return this;
     }
-    public String getTextFromEmailField(){
-        return email.getText();
+    public UserData getTextFromEmailField(){
+        email.getText();
+        return this;
     }
-    public String getTextFromPhoneField(){
-        return phone.getText();
+    public UserData getTextFromPhoneField(){
+        phone.getText();
+        return this;
     }
-    public void clickOnChangePasswordButton(){
+    public ChangePassword clickOnChangePasswordButton(){
         changePassword.click();
+        return new ChangePassword(driver);
     }
-    public void clickOnDeleteProfileButton(){
+    public DeleteProfile clickOnDeleteProfileButton(){
         deleteProfile.click();
+        return new DeleteProfile(driver);
     }
 
 
