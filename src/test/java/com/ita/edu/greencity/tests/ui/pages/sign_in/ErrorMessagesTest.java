@@ -9,8 +9,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ErrorMessagesTest extends TestRun {
-    BasePage basePage = new BasePage(driver);
-    HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
 
     @DataProvider
     private Object[][] dataProvider() {
@@ -24,7 +22,10 @@ public class ErrorMessagesTest extends TestRun {
 
     @Test
     public void emptyEmailTest() {
+        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         String expected = "Email is required";
-        header.clickSignIn();
+        String actual = header.clickSignIn().inputEmail("").getErrorEmailMessage();
+
+        Assert.assertEquals(actual, expected);
     }
 }
