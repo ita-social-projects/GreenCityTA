@@ -39,10 +39,10 @@ public class HeaderComponent extends BasePage {
         super(driver);
     }
 
-    /*public UbsHomePage clickUbsLogo() {
+    public UbsHomePage clickUbsLogo() {
         ubsLogo.click();
         return  new UbsHomePage(driver);
-    }*/
+    }
 
     public void clickAboutUs() {
         aboutUs.click();
@@ -64,8 +64,8 @@ public class HeaderComponent extends BasePage {
         search.click();
     }
 
-    /*public UbsHomePage clickLanguageSwitcher() {
+    public UbsHomePage clickLanguageSwitcher() {
         languageSwitcher.click();
         return new UbsHomePage(driver);
-    }*/
+    }
 }

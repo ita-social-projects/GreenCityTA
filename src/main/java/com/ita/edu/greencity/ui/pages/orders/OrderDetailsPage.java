@@ -83,20 +83,17 @@ public class OrderDetailsPage  extends BasePage {
         }
         return  this;
     }
-    public void EnterNumberOfTextileWaste120lInput(String value){
-        NumberOfTextileWaste120lInput.click();
-        NumberOfTextileWaste120lInput.clear();
+    public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value){
         NumberOfTextileWaste120lInput.sendKeys(value);
+        return this;
     }
-    public void EnterNumberOfSafeWasteInput(String value){
-        NumberOfSafeWasteInput.click();
-        NumberOfSafeWasteInput.clear();
+    public OrderDetailsPage EnterNumberOfSafeWasteInput(String value){
         NumberOfSafeWasteInput.sendKeys(value);
+        return this;
     }
-    public void EnterNumberOfTextileWaste20lInput(String value){
-        NumberOfTextileWaste20lInput.click();
-        NumberOfTextileWaste20lInput.clear();
+    public OrderDetailsPage EnterNumberOfTextileWaste20lInput(String value){
         NumberOfTextileWaste20lInput.sendKeys(value);
+        return this;
     }
     public String getTextileWaste120lSum(){
      String[] arr = totalPrice.get(0).getText().split("/s");

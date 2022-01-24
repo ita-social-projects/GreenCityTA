@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.header;
 
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
+import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
