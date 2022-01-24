@@ -24,8 +24,10 @@ public class ErrorMessagesTest extends TestRun {
     public void emptyEmailTest() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         String expected = "Email is required";
+
         String actual = header.clickSignIn().inputEmail("").getErrorEmailMessage();
 
         Assert.assertEquals(actual, expected);
     }
+
 }
