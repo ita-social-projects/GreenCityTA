@@ -45,6 +45,7 @@ public class SignInComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@id = \"pass-err-msg\"]/app-error/div")
     private WebElement errorPassword;
 
+    // click on text "Welcome"
     public UbsHomePage clickCloseBtn() {
         close.click();
 
