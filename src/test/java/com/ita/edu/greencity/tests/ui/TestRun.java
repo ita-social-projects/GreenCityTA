@@ -34,12 +34,12 @@ public class TestRun {
         driver.navigate().refresh();
     }
 
-//    @AfterMethod
-//    public void afterMethod(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterMethod
+    public void afterMethod(){
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 
 }

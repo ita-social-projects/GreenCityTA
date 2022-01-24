@@ -2,6 +2,7 @@ package com.ita.edu.greencity.tests.ui;
 
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ public class SignUpTest extends TestRun {
         String expected = "Hello!\n" +
                 "Please enter your details to sign up";
         String actual = new SignUpComponent(driver).getTextOfTitle();
+        UbsHomePage signUpComponent = new SignUpComponent(driver).clickOnExitButton();
         Assert.assertEquals(actual, expected);
     }
 
@@ -26,7 +28,9 @@ public class SignUpTest extends TestRun {
                 .inputEmailIntoField(RandomStringUtils.randomAlphabetic(5) + "@gmail.com")
                 .inputUserNameIntoField(RandomStringUtils.randomAlphabetic(10))
                 .inputPasswordIntoField(RandomStringUtils.randomAlphabetic(9))
+                .clickOnShowHidePasswordButton()
                 .inputConfirmPasswordIntoField("")
+                .clickOnShowHideConfirmPasswordButton()
                 .clickOnSignUpButton();
         String actualAlert = signUpComponent.getTextOfBlankConfirmPasswordFieldAlert();
         String expectedAlert = "Password is required";
