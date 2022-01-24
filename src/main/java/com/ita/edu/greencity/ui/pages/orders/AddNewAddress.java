@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -47,8 +48,12 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'secondary-global-button btn m-0 mr-2']")
     private WebElement cancelButton;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = 'mat-dialog-actions d-flex justify-content-end buttons']//button[@class = 'primary-global-button btn m-0']")
+    @FindBy(how = How.XPATH, using = "//button[@class = 'btn add-address']")
     private WebElement addAddressButton;
+
+    public WebElement getAddAddressButton(){
+        return addAddressButton;
+    }
 
     public OrderPagePersonalData clickOnAddAddressButton() {
         return new OrderPagePersonalData(driver);
@@ -60,53 +65,53 @@ public class AddNewAddress extends BasePage {
 
     public AddNewAddress enterAddressComment(final String addressComment) {
         addressCommentField.clear();
-        addressCommentField.sendKeys(addressComment);
+        addressCommentField.sendKeys(addressComment, Keys.ENTER);
         return this;
     }
 
     public AddNewAddress enterEntranceNumber(final String houseCorpus) {
         entranceNumberField.clear();
-        entranceNumberField.sendKeys(houseCorpus);
+        entranceNumberField.sendKeys(houseCorpus, Keys.ENTER);
         return this;
     }
 
     public AddNewAddress enterHouseCorpus(final String houseCorpus) {
         houseCorpusField.clear();
-        houseCorpusField.sendKeys(houseCorpus);
+        houseCorpusField.sendKeys(houseCorpus, Keys.ENTER);
         return this;
     }
 
     public AddNewAddress enterHouseNumber(final String houseNumber) {
         houseNumberField.clear();
-        houseNumberField.sendKeys(houseNumber);
+        houseNumberField.sendKeys(houseNumber, Keys.ENTER);
         return this;
     }
 
     public AddNewAddress enterStreet(final String street) {
         streetField.clear();
-        streetField.sendKeys(street);
+        streetField.sendKeys(street, Keys.ENTER);
         return this;
     }
 
     public AddNewAddress chooseCity(int index) {
         clickOnCityField();
-        implicitWait(100);
         listOfCities.get(index).click();
         return this;
     }
 
     public AddNewAddress chooseDistrict(int index) {
         clickOnDistrictField();
-        implicitWait(100);
         listOfDistricts.get(index).click();
         return this;
     }
 
     public AddNewAddress clickOnDistrictField() {
+        districtField.click();
         return this;
     }
 
     public AddNewAddress clickOnCityField() {
+        cityField.click();
         return this;
     }
 
