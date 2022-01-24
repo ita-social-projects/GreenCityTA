@@ -3,6 +3,7 @@ package com.ita.edu.greencity.ui.pages.header;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import com.ita.edu.greencity.ui.pages.user_data.EditUserData;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,9 +27,9 @@ public class HeaderSignedInComponent extends HeaderComponent {
         super(driver);
     }
 
-    public UbsUserOrders clickUserMenu() {
+    public HeaderSignedInComponent clickUserMenu() {
         userMenu.click();
-        return new UbsUserOrders(driver);
+        return this;
     }
 
     public EditUserData clickSettings() {
@@ -41,11 +42,12 @@ public class HeaderSignedInComponent extends HeaderComponent {
         return new UbsHomePage(driver);
     }
 
-    public void clickUbsUser() {
+    public UbsUserOrders clickUbsUser() {
         ubsUser.click();
+        return new UbsUserOrders(driver);
     }
 
-    public String getUserName(WebElement userMenu){
+    public String getUserName(){
         return userMenu.getText();
     }
 }
