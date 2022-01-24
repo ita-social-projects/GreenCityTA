@@ -72,6 +72,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public OrderDetailsPage clickOnBackButton() {
+        backButton.click();
         return new OrderDetailsPage(driver);
     }
 
