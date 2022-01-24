@@ -1,6 +1,8 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class SelectRegion extends BasePage {
-    private WebDriver driver;
+
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
     @FindBy(xpath = "//button[@class='btn secondaryButton secondary-global-button']")
@@ -62,10 +64,9 @@ public class SelectRegion extends BasePage {
 
     public SelectRegion chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
             listOfRegions.get(index).click();
-        } catch (IndexOutOfBoundsException e) {
+        } catch ( StaleElementReferenceException e) {
             System.err.println(e.getMessage());
         }
         return this;
@@ -73,7 +74,6 @@ public class SelectRegion extends BasePage {
 
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         try {
             for (WebElement option : listOfRegions) {
                 if (option.getText().contains(value.trim()))

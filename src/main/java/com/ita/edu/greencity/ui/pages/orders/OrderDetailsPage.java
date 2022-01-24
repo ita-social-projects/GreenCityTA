@@ -1,6 +1,8 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -91,10 +93,12 @@ public class OrderDetailsPage  extends BasePage {
         NumberOfSafeWasteInput.sendKeys(value);
         return this;
     }
+
     public OrderDetailsPage EnterNumberOfTextileWaste20lInput(String value){
-        NumberOfTextileWaste20lInput.sendKeys(value);
+        NumberOfTextileWaste20lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
+
     public String getTextileWaste120lSum(){
      String[] arr = totalPrice.get(0).getText().split("/s");
       return arr[0];
