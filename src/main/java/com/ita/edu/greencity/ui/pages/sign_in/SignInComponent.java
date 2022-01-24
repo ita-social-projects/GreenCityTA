@@ -18,7 +18,7 @@ public class SignInComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[@class = \"close-modal-window\"]")
     private WebElement close;
 
-    @FindBy(how = How.XPATH, using = "//label[@for = \"email\"]/input[@id = \"email\"]")
+    @FindBy(how = How.XPATH, using = "//form[@class = \"ng-pristine ng-invalid ng-touched\"]/input[@id = \"email\"]")
     private WebElement email;
 
     @FindBy(how = How.XPATH, using = "//input[@id = \"password\"]")
