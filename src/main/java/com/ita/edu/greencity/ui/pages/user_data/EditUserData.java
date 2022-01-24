@@ -42,6 +42,7 @@ public class EditUserData extends BasePage {
         editPhone.clear();
         editPhone.sendKeys(newPhone);
         return this;
+
     }
 
     public UserData clickOnDiscardChangesButton(){
