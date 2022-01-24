@@ -14,22 +14,20 @@ public class ForgotPasswordComponent extends BasePage {
         super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"wrapper\"]//a[@class = \"close-modal-window\"")
+    @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']")
     private WebElement close;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"restore-password-container\"]//input[@id = \"email\"]")
+    @FindBy(how = How.XPATH, using = "//label[@for = 'email']/input[@id = 'email']")
     private WebElement email;
 
-    @FindBy(how = How.XPATH, using = "//form[@class = \"restore-password-form ng-untouched ng-pristine ng-invalid\"]//button[@type = \"submit\"]")
+    @FindBy(how = How.XPATH, using = "//button[@type = 'submit']")
     private WebElement submit;
 
-    @FindBy(how = How.XPATH, using = "//app-google-btn[@class = \"google-sing-in-button\"]/button[@class = \"google-sign-in\"]")
+    @FindBy(how = How.XPATH, using = "//app-google-btn[@class = 'google-sing-in-button']/button[@class = 'google-sign-in']")
     private WebElement signInGoogle;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"mentioned-password\"]/a[@class = \"ubs-sign-in-link\"]")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'mentioned-password']/a[@class = 'ubs-sign-in-link']")
     private WebElement backToSignIn;
-
-
 
     public UbsHomePage clickClose() {
         close.click();

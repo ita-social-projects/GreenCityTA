@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class SignUpComponent extends BasePage {
-    @FindBy(how = How.XPATH, using = "//@class='cross-btn'")
+    @FindBy(how = How.XPATH, using = "//img[@class='cross-btn']")
     private WebElement exitButton;
 
     @FindBy(how = How.XPATH, using = "//input[@id='email']")
@@ -30,11 +30,17 @@ public class SignUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'password']//app-error/div")
     private WebElement blankPasswordFieldAlert;
 
+    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'password']//img[@class='image-show-hide-password']")
+    private WebElement showHidePasswordButton;
+
     @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//input[@id='password']")
     private WebElement confirmPasswordField;
 
     @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//app-error/div")
     private WebElement blankConfirmPasswordFieldAlert;
+
+    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//img[@class='image-show-hide-password']")
+    private WebElement showHideConfirmPasswordButton;
 
     @FindBy(how = How.XPATH, using = "//button[@class='ubs-primary-global-button']")
     private WebElement signUpButton;
@@ -62,7 +68,7 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
-    public String getTextOfBlankEmailFieldAlert () {
+    public String getTextOfBlankEmailFieldAlert() {
         return blankEmailFieldAlert.getText();
     }
 
@@ -71,7 +77,7 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
-    public String getTextOfBlankUserNameFieldAlert () {
+    public String getTextOfBlankUserNameFieldAlert() {
         return blankUserNameFieldAlert.getText();
     }
 
@@ -80,8 +86,13 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
-    public String getTextOfBlankPasswordFieldAlert () {
+    public String getTextOfBlankPasswordFieldAlert() {
         return blankPasswordFieldAlert.getText();
+    }
+
+    public SignUpComponent clickOnShowHidePasswordButton() {
+        showHidePasswordButton.click();
+        return this;
     }
 
     public SignUpComponent inputConfirmPasswordIntoField(String password) {
@@ -89,8 +100,13 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
-    public String getTextOfBlankConfirmPasswordFieldAlert () {
+    public String getTextOfBlankConfirmPasswordFieldAlert() {
         return blankConfirmPasswordFieldAlert.getText();
+    }
+
+    public SignUpComponent clickOnShowHideConfirmPasswordButton() {
+        showHideConfirmPasswordButton.click();
+        return this;
     }
 
     public SignUpComponent clickOnSignUpButton() {
@@ -108,7 +124,7 @@ public class SignUpComponent extends BasePage {
         return new SignInComponent(driver);
     }
 
-    public String getTextOfTitle () {
+    public String getTextOfTitle() {
         return title.getText();
     }
 }
