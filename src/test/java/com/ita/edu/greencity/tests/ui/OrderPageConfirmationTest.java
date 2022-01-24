@@ -16,26 +16,26 @@ public class OrderPageConfirmationTest extends TestRun {
 
     @Test
     public void paymentTest() {
-        UbsHomePage ubsHomePage = new UbsHomePage();
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourier();
+
         SignInComponent signInComponent = new SignInComponent(driver);
         signInComponent.inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
                 .chooseRegionByIndex(0).clickOnContinueButton();
-        ubsHomePage.pressOrderCourier();
-        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        orderDetailsPage.EnterNumberOfSafeWasteInput("1");
-        orderDetailsPage.EnterNumberOfTextileWaste20lInput("1");
-        orderDetailsPage.EnterNumberOfTextileWaste120lInput("1");
-        orderDetailsPage.clickOnNextButton();
-        OrderPagePersonalData orderPagePersonalData = new OrderPagePersonalData(driver);
-        orderPagePersonalData.enterFirstName("Anna");
-        orderPagePersonalData.enterLastName("Maria");
-        orderPagePersonalData.enterEmail(provider.getEmail());
-        orderPagePersonalData.enterPhoneNumber("+380 (63) 114 46 78");
-        orderPagePersonalData.clickOnAddAddressButton();
-        AddNewAddress addNewAddress = new AddNewAddress(driver);
 
-        orderPagePersonalData.clickOnNextButton();
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        orderDetailsPage.EnterNumberOfSafeWasteInput("1").EnterNumberOfTextileWaste20lInput("1")
+                .EnterNumberOfTextileWaste120lInput("1").clickOnNextButton();
+
+        OrderPagePersonalData orderPagePersonalData = new OrderPagePersonalData(driver);
+        orderPagePersonalData.enterFirstName("Anna")
+                .enterLastName("Maria").enterEmail(provider.getEmail())
+                .enterPhoneNumber("+380 (63) 114 46 78").clickOnAddAddressButton()
+                .clickOnCityField().chooseCity(1)
+                .clickOnDistrictField().chooseDistrict(2)
+                .enterStreet("Почаївський провулок")
+                .enterHouseNumber("17").enterHouseCorpus("2").enterEntranceNumber("1")
+                .clickOnAddAddressButton().clickOnNextButton();
 
         OrderPageConfirmation orderPageConfirmation = new OrderPageConfirmation(driver);
         String actual = orderPageConfirmation.choosePaymentMethod().clickOnOrderButton()

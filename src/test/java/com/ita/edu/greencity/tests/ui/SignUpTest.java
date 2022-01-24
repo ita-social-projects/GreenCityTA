@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.tests.ui;
 
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
-import com.ita.edu.greencity.ui.pages.header.SignUpComponent;
+import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
