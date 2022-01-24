@@ -15,31 +15,31 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-info-pop-up-title']")
     private WebElement newAddressTitle;
 
-    @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'region']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'region')]")
     private WebElement regionField;
 
-    @FindBy(how = How.XPATH, using = "//input[@id= 'city']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'city')]")
     private WebElement cityField;
 
-    @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'district']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]")
     private WebElement districtField;
 
-    @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'district']//option[@class= 'ng-star-inserted']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]//option[@class= 'ng-star-inserted']")
     private List<WebElement> listOfDistricts;
 
-    @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'district']//option[@class= 'ng-star-inserted']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'city')]//option[@class= 'ng-star-inserted']")
     private List<WebElement> listOfCities;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname = 'street']")
+    @FindBy(how = How.XPATH, using = "//input[contains(@formcontrolname, 'street')]")
     private WebElement streetField;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname = 'houseNumber']")
+    @FindBy(how = How.XPATH, using = "//input[contains(@formcontrolname, 'houseNumber')]")
     private WebElement houseNumberField;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname = 'houseCorpus']")
+    @FindBy(how = How.XPATH, using = "//input[contains(@formcontrolname, 'houseCorpus')]")
     private WebElement houseCorpusField;
 
-    @FindBy(how = How.XPATH, using = "//input[@formcontrolname = 'entranceNumber']")
+    @FindBy(how = How.XPATH, using = "//input[contains(@formcontrolname, 'entranceNumber')]")
     private WebElement entranceNumberField;
 
     @FindBy(how = How.XPATH, using = "//div[@class = 'address-comment']//textarea[@formcontrolname= 'addressComment']")
@@ -51,7 +51,11 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'btn add-address']")
     private WebElement addAddressButton;
 
-    public WebElement getAddAddressButton(){
+    public AddNewAddress(WebDriver driver) {
+        super(driver);
+    }
+
+    public WebElement getAddAddressButton() {
         return addAddressButton;
     }
 
@@ -121,9 +125,5 @@ public class AddNewAddress extends BasePage {
 
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
-    }
-
-    public AddNewAddress(WebDriver driver) {
-        super(driver);
     }
 }

@@ -9,8 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 
-
-
 public class OrderPagePersonalData extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-data-title']")
@@ -63,6 +61,10 @@ public class OrderPagePersonalData extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button btn m-0']")
     private WebElement nextButton;
+
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
+    }
 
     public OrderPageConfirmation clickOnNextButton() {
         nextButton.click();
@@ -153,9 +155,5 @@ public class OrderPagePersonalData extends BasePage {
 
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
-    }
-
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
     }
 }
