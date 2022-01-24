@@ -31,7 +31,7 @@ public class HeaderSignedInComponent extends HeaderComponent {
         return new UbsUserOrders(driver);
     }
 
-   /* public EditUserData clickSettings() {
+    public EditUserData clickSettings() {
         settings.click();
         return new EditUserData(driver);
     }
@@ -39,7 +39,7 @@ public class HeaderSignedInComponent extends HeaderComponent {
     public UbsHomePage clickSignOut() {
         signOut.click();
         return new UbsHomePage(driver);
-    }*/
+    }
 
     public void clickUbsUser() {
         ubsUser.click();

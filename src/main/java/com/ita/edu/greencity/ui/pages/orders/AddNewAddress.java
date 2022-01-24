@@ -1,22 +1,15 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
-import java.time.Duration;
 import java.util.List;
 
-public class AddNewAddress {
+public class AddNewAddress extends BasePage {
 
-    protected WebDriver driver;
-
-    public AddNewAddress(WebDriver driver){
-        PageFactory.initElements(driver,this);
-        this.driver = driver;
-    }
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-info-pop-up-title']")
     private WebElement newAddressTitle;
@@ -31,7 +24,10 @@ public class AddNewAddress {
     private WebElement districtField;
 
     @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'district']//option[@class= 'ng-star-inserted']")
-    private List <WebElement> listOfDistrict;
+    private List<WebElement> listOfDistricts;
+
+    @FindBy(how = How.XPATH, using = "//select[@formcontrolname = 'district']//option[@class= 'ng-star-inserted']")
+    private List<WebElement> listOfCities;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname = 'street']")
     private WebElement streetField;
@@ -54,59 +50,75 @@ public class AddNewAddress {
     @FindBy(how = How.XPATH, using = "//div[@class = 'mat-dialog-actions d-flex justify-content-end buttons']//button[@class = 'primary-global-button btn m-0']")
     private WebElement addAddressButton;
 
-    public void clickOnAddAddressButton(){
-        addAddressButton.click();
+    public OrderPagePersonalData clickOnAddAddressButton() {
+        return new OrderPagePersonalData(driver);
     }
 
-    public void clickOnCancelButton(){
-        cancelButton.click();
+    public OrderPagePersonalData clickOnCancelButton() {
+        return new OrderPagePersonalData(driver);
     }
 
-    public void enterAddressComment(final String addressComment){
+    public AddNewAddress enterAddressComment(final String addressComment) {
         addressCommentField.clear();
         addressCommentField.sendKeys(addressComment);
+        return this;
     }
 
-    public void enterEntranceNumber(final String houseCorpus){
+    public AddNewAddress enterEntranceNumber(final String houseCorpus) {
         entranceNumberField.clear();
         entranceNumberField.sendKeys(houseCorpus);
+        return this;
     }
 
-    public void enterHouseCorpus(final String houseCorpus){
+    public AddNewAddress enterHouseCorpus(final String houseCorpus) {
         houseCorpusField.clear();
         houseCorpusField.sendKeys(houseCorpus);
+        return this;
     }
 
-    public void enterHouseNumber(final String houseNumber){
+    public AddNewAddress enterHouseNumber(final String houseNumber) {
         houseNumberField.clear();
         houseNumberField.sendKeys(houseNumber);
+        return this;
     }
 
-    public void enterStreet(final String street){
+    public AddNewAddress enterStreet(final String street) {
         streetField.clear();
         streetField.sendKeys(street);
+        return this;
     }
 
-    public void chooseDistrict(){
+    public AddNewAddress chooseCity(int index) {
+        clickOnCityField();
+        implicitWait(100);
+        listOfCities.get(index).click();
+        return this;
+    }
+
+    public AddNewAddress chooseDistrict(int index) {
         clickOnDistrictField();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        listOfDistrict.get(2).click();
+        implicitWait(100);
+        listOfDistricts.get(index).click();
+        return this;
     }
 
-    public void clickOnDistrictField(){
-        districtField.click();
+    public AddNewAddress clickOnDistrictField() {
+        return this;
     }
 
-    public void enterCity(final String city){
-        cityField.clear();
-        cityField.sendKeys(city);
+    public AddNewAddress clickOnCityField() {
+        return this;
     }
 
-    public String getTextFromRegionField(){
+    public String getTextFromRegionField() {
         return regionField.getText();
     }
 
-    public String getTextFromNewAddressTitle(){
+    public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
+    }
+
+    public AddNewAddress(WebDriver driver) {
+        super(driver);
     }
 }

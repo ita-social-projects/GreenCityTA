@@ -1,5 +1,8 @@
 package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class UbsHomePage {
-
+public class UbsHomePage extends BasePage{
     @FindBy(how = How.CSS, using = "span.header_lang-switcher-wrp.header_navigation-menu-right-list")
     private WebElement langButton;
 
@@ -27,6 +29,11 @@ public class UbsHomePage {
     @FindBy(how = How.CSS, using = "button.primary-global-button")
     private WebElement orderCourier;
 
+    public UbsHomePage(WebDriver driver) {
+        super(driver);
+    }
+
+
 //_________________________________________________________
 
     public void pressLangButton() {
@@ -41,8 +48,9 @@ public class UbsHomePage {
         selectLang.getText();
     }
 
-    public void pressOrderCourier() {
+    public SignInComponent pressOrderCourier() {
         orderCourier.click();
+        return new SignInComponent(driver);
     }
 
 
