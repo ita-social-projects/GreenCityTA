@@ -33,13 +33,13 @@ public class OrderDetailsPage  extends BasePage {
     private List<WebElement> totalPrice;
     @FindBy(xpath = "//div[@class='totalInfo']//strong")
     private List<WebElement> totalAmount;
-    @FindBy(xpath = "input[@class='shadow-none form-control col-12 col-sm-8 my-1 input-border ng-pristine ng-valid ng-touched']")
+    @FindBy(xpath = "//input[@class='shadow-none form-control col-12 col-sm-8 my-1 input-border ng-pristine ng-valid ng-touched']")
     private WebElement certificateInput;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
     private WebElement minimumOrderAmountAlert;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][2]//small")
     private WebElement minimumOrderContainsAlert;
-    @FindBy(xpath = "button[@class='primary-global-button btn ng-star-inserted']")
+    @FindBy(xpath = "//button[@class='primary-global-button btn ng-star-inserted']")
     private WebElement activateCertificateButton;
     @FindBy(xpath = "//div[@class='points']//span[@class='checkmark']")
     private List<WebElement> UseBonusesCheckmarks;
@@ -51,9 +51,9 @@ public class OrderDetailsPage  extends BasePage {
     private List<WebElement> orderNumberInputs;
     @FindBy(xpath = "//button[@class='addOrderBtn']")
     private WebElement addAnotherNumberButton;
-    @FindBy(xpath = "p[@class='link']")
+    @FindBy(xpath = "//p[@class='link']")
     private WebElement learnAboutPackagesLink;
-    @FindBy(xpath = "textarea[@formcontrolname='orderComment']")
+    @FindBy(xpath = "//textarea[@formcontrolname='orderComment']")
     private WebElement commentInput;
     @FindBy(xpath = "//button[@class='secondary-global-button btn cancel-button btn-main']")
     private WebElement cancelOrderButton;
