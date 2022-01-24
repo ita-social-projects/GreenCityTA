@@ -44,8 +44,9 @@ public class HeaderComponent extends BasePage {
         return  new UbsHomePage(driver);
     }
 
-    public void clickAboutUs() {
+    public HeaderComponent clickAboutUs() {
         aboutUs.click();
+        return this;
     }
 
     public void clickSortingRules() {
@@ -64,8 +65,22 @@ public class HeaderComponent extends BasePage {
         search.click();
     }
 
-    public UbsHomePage clickLanguageSwitcher() {
+    public HeaderComponent clickLanguageSwitcher() {
         languageSwitcher.click();
-        return new UbsHomePage(driver);
+        return this;
+    }
+
+    public List<WebElement> getLanguagesList() {
+        return languagesList;
+    }
+
+    public HeaderComponent languageChoose(String language){
+        for(WebElement current : getLanguagesList()){
+            if(current != null & current.getAttribute("aria-label").equalsIgnoreCase(language)){
+                current.click();
+                break;
+            }
+        }
+        return this;
     }
 }
