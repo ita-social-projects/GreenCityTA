@@ -1,5 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -8,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class LoginAndGoToUbs {
+public class LoginAndGoToUbs extends BasePage {
     @FindBy(how = How.CSS, using = "a.ubs-header-sign-in")
     private WebElement loginButton;
 
@@ -23,6 +25,10 @@ public class LoginAndGoToUbs {
 
     @FindBy(how = How.CSS, using = "button.btn")
     private WebElement nextButton;
+
+    public LoginAndGoToUbs(WebDriver driver) {
+        super(driver);
+    }
 
 //___________________________________________________
 

@@ -1,9 +1,8 @@
-package com.ita.edu.greencity.ui.pages.header;
+package com.ita.edu.greencity.ui.pages.sign_up;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
-import net.jodah.failsafe.internal.util.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

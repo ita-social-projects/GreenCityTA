@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,28 +9,23 @@ import org.openqa.selenium.support.PageFactory;
 import java.time.Duration;
 import java.util.List;
 
-public class SelectRegion {
+public class SelectRegion extends BasePage {
     private WebDriver driver;
-
-    public SelectRegion(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
-
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
-
     @FindBy(xpath = "//button[@class='btn secondaryButton secondary-global-button']")
     private WebElement backButton;
-
     @FindBy(xpath = "//button[@class='btn primaryButton primary-global-button']")
     private WebElement continueButton;
-
     @FindBy(xpath = "//select[@name='region']")
     private WebElement regionDropdown;
-
     @FindBy(xpath = "//select[@name='region']/option[@class ='ng-star-inserted']")
     private List<WebElement> listOfRegions;
+
+    public SelectRegion(WebDriver driver) {
+        super(driver);
+    }
+
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -55,8 +51,9 @@ public class SelectRegion {
         getBackButton().click();
     }
 
-    public void clickOnContinueButton() {
+    public OrderDetailsPage clickOnContinueButton() {
         getContinueButton().click();
+        return new OrderDetailsPage(driver);
     }
 
     public void clickOnRegionDropdown() {
@@ -86,7 +83,7 @@ public class SelectRegion {
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
-        return  this;
+        return this;
     }
 
 }
