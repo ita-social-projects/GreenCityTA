@@ -15,44 +15,41 @@ public class SignInComponent extends BasePage {
         super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"wrapper\"]//a[@class = \"close-modal-window\"]")
+    @FindBy(how = How.XPATH, using = "//a[@class = \"close-modal-window\"]")
     private WebElement close;
 
-    @FindBy(how = How.XPATH, using = "//app-email-input-field//input[@id = \"email\"]")
+    @FindBy(how = How.XPATH, using = "//input[@id = \"email\"]")
     private WebElement email;
 
-    @FindBy(how = How.XPATH, using = "//form[@class = \"ng-pristine ng-invalid ng-touched\"]//input[@id = \"password\"]")
+    @FindBy(how = How.XPATH, using = "//input[@id = \"password\"]")
     private WebElement password;
 
-    @FindBy(how = How.XPATH, using = "//form[@class = \"ng-pristine ng-invalid ng-touched\"]//span[@role = \"button\"][@class = \"show-hide-btn\"]")
+    @FindBy(how = How.XPATH, using = "//span[@class = \"show-hide-btn\"]")
     private WebElement showHidePassword;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"forgot-wrapper\"]//a[@class = \"ubs-forgot-password\"]")
+    @FindBy(how = How.XPATH, using = "//div[@class = \"forgot-wrapper\"]/a[@class = \"ubs-forgot-password\"]")
     private WebElement forgotPassword;
 
-    @FindBy(how = How.XPATH, using = "//app-submit-button//button[@class = \"ubs-primary-global-button\"]")
+    @FindBy(how = How.XPATH, using = "//app-submit-button/button[@class = \"ubs-primary-global-button\"]")
     private WebElement signIn;
 
-    @FindBy(how = How.XPATH, using = "//app-google-btn//button[@class = \"google-sign-in\"]")
+    @FindBy(how = How.XPATH, using = "//app-google-btn/button[@class = \"google-sign-in\"]")
     private WebElement signInGoogle;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = \"missing-account\"]//a[@class = \"ubs-sign-up-link\"]")
+    @FindBy(how = How.XPATH, using = "//div[@class = \"missing-account\"]/p/a[@class = \"ubs-sign-up-link\"]")
     private WebElement signUp;
 
-    @FindBy(how = How.XPATH, using = "//div[@id = \"email-err-msg\"]//app-error//div")
+    @FindBy(how = How.XPATH, using = "//div[@id = \"email-err-msg\"]/app-error/div")
     private WebElement errorEmail;
 
-    @FindBy(how = How.XPATH, using = "//div[@id = \"pass-err-msg\"]//app-error//div")
+    @FindBy(how = How.XPATH, using = "//div[@id = \"pass-err-msg\"]/app-error/div")
     private WebElement errorPassword;
 
-
-    /*
     public UbsHomePage clickCloseBtn() {
         close.click();
 
         return new UbsHomePage(driver);
     }
-     */
 
     public SignInComponent inputEmail(String emailInput) {
         email.sendKeys(emailInput);
@@ -89,13 +86,12 @@ public class SignInComponent extends BasePage {
 
         return new SelectRegion(driver);
     }
-    /*
+
     public SignUpComponent clickSignUp() {
         signUp.click();
 
-       // return new SignUpComponent(driver);
+        return new SignUpComponent(driver);
     }
-     */
 
     public String getErrorEmailMessage() {
         return errorEmail.getText();
