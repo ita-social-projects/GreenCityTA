@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_user;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import com.ita.edu.greencity.ui.pages.user_data.UserData;
@@ -35,6 +36,11 @@ public class UbsUser extends BasePage {
         return new OrderDetailsPage(driver);
     }
 
+    public UserData clickOnUserDataButton() {
+        userDataButton.click();
+        return new UserData(driver);
+    }
+
     public UbsUserOrders clickOnOrdersButton() {
         ordersButton.click();
         return new UbsUserOrders(driver);
@@ -50,4 +56,7 @@ public class UbsUser extends BasePage {
         return new Messages(driver);
     }
 
+    public HeaderSignedInComponent getHeader() {
+        return new HeaderSignedInComponent(driver);
+    }
 }
