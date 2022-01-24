@@ -2,12 +2,11 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
-
 
 
 public class OrderPagePersonalData extends BasePage {
@@ -63,21 +62,28 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button btn m-0']")
     private WebElement nextButton;
 
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
+    }
+
     public OrderPageConfirmation clickOnNextButton() {
+        nextButton.click();
         return new OrderPageConfirmation(driver);
     }
 
     public UbsHomePage clickOnCancelButton() {
+        cancelButton.click();
         return new UbsHomePage(driver);
     }
 
     public OrderDetailsPage clickOnBackButton() {
+        backButton.click();
         return new OrderDetailsPage(driver);
     }
 
     public OrderPagePersonalData enterAddressComment(final String addressComment) {
         addressCommentField.clear();
-        addressCommentField.sendKeys(addressComment);
+        addressCommentField.sendKeys(addressComment, Keys.ENTER);
         return this;
     }
 
@@ -86,6 +92,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public AddNewAddress clickOnAddAddressButton() {
+        addAddressButton.click();
         return new AddNewAddress(driver);
     }
 
@@ -95,25 +102,25 @@ public class OrderPagePersonalData extends BasePage {
 
     public OrderPagePersonalData enterAnotherClientEmail(final String email) {
         anotherClientEmailField.clear();
-        anotherClientEmailField.sendKeys(email);
+        anotherClientEmailField.sendKeys(email, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterAnotherClientPhoneNumber(final String phoneNumber) {
         anotherClientPhoneNumberField.clear();
-        anotherClientPhoneNumberField.sendKeys(phoneNumber);
+        anotherClientPhoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterAnotherClientLastName(final String lastName) {
         anotherClientLastNameField.clear();
-        anotherClientLastNameField.sendKeys(lastName);
+        anotherClientLastNameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterAnotherClientFirstName(final String firstName) {
         anotherClientFirstNameField.clear();
-        anotherClientFirstNameField.sendKeys(firstName);
+        anotherClientFirstNameField.sendKeys(firstName, Keys.ENTER);
         return this;
     }
 
@@ -124,33 +131,29 @@ public class OrderPagePersonalData extends BasePage {
 
     public OrderPagePersonalData enterEmail(final String email) {
         emailField.clear();
-        emailField.sendKeys(email);
+        emailField.sendKeys(email, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterPhoneNumber(final String phoneNumber) {
         phoneNumberField.clear();
-        phoneNumberField.sendKeys(phoneNumber);
+        phoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterLastName(final String lastName) {
         lastNameField.clear();
-        lastNameField.sendKeys(lastName);
+        lastNameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
     public OrderPagePersonalData enterFirstName(final String firstName) {
         firstNameField.clear();
-        firstNameField.sendKeys(firstName);
+        firstNameField.sendKeys(firstName, Keys.ENTER);
         return this;
     }
 
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
-    }
-
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
     }
 }

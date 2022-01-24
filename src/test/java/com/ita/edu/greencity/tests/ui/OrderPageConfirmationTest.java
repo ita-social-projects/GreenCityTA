@@ -26,21 +26,17 @@ public class OrderPageConfirmationTest extends TestRun {
                 .EnterNumberOfTextileWaste120lInput("1")
                 .EnterNumberOfSafeWasteInput("1")
                 .EnterNumberOfTextileWaste20lInput("1")
-                .clickOnNextButton();
-        Thread.sleep(1000);
+                .clickOnNextButton()
+                .enterFirstName("Anna")
+                .enterLastName("Maria").enterEmail(provider.getEmail())
+               .enterPhoneNumber("+380 (63) 114 46 78")
 
-                OrderPagePersonalData orderPagePersonalData = new OrderPagePersonalData(driver);
-                orderPagePersonalData.enterFirstName("Anna");
-
-
-//
-//               .enterLastName("Maria").enterEmail(provider.getEmail())
-//               .enterPhoneNumber("+380 (63) 114 46 78").clickOnAddAddressButton()
-//                .clickOnCityField().chooseCity(1)
-//                .clickOnDistrictField().chooseDistrict(2)
-//                .enterStreet("Почаївський провулок")
-//               .enterHouseNumber("17").enterHouseCorpus("2").enterEntranceNumber("1")
-//               .clickOnAddAddressButton().clickOnNextButton();
+                .clickOnAddAddressButton()
+                .chooseCity(1)
+                .chooseDistrict(2)
+                .enterStreet("Почаївський провулок")
+               .enterHouseNumber("17").enterHouseCorpus("2").enterEntranceNumber("1")
+               .clickOnAddAddressButton().clickOnNextButton();
 
 
 //     String actual =
