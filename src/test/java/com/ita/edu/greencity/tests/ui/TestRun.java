@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui;
 
-import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+
 import com.ita.edu.greencity.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -34,12 +34,12 @@ public class TestRun {
         driver.navigate().refresh();
     }
 
-//    @AfterMethod
-//    public void afterMethod(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+    @AfterMethod
+    public void afterMethod(){
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
 
 }

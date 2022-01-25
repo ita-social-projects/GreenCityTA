@@ -5,17 +5,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
-import java.security.Key;
-import java.time.Duration;
 import java.util.List;
 
-public class OrderDetailsPage  extends BasePage {
-
-    public OrderDetailsPage(WebDriver driver) {
-        super(driver);
-    }
+public class OrderDetailsPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='change-location']")
     private WebElement changeRegionButton;
@@ -59,22 +52,25 @@ public class OrderDetailsPage  extends BasePage {
     private WebElement cancelOrderButton;
     @FindBy(xpath = "//button[@class='primary-global-button btn btn-main']")
     private WebElement nextButton;
+    public OrderDetailsPage(WebDriver driver) {
+        super(driver);
+    }
 
-
-
-
-    public OrderDetailsPage clickOnChangeRegionButton(){
+    public OrderDetailsPage clickOnChangeRegionButton() {
         changeRegionButton.click();
         return this;
     }
-    public OrderDetailsPage clickOnchangeRegionDropdown(){
+
+    public OrderDetailsPage clickOnchangeRegionDropdown() {
         changeRegionDropdown.click();
         return this;
     }
-    public OrderDetailsPage clickOnRegionByIndex(int index){
+
+    public OrderDetailsPage clickOnRegionByIndex(int index) {
         regionButtons.get(index).click();
         return this;
     }
+
     public OrderDetailsPage chooseRegionByValue(String value) {
         clickOnchangeRegionDropdown();
         try {
@@ -86,105 +82,126 @@ public class OrderDetailsPage  extends BasePage {
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
-        return  this;
+        return this;
     }
-    public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value){
+
+    public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-    public OrderDetailsPage EnterNumberOfSafeWasteInput(String value){
+
+    public OrderDetailsPage EnterNumberOfSafeWasteInput(String value) {
         NumberOfSafeWasteInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-    public OrderDetailsPage EnterNumberOfTextileWaste20lInput(String value){
+
+    public OrderDetailsPage EnterNumberOfTextileWaste20lInput(String value) {
         NumberOfTextileWaste20lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-    public String getTextileWaste120lSum(){
-     String[] arr = totalPrice.get(0).getText().split("/s");
-      return arr[0];
+
+    public String getTextileWaste120lSum() {
+        String[] arr = totalPrice.get(0).getText().split("/s");
+        return arr[0];
     }
-    public String getSaveWasteSum(){
+
+    public String getSaveWasteSum() {
         String[] arr = totalPrice.get(1).getText().split("/s");
         return arr[0];
     }
-    public String getTextileWaste20lSum(){
+
+    public String getTextileWaste20lSum() {
         String[] arr = totalPrice.get(2).getText().split("/s");
         return arr[0];
     }
-    public String getOrderAmount(){
+
+    public String getOrderAmount() {
         String[] arr = totalAmount.get(0).getText().split("/s");
         return arr[0];
     }
-    public String getAmountDue(){
+
+    public String getAmountDue() {
         String[] arr = totalAmount.get(1).getText().split("/s");
         return arr[0];
     }
-    public String getMinimumOrderAmountAlertText(){
+
+    public String getMinimumOrderAmountAlertText() {
         String text = minimumOrderAmountAlert.getText();
         return text;
     }
-    public String getMinimumOrderContainsAlertText(){
+
+    public String getMinimumOrderContainsAlertText() {
         String text = minimumOrderContainsAlert.getText();
         return text;
     }
-    public OrderDetailsPage EnterCertificateInput(String value){
+
+    public OrderDetailsPage EnterCertificateInput(String value) {
         certificateInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-    public OrderDetailsPage clickOnActivateCertificateButton(){
+
+    public OrderDetailsPage clickOnActivateCertificateButton() {
         activateCertificateButton.click();
         return this;
     }
-    public OrderDetailsPage ClickOnNoUseBonusesCheckmark(){
+
+    public OrderDetailsPage ClickOnNoUseBonusesCheckmark() {
         UseBonusesCheckmarks.get(0).click();
         return this;
     }
-    public OrderDetailsPage ClickOnYesUseBonusesCheckmark(){
+
+    public OrderDetailsPage ClickOnYesUseBonusesCheckmark() {
         UseBonusesCheckmarks.get(1).click();
         return this;
     }
-    public OrderDetailsPage ClickOnNoWaitingStoreOrderCheckmark(){
+
+    public OrderDetailsPage ClickOnNoWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(0).click();
         return this;
     }
-    public OrderDetailsPage ClickOnYesWaitingStoreOrderCheckmark(){
+
+    public OrderDetailsPage ClickOnYesWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(1).click();
         return this;
     }
-    public OrderDetailsPage clickOnHowToGetBonusesButton(){
+
+    public OrderDetailsPage clickOnHowToGetBonusesButton() {
         howToGetBonusesButton.click();
         return this;
     }
-    public OrderDetailsPage EnterOrderNumberInputs(String MessageText,int value){
+
+    public OrderDetailsPage EnterOrderNumberInputs(String MessageText, int value) {
         orderNumberInputs.get(value).sendKeys(MessageText);
         return this;
     }
-    public OrderDetailsPage clickOnAddAnotherNumberButton(){
+
+    public OrderDetailsPage clickOnAddAnotherNumberButton() {
         addAnotherNumberButton.click();
         return this;
     }
-    public OrderDetailsPage clickOnLearnAboutPackagesLink(){
+
+    public OrderDetailsPage clickOnLearnAboutPackagesLink() {
         learnAboutPackagesLink.click();
         return this;
     }
-    public OrderDetailsPage EnterCommentInput(String value){
+
+    public OrderDetailsPage EnterCommentInput(String value) {
         commentInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-    public String getCommentInput(){
-       return commentInput.getAttribute("value");
+
+    public String getCommentInput() {
+        return commentInput.getAttribute("value");
     }
-    public OrderDetailsPage clickOnCancelOrderButton(){
+    public OrderDetailsPage clickOnCancelOrderButton() {
         cancelOrderButton.click();
         return this;
     }
-    public OrderPagePersonalData clickOnNextButton(){
+
+    public OrderPagePersonalData clickOnNextButton() {
         nextButton.click();
         return new OrderPagePersonalData(driver);
     }
-
-
 
 
 }

@@ -19,7 +19,7 @@ public class UbsUser extends BasePage {
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
     private WebElement newOrderButton;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'sidebar-list-item-link')][contains(@href, 'profile')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'sidebar-list-item-link')][contains(@href, 'profile')]")
     private WebElement userDataButton;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'sidebar-list-item-link')][contains(@href, 'orders')]")
