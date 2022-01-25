@@ -27,7 +27,7 @@ public class OrderDetailsPageTest extends TestRun{
                 .clickOnNextButton()
                 .clickOnBackButton()
                 .getCommentInput();
-         Assert.assertEquals(actual, expected);
+         Assert.assertEquals(actual.trim(), expected.trim());
 
 
     }
