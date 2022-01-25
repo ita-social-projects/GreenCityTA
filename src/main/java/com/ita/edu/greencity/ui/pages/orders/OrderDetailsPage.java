@@ -173,7 +173,7 @@ public class OrderDetailsPage  extends BasePage {
         return this;
     }
     public String getCommentInput(){
-       return commentInput.getText();
+       return commentInput.getAttribute("value");
     }
     public OrderDetailsPage clickOnCancelOrderButton(){
         cancelOrderButton.click();
