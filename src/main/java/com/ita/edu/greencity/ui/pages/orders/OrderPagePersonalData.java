@@ -93,7 +93,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public AddNewAddress clickOnAddAddressButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class ='btn add-address']"),10);
+//        waitUntilElementToBeClickable(By.xpath("//button[@class ='btn add-address']"),10);
         addAddressButton.click();
         return new AddNewAddress(driver);
     }
