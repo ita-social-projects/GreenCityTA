@@ -16,12 +16,12 @@ public class CheckAddNewAddressButton extends TestRun {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         AddNewAddress addNewAddress = new AddNewAddress(driver);
         ubsHomePage.pressOrderCourier()
-        .inputEmail(provider.getEmail())
+                .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-        .clickOnContinueButton()
-        .EnterNumberOfTextileWaste120lInput("5")
-        .clickOnNextButton()
+                .clickOnContinueButton()
+                .EnterNumberOfTextileWaste120lInput("5")
+                .clickOnNextButton()
                 .clickOnAddAddressButton();
         Assert.assertFalse(addNewAddress.isClickable());
     }
@@ -39,9 +39,11 @@ public class CheckAddNewAddressButton extends TestRun {
                 .EnterNumberOfTextileWaste120lInput("5")
                 .clickOnNextButton()
                 .clickOnAddAddressButton()
-                .chooseCity(2)
-                .chooseDistrict(1)
-                .enterStreet("Ярославська вулиця")
+                .clickOnCityField()
+                .chooseCity(0)
+                .chooseDistrict(0)
+                .enterStreet("Lisna Street")
+                .chooseStreet(0)
                 .enterHouseNumber("1").enterHouseCorpus("2").enterEntranceNumber("3");
         Assert.assertTrue(addNewAddress.isClickable());
     }
