@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,5 +126,18 @@ public class AddNewAddress extends BasePage {
 
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
+    }
+
+    public boolean isClickable()
+    {
+        try
+        {
+            addAddressButton.click();
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }
