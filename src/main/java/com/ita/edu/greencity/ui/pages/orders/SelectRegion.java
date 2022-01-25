@@ -1,12 +1,12 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class SelectRegion extends BasePage {
 
@@ -74,11 +74,13 @@ public class SelectRegion extends BasePage {
         clickOnRegionDropdown();
         try {
             for (WebElement option : listOfRegions) {
-                if (option.getText().contains(value.trim()))
+                if (option.getText().equals(value.trim())) {
+                    waitUntilWebElementToBeClickableBy(option,1000);
                     option.click();
+                }
                 break;
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NoSuchElementException e) {
             System.err.println(e.getMessage());
         }
         return this;
