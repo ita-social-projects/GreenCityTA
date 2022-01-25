@@ -10,6 +10,8 @@ import java.util.List;
 
 public class OrderDetailsPage extends BasePage {
 
+    @FindBy(xpath = "//div[@class='user-location']//h5")
+    private WebElement locationTitle;
     @FindBy(xpath = "//button[@class='change-location']")
     private WebElement changeRegionButton;
     @FindBy(xpath = "//select[@name='region']")
@@ -54,6 +56,11 @@ public class OrderDetailsPage extends BasePage {
     private WebElement nextButton;
     public OrderDetailsPage(WebDriver driver) {
         super(driver);
+    }
+    public String getLocationFromTitle()
+    {
+        System.out.println(locationTitle.getText().substring(11));
+        return locationTitle.getText().substring(11).trim();
     }
 
     public OrderDetailsPage clickOnChangeRegionButton() {
