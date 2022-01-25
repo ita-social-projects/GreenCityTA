@@ -25,7 +25,7 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]")
     private WebElement districtField;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]//option[@class= 'ng-star-inserted']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]//option")
     private List<WebElement> listOfDistricts;
 
     @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'city')]//option[@class= 'ng-star-inserted']")
@@ -51,6 +51,18 @@ public class AddNewAddress extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//button[@class = 'btn add-address']")
     private WebElement addAddressButton;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='pac-matched']")
+    private List<WebElement> listOfStreet;
+
+
+
+
+    public AddNewAddress chooseStreet(int index){
+        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
+        listOfStreet.get(index).click();
+        return this;
+    }
 
     public AddNewAddress(WebDriver driver) {
         super(driver);
@@ -92,9 +104,9 @@ public class AddNewAddress extends BasePage {
         return this;
     }
 
-    public AddNewAddress enterStreet(final String street) {
+    public AddNewAddress enterStreet(final String street) throws InterruptedException {
         streetField.clear();
-        streetField.sendKeys(street, Keys.ENTER);
+        streetField.sendKeys(street);
         return this;
     }
 
@@ -132,7 +144,7 @@ public class AddNewAddress extends BasePage {
     {
         try
         {
-            addAddressButton.click();
+          waitUntilElementToBeClickable(By.xpath("//button[@class = 'btn add-address']"),2);
             return true;
         }
         catch (Exception e)
