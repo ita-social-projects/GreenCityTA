@@ -51,7 +51,6 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
