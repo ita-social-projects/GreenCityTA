@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,6 +61,7 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
@@ -77,7 +79,6 @@ public class SelectRegion extends BasePage {
         }
         return this;
     }
-
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         try {
@@ -96,7 +97,6 @@ public class SelectRegion extends BasePage {
         return this;
     }
 }
-
 class NoSuchOptionException extends Exception {
     public NoSuchOptionException() {
         super("Incorrect value to select! This option does not exist!");
