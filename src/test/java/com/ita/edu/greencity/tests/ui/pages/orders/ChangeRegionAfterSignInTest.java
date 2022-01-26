@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui.orders;
+package com.ita.edu.greencity.tests.ui.pages.orders;
 
 import com.ita.edu.greencity.tests.ui.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
@@ -16,7 +16,7 @@ public class ChangeRegionAfterSignInTest extends TestRun {
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .chooseRegionByValue(region)
-                .clickOnContinueButton().getLocationFromTitle();
+                .clickOnContinueButton().getLocationFromTitle().substring(11).trim();
         Assert.assertEquals(actual, region);
     }
 }
