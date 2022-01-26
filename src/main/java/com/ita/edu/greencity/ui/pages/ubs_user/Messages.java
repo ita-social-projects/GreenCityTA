@@ -12,7 +12,7 @@ public class Messages extends BasePage {
         super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "if-empty ng-star-inserted")
+    @FindBy(how = How.XPATH, using = "//*[@class = 'if-empty ng-star-inserted']")
     private WebElement noMessagesFound;
 
     public String getNoMessagesFoundLabel() {

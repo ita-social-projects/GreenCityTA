@@ -17,6 +17,10 @@ public class UbsUserOrders extends BasePage {
         super(driver);
     }
 
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'if_empty ng-star-inserted']/span")
+    private WebElement emptyOrdersPageLabel;
+
+
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
     private WebElement newOrderButton;
 
@@ -25,6 +29,12 @@ public class UbsUserOrders extends BasePage {
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'card ng-star-inserted')]/*[contains(@class, 'empty_card')]")
     private List<WebElement> orders;
+
+
+    public String getEmptyOrdersPageLabel() {
+        return emptyOrdersPageLabel.getText();
+    }
+
 
     public OrderDetailsPage clickOnNewOrderButton() {
         newOrderButton.click();
