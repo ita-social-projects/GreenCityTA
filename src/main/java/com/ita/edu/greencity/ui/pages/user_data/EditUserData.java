@@ -10,10 +10,10 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 public class EditUserData extends BasePage {
-    @FindBy(how = How.XPATH, using = "//*[@id=\"recipientName\"]")
+    @FindBy(how = How.XPATH, using = "//*[@id='recipientName']")
     private WebElement editName;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"recipientSurname\"]")
+    @FindBy(how = How.XPATH, using = "//*[@id='recipientSurname']")
     private WebElement editSurname;
 
     @FindBy(how = How.XPATH, using = "//*[@id='recipientPhone']")
@@ -59,6 +59,18 @@ public class EditUserData extends BasePage {
     public UserData clickOnSaveChangesButton(){
         saveChanges.click();
         return new UserData(driver);
+    }
+    public String editAdressData(String  numberAdress, String elem){
+        return switch (elem) {
+            case "city" -> driver.findElement(By.xpath("//form/div["+ numberAdress + 2 +"]/div/div[1]/div[1]/input")).getText();
+            case "region" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[1]/div[2]/input")).getText();
+            case "district" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[1]/div[3]/input")).getText();
+            case "street" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[1]/input")).getText();
+            case "house" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[2]/input")).getText();
+            case "corpus" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[3]/input")).getText();
+            case "entrance" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[4]/input")).getText();
+            default -> null;
+        };
     }
 
 }
