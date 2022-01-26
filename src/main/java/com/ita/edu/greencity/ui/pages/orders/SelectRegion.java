@@ -25,17 +25,6 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
-    public static boolean listContainsExactValue(List<WebElement> arr, String value) {
-        boolean ch = false;
-        for (WebElement el : arr) {
-            if (el.getText().equals(value)) {
-                ch = true;
-                break;
-            }
-        }
-        return ch;
-    }
-
     public WebElement getCloseButton() {
         return closeButton;
     }
@@ -61,7 +50,7 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
@@ -72,33 +61,19 @@ public class SelectRegion extends BasePage {
 
     public SelectRegion chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
-        try {
-            listOfRegions.get(index).click();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
+        listOfRegions.get(index).click();
         return this;
     }
+
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
-        try {
-            if (!listContainsExactValue(listOfRegions, value.trim())) {
-                throw new NoSuchOptionException();
+        for (WebElement option : listOfRegions) {
+            if (option.getText().equals(value.trim())) {
+                option.click();
+                break;
             }
-            for (WebElement option : listOfRegions) {
-                if (option.getText().equals(value.trim())) {
-                    option.click();
-                    break;
-                }
-            }
-        } catch (NoSuchOptionException e) {
-            System.err.println(e.getMessage());
         }
         return this;
     }
 }
-class NoSuchOptionException extends Exception {
-    public NoSuchOptionException() {
-        super("Incorrect value to select! This option does not exist!");
-    }
-}
+
