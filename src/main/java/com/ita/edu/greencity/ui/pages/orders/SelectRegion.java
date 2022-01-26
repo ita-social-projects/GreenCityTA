@@ -25,6 +25,16 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
+    public static boolean listContainsExactValue(List<WebElement> arr, String value) {
+        boolean ch = false;
+        for (WebElement el : arr) {
+            if (el.getText().equals(value)) {
+                ch = true;
+                break;
+            }
+        }
+        return ch;
+    }
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -69,19 +79,26 @@ public class SelectRegion extends BasePage {
         }
         return this;
     }
-
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         try {
-            for (WebElement option : listOfRegions) {
-                if (option.getText().contains(value.trim()))
-                    option.click();
-                break;
+            if (!listContainsExactValue(listOfRegions, value.trim())) {
+                throw new NoSuchOptionException();
             }
-        } catch (IndexOutOfBoundsException e) {
+            for (WebElement option : listOfRegions) {
+                if (option.getText().equals(value.trim())) {
+                    option.click();
+                    break;
+                }
+            }
+        } catch (NoSuchOptionException e) {
             System.err.println(e.getMessage());
         }
         return this;
     }
-
+}
+class NoSuchOptionException extends Exception {
+    public NoSuchOptionException() {
+        super("Incorrect value to select! This option does not exist!");
+    }
 }
