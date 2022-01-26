@@ -18,6 +18,7 @@ public class Operation3dSecurePopUp extends BasePage {
     }
 
     public SuccessfulOrderPage clickOnContinueButton() {
+        sleep(5000);
         continueButton.click();
         return new SuccessfulOrderPage(driver);
     }

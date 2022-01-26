@@ -60,12 +60,14 @@ public class SelectRegion extends BasePage {
     }
 
     public SelectRegion chooseRegionByIndex(int index) {
+        sleep(5000);
         clickOnRegionDropdown();
         listOfRegions.get(index).click();
         return this;
     }
 
     public SelectRegion chooseRegionByValue(String value) {
+        sleep(5000);
         clickOnRegionDropdown();
         for (WebElement option : listOfRegions) {
             if (option.getText().equals(value.trim())) {
