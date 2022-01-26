@@ -18,16 +18,18 @@ public class OrderDetailsPageTest extends TestRun{
                 .clickSignIn()
                 .chooseRegionByIndex(0)
                 .clickOnContinueButton();
-
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-           String  actual =  orderDetailsPage.EnterNumberOfSafeWasteInput("1")
+        String actual = orderDetailsPage
+                .chooseRegionByValue(" Kyiv region ")
+                .chooseRegionByValue(" Kyiv ")
+                .EnterNumberOfSafeWasteInput("1")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
                 .EnterCommentInput(expected)
                 .clickOnNextButton()
                 .clickOnBackButton()
                 .getCommentInput();
-         Assert.assertEquals(actual.trim(), expected.trim());
+         Assert.assertEquals(actual.trim(), expected);
 
 
     }
