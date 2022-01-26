@@ -15,6 +15,7 @@ public class OrderSavingPopUp extends BasePage {
     private WebElement saveButton;
     @FindBy(how = How.XPATH, using = "//button[@class = 'close ng-star-inserted']")
     private WebElement closeButton;
+
     public OrderSavingPopUp(WebDriver driver) {
         super(driver);
     }
