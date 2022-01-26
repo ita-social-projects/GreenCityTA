@@ -20,7 +20,7 @@ public class UbsHomePage extends BasePage{
     @FindBy(how = How.CSS, using = "span.add-shadow.header_lang-switcher-wrp.header_navigation-menu-right-list")
     private WebElement selectLang;
 
-    @FindBy(linkText= "UBS Courier")
+    @FindBy(how = How.XPATH, using = "//h1")
     private WebElement h1Text;
 
 //    @FindBy(linkText= " call-up the courier ")
@@ -44,8 +44,8 @@ public class UbsHomePage extends BasePage{
         selectLang.click();
     }
 
-    public void getTitleH1Text() {
-        selectLang.getText();
+    public String getTitleH1Text() {
+        return h1Text.getText();
     }
 
     public SignInComponent pressOrderCourier() {
