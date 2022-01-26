@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -92,6 +93,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public AddNewAddress clickOnAddAddressButton() {
+//        waitUntilElementToBeClickable(By.xpath("//button[@class ='btn add-address']"),10);
         addAddressButton.click();
         return new AddNewAddress(driver);
     }

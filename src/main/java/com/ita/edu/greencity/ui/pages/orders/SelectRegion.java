@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,16 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
+    public static boolean listContainsExactValue(List<WebElement> arr, String value) {
+        boolean ch = false;
+        for (WebElement el : arr) {
+            if (el.getText().equals(value)) {
+                ch = true;
+                break;
+            }
+        }
+        return ch;
+    }
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -50,6 +61,7 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
@@ -67,19 +79,26 @@ public class SelectRegion extends BasePage {
         }
         return this;
     }
-
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         try {
-            for (WebElement option : listOfRegions) {
-                if (option.getText().contains(value.trim()))
-                    option.click();
-                break;
+            if (!listContainsExactValue(listOfRegions, value.trim())) {
+                throw new NoSuchOptionException();
             }
-        } catch (IndexOutOfBoundsException e) {
+            for (WebElement option : listOfRegions) {
+                if (option.getText().equals(value.trim())) {
+                    option.click();
+                    break;
+                }
+            }
+        } catch (NoSuchOptionException e) {
             System.err.println(e.getMessage());
         }
         return this;
     }
-
+}
+class NoSuchOptionException extends Exception {
+    public NoSuchOptionException() {
+        super("Incorrect value to select! This option does not exist!");
+    }
 }

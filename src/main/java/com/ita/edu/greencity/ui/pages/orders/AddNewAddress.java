@@ -1,9 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -24,7 +22,7 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]")
     private WebElement districtField;
 
-    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]//option[@class= 'ng-star-inserted']")
+    @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'district')]//option")
     private List<WebElement> listOfDistricts;
 
     @FindBy(how = How.XPATH, using = "//select[contains(@formcontrolname, 'city')]//option[@class= 'ng-star-inserted']")
@@ -48,8 +46,20 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'secondary-global-button btn m-0 mr-2']")
     private WebElement cancelButton;
 
-    @FindBy(how = How.XPATH, using = "//button[@class = 'btn add-address']")
+    @FindBy(how = How.XPATH, using = "//div[@class ='mat-dialog-actions d-flex justify-content-end buttons']/button[@class = 'primary-global-button btn m-0']")
     private WebElement addAddressButton;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='pac-matched']")
+    private List<WebElement> listOfStreet;
+
+
+
+
+    public AddNewAddress chooseStreet(int index){
+        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
+        listOfStreet.get(index).click();
+        return this;
+    }
 
     public AddNewAddress(WebDriver driver) {
         super(driver);
@@ -91,9 +101,9 @@ public class AddNewAddress extends BasePage {
         return this;
     }
 
-    public AddNewAddress enterStreet(final String street) {
+    public AddNewAddress enterStreet(final String street) throws InterruptedException {
         streetField.clear();
-        streetField.sendKeys(street, Keys.ENTER);
+        streetField.sendKeys(street);
         return this;
     }
 
@@ -125,5 +135,18 @@ public class AddNewAddress extends BasePage {
 
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
+    }
+
+    public boolean isClickable()
+    {
+        try
+        {
+          waitUntilElementToBeClickable(By.xpath("//div[@class ='mat-dialog-actions d-flex justify-content-end buttons']/button[@class = 'primary-global-button btn m-0']"),1);
+            return true;
+        }
+        catch (TimeoutException timeout)
+        {
+            return false;
+        }
     }
 }
