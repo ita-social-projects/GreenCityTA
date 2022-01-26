@@ -94,6 +94,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public OrderDetailsPage clickOnBackButton() {
+        waitUntilElementToBeClickable(By.xpath("//button[@class = 'secondary-global-button btn back-btn m-0']"),2);
         backButton.click();
         return new OrderDetailsPage(driver);
     }

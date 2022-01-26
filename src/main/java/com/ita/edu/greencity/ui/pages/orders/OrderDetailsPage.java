@@ -86,8 +86,10 @@ public class OrderDetailsPage extends BasePage {
         clickOnchangeRegionDropdown();
         sleep(2000);
         for (WebElement option : regionButtons) {
-            if (option.getText().trim().equals(value.trim()))
+            if (option.getText().trim().equals(value.trim())) {
                 option.click();
+                break;
+            }
         }
         return this;
         }

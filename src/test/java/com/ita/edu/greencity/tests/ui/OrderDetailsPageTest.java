@@ -21,8 +21,7 @@ public class OrderDetailsPageTest extends TestRun{
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
         String actual = orderDetailsPage
                 .chooseRegionByValue(" Kyiv region ")
-                .chooseRegionByValue(" Kyiv ")
-                .EnterNumberOfSafeWasteInput("1")
+                .EnterNumberOfSafeWasteInput("20")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
                 .EnterCommentInput(expected)
