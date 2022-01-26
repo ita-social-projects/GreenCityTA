@@ -8,13 +8,13 @@ import org.openqa.selenium.support.How;
 
 public class ChangePassword extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"mat-input-3\"]")
+    @FindBy(how = How.XPATH, using = "//*[contains(@formcontrolname, 'currentPassword')]")
     private WebElement oldPassword;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"mat-input-4\"]")
+    @FindBy(how = How.XPATH, using = "//*[contains(@formcontrolname, 'password')]")
     private WebElement newPassword;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"mat-input-5\"]]")
+    @FindBy(how = How.XPATH, using = "//*[contains(@formcontrolname, 'confirmPassword')]")
     private WebElement repeatNewPassword;
 
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions/button[2]")

@@ -59,7 +59,7 @@ public class OrderDetailsPage extends BasePage {
     }
     public String getLocationFromTitle()
     {
-        return locationTitle.getText().substring(11).trim();
+        return locationTitle.getText();
     }
 
     public OrderDetailsPage clickOnChangeRegionButton() {

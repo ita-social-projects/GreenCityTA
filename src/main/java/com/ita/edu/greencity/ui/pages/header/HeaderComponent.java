@@ -41,7 +41,7 @@ public class HeaderComponent extends BasePage {
 
     public UbsHomePage clickUbsLogo() {
         ubsLogo.click();
-        return  new UbsHomePage(driver);
+        return new UbsHomePage(driver);
     }
 
     public HeaderComponent clickAboutUs() {
@@ -65,6 +65,10 @@ public class HeaderComponent extends BasePage {
         search.click();
     }
 
+    public String getLanguage() {
+        return languageSwitcher.getText();
+    }
+
     public HeaderComponent clickLanguageSwitcher() {
         languageSwitcher.click();
         return this;
@@ -74,13 +78,17 @@ public class HeaderComponent extends BasePage {
         return languagesList;
     }
 
-    public HeaderComponent languageChoose(String language){
-        for(WebElement current : getLanguagesList()){
-            if(current != null & current.getAttribute("aria-label").equalsIgnoreCase(language)){
+    public HeaderComponent languageChoose(String language) {
+        for (WebElement current : getLanguagesList()) {
+            if (current != null & current.getAttribute("aria-label").equalsIgnoreCase(language)) {
                 current.click();
                 break;
             }
         }
         return this;
+    }
+
+    public String getAboutUsText() {
+        return aboutUs.getText();
     }
 }
