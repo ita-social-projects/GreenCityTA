@@ -10,6 +10,12 @@ import java.io.IOException;
 
 public class CheckAddNewAddressButton extends TestRun {
 
+    private final String NUMBER_OF_TEXTILE_WASTE_120 = "5";
+    private final String STREET = "Sevastopol's'ka Square";
+    private final int INDEX_CITY = 0;
+    private final int INDEX_DISTRICT = 4;
+    private final int INDEX_STREET = 0;
+
     @Test
     public void checkAddNewAddressIsNotClickable() throws IOException {
         ValueProvider provider = new ValueProvider();
@@ -20,10 +26,10 @@ public class CheckAddNewAddressButton extends TestRun {
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .clickOnContinueButton()
-                .EnterNumberOfTextileWaste120lInput("5")
+                .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()
                 .clickOnAddAddressButton();
-        Assert.assertFalse(addNewAddress.isClickable());
+        Assert.assertFalse(addNewAddress.getAddAddressButton().isEnabled());
     }
 
     @Test
@@ -36,15 +42,17 @@ public class CheckAddNewAddressButton extends TestRun {
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .clickOnContinueButton()
-                .EnterNumberOfTextileWaste120lInput("5")
+                .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()
                 .clickOnAddAddressButton()
                 .clickOnCityField()
-                .chooseCity(0)
-                .chooseDistrict(0)
-                .enterStreet("Lisna Street")
-                .chooseStreet(0)
-                .enterHouseNumber("1").enterHouseCorpus("2").enterEntranceNumber("3");
-        Assert.assertTrue(addNewAddress.isClickable());
+                .chooseCity(INDEX_CITY)
+                .chooseDistrict(INDEX_DISTRICT)
+                .enterStreet(STREET)
+                .chooseStreet(INDEX_STREET)
+                .enterHouseNumber("19")
+                .enterStreet(STREET)
+                .chooseStreet(INDEX_STREET);
+        Assert.assertTrue(addNewAddress.getAddAddressButton().isEnabled());
     }
 }

@@ -56,8 +56,10 @@ public class AddNewAddress extends BasePage {
 
 
     public AddNewAddress chooseStreet(int index){
-        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
-        listOfStreet.get(index).click();
+//        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
+        this.sleep(2000);
+      listOfStreet.get(index).click();
+        this.sleep(2000);
         return this;
     }
 
@@ -135,18 +137,5 @@ public class AddNewAddress extends BasePage {
 
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
-    }
-
-    public boolean isClickable()
-    {
-        try
-        {
-          waitUntilElementToBeClickable(By.xpath("//div[@class ='mat-dialog-actions d-flex justify-content-end buttons']/button[@class = 'primary-global-button btn m-0']"),1);
-            return true;
-        }
-        catch (TimeoutException timeout)
-        {
-            return false;
-        }
     }
 }
