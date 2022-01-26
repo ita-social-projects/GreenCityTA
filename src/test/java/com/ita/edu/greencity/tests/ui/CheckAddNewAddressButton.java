@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CheckAddNewAddressButton extends TestRun {
 
     @Test
-    public void checkAddNewAddressIsNotClickable() throws InterruptedException, IOException {
+    public void checkAddNewAddressIsNotClickable() throws IOException {
         ValueProvider provider = new ValueProvider();
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         AddNewAddress addNewAddress = new AddNewAddress(driver);
@@ -27,7 +27,7 @@ public class CheckAddNewAddressButton extends TestRun {
     }
 
     @Test
-    public void checkAddNewAddressIsClickable() throws InterruptedException, IOException {
+    public void checkAddNewAddressIsClickable() throws IOException, InterruptedException {
         ValueProvider provider = new ValueProvider();
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         AddNewAddress addNewAddress = new AddNewAddress(driver);

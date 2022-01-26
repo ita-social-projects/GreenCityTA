@@ -1,10 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -49,7 +46,7 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'secondary-global-button btn m-0 mr-2']")
     private WebElement cancelButton;
 
-    @FindBy(how = How.XPATH, using = "//button[@class = 'btn add-address']")
+    @FindBy(how = How.XPATH, using = "//div[@class ='mat-dialog-actions d-flex justify-content-end buttons']/button[@class = 'primary-global-button btn m-0']")
     private WebElement addAddressButton;
 
     @FindBy(how = How.XPATH, using = "//span[@class='pac-matched']")
@@ -144,10 +141,10 @@ public class AddNewAddress extends BasePage {
     {
         try
         {
-          waitUntilElementToBeClickable(By.xpath("//button[@class = 'btn add-address']"),2);
+          waitUntilElementToBeClickable(By.xpath("//div[@class ='mat-dialog-actions d-flex justify-content-end buttons']/button[@class = 'primary-global-button btn m-0']"),1);
             return true;
         }
-        catch (Exception e)
+        catch (TimeoutException timeout)
         {
             return false;
         }

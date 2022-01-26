@@ -25,7 +25,6 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
-
     public WebElement getCloseButton() {
         return closeButton;
     }
@@ -51,7 +50,7 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
@@ -62,26 +61,19 @@ public class SelectRegion extends BasePage {
 
     public SelectRegion chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
-        try {
-            listOfRegions.get(index).click();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
+        listOfRegions.get(index).click();
         return this;
     }
 
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
-        try {
-            for (WebElement option : listOfRegions) {
-                if (option.getText().contains(value.trim()))
-                    option.click();
+        for (WebElement option : listOfRegions) {
+            if (option.getText().equals(value.trim())) {
+                option.click();
                 break;
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
         }
         return this;
     }
-
 }
+
