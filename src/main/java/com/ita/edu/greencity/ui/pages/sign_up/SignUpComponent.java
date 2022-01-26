@@ -12,7 +12,7 @@ public class SignUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//img[@class='cross-btn']")
     private WebElement exitButton;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='email']")
+    @FindBy(how = How.XPATH, using = "//div[@class='wrapper']//input[@id='email']")
     private WebElement emailField;
 
     @FindBy(how = How.XPATH, using = "//*[@id='email-err-msg']/app-error/div")
@@ -126,5 +126,9 @@ public class SignUpComponent extends BasePage {
 
     public String getTextOfTitle() {
         return title.getText();
+    }
+
+    public boolean checkDisabledSignUpButton() {
+        return (signUpButton.getAttribute("disabled")!= null);
     }
 }

@@ -62,6 +62,7 @@ public class PaymentByFondyPage extends BasePage {
     }
 
     public PaymentByFondyPage cardNumberInput(String value) {
+        sleep(6000);
         cardNumber.sendKeys(value);
         return this;
     }

@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
+import com.ita.edu.greencity.ui.pages.orders.payment.PrePaymentAlert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,18 +50,12 @@ public class OrderPageConfirmation extends BasePage {
         return new OrderPagePersonalData(driver);
     }
 
-    public String getTextFromTitle() {
+    public String getTitle() {
         return yourOrderTitle.getText();
     }
 
     public String getNecessaryHeader(int index) {
-        String str = "";
-        try {
-            str = headersList.get(index).getText();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
-        return str;
+        return headersList.get(index).getText();
     }
 
     public String chooseOneElementFromYourOrderTable(int row, int column) {
@@ -68,37 +63,15 @@ public class OrderPageConfirmation extends BasePage {
                 .getText();
     }
 
-    public String getTotalSum(int index) {
-        String[] splittedTotal = new String[0];
-        try {
-            splittedTotal = totalSumList.get(index).getText().split("/s");
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
-        return splittedTotal[0];
+    public String getTotalSumWithCurrency(int index) {
+        return totalSumList.get(index).getText();
     }
 
-    public String getCurrency(int index) {
-        String[] splittedTotal = new String[0];
-        try {
-            splittedTotal = totalSumList.get(index).getText().split("/s");
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
-        return splittedTotal[1];
+    public String getNecessaryAmount(int index) {
+        return amountsList.get(index).getText();
     }
 
-    public String getTextFromNecessaryAmount(int index) {
-        String str = "";
-        try {
-            str = amountsList.get(index).getText();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
-        return str;
-    }
-
-    public OrderPageConfirmation clickOnPaymentChooser() {
+    private OrderPageConfirmation clickOnPaymentChooser() {
         paymentChooser.click();
         return this;
     }
@@ -108,6 +81,7 @@ public class OrderPageConfirmation extends BasePage {
     }
 
     public OrderPageConfirmation choosePaymentMethod() {
+        clickOnPaymentChooser();
         paymentOption("Fondy").click();
         return this;
     }
@@ -122,9 +96,10 @@ public class OrderPageConfirmation extends BasePage {
         return new OrderSavingPopUp(driver);
     }
 
-    public PaymentByFondyPage clickOnOrderButton() {
+    public PrePaymentAlert clickOnOrderButton() {
+        this.sleep(5000);
         orderButton.click();
-        return new PaymentByFondyPage(driver);
+        return new PrePaymentAlert(driver);
     }
 
 }

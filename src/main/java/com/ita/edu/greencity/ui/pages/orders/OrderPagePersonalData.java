@@ -67,6 +67,22 @@ public class OrderPagePersonalData extends BasePage {
         super(driver);
     }
 
+    @FindBy(how = How.XPATH, using = "//img[@alt = 'edit image']")
+    private WebElement editCollectionAddressButton;
+
+    @FindBy(how = How.XPATH, using = "//img[@alt = 'delete image']")
+    private WebElement deleteCollectionAddressButton;
+
+    public OrderPagePersonalData clickOnDeleteCollectionAddressButton() {
+        deleteCollectionAddressButton.click();
+        return this;
+    }
+
+    public AddNewAddress clickOnEditAddressButton() {
+        editCollectionAddressButton.click();
+        return new AddNewAddress(driver);
+    }
+
     public OrderPageConfirmation clickOnNextButton() {
         nextButton.click();
         return new OrderPageConfirmation(driver);
@@ -93,7 +109,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public AddNewAddress clickOnAddAddressButton() {
-//        waitUntilElementToBeClickable(By.xpath("//button[@class ='btn add-address']"),10);
+        this.sleep(2000);
         addAddressButton.click();
         return new AddNewAddress(driver);
     }

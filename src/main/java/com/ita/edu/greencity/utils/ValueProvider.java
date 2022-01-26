@@ -46,4 +46,16 @@ public class ValueProvider {
     public String getCVV2() {
         return properties.getProperty("CVV2");
     }
+
+    public String getDbUrl() {
+        return properties.getProperty("dbUrl");
+    }
+
+    public String getDbUsername() {
+        return properties.getProperty("dbUsername");
+    }
+
+    public String getDbPassword() {
+        return properties.getProperty("dbPassword");
+    }
 }
