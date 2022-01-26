@@ -1,12 +1,12 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class SelectRegion extends BasePage {
 
@@ -24,7 +24,6 @@ public class SelectRegion extends BasePage {
     public SelectRegion(WebDriver driver) {
         super(driver);
     }
-
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -51,7 +50,7 @@ public class SelectRegion extends BasePage {
     }
 
     public OrderDetailsPage clickOnContinueButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"),10);
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 10);
         getContinueButton().click();
         return new OrderDetailsPage(driver);
     }
@@ -62,28 +61,19 @@ public class SelectRegion extends BasePage {
 
     public SelectRegion chooseRegionByIndex(int index) {
         clickOnRegionDropdown();
-        try {
-            listOfRegions.get(index).click();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
-        }
+        listOfRegions.get(index).click();
         return this;
     }
 
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
-        try {
-            for (WebElement option : listOfRegions) {
-                if (option.getText().equals(value.trim())) {
-                    waitUntilWebElementToBeClickableBy(option,1000);
-                    option.click();
-                }
+        for (WebElement option : listOfRegions) {
+            if (option.getText().equals(value.trim())) {
+                option.click();
                 break;
             }
-        } catch (NoSuchElementException e) {
-            System.err.println(e.getMessage());
         }
         return this;
     }
-
 }
+

@@ -59,7 +59,6 @@ public class OrderDetailsPage extends BasePage {
     }
     public String getLocationFromTitle()
     {
-        System.out.println(locationTitle.getText().substring(11));
         return locationTitle.getText().substring(11).trim();
     }
 

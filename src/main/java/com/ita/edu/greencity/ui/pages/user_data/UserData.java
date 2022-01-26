@@ -4,19 +4,14 @@ import com.ita.edu.greencity.ui.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v85.backgroundservice.BackgroundService;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
 public class UserData extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//app-ubs-user-profile-page/div/div/div/div[1]/button")
+    @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.edit")
     private WebElement editData;
 
     @FindBy(how = How.XPATH, using = "//form/div[2]/div[2]/p")
@@ -38,9 +33,10 @@ public class UserData extends BasePage {
         super(driver);
     }
 
-    public EditUserData clickOnEditDataButton(){
+    public EditUserData clickOnEditDataButton()  {
         editData.click();
-        return new EditUserData(driver);
+        return  new EditUserData(driver);
+
     }
     public String getTextFromEmailField(){
         return email.getText();

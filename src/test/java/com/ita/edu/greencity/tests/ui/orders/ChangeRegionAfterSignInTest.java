@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 public class ChangeRegionAfterSignInTest extends TestRun {
     public static String region = "Kyiv region";
+
     @Test
     public void changeRegionAfterSignIn() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
@@ -16,9 +17,6 @@ public class ChangeRegionAfterSignInTest extends TestRun {
                 .clickSignIn()
                 .chooseRegionByValue(region)
                 .clickOnContinueButton().getLocationFromTitle();
-        Assert.assertEquals(actual,region);
-
-
-
+        Assert.assertEquals(actual, region);
     }
 }
