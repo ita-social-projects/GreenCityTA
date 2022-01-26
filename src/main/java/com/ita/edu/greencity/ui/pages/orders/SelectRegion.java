@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class SelectRegion extends BasePage {
 
@@ -25,6 +24,16 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
+    public static boolean listContainsExactValue(List<WebElement> arr, String value) {
+        boolean ch = false;
+        for (WebElement el : arr) {
+            if (el.getText().equals(value)) {
+                ch = true;
+                break;
+            }
+        }
+        return ch;
+    }
 
     public WebElement getCloseButton() {
         return closeButton;
@@ -72,17 +81,24 @@ public class SelectRegion extends BasePage {
     public SelectRegion chooseRegionByValue(String value) {
         clickOnRegionDropdown();
         try {
+            if (!listContainsExactValue(listOfRegions, value.trim())) {
+                throw new NoSuchOptionException();
+            }
             for (WebElement option : listOfRegions) {
                 if (option.getText().equals(value.trim())) {
-                    waitUntilWebElementToBeClickableBy(option,1000);
                     option.click();
+                    break;
                 }
-                break;
             }
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchOptionException e) {
             System.err.println(e.getMessage());
         }
         return this;
     }
+}
 
+class NoSuchOptionException extends Exception {
+    public NoSuchOptionException() {
+        super("Incorrect value to select! This option does not exist!");
+    }
 }
