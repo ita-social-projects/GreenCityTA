@@ -28,4 +28,27 @@ public class EmptyUbsUserOrderPageTest extends TestRun {
 
         Assert.assertEquals(actual, expected, "Not empty page!");
     }
+
+    @Test
+    public void verifyNewOrderButtonOnUbsUserOrderPage() {
+
+        HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
+        headerSignedOutComponent.clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn()
+                .chooseRegionByIndex(0)
+                .clickOnContinueButton();
+
+        HeaderSignedInComponent headerSignedInComponent = new HeaderSignedInComponent(driver);
+
+        boolean newOrderButtonIsDisplayed = headerSignedInComponent
+                .clickUserMenu()
+                .clickUbsUser()
+                .getNewOrderButton()
+                .isDisplayed();
+
+        Assert.assertTrue(newOrderButtonIsDisplayed);
+    }
+
 }

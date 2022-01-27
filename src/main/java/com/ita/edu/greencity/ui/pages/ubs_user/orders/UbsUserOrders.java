@@ -69,4 +69,8 @@ public class UbsUserOrders extends BasePage {
     public UbsUser getUbsUserPage() {
         return new UbsUser(driver);
     }
+
+    public WebElement getNewOrderButton() {
+        return newOrderButton;
+    }
 }
