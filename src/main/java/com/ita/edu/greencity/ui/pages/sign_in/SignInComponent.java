@@ -12,6 +12,8 @@ import org.openqa.selenium.support.How;
 
 public class SignInComponent extends BasePage {
 
+    @FindBy(how = How.XPATH, using = "//div[@class = 'title']/h1")
+    private WebElement title;
     @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']")
     private WebElement close;
     @FindBy(how = How.XPATH, using = "//div[@class = 'wrapper']//*/input[@formcontrolname='email']")
@@ -91,5 +93,15 @@ public class SignInComponent extends BasePage {
 
     public String getErrorPasswordMessage() {
         return errorPassword.getText();
+    }
+
+    public String getTitle() {
+        return title.getText();
+    }
+
+    public SignInComponent unfocus() {
+        title.click();
+
+        return this;
     }
 }
