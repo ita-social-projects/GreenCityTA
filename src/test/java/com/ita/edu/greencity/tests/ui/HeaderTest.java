@@ -74,10 +74,9 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
-        String expected = "Test.323";
+        String expected = provider.getUserName();
         String actual = header2.getUserName();
         Assert.assertEquals(actual, expected);
     }
@@ -89,7 +88,6 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
         header2.clickUserMenu().clickSettings();
@@ -105,7 +103,6 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
         header2.clickUserMenu().clickSignOut();
