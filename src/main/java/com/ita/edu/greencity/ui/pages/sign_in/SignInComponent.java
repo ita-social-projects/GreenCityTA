@@ -14,7 +14,7 @@ public class SignInComponent extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[@class = 'title']/h1")
     private WebElement title;
-    @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']")
+    @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']/img")
     private WebElement close;
     @FindBy(how = How.XPATH, using = "//div[@class = 'wrapper']//*/input[@formcontrolname='email']")
     private WebElement email;
