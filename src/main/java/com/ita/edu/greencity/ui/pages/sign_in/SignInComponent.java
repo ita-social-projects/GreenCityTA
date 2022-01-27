@@ -4,6 +4,7 @@ import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,7 +37,6 @@ public class SignInComponent extends BasePage {
         super(driver);
     }
 
-    // click on text "Welcome"
     public UbsHomePage clickCloseBtn() {
         close.click();
 
@@ -44,13 +44,13 @@ public class SignInComponent extends BasePage {
     }
 
     public SignInComponent inputEmail(String emailInput) {
-        email.sendKeys(emailInput);
+        email.sendKeys(emailInput, Keys.ENTER);
 
         return this;
     }
 
     public SignInComponent inputPassword(String passwordInput) {
-        password.sendKeys(passwordInput);
+        password.sendKeys(passwordInput, Keys.ENTER);
 
         return this;
     }
