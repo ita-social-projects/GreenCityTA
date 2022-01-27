@@ -65,7 +65,7 @@ public class UbsHomePage extends BasePage {
     }
 
     public SignInComponent pressOrderCourier() {
-        orderCourier.click();
+
         headerButtonOrderCourier.click();
         return new SignInComponent(driver);
     }
