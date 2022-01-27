@@ -34,6 +34,8 @@ public class SignInComponent extends BasePage {
     private WebElement errorEmail;
     @FindBy(how = How.XPATH, using = "//div[@id = 'pass-err-msg']/app-error/div")
     private WebElement errorPassword;
+    @FindBy(how = How.XPATH, using = "//div[@class = 'alert-general-error ng-star-inserted']")
+    private WebElement errorGeneral;
 
     public SignInComponent(WebDriver driver) {
         super(driver);
@@ -46,12 +48,14 @@ public class SignInComponent extends BasePage {
     }
 
     public SignInComponent inputEmail(String emailInput) {
+        email.clear();
         email.sendKeys(emailInput, Keys.ENTER);
 
         return this;
     }
 
     public SignInComponent inputPassword(String passwordInput) {
+        password.clear();
         password.sendKeys(passwordInput, Keys.ENTER);
 
         return this;
@@ -103,5 +107,9 @@ public class SignInComponent extends BasePage {
         title.click();
 
         return this;
+    }
+
+    public String getErrorGeneralMessage() {
+        return errorGeneral.getText();
     }
 }
