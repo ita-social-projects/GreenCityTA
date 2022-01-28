@@ -103,7 +103,7 @@ public class AddNewAddress extends BasePage {
         return this;
     }
 
-    public AddNewAddress enterStreet(final String street) throws InterruptedException {
+    public AddNewAddress enterStreet(final String street) {
         streetField.clear();
         streetField.sendKeys(street);
         return this;
