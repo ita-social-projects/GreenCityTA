@@ -8,6 +8,7 @@ import com.ita.edu.greencity.ui.pages.user_data.UserData;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class UserDataTest extends TestRun {
@@ -21,9 +22,16 @@ public class UserDataTest extends TestRun {
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
-    @Test
-    public void editPhone() throws InterruptedException {
-        String newNumber = "0970101011";
+    @DataProvider(name = "PhoneNumberProvider")
+    public Object[][] dpArrayOutputTest() {
+        return new Object[][]{
+                {"0970101011", "+380 (97) 010 10 11"},
+                {"0972222222", "+380 (97) 222 22 22"},
+        };
+    }
+
+    @Test(dataProvider = "PhoneNumberProvider")
+    public void editPhone(String newNumber, String expectedNumber ) {
         HeaderSignedInComponent ubs = new HeaderSignedInComponent(driver);
         ubs.clickUserMenu().clickUbsUser().getUbsUserPage()
                 .clickOnUserDataButton()
@@ -31,9 +39,7 @@ public class UserDataTest extends TestRun {
                 .enterEditedPhone(newNumber)
                 .clickOnSaveChangesButton();
         UserData userData = new UserData(driver);
-        String expected = "+380 (97) 010 10 11";
         String actual = userData.getTextFromPhoneField();
-        Assert.assertEquals(actual, expected);
-
+        Assert.assertEquals(actual, expectedNumber);
     }
 }
