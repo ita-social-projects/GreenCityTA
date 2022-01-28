@@ -6,34 +6,40 @@ import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import com.ita.edu.greencity.ui.pages.user_data.UserData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class UserDataTest extends TestRun {
-    @Test
-    public void editPhone() {
-
+    @BeforeMethod
+    public void loginToUBS(){
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
+                .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
+    }
+    @DataProvider(name = "PhoneNumberProvider")
+    public Object[][] dpArrayOutputTest() {
+        return new Object[][]{
+                {"0970101011", "+380 (97) 010 10 11"},
+                {"0972222222", "+380 (97) 222 22 22"},
+        };
+    }
 
-        String newNumber = "0970101011";
+    @Test(dataProvider = "PhoneNumberProvider")
+    public void editPhone(String newNumber, String expectedNumber ) {
         HeaderSignedInComponent ubs = new HeaderSignedInComponent(driver);
-        ubs.clickUserMenu().clickUbsUser();
-        UbsUser user = new UbsUser(driver);
-        user.clickOnUserDataButton()
+        ubs.clickUserMenu().clickUbsUser().getUbsUserPage()
+                .clickOnUserDataButton()
                 .clickOnEditDataButton()
                 .enterEditedPhone(newNumber)
                 .clickOnSaveChangesButton();
         UserData userData = new UserData(driver);
         String actual = userData.getTextFromPhoneField();
-        Assert.assertEquals(actual, newNumber);
-
-
-
-
+        Assert.assertEquals(actual, expectedNumber);
     }
 }

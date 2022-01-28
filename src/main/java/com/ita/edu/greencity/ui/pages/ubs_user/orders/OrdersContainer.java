@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.ubs_user.orders;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -12,60 +13,36 @@ public class OrdersContainer {
         this.rootElement = rootElement;
     }
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@src, 'ubs-admin-orders/arrow_up.svg')]")
-    private WebElement moreInformationArrowUp;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-id')]")
-    private WebElement orderId;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-date')]")
-    private WebElement orderDate;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-status')]")
-    private WebElement orderStatus;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-paymentStatus')]")
-    private WebElement orderPaymentStatus;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_sum')]")
-    private WebElement orderPaymentAmount;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
-    private WebElement cancelOrderButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
-    private WebElement payForOrderButton;
-
     public WebElement getMoreOrderInfo() {
-        return moreInformationArrowUp;
+        return rootElement.findElement(By.xpath(".//*[contains(@src, 'ubs-admin-orders/arrow_up.svg')]"));
     }
 
     public String getOrderId() {
-        return orderId.getText();
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'empty_card-id')]")).getText();
     }
 
     public String getOrderDate() {
-        return orderDate.getText();
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'empty_card-date')]")).getText();
     }
 
     public String getOrderStatus() {
-        return orderStatus.getText();
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'empty_card-status')]")).getText();
     }
 
     public String getOrderPaymentStatus() {
-        return orderPaymentStatus.getText();
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'empty_card-paymentStatus')]")).getText();
     }
 
     public String getOrderPaymentAmount() {
-        return orderPaymentAmount.getText();
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'order_sum')]")).getText();
     }
 
     public WebElement getCancelOrderButton() {
-        return cancelOrderButton;
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'btn_cancel')]"));
     }
 
     public WebElement getPayForOrderButton() {
-        return payForOrderButton;
+        return rootElement.findElement(By.xpath(".//*[contains(@class, 'btn_pay')]"));
     }
 
 }
