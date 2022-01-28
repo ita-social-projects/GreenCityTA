@@ -51,7 +51,7 @@ public class UbsUserOrders extends BasePage {
         List<OrdersContainer> ordersContainerList = new ArrayList<>();
 
         for (WebElement element : orders) {
-            ordersContainerList.add(new OrdersContainer(element));
+            ordersContainerList.add(new OrdersContainer(driver, element));
         }
 
         return ordersContainerList;
@@ -68,5 +68,9 @@ public class UbsUserOrders extends BasePage {
 
     public UbsUser getUbsUserPage() {
         return new UbsUser(driver);
+    }
+
+    public WebElement getNewOrderButton() {
+        return newOrderButton;
     }
 }

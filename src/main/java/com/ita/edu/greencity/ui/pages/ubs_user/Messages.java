@@ -13,10 +13,10 @@ public class Messages extends BasePage {
     }
 
     @FindBy(how = How.XPATH, using = "//*[@class = 'if-empty ng-star-inserted']")
-    private WebElement noMessagesFound;
+    private WebElement emptyMessagesPageLabel;
 
-    public String getNoMessagesFoundLabel() {
-        return noMessagesFound.getText();
+    public String getEmptyMessagesPageLabel() {
+        return emptyMessagesPageLabel.getText();
     }
 
     public UbsUser getUbsUserPage() {

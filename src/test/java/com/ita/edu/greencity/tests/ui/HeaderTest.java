@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.ui;
 
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
@@ -74,10 +75,9 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
-        String expected = "Test.323";
+        String expected = provider.getUserName();
         String actual = header2.getUserName();
         Assert.assertEquals(actual, expected);
     }
@@ -89,7 +89,6 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
         header2.clickUserMenu().clickSettings();
@@ -105,7 +104,6 @@ public class HeaderTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(2)
                 .clickOnContinueButton();
         HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
         header2.clickUserMenu().clickSignOut();

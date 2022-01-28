@@ -1,19 +1,29 @@
 package com.ita.edu.greencity.ui.pages.ubs_user.orders;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
+    private WebDriver driver;
+
+    private DefaultElementLocatorFactory parentContext;
+
     private WebElement rootElement;
 
-    public OrdersContainer(WebElement rootElement) {
+    public OrdersContainer(WebDriver driver, WebElement rootElement) {
         this.rootElement = rootElement;
+        this.driver = driver;
+        parentContext = new DefaultElementLocatorFactory(rootElement);
+        PageFactory.initElements(parentContext, this);
     }
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@src, 'ubs-admin-orders/arrow_up.svg')]")
-    private WebElement moreInformationArrowUp;
+    private WebElement moreOrderInfo;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-id')]")
     private WebElement orderId;
@@ -37,7 +47,7 @@ public class OrdersContainer {
     private WebElement payForOrderButton;
 
     public WebElement getMoreOrderInfo() {
-        return moreInformationArrowUp;
+        return moreOrderInfo;
     }
 
     public String getOrderId() {
@@ -61,7 +71,7 @@ public class OrdersContainer {
     }
 
     public WebElement getCancelOrderButton() {
-        return cancelOrderButton;
+        return getPayForOrderButton();
     }
 
     public WebElement getPayForOrderButton() {

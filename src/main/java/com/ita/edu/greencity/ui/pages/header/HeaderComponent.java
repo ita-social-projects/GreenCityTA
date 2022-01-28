@@ -1,6 +1,9 @@
 package com.ita.edu.greencity.ui.pages.header;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.header.external_sites.EcoShop;
+import com.ita.edu.greencity.ui.pages.header.external_sites.GreenCity;
+import com.ita.edu.greencity.ui.pages.header.external_sites.SortingRules;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,9 +29,6 @@ public class HeaderComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@class='header_navigation-menu-left']/*/li[4]/a")
     private WebElement greenCity;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='header_navigation-menu-right']/*/li[1]")
-    private WebElement search;
-
     @FindBy(how = How.XPATH, using = "//*[@class='header_lang-switcher-wrp header_navigation-menu-right-list']")
     private WebElement languageSwitcher;
 
@@ -49,20 +49,19 @@ public class HeaderComponent extends BasePage {
         return this;
     }
 
-    public void clickSortingRules() {
+    public SortingRules clickSortingRules() {
         sortingRules.click();
+        return new SortingRules(driver);
     }
 
-    public void clickEcoShop() {
+    public EcoShop clickEcoShop() {
         ecoShop.click();
+        return new EcoShop(driver);
     }
 
-    public void clickGreenCity() {
+    public GreenCity clickGreenCity() {
         greenCity.click();
-    }
-
-    public void clickSearch() {
-        search.click();
+        return new GreenCity(driver);
     }
 
     public String getLanguage() {
