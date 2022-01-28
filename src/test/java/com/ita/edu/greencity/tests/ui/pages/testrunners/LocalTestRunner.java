@@ -30,9 +30,9 @@ public class LocalTestRunner {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(provider.getLocalUbsHomePageURL());
-//        LocalStorage localStorage = ((WebStorage)driver).getLocalStorage();
-//        localStorage.setItem("language", "en");
-//        driver.navigate().refresh();
+        LocalStorage localStorage = ((WebStorage)driver).getLocalStorage();
+        localStorage.setItem("language", "en");
+        driver.navigate().refresh();
     }
 
     @AfterMethod

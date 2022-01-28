@@ -47,7 +47,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnAddAddressButton()
                 .clickOnCityField()
                 .chooseCity(0)
-                .chooseDistrict(4)
+                .chooseDistrict(8)
                 .enterStreet("Sevastopol's'ka Square")
                 .chooseStreet(0)
                 .enterHouseNumber("19")
