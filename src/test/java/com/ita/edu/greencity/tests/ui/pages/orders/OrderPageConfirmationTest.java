@@ -1,5 +1,6 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.orders;
 
+import com.ita.edu.greencity.tests.ui.pages.testrunners.LocalTestRunner;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.testng.Assert;
@@ -50,8 +51,6 @@ public class OrderPageConfirmationTest extends TestRun {
                 .enterStreet("Sevastopol's'ka Square")
                 .chooseStreet(0)
                 .enterHouseNumber("19")
-                .enterStreet("Sevastopol's'ka Square")
-                .chooseStreet(0)
                 .clickOnAddAddressButton()
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
