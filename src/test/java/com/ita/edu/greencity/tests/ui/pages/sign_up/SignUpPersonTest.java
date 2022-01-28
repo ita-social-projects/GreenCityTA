@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
-import com.ita.edu.greencity.tests.ui.TestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;

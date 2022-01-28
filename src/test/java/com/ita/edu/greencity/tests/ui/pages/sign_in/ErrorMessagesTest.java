@@ -1,24 +1,39 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_in;
 
-import com.ita.edu.greencity.tests.ui.LoginTestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class ErrorMessagesTest extends LoginTestRun {
+public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
+
+    @BeforeMethod
+    public void beforeMethod() {
+        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
+        header.clickSignIn();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        SignInComponent signin = new SignInComponent(driver);
+        signin.clickCloseBtn();
+    }
 
     @DataProvider
     private Object[][] emailDataProvider() {
-        String expected = "Email is required";
-        String expected1 = "Please check that your e-mail address is indicated correctly";
+        final String expected = "Email is required";
+        final String expectedIncorrect = "Please check that your e-mail address is indicated correctly";
 
         return new Object[][] {
                 {"", expected},
-                {"1234", expected1},
-                {"testgreencity", expected1},
-                {"testgreencity.com", expected1},
-                {"testgreencity323@gmail.com com", expected1}
+                {"1234", expectedIncorrect},
+                {"testgreencity", expectedIncorrect},
+                {"testgreencity.com", expectedIncorrect},
+                {"testgreencity323@gmail.com com", expectedIncorrect}
         };
     }
 
@@ -49,7 +64,7 @@ public class ErrorMessagesTest extends LoginTestRun {
         String expected = "Password is required";
 
         String actual = signin
-                .inputEmail("")
+                .inputEmail(provider.getEmail())
                 .inputPassword("")
                 .unfocus()
                 .getErrorPasswordMessage();
