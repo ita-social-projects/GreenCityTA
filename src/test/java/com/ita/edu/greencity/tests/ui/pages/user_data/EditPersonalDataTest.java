@@ -1,21 +1,18 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.user_data;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
-import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import com.ita.edu.greencity.ui.pages.user_data.UserData;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class UserDataTest extends TestRun {
+public class EditPersonalDataTest extends TestRun {
     @BeforeMethod
     public void loginToUBS(){
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
+        new HeaderSignedOutComponent(driver).clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
@@ -32,8 +29,10 @@ public class UserDataTest extends TestRun {
 
     @Test(dataProvider = "PhoneNumberProvider")
     public void editPhone(String newNumber, String expectedNumber ) {
-        HeaderSignedInComponent ubs = new HeaderSignedInComponent(driver);
-        ubs.clickUserMenu().clickUbsUser().getUbsUserPage()
+        new HeaderSignedInComponent(driver)
+                .clickUserMenu()
+                .clickUbsUser()
+                .getUbsUserPage()
                 .clickOnUserDataButton()
                 .clickOnEditDataButton()
                 .enterEditedPhone(newNumber)
