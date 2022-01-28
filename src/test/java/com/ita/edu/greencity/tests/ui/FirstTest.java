@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.ui;
 
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

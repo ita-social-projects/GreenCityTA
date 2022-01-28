@@ -2,7 +2,7 @@
 package com.ita.edu.greencity.tests.ui.pages.ubs_homepage;
 
 
-import com.ita.edu.greencity.tests.ui.TestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 

@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.testrunners;
 
 
 import com.ita.edu.greencity.utils.ValueProvider;
