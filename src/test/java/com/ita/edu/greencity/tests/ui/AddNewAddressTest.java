@@ -6,7 +6,7 @@ import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AddNewAddressTest extends TestRun {
+public class AddNewAddressTest extends TestRun{
 
     final String NUMBER_OF_TEXTILE_WASTE_120 = "5";
     final String STREET = "Sevastopol's'ka Square";
