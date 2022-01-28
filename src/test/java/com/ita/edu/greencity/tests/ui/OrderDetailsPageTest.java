@@ -7,20 +7,20 @@ import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class OrderDetailsPageTest extends TestRun{
     @Test
     public void messageTest() {
         String expected = "Hello world";
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
+        String actual = header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .chooseRegionByIndex(0)
-                .clickOnContinueButton();
-        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        String actual = orderDetailsPage
-                .chooseRegionByValue(" Kyiv region ")
+                .clickOnContinueButton()
+                .chooseRegionByValue(" Kyiv ")
                 .EnterNumberOfSafeWasteInput("20")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
