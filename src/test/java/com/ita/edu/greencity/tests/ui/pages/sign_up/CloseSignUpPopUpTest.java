@@ -1,10 +1,9 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
-import com.ita.edu.greencity.tests.ui.TestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
-import org.openqa.selenium.support.How;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

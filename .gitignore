@@ -28,4 +28,4 @@ replay_pid*
 /out/
 target
 .idea
-*.properties
+src/main/resources/properties.properties

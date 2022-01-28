@@ -39,6 +39,7 @@ public class SignInComponent extends BasePage {
 
     public SignInComponent(WebDriver driver) {
         super(driver);
+        this.sleep(500);
     }
 
     public UbsHomePage clickCloseBtn() {
