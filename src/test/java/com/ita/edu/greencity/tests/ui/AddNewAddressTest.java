@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class CheckAddNewAddressButton extends TestRun {
+public class AddNewAddressTest extends TestRun {
 
     private final String NUMBER_OF_TEXTILE_WASTE_120 = "5";
     private final String STREET = "Sevastopol's'ka Square";
@@ -18,7 +18,7 @@ public class CheckAddNewAddressButton extends TestRun {
     private final int INDEX_STREET = 0;
 
     @Test
-    public void checkAddNewAddressIsNotClickable() throws IOException {
+    public void checkAddNewAddressButtonIsNotClickableWhenAllMandatoryFieldsAreNotFilled() throws IOException {
         ValueProvider provider = new ValueProvider();
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         AddNewAddress addNewAddress = new AddNewAddress(driver);
@@ -34,7 +34,7 @@ public class CheckAddNewAddressButton extends TestRun {
     }
 
     @Test
-    public void checkAddNewAddressIsClickable() throws IOException, InterruptedException {
+    public void checkAddNewAddressButtonIsClickableWhenAllMandatoryFieldsAreFilled() throws IOException, InterruptedException {
         ValueProvider provider = new ValueProvider();
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         AddNewAddress addNewAddress = new AddNewAddress(driver);
@@ -51,9 +51,7 @@ public class CheckAddNewAddressButton extends TestRun {
                 .chooseDistrict(INDEX_DISTRICT)
                 .enterStreet(STREET)
                 .chooseStreet(INDEX_STREET)
-                .enterHouseNumber("19")
-                .enterStreet(STREET)
-                .chooseStreet(INDEX_STREET);
+                .enterHouseNumber("19");
         Assert.assertTrue(addNewAddress.getAddAddressButton().isEnabled());
     }
 }
