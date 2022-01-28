@@ -23,7 +23,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .EnterNumberOfTextileWaste20lInput("1")
                 .clickOnNextButton()
                 .enterFirstName("Anna")
-                .enterLastName("Maria").enterEmail(provider.getEmail())
+                .entersurname("Maria").enterEmail(provider.getEmail())
                 .enterPhoneNumber("+380 (63) 114 46 78").clickOnNextButton();
 
         OrderPageConfirmation orderPageConfirmation = new OrderPageConfirmation(driver);
@@ -52,7 +52,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .EnterNumberOfTextileWaste20lInput("1")
                 .clickOnNextButton()
                 .enterFirstName("Anna")
-                .enterLastName("Maria").enterEmail(provider.getEmail())
+                .entersurname("Maria").enterEmail(provider.getEmail())
                 .enterPhoneNumber("+380 (63) 114 46 78")
 
                 .clickOnAddAddressButton()
