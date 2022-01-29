@@ -58,4 +58,8 @@ public class ValueProvider {
     public String getDbPassword() {
         return properties.getProperty("dbPassword");
     }
+
+    public void setPassword(String newPassword) {
+        properties.setProperty("password", newPassword);
+    }
 }
