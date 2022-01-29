@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import com.ita.edu.greencity.ui.pages.orders.payment.PrePaymentAlert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -97,7 +96,6 @@ public class OrderPageConfirmation extends BasePage {
     }
 
     public PrePaymentAlert clickOnOrderButton() {
-        this.sleep(5000);
         orderButton.click();
         return new PrePaymentAlert(driver);
     }

@@ -15,11 +15,15 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-data-title']")
     private WebElement personalDataTitle;
 
+    @FindBy(how = How.XPATH, using = "//h1[@class ='h1 text-center form-title']")
+    private WebElement UBSTitle;
+
+
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'firstName']")
     private WebElement firstNameField;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'lastName']")
-    private WebElement lastNameField;
+    private WebElement surnameField;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'phoneNumber']")
     private WebElement phoneNumberField;
@@ -63,15 +67,62 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button btn m-0']")
     private WebElement nextButton;
 
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
-    }
-
     @FindBy(how = How.XPATH, using = "//img[@alt = 'edit image']")
     private WebElement editCollectionAddressButton;
 
     @FindBy(how = How.XPATH, using = "//img[@alt = 'delete image']")
     private WebElement deleteCollectionAddressButton;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[2]/div/app-ubs-input-error/div")
+    private WebElement nameErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
+    private WebElement surnameErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[3]/div/app-ubs-input-error/div")
+    private WebElement phoneNumberErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[5]/div/app-ubs-input-error/div")
+    private WebElement emailErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[2]/div/app-ubs-input-error/div")
+    private WebElement anotherClientNameErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[3]/div/app-ubs-input-error/div")
+    private WebElement anotherClientSurnameErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
+    private WebElement anotherClientPhoneNumberErrorMessage;
+
+
+    public String getTextFromAnotherClientPhoneNumberErrorMessage() {
+        return anotherClientPhoneNumberErrorMessage.getText();
+    }
+
+    public String getTextFromAnotherClientSurnameErrorMessage() {
+        return anotherClientSurnameErrorMessage.getText();
+    }
+
+    public String getTextFromAnotherClientNameErrorMessage() {
+        return anotherClientNameErrorMessage.getText();
+    }
+
+    public String getTextFromEmailErrorMessage() {
+        return emailErrorMessage.getText();
+    }
+
+    public String getTextFromPhoneNumberErrorMessage() {
+        return phoneNumberErrorMessage.getText();
+    }
+
+    public String getTextFromSurnameErrorMessage() {
+        return surnameErrorMessage.getText();
+    }
+
+    public String getTextFromNameErrorMessage() {
+        return nameErrorMessage.getText();
+    }
+
 
     public OrderPagePersonalData clickOnDeleteCollectionAddressButton() {
         deleteCollectionAddressButton.click();
@@ -84,6 +135,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public OrderPageConfirmation clickOnNextButton() {
+        sleep(5000);
         nextButton.click();
         return new OrderPageConfirmation(driver);
     }
@@ -160,9 +212,9 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
-    public OrderPagePersonalData enterLastName(final String lastName) {
-        lastNameField.clear();
-        lastNameField.sendKeys(lastName, Keys.ENTER);
+    public OrderPagePersonalData entersurname(final String lastName) {
+        surnameField.clear();
+        surnameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
@@ -172,7 +224,16 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
+    public OrderPagePersonalData clickForGetMessage(){
+        UBSTitle.click();
+        return this;
+    }
+
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
+    }
+
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
     }
 }
