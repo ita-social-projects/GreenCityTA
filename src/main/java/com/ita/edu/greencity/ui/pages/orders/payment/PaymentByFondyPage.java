@@ -49,20 +49,16 @@ public class PaymentByFondyPage extends BasePage {
 
     public PaymentByFondyPage chooseLanguage(String value) {
         clickOnLanguageChooser();
-        try {
-            for (WebElement option : listOfLanguages) {
-                if (option.getText().equals(value.trim()))
-                    option.click();
-                break;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
+        for (WebElement option : listOfLanguages) {
+            if (option.getText().equals(value.trim()))
+                option.click();
+            break;
         }
         return this;
     }
 
     public PaymentByFondyPage cardNumberInput(String value) {
-        sleep(6000);
+        sleep(5000);
         cardNumber.sendKeys(value);
         return this;
     }

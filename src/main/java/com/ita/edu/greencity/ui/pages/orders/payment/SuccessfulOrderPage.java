@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 
 public class SuccessfulOrderPage extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//div[@class='ng-star-inserted']/h2")
+    @FindBy(how = How.XPATH, using = "//div/h2[@class = 'title']")
     private WebElement successfulOrderMessage;
     @FindBy(how = How.XPATH, using = "//a[@routerlink]")
     private WebElement makeOtherOrderButton;

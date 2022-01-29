@@ -82,6 +82,7 @@ public class AddNewAddress extends BasePage {
     }
 
     public OrderPagePersonalData clickOnAddAddressButton() {
+        sleep(5000);
         addAddressButton.click();
         return new OrderPagePersonalData(driver);
     }

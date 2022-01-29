@@ -135,6 +135,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     public OrderPageConfirmation clickOnNextButton() {
+        sleep(5000);
         nextButton.click();
         return new OrderPageConfirmation(driver);
     }

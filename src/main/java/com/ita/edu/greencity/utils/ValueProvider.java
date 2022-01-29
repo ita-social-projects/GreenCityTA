@@ -23,6 +23,10 @@ public class ValueProvider {
         return properties.getProperty("UbsHomePageURL");
     }
 
+    public String getLocalUbsHomePageURL() {
+        return properties.getProperty("localUbsHomePageURL");
+    }
+
     public String getEmail() {
         return properties.getProperty("email");
     }
