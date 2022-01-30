@@ -39,7 +39,7 @@ public class SignInComponent extends BasePage {
 
     public SignInComponent(WebDriver driver) {
         super(driver);
-        this.sleep(500);
+        this.sleep(250);
     }
 
     public UbsHomePage clickCloseBtn() {
@@ -112,5 +112,9 @@ public class SignInComponent extends BasePage {
 
     public String getErrorGeneralMessage() {
         return errorGeneral.getText();
+    }
+
+    public String getPasswordType() {
+        return password.getAttribute("type");
     }
 }
