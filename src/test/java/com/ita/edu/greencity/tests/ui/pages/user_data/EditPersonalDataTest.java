@@ -27,7 +27,7 @@ public class EditPersonalDataTest extends TestRun {
 
         };
     }
-//works well
+
     @Test(dataProvider = "personalDataProvider")
     public void editPersonalData(String newName, String newSurname, String newNumber, String expectedNumber ) {
         new HeaderSignedInComponent(driver)
