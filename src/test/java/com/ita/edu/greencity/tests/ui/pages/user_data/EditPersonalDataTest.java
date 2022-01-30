@@ -42,7 +42,7 @@ public class EditPersonalDataTest extends TestRun {
                 .clickOnSaveChangesButton();
         UserData userData = new UserData(driver);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(userData.getTextFromPhoneField(), expectedNumber,"error in PhoneField ");
+        softAssert.assertEquals(userData.getTextFromPhoneField(), expectedNumber,"error in PhoneField");
         softAssert.assertEquals(userData.getTextFromNameField(), newName, "error in NameField");
         softAssert.assertEquals(userData.getTextFromSurnameField(), newSurname,"error in SurnameField");
         softAssert.assertAll();
