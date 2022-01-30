@@ -11,16 +11,9 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import java.util.List;
 
 public class DisplayAddressContainer {
-    private WebDriver driver;
 
-    private DefaultElementLocatorFactory parentContext;
-
-    private WebElement rootElement;
-
-    public DisplayAddressContainer(WebDriver driver, WebElement rootElement) {
-        this.rootElement = rootElement;
-        this.driver = driver;
-        parentContext = new DefaultElementLocatorFactory(rootElement);
+    public DisplayAddressContainer(WebElement rootElement) {
+        DefaultElementLocatorFactory parentContext = new DefaultElementLocatorFactory(rootElement);
         PageFactory.initElements(parentContext, this);
     }
 
@@ -45,6 +38,7 @@ public class DisplayAddressContainer {
     public String getDistrict() {
         return dataAddressTable.get(2).getText();
     }
+
     public String getStreet() {
         return dataAddressTable.get(3).getText();
     }
@@ -59,19 +53,6 @@ public class DisplayAddressContainer {
 
     public String getEntrance() {
         return dataAddressTable.get(6).getText();
-    }
-
-    public String getAdressData(String  numberAdress, String elem) {
-        return switch (elem) {
-            case "city" -> dataAddressTable.get(0).getText();
-            case "region" -> dataAddressTable.get(1).getText();
-            case "district" -> dataAddressTable.get(2).getText();
-            case "street" -> dataAddressTable.get(3).getText();
-            case "house" -> dataAddressTable.get(4).getText();
-            case "corpus" -> dataAddressTable.get(5).getText();
-            case "entrance" -> dataAddressTable.get(6).getText();
-            default -> null;
-        };
     }
 
 

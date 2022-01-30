@@ -8,16 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class EditAddressContainer {
-    private WebDriver driver;
-
-    private DefaultElementLocatorFactory parentContext;
-
-    private WebElement rootElement;
-
-    public EditAddressContainer(WebDriver driver, WebElement rootElement) {
-        this.rootElement = rootElement;
-        this.driver = driver;
-        parentContext = new DefaultElementLocatorFactory(rootElement);
+    WebDriver driver;
+    public EditAddressContainer( WebElement rootElement) {
+        DefaultElementLocatorFactory parentContext = new DefaultElementLocatorFactory(rootElement);
         PageFactory.initElements(parentContext, this);
     }
 
@@ -44,9 +37,9 @@ public class EditAddressContainer {
 
     @FindBy(how = How.CSS, using = "h5")
     private WebElement addressNumber;
-//????????????????????????????????
-    @FindBy(how = How.XPATH, using = "//app-ubs-user-profile-page/div/div/div/div[4]/button[2]")
-    private WebElement  saveChanges;
+
+    @FindBy(how = How.XPATH, using = "(//*[contains(@type, 'submit')])[2]")
+    private WebElement saveChanges;
 
     public EditAddressContainer setCityAddress(final String newData) {
         city.clear();

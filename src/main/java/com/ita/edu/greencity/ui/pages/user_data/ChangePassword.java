@@ -67,7 +67,4 @@ public class ChangePassword extends BasePage {
         return errorMessageDontMatchPassword.getText();
     }
 
-
-
-
 }
