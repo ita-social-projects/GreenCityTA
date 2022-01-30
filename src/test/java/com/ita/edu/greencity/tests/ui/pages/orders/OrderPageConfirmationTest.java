@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Arrays;
+
 public class OrderPageConfirmationTest extends TestRun {
 
     final String textileWaste120lAmount = "1";
@@ -44,8 +46,8 @@ public class OrderPageConfirmationTest extends TestRun {
 
     @Test
     public void paymentWIthExistingAddressTest() {
-        String expected = "Your order is accepted";
-        String actual = new OrderPagePersonalData(driver)
+        String expectedMessage = "Your order is accepted";
+        String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .acceptAlert()
@@ -54,13 +56,13 @@ public class OrderPageConfirmationTest extends TestRun {
                 .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
                 .clickOnTheLink().clickOnContinueButton()
                 .getTextFromSuccessfulOrderMessage();
-        Assert.assertTrue(actual.contains(expected), "Messages do not match");
+        Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
     }
 
     @Test
     public void paymentWIthAddingNewAddressTest() {
-        String expected = "Your order is accepted";
-        String actual = new OrderPagePersonalData(driver)
+        String expectedMessage = "Your order is accepted";
+        String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
                 .clickOnCityField()
                 .chooseCity(indexOfCity)
@@ -77,26 +79,31 @@ public class OrderPageConfirmationTest extends TestRun {
                 .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
                 .clickOnTheLink().clickOnContinueButton()
                 .getTextFromSuccessfulOrderMessage();
-        Assert.assertTrue(actual.contains(expected), "Messages do not match");
+        Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
     }
 
     @Test
     public void theTotalSumOfOrderIdentityTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
 
-        String total1 = orderPageConfirmation.chooseOneElementFromYourOrderTable(1, 5).substring(0, 6);
-        String total2 = orderPageConfirmation.chooseOneElementFromYourOrderTable(2, 5).substring(0, 6);
-        String total3 = orderPageConfirmation.chooseOneElementFromYourOrderTable(3, 5).substring(0, 6);
+        String totalAmountOfTextileWaste120l = Arrays.stream(orderPageConfirmation
+                .chooseOneElementFromYourOrderTable(1, 5)
+                .split("\s")).toList().get(0);
+        String totalAmountOfSafeWaste = Arrays.stream(orderPageConfirmation
+                .chooseOneElementFromYourOrderTable(2, 5)
+                .split("\s")).toList().get(0);
+        String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation.chooseOneElementFromYourOrderTable(3, 5)
+                .split("\s")).toList().get(0);
 
-        double sumOfAllWasteTypesTotals = orderPageConfirmation.transformToDoubleValue(total1)
-                + orderPageConfirmation.transformToDoubleValue(total2)
-                + orderPageConfirmation.transformToDoubleValue(total3);
+        double sumOfAllWasteTypesTotals = orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste120l)
+                + orderPageConfirmation.transformToDoubleValue(totalAmountOfSafeWaste)
+                + orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste20l);
 
-        double expectedOrderAmount = orderPageConfirmation.transformToDoubleValue(orderPageConfirmation
-                .getTotalSumWithCurrency(0).substring(0, 6));
+        double expectedOrderAmount = orderPageConfirmation.transformToDoubleValue(Arrays.stream(orderPageConfirmation
+                .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
 
-        double expectedAmountDue = orderPageConfirmation.transformToDoubleValue(orderPageConfirmation
-                .getTotalSumWithCurrency(1).substring(0, 6));
+        double expectedAmountDue = orderPageConfirmation.transformToDoubleValue(Arrays.stream(orderPageConfirmation
+                .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(sumOfAllWasteTypesTotals, expectedOrderAmount, "Order amount is not the same");
@@ -106,19 +113,19 @@ public class OrderPageConfirmationTest extends TestRun {
 
     @Test
     public void verifyOrderSavingTest() {
-        String actual = new OrderPagePersonalData(driver).clickOnNextButton()
+        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
-        String numberOfOrder = actual.substring(28, 32);
-        String expected = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
-        Assert.assertEquals(actual, expected, "Messages do not match");
+        String numberOfOrder = actualMessage.substring(28, 32);
+        String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
+        Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
     @Test
     public void localizationRelevanceOfCurrencyTest() {
-        String actualResultBeforeLanguageChange = new OrderPagePersonalData(driver).clickOnNextButton()
-                .getTotalSumWithCurrency(0).substring(7);
+        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver).clickOnNextButton()
+                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
         String expectedResultBeforeLanguageChange = "UAH";
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange);
@@ -126,7 +133,8 @@ public class OrderPageConfirmationTest extends TestRun {
         header.clickLanguageSwitcher().languageChoose("UA");
         ChangeLanguageAlert changeLanguageAlert = new ChangeLanguageAlert(driver);
         changeLanguageAlert.dismissAlert();
-        String actualResultAfterLanguageChange = new OrderPageConfirmation(driver).getTotalSumWithCurrency(0).substring(7);
+        String actualResultAfterLanguageChange = Arrays.stream(new OrderPageConfirmation(driver)
+                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
         String expectedResultAfterLanguageChange = "грн";
         softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange);
         softAssert.assertAll();
