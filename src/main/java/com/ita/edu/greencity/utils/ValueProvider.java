@@ -70,5 +70,4 @@ public class ValueProvider {
         OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
         properties.store(os,"new password for rollback" );
     }
-
 }
