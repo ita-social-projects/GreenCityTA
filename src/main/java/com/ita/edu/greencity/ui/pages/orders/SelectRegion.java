@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,8 +52,9 @@ public class SelectRegion extends BasePage {
         getCloseButton().click();
     }
 
-    public void clickOnBackButton() {
+    public UbsHomePage clickOnBackButton() {
         getBackButton().click();
+        return new UbsHomePage(driver);
     }
 
     public OrderDetailsPage clickOnContinueButton() {
