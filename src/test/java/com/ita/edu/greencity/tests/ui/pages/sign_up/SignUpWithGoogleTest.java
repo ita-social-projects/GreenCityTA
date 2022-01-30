@@ -1,31 +1,33 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.ui.pages.google_account.GoogleSignInInputEmailPopUp;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
-import org.apache.commons.lang.RandomStringUtils;
+
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class SignUpPersonTest extends TestRun {
+public class SignUpWithGoogleTest extends TestRun {
 
     static Connection con = null;
     private static Statement stmt;
-    private final String userEmail = RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
-    private final String userName = RandomStringUtils.randomAlphabetic(10);
+    private final String userEmail = "registertesttest88@gmail.com";
     private final String query1 = "SELECT id\n" +
             "FROM greencity_ubs.public.users\n" +
             "WHERE recipient_email = '" + userEmail + "'";
     private final String query2 = "DELETE\n" +
             "FROM greencity_ubs.public.users\n" +
-            "WHERE recipient_email ='" + userEmail + "'";
+            "WHERE recipient_email ='" + userEmail  + "'";
 
     @BeforeTest
     public void checkRegisteredUser() throws Exception {
@@ -49,18 +51,16 @@ public class SignUpPersonTest extends TestRun {
     @Test
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
-        String userPassword = "yachtOP_1";
-        signUpComponent.inputEmailIntoField(userEmail)
-                .inputUserNameIntoField(userName)
+        String userPassword = "Tetsregistr_1";
+        signUpComponent.clickOnSignUpWithGoogleButton();
+        new GoogleSignInInputEmailPopUp(driver).inputEmailIntoField(userEmail)
+                .clickOnContinueButton()
                 .inputPasswordIntoField(userPassword)
-                .inputConfirmPasswordIntoField(userPassword)
-                .clickOnSignUpButton();
-        boolean isDisabled = signUpComponent.checkDisabledSignUpButton();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertFalse(isDisabled, "SignUp button is disabled!");
-        String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
-        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
-        softAssert.assertAll();
+                .clickOnContinueButton();
+        new SelectRegion(driver).clickOnCloseButton();
+        signUpComponent.clickOnExitButton();
+        String actualUserName = new HeaderSignedInComponent(driver).getUserName();
+        Assert.assertEquals(actualUserName,"Tetsregistr Tetsregistr");
     }
 
     @AfterTest
