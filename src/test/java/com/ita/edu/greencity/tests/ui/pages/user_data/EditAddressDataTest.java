@@ -4,14 +4,11 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.user_data.UserData;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class EditAddressDataTest extends TestRun {
     @BeforeMethod
@@ -23,23 +20,24 @@ public class EditAddressDataTest extends TestRun {
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
-    @DataProvider(name = "dataProvider")
-    private Object[][] dataProvider() {
+    @DataProvider(name = "dataProviderAddress")
+    private Object[][] dataProviderAddress() {
         return new Object[][]{
-                {"Київ","Київська область","Святошинський", "вулиця Львівська" , "1" ,"1","1"},
-                {"Київ","Київська область","Печерський", "Деміївська вулиця" , "1" ,"1","1"},
+                {"Address №2","Київ","Київська область","Святошинський", "вулиця Львівська" , "1" ,"2","3"},
+                {"Address №2","Київ","Київська область","Печерський", "Деміївська вулиця" , "6" ,"5","4"},
         };
     }
-    @Test(dataProvider = "dataProvider")
-    public void editAddress(String city, String region, String district,
-                            String street, String number, String corpus, String entrance ) throws InterruptedException {
+    //works well
+    @Test(dataProvider = "dataProviderAddress")
+    public void editAddress(String numberAddress,String city, String region, String district,
+                            String street, String number, String corpus, String entrance ){
         new HeaderSignedInComponent(driver)
                 .clickUserMenu()
                 .clickUbsUser()
                 .getUbsUserPage()
                 .clickOnUserDataButton()
                 .clickOnEditDataButton()
-                .chooseAddress("Address №2")
+                .chooseAddress(numberAddress)
                 .setCityAddress(city)
                 .setRegionAddress(region)
                 .setDistrictAddress(district)
@@ -50,22 +48,14 @@ public class EditAddressDataTest extends TestRun {
                 .clickOnSaveChangesButton();
 
         UserData userData = new UserData(driver);
-        List<String> actualData = new ArrayList<>();
-        actualData.add(userData.chooseAddressShow("Address №2").getCity());
-        actualData.add(userData.chooseAddressShow("Address №2").getRegion());
-        actualData.add(userData.chooseAddressShow("Address №2").getDistrict());
-        actualData.add(userData.chooseAddressShow("Address №2").getStreet());
-        actualData.add(userData.chooseAddressShow("Address №2").getHouse());
-        actualData.add(userData.chooseAddressShow("Address №2").getCorpus());
-        actualData.add(userData.chooseAddressShow("Address №2").getEntrance());
         SoftAssert asert = new SoftAssert();
-        asert.assertEquals(actualData.get(0),city,"assert in city");
-        asert.assertEquals(actualData.get(1),region,"assert in Region");
-        asert.assertEquals(actualData.get(2),district,"assert in District");
-        asert.assertEquals(actualData.get(3),street,"assert in Street");
-        asert.assertEquals(actualData.get(4),number,"assert in House");
-        asert.assertEquals(actualData.get(5),corpus,"assert in Corpus");
-        asert.assertEquals(actualData.get(6),entrance,"assert in Entrance");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCity(),city,"assert in City");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getRegion(),region,"assert in Region");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getDistrict(),district,"assert in District");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getStreet(),street,"assert in Street");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getHouse(),number,"assert in House");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCorpus(),corpus,"assert in Corpus");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getEntrance(),entrance,"assert in Entrance");
         asert.assertAll();
 
     }

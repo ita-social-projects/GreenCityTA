@@ -15,10 +15,16 @@ public class UserData extends BasePage {
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.edit")
     private WebElement editData;
 
-    @FindBy(how = How.XPATH, using = "//form/div[2]/div[2]/p")
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[1]")
+    private WebElement name;
+
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[2]")
+    private WebElement surname;
+
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[3]")
     private WebElement email;
 
-    @FindBy(how = How.XPATH, using = "//div[3]/form/div[2]/div[2]/p")
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[4]")
     private WebElement phone;
 
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.open")
@@ -40,6 +46,12 @@ public class UserData extends BasePage {
         return  new EditUserData(driver);
 
     }
+    public String getTextFromNameField(){
+        return name.getText();
+    }
+    public String getTextFromSurnameField(){
+        return surname.getText();
+    }
     public String getTextFromEmailField(){
         return email.getText();
     }
@@ -47,6 +59,7 @@ public class UserData extends BasePage {
         return phone.getText();
     }
     public ChangePassword clickOnChangePasswordButton(){
+        this.sleep(10000);
         changePassword.click();
         return new ChangePassword(driver);
     }
