@@ -66,4 +66,13 @@ public class ValueProvider {
     public void setPassword(String newPassword) {
         properties.setProperty("password", newPassword);
     }
+    
+    public void setPassword(String newPassword) throws IOException {
+        FileReader reader =  new FileReader("src/main/resources/properties.properties");
+        properties.load(reader);
+        properties.getProperty("password");
+        properties.setProperty("password",newPassword);
+        OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
+        properties.store(os,"new password for rollback" );
+    }
 }
