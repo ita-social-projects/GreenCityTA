@@ -41,7 +41,7 @@ public class ChangePasswordTest extends TestRun {
                 {"mypas3swoRd1+","mypasswoRd1"},
         };
     }
-    //works well
+
     @Test(dataProvider = "dataProvider")
     public void changeCurrentPassword( String newPassword) throws IOException {
 
@@ -67,7 +67,7 @@ public class ChangePasswordTest extends TestRun {
         Assert.assertEquals(actual, expectedTitle);
         provider.setPassword(newPassword);
     }
-    //works well
+   
     @Test
     public void verifyMessageWhenChangingPasswordToTheSame(){
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
@@ -83,7 +83,7 @@ public class ChangePasswordTest extends TestRun {
         String expectedTitle = "Enter the new password!";
         Assert.assertEquals(actual, expectedTitle);
     }
-    //work well
+   
     @Test(dataProvider = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     public void verifyMessageWhenPasswordsNotMatch(String newPassword,String repeatPassword){
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
