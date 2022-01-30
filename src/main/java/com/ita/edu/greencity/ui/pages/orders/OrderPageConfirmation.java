@@ -76,9 +76,8 @@ public class OrderPageConfirmation extends BasePage {
         return amountsList.get(index).getText();
     }
 
-    private OrderPageConfirmation clickOnPaymentChooser() {
+    private void clickOnPaymentChooser() {
         paymentChooser.click();
-        return this;
     }
 
     public WebElement paymentOption(String value) {
