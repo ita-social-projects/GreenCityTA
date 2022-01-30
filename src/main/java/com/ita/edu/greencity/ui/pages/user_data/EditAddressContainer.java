@@ -91,8 +91,7 @@ public class EditAddressContainer {
         return this;
     }
 
-    public UserData clickOnSaveChangesButton() throws InterruptedException {
-        Thread.sleep(3000);
+    public UserData clickOnSaveChangesButton(){
         saveChanges.click();
         return new UserData(driver);
     }
