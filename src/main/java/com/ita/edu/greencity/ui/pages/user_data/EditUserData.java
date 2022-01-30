@@ -66,16 +66,16 @@ public class EditUserData extends BasePage {
     private List<EditAddressContainer> getAddress() {
         List<EditAddressContainer> addressContainerList = new ArrayList<>();
         for (WebElement element : adressTable) {
-            addressContainerList.add(new EditAddressContainer(driver, element));
+            addressContainerList.add(new EditAddressContainer(element));
         }
         return addressContainerList;
     }
 
-    public EditAddressContainer chooseAddress(String numberOfOrder) {
+    public EditAddressContainer chooseAddress(String numberAddress) {
         this.sleep(3000);
         return getAddress()
                 .stream()
-                .filter(element -> element.getAddressNumber().equals(numberOfOrder))
+                .filter(element -> element.getAddressNumber().equals(numberAddress))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     }

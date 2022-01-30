@@ -7,8 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import java.io.IOException;
 
-
-
 public class ChangePasswordTest extends TestRun {
     @BeforeMethod
     public void loginToUBS() {
@@ -27,13 +25,7 @@ public class ChangePasswordTest extends TestRun {
                 {".mypasswoRd1"},
         };
     }
-    @DataProvider(name = "dataProviderToVerifyMessageWhenChangingPasswordToTheSame")
-    private Object[][] dataProviderToVerifyMessageWhenChangingPasswordToTheSame() {
-        return new Object[][]{
-                {"00000000Qw1/"},
-                {"mypasswoRd1+"},
-        };
-    }
+
     @DataProvider(name = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     private Object[][] dataProviderToVerifyMessageWhenPasswordsNotMatch() {
         return new Object[][]{
@@ -44,7 +36,6 @@ public class ChangePasswordTest extends TestRun {
 
     @Test(dataProvider = "dataProvider")
     public void changeCurrentPassword( String newPassword) throws IOException {
-
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         header.clickUserMenu()
                 .clickUbsUser()
@@ -96,10 +87,8 @@ public class ChangePasswordTest extends TestRun {
                 .enterNewPassword(newPassword)
                 .enterRepeatNewPassword(repeatPassword)
                 .getErrorMessageDontMatchPassword();
-
         String expectedTitle = "Passwords do not match!";
         Assert.assertEquals(actual, expectedTitle);
-
     }
 
 }

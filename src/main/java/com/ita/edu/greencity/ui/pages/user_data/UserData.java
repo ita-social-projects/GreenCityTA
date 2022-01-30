@@ -70,16 +70,16 @@ public class UserData extends BasePage {
     private List<DisplayAddressContainer> getAddress() {
         List<DisplayAddressContainer> addressContainerList = new ArrayList<>();
         for (WebElement element : allAdresses) {
-            addressContainerList.add(new DisplayAddressContainer(driver, element));
+            addressContainerList.add(new DisplayAddressContainer(element));
         }
         return addressContainerList;
     }
 
-    public DisplayAddressContainer chooseAddressShow(String numberOfOrder) {
+    public DisplayAddressContainer chooseAddressShow(String number) {
         this.sleep(3000);
         return getAddress()
                 .stream()
-                .filter(element -> element.getAddressNumberShow().equals(numberOfOrder))
+                .filter(element -> element.getAddressNumberShow().equals(number))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     }
