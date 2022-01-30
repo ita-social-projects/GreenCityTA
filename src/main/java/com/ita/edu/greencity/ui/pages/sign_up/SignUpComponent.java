@@ -54,6 +54,9 @@ public class SignUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='title']")
     private WebElement title;
 
+    @FindBy(how = How.XPATH, using = "//*[contains(@id,'cdk-overlay-')]/snack-bar-container/simple-snack-bar/span")
+    private WebElement successRegistrationAlert;
+
     public SignUpComponent(WebDriver driver) {
         super(driver);
     }
@@ -130,5 +133,18 @@ public class SignUpComponent extends BasePage {
 
     public boolean checkDisabledSignUpButton() {
         return (signUpButton.getAttribute("disabled")!= null);
+    }
+
+    public String getTextOfSuccessRegistrationAlert() {
+        sleep(5000);
+        return successRegistrationAlert.getText();
+    }
+
+    public boolean checkPasswordIsVisible() {
+        return (passwordField.getAttribute("type").equals("text"));
+    }
+
+    public boolean checkConfirmPasswordIsVisible() {
+        return (confirmPasswordField.getAttribute("type").equals("text"));
     }
 }

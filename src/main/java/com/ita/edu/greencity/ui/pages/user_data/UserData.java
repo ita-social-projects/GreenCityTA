@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserData extends BasePage {
@@ -14,10 +15,16 @@ public class UserData extends BasePage {
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.edit")
     private WebElement editData;
 
-    @FindBy(how = How.XPATH, using = "//form/div[2]/div[2]/p")
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[1]")
+    private WebElement name;
+
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[2]")
+    private WebElement surname;
+
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[3]")
     private WebElement email;
 
-    @FindBy(how = How.XPATH, using = "//div[3]/form/div[2]/div[2]/p")
+    @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[4]")
     private WebElement phone;
 
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.open")
@@ -26,7 +33,7 @@ public class UserData extends BasePage {
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.delete")
     private WebElement deleteProfile;
 
-    @FindBy(how = How.CSS, using = "div.address.ng-untouched.ng-pristine.ng-valid.ng-star-inserted")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@formarrayname, 'address')]")
     private List<WebElement> allAdresses;
 
     public UserData(WebDriver driver) {
@@ -34,9 +41,16 @@ public class UserData extends BasePage {
     }
 
     public EditUserData clickOnEditDataButton()  {
+        this.sleep(3000);
         editData.click();
         return  new EditUserData(driver);
 
+    }
+    public String getTextFromNameField(){
+        return name.getText();
+    }
+    public String getTextFromSurnameField(){
+        return surname.getText();
     }
     public String getTextFromEmailField(){
         return email.getText();
@@ -45,6 +59,7 @@ public class UserData extends BasePage {
         return phone.getText();
     }
     public ChangePassword clickOnChangePasswordButton(){
+        this.sleep(10000);
         changePassword.click();
         return new ChangePassword(driver);
     }
@@ -52,22 +67,29 @@ public class UserData extends BasePage {
         deleteProfile.click();
         return new DeleteProfile(driver);
     }
-    public String getAdressData(String  numberAdress, String elem){
-        return switch (elem) {
-            case "city" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[1]/div[1]/p")).getText();
-            case "region" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[1]/div[2]/p")).getText();
-            case "district" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[1]/div[3]/p")).getText();
-            case "street" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[1]/p")).getText();
-            case "house" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[2]/p")).getText();
-            case "corpus" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[3]/p")).getText();
-            case "entrance" -> driver.findElement(By.xpath("//form/div[" + numberAdress + 2 + "]/div/div[2]/div[4]/p")).getText();
-            default -> null;
-        };
+    private List<DisplayAddressContainer> getAddress() {
+        List<DisplayAddressContainer> addressContainerList = new ArrayList<>();
+        for (WebElement element : allAdresses) {
+            addressContainerList.add(new DisplayAddressContainer(driver, element));
+        }
+        return addressContainerList;
+    }
+
+    public DisplayAddressContainer chooseAddressShow(String numberOfOrder) {
+        this.sleep(3000);
+        return getAddress()
+                .stream()
+                .filter(element -> element.getAddressNumberShow().equals(numberOfOrder))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
     }
 
 
-
-
-
 }
+
+
+
+
+
+
 

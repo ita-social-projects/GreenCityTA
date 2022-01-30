@@ -10,6 +10,8 @@ import java.util.List;
 
 public class SelectRegion extends BasePage {
 
+    @FindBy(css = "h5.title-text")
+    private WebElement title;
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
     @FindBy(xpath = "//button[@class='btn secondaryButton secondary-global-button']")
@@ -25,6 +27,10 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
+    public String getTitleText() {
+        this.sleep(7000);
+        return title.getText();
+    }
     public WebElement getCloseButton() {
         return closeButton;
     }
@@ -67,7 +73,7 @@ public class SelectRegion extends BasePage {
     }
 
     public SelectRegion chooseRegionByValue(String value) {
-        sleep(5000);
+        sleep(7000);
         clickOnRegionDropdown();
         for (WebElement option : listOfRegions) {
             if (option.getText().equals(value.trim())) {
