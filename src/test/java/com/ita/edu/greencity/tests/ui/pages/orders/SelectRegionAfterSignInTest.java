@@ -5,8 +5,8 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ChangeRegionAfterSignInTest extends TestRun {
-    public static String region = "Kyiv region";
+public class SelectRegionAfterSignInTest extends TestRun {
+    public static String region = "Kyiv";
 
     @Test
     public void changeRegionAfterSignIn() {
