@@ -4,12 +4,13 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
-import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class HeaderTest extends TestRun {
 
@@ -58,14 +59,18 @@ public class HeaderTest extends TestRun {
         HeaderComponent header = new HeaderComponent(driver);
         String expectedUA = "ua";
         String expectedEN = "en";
-        String actual = Locale.getDefault().getLanguage();
-        if (header.getLanguage() == "En") {
-            header.clickLanguageSwitcher().languageChoose("ua");
-            Assert.assertEquals(actual, expectedUA);
-        } else {
-            header.clickLanguageSwitcher().languageChoose("en");
-            Assert.assertEquals(actual, expectedEN);
-        }
+        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
+        SoftAssert softAssert = new SoftAssert();
+
+        header.clickLanguageSwitcher().languageChoose("ua");
+        String actual = localStorage.getItem("language");
+        softAssert.assertEquals(actual, expectedUA);
+
+        header.clickLanguageSwitcher().languageChoose("en");
+        actual = localStorage.getItem("language");
+        softAssert.assertEquals(actual, expectedEN);
+
+        softAssert.assertAll();
     }
 
     @Test
@@ -99,14 +104,14 @@ public class HeaderTest extends TestRun {
 
     @Test
     public void signOutButtonTest() {
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
+        HeaderSignedOutComponent headerSignedOut = new HeaderSignedOutComponent(driver);
+        headerSignedOut.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .clickOnContinueButton();
-        HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
-        header2.clickUserMenu().clickSignOut();
+        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
+        headerSignedIn.clickUserMenu().clickSignOut();
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
