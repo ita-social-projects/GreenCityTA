@@ -35,7 +35,7 @@ public class ChangePasswordTest extends TestRun {
     }
 
     @Test(dataProvider = "dataProvider")
-    public void changeCurrentPassword( String newPassword) throws IOException {
+    public void changeCurrentPassword( String newPassword) {
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         header.clickUserMenu()
                 .clickUbsUser()
