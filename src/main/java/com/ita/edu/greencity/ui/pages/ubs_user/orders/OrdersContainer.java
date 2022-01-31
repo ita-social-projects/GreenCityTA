@@ -23,7 +23,7 @@ public class OrdersContainer {
     }
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@src, 'ubs-admin-orders/arrow_up.svg')]")
-    private WebElement moreOrderInfo;
+    private WebElement orderDetailsArrowUp;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-id')]")
     private WebElement orderId;
@@ -46,8 +46,8 @@ public class OrdersContainer {
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
     private WebElement payForOrderButton;
 
-    public WebElement getMoreOrderInfo() {
-        return moreOrderInfo;
+    public WebElement clickOnOrderDetailsArrowUp() {
+        return orderDetailsArrowUp;
     }
 
     public String getOrderId() {
