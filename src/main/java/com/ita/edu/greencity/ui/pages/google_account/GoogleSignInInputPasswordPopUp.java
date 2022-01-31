@@ -25,7 +25,7 @@ public class GoogleSignInInputPasswordPopUp extends BasePage {
 
     public SignUpComponent clickOnContinueButton() {
         continueButton.click();
-        sleep(5000);
+        sleep(10000);
         switchBackToDefaultTab();
         return new SignUpComponent(driver);
     }
