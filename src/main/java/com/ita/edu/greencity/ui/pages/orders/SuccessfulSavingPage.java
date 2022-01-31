@@ -21,6 +21,7 @@ public class SuccessfulSavingPage extends BasePage {
     }
 
     public String getTextFromSuccessfulSavingAlert() {
+        sleep(4000);
         return successfulSavingAlert.getText();
     }
 

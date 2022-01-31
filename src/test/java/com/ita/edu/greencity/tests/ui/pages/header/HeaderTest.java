@@ -1,12 +1,15 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.header;
 
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class HeaderTest extends TestRun {
 
@@ -23,7 +26,6 @@ public class HeaderTest extends TestRun {
     public void sortingRulesRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickSortingRules();
-        //driver.switchTo().window(driver.getWindowHandles().stream().reduce((f, s) -> s).orElse(null));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         String expected = "https://nowaste.com.ua/yak-sortyvaty-na-karantuni/";
@@ -35,7 +37,6 @@ public class HeaderTest extends TestRun {
     public void ecoShopRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickEcoShop();
-        //driver.switchTo().window(driver.getWindowHandles().stream().reduce((f, s) -> s).orElse(null));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         String expected = "https://shop.nowaste.com.ua/";
@@ -55,9 +56,9 @@ public class HeaderTest extends TestRun {
     @Test
     public void languageSwitcherTest() {
         HeaderComponent header = new HeaderComponent(driver);
-        String expectedUA = "Про нас";
-        String expectedEN = "About-us";
-        String actual = header.getAboutUsText();
+        String expectedUA = "ua";
+        String expectedEN = "en";
+        String actual = Locale.getDefault().getLanguage();
         if (header.getLanguage() == "En") {
             header.clickLanguageSwitcher().languageChoose("ua");
             Assert.assertEquals(actual, expectedUA);

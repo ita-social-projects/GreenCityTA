@@ -26,6 +26,7 @@ public class OrderSavingPopUp extends BasePage {
     }
 
     public SuccessfulSavingPage clickOnSaveButton() {
+        sleep(3000);
         saveButton.click();
         return new SuccessfulSavingPage(driver);
     }

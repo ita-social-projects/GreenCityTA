@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 
-import com.ita.edu.greencity.tests.ui.TestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;

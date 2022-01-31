@@ -23,6 +23,12 @@ public class ChangePassword extends BasePage {
     @FindBy(how = How.XPATH, using = "//mat-dialog-actions/button[1]")
     private WebElement cancelChangingPasswordButton;
 
+    @FindBy(how = How.XPATH, using = "//mat-form-field[contains(@class, 'ng-valid')]/following::mat-error[1]")
+    private WebElement errorMessageTheSamePassword;
+
+    @FindBy(how = How.XPATH, using = "//mat-form-field[contains(@class, 'ng-valid')]/following::mat-error[1]")
+    private WebElement errorMessageDontMatchPassword;
+
     public ChangePassword(WebDriver driver) {
         super(driver);
     }
@@ -54,8 +60,11 @@ public class ChangePassword extends BasePage {
         cancelChangingPasswordButton.click();
         return new UserData(driver);
     }
-
-
-
+    public String getErrorMessageTheSamePassword() {
+        return errorMessageTheSamePassword.getText();
+    }
+    public String getErrorMessageDontMatchPassword() {
+        return errorMessageDontMatchPassword.getText();
+    }
 
 }

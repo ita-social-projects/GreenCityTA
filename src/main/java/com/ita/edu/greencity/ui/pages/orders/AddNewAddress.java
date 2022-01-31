@@ -52,7 +52,17 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//span[@class='pac-matched']")
     private List<WebElement> listOfStreet;
 
+    @FindBy(how = How.XPATH, using = "//form/div[6]/div[1]/div/app-ubs-input-error/div")
+    private WebElement houseErrorMessage;
 
+    @FindBy(how = How.XPATH, using = "//form/div[6]/div[2]/div/app-ubs-input-error/div")
+    private WebElement corpusErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[6]/div[3]/div/app-ubs-input-error/div")
+    private WebElement entranceErrorMessage;
+
+    @FindBy(how = How.XPATH, using = "//form/div[7]/div/app-ubs-input-error/div")
+    private WebElement commentToTheAddressErrorMessage;
 
 
     public AddNewAddress chooseStreet(int index){
@@ -72,10 +82,13 @@ public class AddNewAddress extends BasePage {
     }
 
     public OrderPagePersonalData clickOnAddAddressButton() {
+        sleep(5000);
+        addAddressButton.click();
         return new OrderPagePersonalData(driver);
     }
 
     public OrderPagePersonalData clickOnCancelButton() {
+        cancelButton.click();
         return new OrderPagePersonalData(driver);
     }
 
@@ -103,7 +116,7 @@ public class AddNewAddress extends BasePage {
         return this;
     }
 
-    public AddNewAddress enterStreet(final String street) throws InterruptedException {
+    public AddNewAddress enterStreet(final String street) {
         streetField.clear();
         streetField.sendKeys(street);
         return this;

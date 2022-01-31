@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class SelectRegion extends BasePage {
 
+    @FindBy(css = "h5.title-text")
+    private WebElement title;
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
     @FindBy(xpath = "//button[@class='btn secondaryButton secondary-global-button']")
@@ -25,6 +28,10 @@ public class SelectRegion extends BasePage {
         super(driver);
     }
 
+    public String getTitleText() {
+        this.sleep(7000);
+        return title.getText();
+    }
     public WebElement getCloseButton() {
         return closeButton;
     }
@@ -45,8 +52,9 @@ public class SelectRegion extends BasePage {
         getCloseButton().click();
     }
 
-    public void clickOnBackButton() {
+    public UbsHomePage clickOnBackButton() {
         getBackButton().click();
+        return new UbsHomePage(driver);
     }
 
     public OrderDetailsPage clickOnContinueButton() {
@@ -67,7 +75,7 @@ public class SelectRegion extends BasePage {
     }
 
     public SelectRegion chooseRegionByValue(String value) {
-        sleep(5000);
+        sleep(7000);
         clickOnRegionDropdown();
         for (WebElement option : listOfRegions) {
             if (option.getText().equals(value.trim())) {

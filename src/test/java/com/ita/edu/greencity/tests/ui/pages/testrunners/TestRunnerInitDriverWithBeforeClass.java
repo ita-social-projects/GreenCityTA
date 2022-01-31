@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.testrunners;
 
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import org.testng.annotations.AfterClass;
@@ -7,13 +7,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 
-public class LoginTestRun extends TestRun {
+public class TestRunnerInitDriverWithBeforeClass extends TestRun {
 
     @BeforeClass
     public void beforeClass() {
         super.beforeMethod();
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn();
     }
 
     @BeforeMethod

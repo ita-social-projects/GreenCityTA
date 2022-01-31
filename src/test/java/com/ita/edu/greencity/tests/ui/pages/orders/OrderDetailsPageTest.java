@@ -1,20 +1,15 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
-
-import com.ita.edu.greencity.tests.ui.TestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
-import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
-import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
-import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
-import org.apache.commons.lang.RandomStringUtils;
-import org.postgresql.core.Query;
+import com.ita.edu.greencity.utils.ValueProvider;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
 
@@ -22,7 +17,7 @@ public class OrderDetailsPageTest extends TestRun {
     //private static Statement stmt;
     private String query1 = "INSERT INTO greencity_ubs.public.certificate (code,status, expiration_date, points) VALUES ('6666-7777', 'ACTIVE', '2022-11-11 00:00:00', 500)";
     private String query2 = "DELETE  from greencity_ubs.public.certificate where code = '6666-7777'";
-@BeforeTest
+      @BeforeTest
     public void AddCertificate() throws Exception {
         String dbUrl = provider.getDbUrl();
         String dbUsername = provider.getDbUsername();

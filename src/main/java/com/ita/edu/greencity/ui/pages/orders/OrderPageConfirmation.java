@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import com.ita.edu.greencity.ui.pages.orders.payment.PrePaymentAlert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,9 +21,9 @@ public class OrderPageConfirmation extends BasePage {
     private WebElement yourOrderTitle;
     @FindBy(how = How.XPATH, using = "//div[@class = 'w-100 d-flex justify-content-between mb-2']/label[contains(@class,'p-0')]")
     private List<WebElement> headersList;
-    @FindBy(how = How.XPATH, using = "//div[@_ngcontent-ugo-c425]/p/span[2]/strong")
+    @FindBy(how = How.XPATH, using = "//app-ubs-submit-order//form/div[3]//p/span[2]/strong")
     private List<WebElement> totalSumList;
-    @FindBy(how = How.XPATH, using = "//div[@_ngcontent-ugo-c425]/p/span[1]")
+    @FindBy(how = How.XPATH, using = "//app-ubs-submit-order//form/div[3]//p/span[1]")
     private List<WebElement> amountsList;
 
     @FindBy(how = How.XPATH, using = "//select[contains(@class, 'payment-select shadow-none')]")
@@ -59,11 +58,17 @@ public class OrderPageConfirmation extends BasePage {
     }
 
     public String chooseOneElementFromYourOrderTable(int row, int column) {
+        sleep(5000);
         return driver.findElement(By.xpath("//ul[@class = 'services-list w-100 p-0 m-0']/li[" + row + "]/span[" + column + "]"))
                 .getText();
     }
 
+    public double transformToDoubleValue(String str) {
+        return Double.parseDouble(str);
+    }
+
     public String getTotalSumWithCurrency(int index) {
+        sleep(5000);
         return totalSumList.get(index).getText();
     }
 
@@ -71,9 +76,8 @@ public class OrderPageConfirmation extends BasePage {
         return amountsList.get(index).getText();
     }
 
-    private OrderPageConfirmation clickOnPaymentChooser() {
+    private void clickOnPaymentChooser() {
         paymentChooser.click();
-        return this;
     }
 
     public WebElement paymentOption(String value) {
@@ -97,7 +101,6 @@ public class OrderPageConfirmation extends BasePage {
     }
 
     public PrePaymentAlert clickOnOrderButton() {
-        this.sleep(5000);
         orderButton.click();
         return new PrePaymentAlert(driver);
     }
