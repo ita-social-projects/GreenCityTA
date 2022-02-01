@@ -4,6 +4,8 @@ import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,7 +28,7 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     public void checkImgArmoredTrackOnDisplay() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
         Assert.assertTrue(ubsHomePage.checkImgArmoredTrackOnDisplay());
     }
 
@@ -114,7 +116,6 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
         List<WebElement> UlElement = driver.findElements(By.xpath("//section[1]//*/div[@class='header-right']/ul[1]//*"));
         List<String> actual = new ArrayList<>();
         UlElement.forEach(i->actual.add(i.getText()));
-
         System.out.println(actual.size());
         System.out.println(expected.size());
         Assert.assertEquals(actual,expected);
@@ -132,5 +133,27 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
         String expected = "The cost of the service “UBS Courier";
         Assert.assertEquals(ubsHomePage.checkTextPriceUbsCourier(), expected);
     }
+
+    @Test
+    public void checkIfBurgerMenuonDisplay(){
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
+        Assert.assertTrue(ubsHomePage.checkIfBurgerMenuOnDisplay());
+    }
+
+//    @Test
+//    public void clickBurgerMenu(){
+//            driver.manage().window().setSize(new Dimension(900,900));
+//            UbsHomePage ubsHomePage = new UbsHomePage(driver);
+//            ubsHomePage.clickBurgerMenu();
+//            List<WebElement> listOfMenu = driver.findElements(By.xpath("//ul[@role='tablist']//a"));
+//            System.out.println(listOfMenu.size());
+//            System.out.println(listOfMenu);
+//            int expected = 7;
+//            Assert.assertEquals(listOfMenu.size(), expected);
+//    }
+
+
 }
+
+
 
