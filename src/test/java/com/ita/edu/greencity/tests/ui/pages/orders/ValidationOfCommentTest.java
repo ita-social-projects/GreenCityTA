@@ -4,8 +4,10 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -23,42 +25,33 @@ public class ValidationOfCommentTest extends TestRun {
     }
 
     @Test
-    public void CorrectCommentErrorMessage()
-    {
-        String expected = "You can't enter more than 255 characters.";
-        String actual =  new OrderDetailsPage(driver).EnterCommentInput(TestHelpersUtils.generateRandomComment(256))
-                .getCommentErrorMessage().getText();
-        Assert.assertEquals(actual,expected);
-
-    }
-
-    @Test
     public void incorrectLenghtOfComment()
     {
+        String expected = "You can't enter more than 255 characters.";
         SoftAssert softAssert = new SoftAssert();
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        boolean isDisplayed = orderDetailsPage.EnterCommentInput(TestHelpersUtils.generateRandomComment(256))
-               .getCommentErrorMessage().isDisplayed();
-        softAssert.assertTrue(isDisplayed,"Comment error message is not displayed");
-        boolean isEnabled = orderDetailsPage.getNextButton().isEnabled();
-        softAssert.assertFalse(isEnabled,"Next button is enable");
+        WebElement errorMessage = orderDetailsPage.EnterCommentInput(TestHelpersUtils.generateRandomComment(256))
+                .getCommentErrorMessage();
+        softAssert.assertTrue(errorMessage.isDisplayed(),"Comment error message is not displayed");
+        softAssert.assertEquals(errorMessage.getText(), expected, "Error message is not as required");
+        softAssert.assertFalse(orderDetailsPage.getNextButton().isEnabled(),"Next button is enable");
         softAssert.assertAll();
     }
 
-    @Test
-    public void correctLenghtOfComment()
+    @DataProvider(name = "correctComment-provider")
+    public Object[][] dataProviderMethod() {
+        return new String[][]{{TestHelpersUtils.generateRandomComment(138)}, {""}};
+    }
+
+
+    @Test(dataProvider = "correctComment-provider")
+    public void correctLengthOfComment(String comment)
     {
-        SoftAssert softAssert = new SoftAssert();
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        boolean isEnabled = orderDetailsPage.EnterCommentInput(TestHelpersUtils.generateRandomComment(138))
+        boolean isEnabled = orderDetailsPage.EnterCommentInput(comment)
                 .getNextButton()
                 .isEnabled();
-        softAssert.assertTrue(isEnabled,"Next button is not enable");
-        isEnabled = orderDetailsPage.EnterCommentInput("")
-                .getNextButton()
-                .isEnabled();
-        softAssert.assertTrue(isEnabled,"Next button is not enable");
-        softAssert.assertAll();
+        Assert.assertTrue(isEnabled,"Next button is disabled for correct length of comment");
     }
 
 

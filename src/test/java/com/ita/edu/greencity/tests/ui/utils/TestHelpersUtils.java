@@ -6,6 +6,7 @@ import org.apache.tika.language.detect.LanguageDetector;
 import java.util.Random;
 
 public class TestHelpersUtils {
+
     public static String getLanguage(String text) {
         LanguageDetector detector = new OptimaizeLangDetector().loadModels();
         return detector
@@ -16,7 +17,7 @@ public class TestHelpersUtils {
 
     public static String generateRandomComment(int len) {
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
-                +"lmnopqrstuvwxyz!@#$%& ";
+                 +"lmnopqrstuvwxyz!@#$%& ";
         Random rnd = new Random();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++)

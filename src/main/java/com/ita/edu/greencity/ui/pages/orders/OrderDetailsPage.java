@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,7 +68,6 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public String getTipTextHint() {
-        waitUntilElementToBeClickable(By.xpath("//div[@class='bottom-text']//p"), 10);
         return tipTextHint.getText();
     }
 

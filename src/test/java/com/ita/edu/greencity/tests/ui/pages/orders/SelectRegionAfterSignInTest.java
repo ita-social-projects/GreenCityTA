@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SelectRegionAfterSignInTest extends TestRun {
-    public static String region = "Kyiv";
+    public final static String region = "Kyiv";
 
     @Test
     public void changeRegionAfterSignIn() {

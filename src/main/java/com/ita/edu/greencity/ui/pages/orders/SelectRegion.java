@@ -30,12 +30,20 @@ public class SelectRegion extends BasePage {
     }
 
     public String getTitleText() {
-        //this.sleep(7000);
+        this.sleep(7000);
         return title.getText();
     }
 
     public String getBottomText() {
         return bottomText.getText();
+    }
+
+    public String getContinueButtonText() {
+        return continueButton.getText();
+    }
+
+    public String getBackButtonText() {
+        return backButton.getText();
     }
 
     public void clickOnCloseButton() {
