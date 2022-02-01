@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SelectRegion extends BasePage {
 
-    @FindBy(css = "h5.title-text")
+    @FindBy(xpath = "//div[@class='title']/h5")
     private WebElement title;
     @FindBy(xpath = "//*[@class = 'close-btn']")
     private WebElement closeButton;
@@ -23,6 +23,8 @@ public class SelectRegion extends BasePage {
     private WebElement regionDropdown;
     @FindBy(xpath = "//select[@name='region']/option[@class ='ng-star-inserted']")
     private List<WebElement> listOfRegions;
+    @FindBy(xpath = "//p[@class='text ng-star-inserted']")
+    private WebElement bottomText;
 
     public SelectRegion(WebDriver driver) {
         super(driver);
@@ -36,35 +38,34 @@ public class SelectRegion extends BasePage {
         return closeButton;
     }
 
-    public WebElement getBackButton() {
-        return backButton;
+    public String getBottomText() {
+        return bottomText.getText();
     }
 
-    public WebElement getContinueButton() {
-        return continueButton;
+    public String getContinueButtonText() {
+        return continueButton.getText();
     }
 
-    public WebElement getRegionDropdown() {
-        return regionDropdown;
+    public String getBackButtonText() {
+        return backButton.getText();
     }
 
     public void clickOnCloseButton() {
-        getCloseButton().click();
+        closeButton.click();
     }
 
-    public UbsHomePage clickOnBackButton() {
-        getBackButton().click();
-        return new UbsHomePage(driver);
+    public void clickOnBackButton() {
+        backButton.click();
     }
 
     public OrderDetailsPage clickOnContinueButton() {
         waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 10);
-        getContinueButton().click();
+        continueButton.click();
         return new OrderDetailsPage(driver);
     }
 
     public void clickOnRegionDropdown() {
-        getRegionDropdown().click();
+        regionDropdown.click();
     }
 
     public SelectRegion chooseRegionByIndex(int index) {
