@@ -29,7 +29,7 @@ public class OrderDetailsPage extends BasePage {
     private List<WebElement> totalPrice;
     @FindBy(xpath = "//div[@class='totalInfo']//strong")
     private List<WebElement> totalAmount;
-    @FindBy(xpath = "//input[@class='shadow-none form-control col-12 col-sm-8 my-1 input-border ng-pristine ng-valid ng-touched']")
+    @FindBy(xpath = ".//div[@formarrayname='formArrayCertificates']/input")
     private WebElement certificateInput;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
     private WebElement minimumOrderAmountAlert;
@@ -86,7 +86,7 @@ public class OrderDetailsPage extends BasePage {
         clickOnchangeRegionDropdown();
         sleep(2000);
         for (WebElement option : regionButtons) {
-            if (option.getText().trim().equals(value.trim())) {
+            if (option.getText().equals(value.trim())) {
                 option.click();
                 break;
             }
@@ -154,6 +154,7 @@ public class OrderDetailsPage extends BasePage {
         }
 
         public OrderDetailsPage EnterCertificateInput (String value){
+        certificateInput.click();
             certificateInput.sendKeys(value, Keys.ENTER);
             return this;
         }
