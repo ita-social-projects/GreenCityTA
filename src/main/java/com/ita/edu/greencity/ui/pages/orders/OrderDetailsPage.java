@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderDetailsPage extends BasePage {
@@ -31,12 +33,14 @@ public class OrderDetailsPage extends BasePage {
     private List<WebElement> totalAmount;
     @FindBy(xpath = ".//div[@formarrayname='formArrayCertificates']/input")
     private WebElement certificateInput;
+    @FindBy(xpath = "//button[@class='primary-global-button btn ng-star-inserted']")
+    private WebElement activateCertificateButton;
+    @FindBy(xpath = "//div[@class='messages-container']/small")
+    private WebElement certificateAlert;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
     private WebElement minimumOrderAmountAlert;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][2]//small")
     private WebElement minimumOrderContainsAlert;
-    @FindBy(xpath = "//button[@class='primary-global-button btn ng-star-inserted']")
-    private WebElement activateCertificateButton;
     @FindBy(xpath = "//div[@class='points']//span[@class='checkmark']")
     private List<WebElement> UseBonusesCheckmarks;
     @FindBy(xpath = "//a[@class='bonus-how-to-link']")
@@ -82,9 +86,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderDetailsPage chooseRegionByValue(String value) {
         clickOnChangeRegionButton();
-        sleep(2000);
         clickOnchangeRegionDropdown();
-        sleep(2000);
         for (WebElement option : regionButtons) {
             if (option.getText().equals(value.trim())) {
                 option.click();
@@ -134,12 +136,12 @@ public class OrderDetailsPage extends BasePage {
         }
 
         public String getOrderAmount () {
-            String price = totalPrice.get(0).getText();
+            String price = totalAmount.get(0).getText();
             return price;
         }
 
         public String getAmountDue () {
-            String price = totalPrice.get(1).getText();
+            String price = totalAmount.get(1).getText();
             return price;
         }
 
@@ -163,6 +165,10 @@ public class OrderDetailsPage extends BasePage {
             activateCertificateButton.click();
             return this;
         }
+    public String getCertificateAlertMessage () {
+        return certificateAlert.getText().trim();
+    }
+
 
         public OrderDetailsPage ClickOnNoUseBonusesCheckmark () {
             UseBonusesCheckmarks.get(0).click();
