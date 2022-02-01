@@ -19,7 +19,7 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[@class='ubs-header-sign-in']")
     private WebElement singInButton;
 
-    @FindBy(how = How.XPATH, using = "//img[@alt='ubs-armored-track']")
+    @FindBy(how = How.XPATH, using = "//div[1]/img[@src='assets/img/ubs/armored_truck.svg']")
     private WebElement imgArmoredTrack;
 
     @FindBy(how = How.XPATH, using = "//*/h1")
@@ -74,7 +74,14 @@ public class UbsHomePage extends BasePage {
     private WebElement divNecessaryRole;
 
     @FindBy(how = How.XPATH, using = "//h2[@class='price-header']")
-    private WebElement priceUbsCurier;
+    private WebElement priceUbsCourier;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='menu-icon-wrapper']")
+    private WebElement burgerMenu;
+
+
+    @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
+    private WebElement elementsInBurgerMenu;
 
 
     //_______________________________________________________________________
@@ -134,8 +141,18 @@ public class UbsHomePage extends BasePage {
     }
 
     public String checkTextPriceUbsCourier(){
-        return priceUbsCurier.getText();
+        return priceUbsCourier.getText();
     }
+
+    public boolean checkIfBurgerMenuOnDisplay(){
+        return burgerMenu.isDisplayed();
+    }
+
+    public UbsHomePage clickBurgerMenu() {
+        burgerMenu.click();
+        return null;
+    }
+
 
     //    public void clickSelectionImg() {
 //        selectionImg.click();
