@@ -153,7 +153,6 @@ public class OrderDetailsPage extends BasePage {
         return price;
     }
 
-
     public String getOrderAmount() {
         String price = totalPrice.get(0).getText();
         return price;
@@ -162,7 +161,7 @@ public class OrderDetailsPage extends BasePage {
     public String getAmountDue() {
         String price = totalPrice.get(1).getText();
         return price;
-
+    }
 
     public String getMinimumOrderAmountAlertText() {
         String text = minimumOrderAmountAlert.getText();
