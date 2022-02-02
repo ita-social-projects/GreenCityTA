@@ -152,6 +152,7 @@ public class OrderDetailsPage extends BasePage {
         String price = totalPrice.get(2).getText();
         return price;
     }
+
     public String getOrderAmount() {
         String price = totalPrice.get(0).getText();
         return price;
@@ -178,10 +179,10 @@ public class OrderDetailsPage extends BasePage {
             return this;
         }
 
-
     public String getCertificateAlertMessage () {
         return certificateAlert.getText().trim();
     }
+
 
     public OrderDetailsPage clickOnActivateCertificateButton() {
         activateCertificateButton.click();
