@@ -45,4 +45,15 @@ public class BasePage {
         getDriver().close();
         getDriver().switchTo().window(tabs2.get(1));
     }
+
+    public void switchToNewTabWithoutClosing() {
+        ArrayList<String> tabs2 = new ArrayList<>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs2.get(0));
+        getDriver().switchTo().window(tabs2.get(1));
+    }
+
+    public void switchBackToDefaultTab() {
+        ArrayList<String> tabs2 = new ArrayList<>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs2.get(0));
+    }
 }

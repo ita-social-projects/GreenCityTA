@@ -57,7 +57,7 @@ public class UbsUserOrders extends BasePage {
         return ordersContainerList;
     }
 
-    public OrdersContainer filterOrders(String numberOfOrder) {
+    public OrdersContainer getOrder(String numberOfOrder) {
 
         return getOrders()
                 .stream()

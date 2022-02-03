@@ -119,6 +119,8 @@ public class SignUpComponent extends BasePage {
 
     public SignUpComponent clickOnSignUpWithGoogleButton() {
         signUpWithGoogleButton.click();
+        sleep(5000);
+        switchToNewTabWithoutClosing();
         return this;
     }
 

@@ -1,11 +1,14 @@
-package com.ita.edu.greencity.tests.ui;
+package com.ita.edu.greencity.tests.ui.pages.header;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import org.openqa.selenium.html5.LocalStorage;
+import org.openqa.selenium.html5.WebStorage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,6 @@ public class HeaderTest extends TestRun {
     public void sortingRulesRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickSortingRules();
-        //driver.switchTo().window(driver.getWindowHandles().stream().reduce((f, s) -> s).orElse(null));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         String expected = "https://nowaste.com.ua/yak-sortyvaty-na-karantuni/";
@@ -36,7 +38,6 @@ public class HeaderTest extends TestRun {
     public void ecoShopRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickEcoShop();
-        //driver.switchTo().window(driver.getWindowHandles().stream().reduce((f, s) -> s).orElse(null));
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         String expected = "https://shop.nowaste.com.ua/";
@@ -56,16 +57,20 @@ public class HeaderTest extends TestRun {
     @Test
     public void languageSwitcherTest() {
         HeaderComponent header = new HeaderComponent(driver);
-        String expectedUA = "Про нас";
-        String expectedEN = "About-us";
-        String actual = header.getAboutUsText();
-        if (header.getLanguage() == "En") {
-            header.clickLanguageSwitcher().languageChoose("ua");
-            Assert.assertEquals(actual, expectedUA);
-        } else {
-            header.clickLanguageSwitcher().languageChoose("en");
-            Assert.assertEquals(actual, expectedEN);
-        }
+        String expectedUA = "ua";
+        String expectedEN = "en";
+        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
+        SoftAssert softAssert = new SoftAssert();
+
+        header.clickLanguageSwitcher().languageChoose("ua");
+        String actual = localStorage.getItem("language");
+        softAssert.assertEquals(actual, expectedUA);
+
+        header.clickLanguageSwitcher().languageChoose("en");
+        actual = localStorage.getItem("language");
+        softAssert.assertEquals(actual, expectedEN);
+
+        softAssert.assertAll();
     }
 
     @Test
@@ -99,14 +104,14 @@ public class HeaderTest extends TestRun {
 
     @Test
     public void signOutButtonTest() {
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
+        HeaderSignedOutComponent headerSignedOut = new HeaderSignedOutComponent(driver);
+        headerSignedOut.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
                 .clickOnContinueButton();
-        HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
-        header2.clickUserMenu().clickSignOut();
+        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
+        headerSignedIn.clickUserMenu().clickSignOut();
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
