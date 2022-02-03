@@ -3,53 +3,32 @@ package com.ita.edu.greencity.tests.ui.pages.sign_up;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
-import org.apache.commons.lang.RandomStringUtils;
+import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class SignUpPersonTest extends TestRun {
 
-    static Connection con = null;
-    private static Statement stmt;
-    private final String userEmail = RandomStringUtils.randomAlphabetic(5) + "@gmail.com";
-    private final String userName = RandomStringUtils.randomAlphabetic(10);
-    private final String query1 = "SELECT id\n" +
-            "FROM greencity_ubs.public.users\n" +
-            "WHERE recipient_email = '" + userEmail + "'";
-    private final String query2 = "DELETE\n" +
-            "FROM greencity_ubs.public.users\n" +
-            "WHERE recipient_email ='" + userEmail + "'";
+    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
+    private final String userEmail = "registertesttest88@gmail.com";
 
     @BeforeTest
-    public void checkRegisteredUser() throws Exception {
-        String dbUrl = provider.getDbUrl();
-        String dbUsername = provider.getDbUsername();
-        String dbPassword = provider.getDbPassword();
-        Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-        con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-        stmt = con.createStatement();
-        ResultSet res = stmt.executeQuery(query1);
-        String myiD = null;
-        while (res.next()) {
-            myiD = res.getString(1);
-            System.out.println("id" + myiD);
-        }
-        if (myiD != null) {
-            stmt.executeQuery(query2);
+    public void checkRegisteredUser() {
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        if (user != null) {
+            ecoNewsUsersService.deleteById(user.getId());
         }
     }
 
     @Test
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
-        String userPassword = "yachtOP_1";
+        String userPassword = "Tetsregistr_1";
+        String userName = "Tetsregistr";
         signUpComponent.inputEmailIntoField(userEmail)
                 .inputUserNameIntoField(userName)
                 .inputPasswordIntoField(userPassword)
@@ -64,18 +43,10 @@ public class SignUpPersonTest extends TestRun {
     }
 
     @AfterTest
-    public void deleteRegisteredUser() throws Exception {
-        ResultSet res = stmt.executeQuery(query1);
-        String myiD = null;
-        while (res.next()) {
-            myiD = res.getString(1);
-            System.out.println("id" + myiD);
-        }
-        if (myiD != null) {
-            stmt.executeQuery(query2);
-        }
-        if (con != null) {
-            con.close();
+    public void deleteRegisteredUser() {
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        if (user != null) {
+            ecoNewsUsersService.deleteById(user.getId());
         }
     }
 }
