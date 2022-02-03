@@ -3,6 +3,7 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.utils.ValueProvider;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
@@ -16,18 +17,14 @@ import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
 
-    static Connection con = null;
-    private String query1 = "INSERT INTO greencity_ubs.public.certificate (code,status, expiration_date, points) VALUES ('6666-7777', 'ACTIVE', '2022-11-11 00:00:00', 500)";
-    private String query2 = "DELETE  from greencity_ubs.public.certificate where code = '6666-7777'";
+EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
+    private final String codeValue = "7777-6666";
+    private final String statusValue = "ACTIVE";
+    private final String expiration_dateValue = "2022-11-11 00:00:00";
+    private final int pointsValue = 500;
       @BeforeTest
     public void AddCertificate() throws Exception {
-        String dbUrl = provider.getDbUrl();
-        String dbUsername = provider.getDbUsername();
-        String dbPassword = provider.getDbPassword();
-        Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-        con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-        Statement stmt = con.createStatement();
-    stmt.executeUpdate(query1);
+          ecoNewsCertificateService.addCertificate(codeValue,statusValue,expiration_dateValue,pointsValue);
     }
 @BeforeMethod
 public void preConditions(){
@@ -79,7 +76,7 @@ public void preConditions(){
                 .EnterNumberOfSafeWasteInput("20")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
-                .EnterCertificateInput("6666-7777")
+                .EnterCertificateInput(codeValue)
                 .clickOnActivateCertificateButton()
                 .getCertificateAlertMessage();
         Assert.assertTrue(actual.contains(expected));
@@ -87,8 +84,6 @@ public void preConditions(){
 
     @AfterTest
     public void checkRegisteredUser() throws Exception {
-    Statement stmt = con.createStatement();
-    stmt.executeUpdate(query2);
-        con.close();
+ecoNewsCertificateService.deleteCertificate(codeValue);
     }
 }
