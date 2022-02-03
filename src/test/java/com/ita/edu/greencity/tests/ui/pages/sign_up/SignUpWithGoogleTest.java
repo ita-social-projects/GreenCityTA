@@ -7,44 +7,24 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 
+import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class SignUpWithGoogleTest extends TestRun {
 
-    static Connection con = null;
-    private static Statement stmt;
+    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
     private final String userEmail = "registertesttest88@gmail.com";
-    private final String query1 = "SELECT id\n" +
-            "FROM greencity_ubs.public.users\n" +
-            "WHERE recipient_email = '" + userEmail + "'";
-    private final String query2 = "DELETE\n" +
-            "FROM greencity_ubs.public.users\n" +
-            "WHERE recipient_email ='" + userEmail  + "'";
 
     @BeforeTest
-    public void checkRegisteredUser() throws Exception {
-        String dbUrl = provider.getDbUrl();
-        String dbUsername = provider.getDbUsername();
-        String dbPassword = provider.getDbPassword();
-        Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-        con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-        stmt = con.createStatement();
-        ResultSet res = stmt.executeQuery(query1);
-        String myiD = null;
-        while (res.next()) {
-            myiD = res.getString(1);
-            System.out.println("id" + myiD);
-        }
-        if (myiD != null) {
-            stmt.executeQuery(query2);
+    public void checkRegisteredUser() {
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        if (user != null) {
+            ecoNewsUsersService.deleteById(user.getId());
         }
     }
 
@@ -64,18 +44,10 @@ public class SignUpWithGoogleTest extends TestRun {
     }
 
     @AfterTest
-    public void deleteRegisteredUser() throws Exception {
-        ResultSet res = stmt.executeQuery(query1);
-        String myiD = null;
-        while (res.next()) {
-            myiD = res.getString(1);
-            System.out.println("id" + myiD);
-        }
-        if (myiD != null) {
-            stmt.executeQuery(query2);
-        }
-        if (con != null) {
-            con.close();
+    public void deleteRegisteredUser() {
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        if (user != null) {
+            ecoNewsUsersService.deleteById(user.getId());
         }
     }
 }

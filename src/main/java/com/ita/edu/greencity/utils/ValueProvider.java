@@ -62,6 +62,30 @@ public class ValueProvider {
         return properties.getProperty("dbPassword");
     }
 
+    public String getJDBCGreenCityUsername() {
+        return properties.getProperty("JDBCGreenCityUsername");
+    }
+
+    public String getJDBCGreenCityPassword() {
+        return properties.getProperty("JDBCGreenCityPassword");
+    }
+
+    public String getJDBCGreenCityURL() {
+        return properties.getProperty("JDBCGreenCityURL");
+    }
+
+    public String getJDBCGreenCityUbsUsername() {
+        return properties.getProperty("JDBCGreenCityUbsUsername");
+    }
+
+    public String getJDBCGreenCityUbsPassword() {
+        return properties.getProperty("JDBCGreenCityUbsPassword");
+    }
+
+    public String getJDBCGreenCityUbsURL() {
+        return properties.getProperty("JDBCGreenCityUbsURL");
+    }
+
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
