@@ -1,9 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 
-import com.ita.edu.greencity.tests.ui.pages.testrunners.LocalTestRunner;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.ui.pages.header.ChangeLanguageAlert;
-import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
@@ -50,10 +47,10 @@ public class OrderPageConfirmationTest extends TestRun {
         String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
-                .acceptAlert()
                 .cardNumberInput(provider.getCardNumber())
                 .expiryDateInput(provider.getExpiryDate())
-                .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
+                .CVV2Input(provider.getCVV2())
+                .emailInput(provider.getEmail()).clickOnPayButton()
                 .clickOnTheLink().clickOnContinueButton()
                 .getTextFromSuccessfulOrderMessage();
         Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
@@ -73,7 +70,6 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnAddAddressButton()
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
-                .acceptAlert()
                 .cardNumberInput(provider.getCardNumber())
                 .expiryDateInput(provider.getExpiryDate())
                 .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
@@ -92,17 +88,21 @@ public class OrderPageConfirmationTest extends TestRun {
         String totalAmountOfSafeWaste = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(2, 5)
                 .split("\s")).toList().get(0);
-        String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation.chooseOneElementFromYourOrderTable(3, 5)
+        String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation
+                .chooseOneElementFromYourOrderTable(3, 5)
                 .split("\s")).toList().get(0);
 
-        double sumOfAllWasteTypesTotals = orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste120l)
+        double sumOfAllWasteTypesTotals = orderPageConfirmation
+                .transformToDoubleValue(totalAmountOfTextileWaste120l)
                 + orderPageConfirmation.transformToDoubleValue(totalAmountOfSafeWaste)
                 + orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste20l);
 
-        double expectedOrderAmount = orderPageConfirmation.transformToDoubleValue(Arrays.stream(orderPageConfirmation
+        double expectedOrderAmount = orderPageConfirmation
+                .transformToDoubleValue(Arrays.stream(orderPageConfirmation
                 .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
 
-        double expectedAmountDue = orderPageConfirmation.transformToDoubleValue(Arrays.stream(orderPageConfirmation
+        double expectedAmountDue = orderPageConfirmation
+                .transformToDoubleValue(Arrays.stream(orderPageConfirmation
                 .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
 
         SoftAssert softAssert = new SoftAssert();
@@ -120,23 +120,5 @@ public class OrderPageConfirmationTest extends TestRun {
         String numberOfOrder = actualMessage.substring(28, 32);
         String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
-    }
-
-    @Test
-    public void localizationRelevanceOfCurrencyTest() {
-        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver).clickOnNextButton()
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
-        String expectedResultBeforeLanguageChange = "UAH";
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange);
-        HeaderComponent header = new HeaderComponent(driver);
-        header.clickLanguageSwitcher().languageChoose("UA");
-        ChangeLanguageAlert changeLanguageAlert = new ChangeLanguageAlert(driver);
-        changeLanguageAlert.dismissAlert();
-        String actualResultAfterLanguageChange = Arrays.stream(new OrderPageConfirmation(driver)
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
-        String expectedResultAfterLanguageChange = "грн";
-        softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange);
-        softAssert.assertAll();
     }
 }
