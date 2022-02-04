@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders.payment;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
+import com.ita.edu.greencity.ui.pages.header.orders.SelectRegion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

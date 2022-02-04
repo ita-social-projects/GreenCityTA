@@ -2,7 +2,6 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
-import com.ita.edu.greencity.utils.ValueProvider;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;

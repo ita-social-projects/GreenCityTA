@@ -2,7 +2,7 @@ package com.ita.edu.greencity.tests.ui.pages.ubs_homepage;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
+import com.ita.edu.greencity.ui.pages.header.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import org.testng.annotations.AfterClass;

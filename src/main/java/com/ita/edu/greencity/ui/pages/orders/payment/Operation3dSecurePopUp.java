@@ -6,9 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.util.Iterator;
-import java.util.Set;
-
 public class Operation3dSecurePopUp extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//button[@type = 'submit']")

@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_user.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import com.ita.edu.greencity.ui.pages.header.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
