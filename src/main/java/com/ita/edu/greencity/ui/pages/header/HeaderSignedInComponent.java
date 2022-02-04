@@ -27,6 +27,7 @@ public class HeaderSignedInComponent extends HeaderComponent {
     }
 
     public HeaderSignedInComponent clickUserMenu() {
+        this.sleep(3000);
         userMenu.click();
         return this;
     }
@@ -42,6 +43,7 @@ public class HeaderSignedInComponent extends HeaderComponent {
     }
 
     public UbsUserOrders clickUbsUser() {
+        this.sleep(3000);
         ubsUser.click();
         return new UbsUserOrders(driver);
     }
