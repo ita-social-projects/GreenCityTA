@@ -4,6 +4,7 @@ import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,6 +49,7 @@ public class SignInComponent extends BasePage {
         return new UbsHomePage(driver);
     }
 
+    @Step("email input set value {emailInput}")
     public SignInComponent inputEmail(String emailInput) {
         email.clear();
         email.sendKeys(emailInput, Keys.ENTER);
@@ -92,6 +94,7 @@ public class SignInComponent extends BasePage {
         return new SignUpComponent(driver);
     }
 
+    @Step("get text of error message")
     public String getErrorEmailMessage() {
         return errorEmail.getText();
     }
@@ -104,6 +107,7 @@ public class SignInComponent extends BasePage {
         return title.getText();
     }
 
+    @Step("click on title to unfocus")
     public SignInComponent unfocus() {
         title.click();
 
