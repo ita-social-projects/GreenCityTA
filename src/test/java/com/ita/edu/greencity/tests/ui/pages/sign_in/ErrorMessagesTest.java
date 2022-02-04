@@ -3,6 +3,8 @@ package com.ita.edu.greencity.tests.ui.pages.sign_in;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +13,7 @@ import org.testng.annotations.Test;
 
 public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
 
-    @BeforeMethod
+    @BeforeMethod(description = "go to sign in page")
     public void beforeMethod() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn();
@@ -46,6 +48,8 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
         };
     }
 
+    @Description("test error messages below email field")
+    @Issue("28")
     @Test(dataProvider = "emailDataProvider")
     public void emailErrorTest(String email, String expected) {
         SignInComponent signin = new SignInComponent(driver);
