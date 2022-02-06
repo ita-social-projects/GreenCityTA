@@ -3,9 +3,14 @@ package com.ita.edu.greencity.tests.ui.pages.user_data;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Link;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import java.io.IOException;
+
 
 public class ChangePasswordTest extends TestRun {
     @BeforeMethod
@@ -19,7 +24,7 @@ public class ChangePasswordTest extends TestRun {
     }
 
     @DataProvider(name = "dataProvider")
-    private Object[][] dataProvider() {
+    private Object[][] dataProviderToChangeCurrentPassword() {
         return new Object[][]{
                 { "0000000700Qw1/"},
                 {".mypasswoRd1"},
@@ -34,7 +39,11 @@ public class ChangePasswordTest extends TestRun {
         };
     }
 
-    @Test(dataProvider = "dataProvider")
+    @Test(dataProvider = "dataProviderToChangeCurrentPassword")
+    @Description("test to change the current account password")
+    @Issue("91")
+    @Severity(SeverityLevel.CRITICAL)
+    @Link("https://jira.softserve.academy/browse/GC-2450")
     public void changeCurrentPassword( String newPassword) {
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         header.clickUserMenu()
@@ -58,8 +67,10 @@ public class ChangePasswordTest extends TestRun {
         Assert.assertEquals(actual, expectedTitle);
         provider.setPassword(newPassword);
     }
-   
     @Test
+    @Description("check the error message when the new password is the same as the old one")
+    @Issue("92")
+    @Severity(SeverityLevel.TRIVIAL)
     public void verifyMessageWhenChangingPasswordToTheSame(){
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         String actual = header.clickUserMenu()
@@ -74,8 +85,10 @@ public class ChangePasswordTest extends TestRun {
         String expectedTitle = "Enter the new password!";
         Assert.assertEquals(actual, expectedTitle);
     }
-   
     @Test(dataProvider = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
+    @Description("check the error message when the data in 'the new password' and 'repeat the password' fields are different")
+    @Issue("93")
+    @Severity(SeverityLevel.TRIVIAL)
     public void verifyMessageWhenPasswordsNotMatch(String newPassword,String repeatPassword){
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         String actual = header.clickUserMenu()
