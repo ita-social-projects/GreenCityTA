@@ -4,12 +4,18 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import jdk.jfr.Description;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.stream.Collectors;
+
 public class SelectRegionAfterSignInTest extends TestRun {
-    public final static String region = "Kyiv";
+    public final static String defaultRegion = "Kyiv";
+    public final static String secondRegion = "Kyiv region";
+
+
 
     @Description("Verify equality of regions from pop-up and OrderDetailsPage")
     @Test
@@ -19,9 +25,9 @@ public class SelectRegionAfterSignInTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByValue(region)
+                .chooseRegionByValue(defaultRegion)
                 .clickOnContinueButton().getLocationFromTitle().substring(11).trim();
-        Assert.assertEquals(actual, region);
+        Assert.assertEquals(actual, defaultRegion);
     }
 
     @Description("Verify correct redirection from pop-up to OderDetails page after pressing Continue button")
@@ -75,8 +81,8 @@ public class SelectRegionAfterSignInTest extends TestRun {
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn();
-        softAssert.assertEquals(selectRegion.getListOfRegions().get(0).getText(), "Kyiv", "Incorrect default value of dropdown");
-        softAssert.assertEquals(selectRegion.getListOfRegions().get(1).getText(), "Kyiv region", "Dropdown do not have 'Kyiv region' option");
+        softAssert.assertEquals(selectRegion.getListOfRegions().get(0).getText(), defaultRegion, "Incorrect default value of dropdown");
+        softAssert.assertTrue(selectRegion.getListOfRegions().stream().map(WebElement::getText).collect(Collectors.toList()).contains(secondRegion), "Dropdown do not have 'Kyiv region' option");
         softAssert.assertAll();
     }
 
