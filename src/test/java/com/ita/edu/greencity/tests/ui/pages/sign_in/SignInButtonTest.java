@@ -3,6 +3,7 @@ package com.ita.edu.greencity.tests.ui.pages.sign_in;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,18 +11,22 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class SignInButtonTest extends TestRunnerInitDriverWithBeforeClass {
+
+    @Description("go to 'sign in' form")
     @BeforeMethod
     public void beforeMethod() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn();
     }
 
+    @Description("close 'sign in' form")
     @AfterMethod
     public void afterMethod() {
         SignInComponent signin = new SignInComponent(driver);
         signin.clickCloseBtn();
     }
 
+    @Description("test whether 'show-hide password' button works properly")
     @Test
     public void showHidePasswordTest() {
         SignInComponent signin = new SignInComponent(driver);
@@ -46,6 +51,7 @@ public class SignInButtonTest extends TestRunnerInitDriverWithBeforeClass {
         softAssert.assertAll();
     }
 
+    @Description("test whether 'sign up' link works properly")
     @Test
     public void signUpLinkTest() {
         SignInComponent signin = new SignInComponent(driver);
@@ -59,6 +65,7 @@ public class SignInButtonTest extends TestRunnerInitDriverWithBeforeClass {
         Assert.assertEquals(actual, expected);
     }
 
+    @Description("test whether 'forgot password' link works properly")
     @Test
     public void forgotPasswordLinkTest() {
         SignInComponent signin = new SignInComponent(driver);
