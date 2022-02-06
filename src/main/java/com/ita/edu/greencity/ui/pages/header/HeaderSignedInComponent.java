@@ -3,6 +3,7 @@ package com.ita.edu.greencity.ui.pages.header;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import com.ita.edu.greencity.ui.pages.user_data.EditUserData;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,29 +27,34 @@ public class HeaderSignedInComponent extends HeaderComponent {
         super(driver);
     }
 
+    @Step("Click on User menu button")
     public HeaderSignedInComponent clickUserMenu() {
         this.sleep(3000);
         userMenu.click();
         return this;
     }
 
+    @Step("Click on Settings button")
     public EditUserData clickSettings() {
         settings.click();
         return new EditUserData(driver);
     }
 
+    @Step("Click on Sign out button")
     public UbsHomePage clickSignOut() {
         signOut.click();
         return new UbsHomePage(driver);
     }
 
+    @Step("Click on UBS-user button")
     public UbsUserOrders clickUbsUser() {
         this.sleep(3000);
         ubsUser.click();
         return new UbsUserOrders(driver);
     }
 
-    public String getUserName(){
+    @Step("Get user name")
+    public String getUserName() {
         return userMenu.getText();
     }
 }
