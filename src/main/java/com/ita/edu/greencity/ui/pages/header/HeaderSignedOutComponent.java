@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.header;
 
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,11 +20,13 @@ public class HeaderSignedOutComponent extends HeaderComponent {
         super(driver);
     }
 
+    @Step("Click on Sign in button")
     public SignInComponent clickSignIn() {
         signIn.click();
         return new SignInComponent(driver);
     }
 
+    @Step("Click on Sign up button")
     public SignUpComponent clickSignUp() {
         signUp.click();
         return new SignUpComponent(driver);
