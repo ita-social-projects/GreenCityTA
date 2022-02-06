@@ -17,13 +17,13 @@ public class TestRun {
     protected WebDriver driver;
     protected static ValueProvider provider;
 
-    @BeforeSuite
+    @BeforeSuite(description = "Make chromedriver setup")
     public void beforeSuite() throws IOException {
         WebDriverManager.chromedriver().setup();
         provider = new ValueProvider();
     }
 
-    @BeforeMethod
+    @BeforeMethod(description = "Configure chromedriver and go to UbsHomePageURL")
     public void beforeMethod(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -34,7 +34,7 @@ public class TestRun {
         driver.navigate().refresh();
     }
 
-    @AfterMethod
+    @AfterMethod(description = "Quite chromedriver")
     public void afterMethod(){
         if (driver != null) {
             driver.quit();
