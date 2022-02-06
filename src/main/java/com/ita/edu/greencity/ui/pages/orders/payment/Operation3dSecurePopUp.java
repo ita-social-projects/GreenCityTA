@@ -1,13 +1,11 @@
 package com.ita.edu.greencity.ui.pages.orders.payment;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
-import java.util.Iterator;
-import java.util.Set;
 
 public class Operation3dSecurePopUp extends BasePage {
 
@@ -22,6 +20,7 @@ public class Operation3dSecurePopUp extends BasePage {
         super(driver);
     }
 
+    @Step("Follow the link")
     public Operation3dSecurePopUp clickOnTheLink() {
         linkForRedirection.click();
         sleep(5000);
@@ -29,15 +28,16 @@ public class Operation3dSecurePopUp extends BasePage {
         return this;
     }
 
+    @Step("Press continue button")
     public SuccessfulOrderPage clickOnContinueButton() {
         continueButton.click();
         sleep(5000);
         return new SuccessfulOrderPage(driver);
     }
 
+    @Step("Read the page title")
     public String getTextFromPageTitle() {
         return pageTitle.getText();
     }
-
 
 }

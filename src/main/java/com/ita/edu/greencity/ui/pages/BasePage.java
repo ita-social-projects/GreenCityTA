@@ -39,6 +39,10 @@ public class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+    public double transformToDoubleValue(String str) {
+        return Double.parseDouble(str);
+    }
+
     public void switchToNewTab() {
         ArrayList<String> tabs2 = new ArrayList<>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(0));
