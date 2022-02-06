@@ -36,9 +36,10 @@ public class SelectRegion extends BasePage {
         this.sleep(7000);
         return title.getText();
     }
-    @Step("get default dropdown value from the  pop-up after logging in")
-    public String getDefaultDropdownValue() {
-        return listOfRegions.get(0).getText();
+
+    @Step("get dropdown options list from pop-up after logging in")
+    public List<WebElement> getListOfRegions() {
+        return listOfRegions;
     }
 
     @Step("get bottom text from the  pop-up after logging in")
