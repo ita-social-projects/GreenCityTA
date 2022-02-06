@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -35,6 +36,10 @@ public class SelectRegion extends BasePage {
         this.sleep(7000);
         return title.getText();
     }
+    @Step("get default dropdown value from the  pop-up after logging in")
+    public String getDefaultDropdownValue() {
+        return listOfRegions.get(0).getText();
+    }
 
     @Step("get bottom text from the  pop-up after logging in")
     public String getBottomText() {
@@ -52,13 +57,15 @@ public class SelectRegion extends BasePage {
     }
 
     @Step("click on Close button at pop-up after logging in")
-    public void clickOnCloseButton() {
+    public UbsHomePage clickOnCloseButton() {
         closeButton.click();
+        return new UbsHomePage(driver);
     }
 
     @Step("click on Back button at pop-up after logging in")
-    public void clickOnBackButton() {
+    public UbsHomePage clickOnBackButton() {
         backButton.click();
+        return new UbsHomePage(driver);
     }
 
     @Step("click on Continue button at pop-up after logging in")

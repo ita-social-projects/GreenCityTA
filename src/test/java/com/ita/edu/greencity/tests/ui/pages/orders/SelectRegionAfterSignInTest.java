@@ -35,4 +35,42 @@ public class SelectRegionAfterSignInTest extends TestRun {
         Assert.assertEquals(actual, expected);
     }
 
+    @Test
+    public void checkRedirectionAfterBackButton() {
+        String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";
+        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
+        header.clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn()
+                .clickOnBackButton();
+        String actual = driver.getCurrentUrl();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void checkRedirectionAfterCloseButton() {
+        String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";
+        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
+        header.clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn()
+                .clickOnCloseButton();
+        String actual = driver.getCurrentUrl();
+        Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void checkCorrectDefaultDropdownValue() {
+        String expected = "Kyiv";
+        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
+        String actual = header.clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn()
+                .getDefaultDropdownValue();
+        Assert.assertEquals(actual, expected);
+    }
+
 }
