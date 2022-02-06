@@ -107,7 +107,7 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
-    @Step("Input confirmation password {password} into confirmation password field in sign-up pop up")
+    @Step("Input confirmation password {confirmPassword} into confirmation password field in sign-up pop up")
     public SignUpComponent inputConfirmPasswordIntoField(String confirmPassword) {
         confirmPasswordField.sendKeys(confirmPassword);
         return this;
