@@ -3,6 +3,10 @@ package com.ita.edu.greencity.tests.ui.pages.sign_up;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.apache.commons.lang.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,6 +15,9 @@ import org.testng.asserts.SoftAssert;
 public class SignUpErrorMessageTest extends TestRun {
 
     @Test
+    @Description("Check alerts near fields after sign-up with blank fields")
+    @Issue("29")
+    @Severity(SeverityLevel.NORMAL)
     public void signUpWithBlankFields() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();
@@ -33,6 +40,9 @@ public class SignUpErrorMessageTest extends TestRun {
     }
 
     @Test
+    @Description("Check alert near confirmation password field after sign-up with different values in password and confirmation password fields")
+    @Issue("29")
+    @Severity(SeverityLevel.NORMAL)
     public void signUpWithDifferentPasswords() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();
@@ -47,6 +57,9 @@ public class SignUpErrorMessageTest extends TestRun {
     }
 
     @Test
+    @Description("Check alerts near fields after sign-up with invalid values in all fields")
+    @Issue("29")
+    @Severity(SeverityLevel.CRITICAL)
     public void signUpWithInvalidFields() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();
@@ -68,6 +81,9 @@ public class SignUpErrorMessageTest extends TestRun {
     }
 
     @Test
+    @Description("Check alert near field after sign-up with too short password")
+    @Issue("29")
+    @Severity(SeverityLevel.NORMAL)
     public void signUpWithTooShortPassword() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignUp();

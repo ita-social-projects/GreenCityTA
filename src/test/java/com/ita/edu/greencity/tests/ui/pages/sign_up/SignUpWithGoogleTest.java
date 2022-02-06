@@ -9,6 +9,10 @@ import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +24,7 @@ public class SignUpWithGoogleTest extends TestRun {
     EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
     private final String userEmail = "registertesttest88@gmail.com";
 
-    @BeforeTest
+    @BeforeTest(description = "Delete user by email if it exists in database before registration")
     public void checkRegisteredUser() {
         EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
         if (user != null) {
@@ -29,6 +33,9 @@ public class SignUpWithGoogleTest extends TestRun {
     }
 
     @Test
+    @Description("Check correct registration of user with Google")
+    @Issue("29")
+    @Severity(SeverityLevel.CRITICAL)
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";
@@ -43,7 +50,7 @@ public class SignUpWithGoogleTest extends TestRun {
         Assert.assertEquals(actualUserName,"Tetsregistr Tetsregistr");
     }
 
-    @AfterTest
+    @AfterTest(description = "Delete user by email in database after registration")
     public void deleteRegisteredUser() {
         EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
         if (user != null) {
