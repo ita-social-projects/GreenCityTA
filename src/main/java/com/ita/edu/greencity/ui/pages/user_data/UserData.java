@@ -19,14 +19,26 @@ public class UserData extends BasePage {
     @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[1]")
     private WebElement name;
 
+    @FindBy(how = How.XPATH, using = "(.//*[contains(@class, 'personal inline')]/div/label)[1]")
+    private WebElement nameLabelText;
+
     @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[2]")
     private WebElement surname;
+
+    @FindBy(how = How.XPATH, using = "(.//*[contains(@class, 'personal inline')]/div/label)[2]")
+    private WebElement surnameLabelText;
 
     @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[3]")
     private WebElement email;
 
+    @FindBy(how = How.XPATH, using = "(.//*[contains(@class, 'contacts inline')]/div/label)[1]")
+    private WebElement emailLabelText;
+
     @FindBy(how = How.XPATH, using = "(//p[@class = 'ng-star-inserted'])[4]")
     private WebElement phone;
+
+    @FindBy(how = How.XPATH, using = "(.//*[contains(@class, 'contacts inline')]/div/label)[2]")
+    private WebElement phoneLabelText;
 
     @FindBy(how = How.CSS, using = "button.btn.btn-outline-success.open")
     private WebElement changePassword;
@@ -64,6 +76,36 @@ public class UserData extends BasePage {
     public String getTextFromPhoneField(){
         return phone.getText();
     }
+    @Step("get data from 'Name' label")
+    public String getTextFromNameLabel(){
+        return nameLabelText.getText();
+    }
+    @Step("get data from 'Surname' label")
+    public String getTextFromSurnameLabel(){
+        return surnameLabelText.getText();
+    }
+    @Step("get data from 'Email' label")
+    public String getTextFromEmailLabel(){
+        return emailLabelText.getText();
+    }
+    @Step("get data from 'Phone' label")
+    public String getTextFromPhoneLabel(){
+        return phoneLabelText.getText();
+    }
+    @Step("get data from 'Edit data' button")
+    public String getTextFromEditDataButton(){
+        return editData.getText();
+    }
+    @Step("get data from 'Change password' button")
+    public String getTextFromChangePasswordButton(){
+        return changePassword.getText();
+    }
+    @Step("get data from 'Delete profile' button")
+    public String getTextFromDeleteProfileButton(){
+        return deleteProfile.getText();
+    }
+
+
     @Step("click on 'Change password' button")
     public ChangePassword clickOnChangePasswordButton(){
         this.sleep(10000);
