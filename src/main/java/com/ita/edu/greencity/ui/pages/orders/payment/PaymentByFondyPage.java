@@ -67,28 +67,28 @@ public class PaymentByFondyPage extends BasePage {
         return this;
     }
 
-    @Step("Enter card number to make a payment")
-    public PaymentByFondyPage cardNumberInput(String value) {
+    @Step("Enter card number to make a payment | value = {cardNumber}")
+    public PaymentByFondyPage cardNumberInput(String cardNumberValue) {
         sleep(5000);
-        cardNumber.sendKeys(value);
+        cardNumber.sendKeys(cardNumberValue);
         return this;
     }
 
-    @Step("Enter card expiry date to make a payment")
-    public PaymentByFondyPage expiryDateInput(String value) {
-        expiryDate.sendKeys(value);
+    @Step("Enter card expiry date to make a payment | value = {expiryDateValue}")
+    public PaymentByFondyPage expiryDateInput(String expiryDateValue) {
+        expiryDate.sendKeys(expiryDateValue);
         return this;
     }
 
-    @Step("Enter card CVV2 value to make a payment")
-    public PaymentByFondyPage CVV2Input(String value) {
-        CVV2.sendKeys(value);
+    @Step("Enter card CVV2 value to make a payment | value = {CVV2Value}")
+    public PaymentByFondyPage CVV2Input(String CVV2Value) {
+        CVV2.sendKeys(CVV2Value);
         return this;
     }
 
-    @Step("Enter user's email address")
-    public PaymentByFondyPage emailInput(String value) {
-        emailField.sendKeys(value);
+    @Step("Enter user's email address | value = {email}")
+    public PaymentByFondyPage emailInput(String email) {
+        emailField.sendKeys(email);
         return this;
     }
 
