@@ -3,6 +3,7 @@ package com.ita.edu.greencity.ui.pages.sign_up;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -61,62 +62,75 @@ public class SignUpComponent extends BasePage {
         super(driver);
     }
 
+    @Step("Click on cross to close sign-up pop up")
     public UbsHomePage clickOnExitButton() {
         exitButton.click();
         return new UbsHomePage(driver);
     }
 
+    @Step("Input email {email} into email field in sign-up pop up")
     public SignUpComponent inputEmailIntoField(String email) {
         emailField.sendKeys(email);
         return this;
     }
 
+    @Step("Check text of alert near email field in sign-up pop up")
     public String getTextOfBlankEmailFieldAlert() {
         return blankEmailFieldAlert.getText();
     }
 
+    @Step("Input user name {userName} into user name field in sign-up pop up")
     public SignUpComponent inputUserNameIntoField(String userName) {
         userNameField.sendKeys(userName);
         return this;
     }
 
+    @Step("Check text of alert near user name field in sign-up pop up")
     public String getTextOfBlankUserNameFieldAlert() {
         return blankUserNameFieldAlert.getText();
     }
 
+    @Step("Input password {password} into password field in sign-up pop up")
     public SignUpComponent inputPasswordIntoField(String password) {
         passwordField.sendKeys(password);
         return this;
     }
 
+    @Step("Check text of alert near password field in sign-up pop up")
     public String getTextOfBlankPasswordFieldAlert() {
         return blankPasswordFieldAlert.getText();
     }
 
+    @Step("Click on showHidePasswordButton to show or hide password")
     public SignUpComponent clickOnShowHidePasswordButton() {
         showHidePasswordButton.click();
         return this;
     }
 
-    public SignUpComponent inputConfirmPasswordIntoField(String password) {
-        confirmPasswordField.sendKeys(password);
+    @Step("Input confirmation password {password} into confirmation password field in sign-up pop up")
+    public SignUpComponent inputConfirmPasswordIntoField(String confirmPassword) {
+        confirmPasswordField.sendKeys(confirmPassword);
         return this;
     }
 
+    @Step("Check text of alert near confirmation password field in sign-up pop up")
     public String getTextOfBlankConfirmPasswordFieldAlert() {
         return blankConfirmPasswordFieldAlert.getText();
     }
 
+    @Step("Click on showHideConfirmPasswordButton to show or hide confirmation password")
     public SignUpComponent clickOnShowHideConfirmPasswordButton() {
         showHideConfirmPasswordButton.click();
         return this;
     }
 
+    @Step("Click on sign-up button")
     public SignUpComponent clickOnSignUpButton() {
         signUpButton.click();
         return this;
     }
 
+    @Step("Click on sign-up with Google button")
     public SignUpComponent clickOnSignUpWithGoogleButton() {
         signUpWithGoogleButton.click();
         sleep(5000);
@@ -133,19 +147,23 @@ public class SignUpComponent extends BasePage {
         return title.getText();
     }
 
+    @Step("Check the disability of sign-up button in sign-up pop up")
     public boolean checkDisabledSignUpButton() {
         return (signUpButton.getAttribute("disabled")!= null);
     }
 
+    @Step("Check the alert which appears after successful registration of user")
     public String getTextOfSuccessRegistrationAlert() {
         sleep(5000);
         return successRegistrationAlert.getText();
     }
 
+    @Step("Check the visibility of password in field")
     public boolean checkPasswordIsVisible() {
         return (passwordField.getAttribute("type").equals("text"));
     }
 
+    @Step("Check the visibility of confirmation password in field")
     public boolean checkConfirmPasswordIsVisible() {
         return (confirmPasswordField.getAttribute("type").equals("text"));
     }
