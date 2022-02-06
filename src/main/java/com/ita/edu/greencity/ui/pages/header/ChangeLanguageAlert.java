@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.ui.pages.header;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.header.orders.OrderDetailsPage;
+import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

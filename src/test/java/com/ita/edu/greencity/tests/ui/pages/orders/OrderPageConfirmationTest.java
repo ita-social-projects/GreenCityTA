@@ -1,9 +1,12 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
+import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,13 +22,8 @@ public class OrderPageConfirmationTest extends TestRun {
     final String userFirstName = "John";
     final String userLastName = "Doe";
     final String userPhoneNumber = "+380 (63) 114 46 78";
-    final int indexOfCity = 0;
-    final int indexOfDistrict = 4;
-    final int indexOfStreet = 0;
-    final String streetToAdd = "Sevastopol's'ka Square";
-    final String houseNumberToAdd = "19";
 
-    @BeforeMethod
+    @BeforeMethod(description = "Navigate to Order confirmation page")
     public void beforeMethod() {
         super.beforeMethod();
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
@@ -41,55 +39,19 @@ public class OrderPageConfirmationTest extends TestRun {
                 .enterPhoneNumber(userPhoneNumber);
     }
 
-    @Test
-    public void paymentWIthExistingAddressTest() {
-        String expectedMessage = "Your order is accepted";
-        String actualMessage = new OrderPagePersonalData(driver)
-                .clickOnNextButton()
-                .choosePaymentMethod().clickOnOrderButton()
-                .cardNumberInput(provider.getCardNumber())
-                .expiryDateInput(provider.getExpiryDate())
-                .CVV2Input(provider.getCVV2())
-                .emailInput(provider.getEmail()).clickOnPayButton()
-                .clickOnTheLink().clickOnContinueButton()
-                .getTextFromSuccessfulOrderMessage();
-        Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
-    }
-
-    @Test
-    public void paymentWIthAddingNewAddressTest() {
-        String expectedMessage = "Your order is accepted";
-        String actualMessage = new OrderPagePersonalData(driver)
-                .clickOnAddAddressButton()
-                .clickOnCityField()
-                .chooseCity(indexOfCity)
-                .chooseDistrict(indexOfDistrict)
-                .enterStreet(streetToAdd)
-                .chooseStreet(indexOfStreet)
-                .enterHouseNumber(houseNumberToAdd)
-                .clickOnAddAddressButton()
-                .clickOnNextButton()
-                .choosePaymentMethod().clickOnOrderButton()
-                .cardNumberInput(provider.getCardNumber())
-                .expiryDateInput(provider.getExpiryDate())
-                .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
-                .clickOnTheLink().clickOnContinueButton()
-                .getTextFromSuccessfulOrderMessage();
-        Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
-    }
-
+    @Description("Verify whether the result of addition all types of wastes is the same as one calculated in UBS")
     @Test
     public void theTotalSumOfOrderIdentityTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
 
         String totalAmountOfTextileWaste120l = Arrays.stream(orderPageConfirmation
-                .chooseOneElementFromYourOrderTable(1, 5)
+                .chooseOneElementFromYourOrderTable(4, 5)
                 .split("\s")).toList().get(0);
         String totalAmountOfSafeWaste = Arrays.stream(orderPageConfirmation
-                .chooseOneElementFromYourOrderTable(2, 5)
+                .chooseOneElementFromYourOrderTable(5, 5)
                 .split("\s")).toList().get(0);
         String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation
-                .chooseOneElementFromYourOrderTable(3, 5)
+                .chooseOneElementFromYourOrderTable(6, 5)
                 .split("\s")).toList().get(0);
 
         double sumOfAllWasteTypesTotals = orderPageConfirmation
@@ -99,11 +61,11 @@ public class OrderPageConfirmationTest extends TestRun {
 
         double expectedOrderAmount = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
 
         double expectedAmountDue = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(sumOfAllWasteTypesTotals, expectedOrderAmount, "Order amount is not the same");
@@ -111,6 +73,7 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertAll();
     }
 
+    @Description("Verify that order saving functionality")
     @Test
     public void verifyOrderSavingTest() {
         String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
@@ -121,4 +84,34 @@ public class OrderPageConfirmationTest extends TestRun {
         String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
+
+    @Description("Verify order deleting functionality")
+    @Test
+    public void verifyOrderDeletingTest() {
+        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+                .clickOnCancelButton()
+                .clickOnDeleteButton()
+                .getHomePageTitle();
+        String expectedMessage = "It's even easier than before!";
+        Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
+    }
+
+    @Description("Verify whether after language changing the currency of order is changed")
+    @Test
+    public void localizationRelevanceOfCurrencyTest() {
+        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver).clickOnNextButton()
+                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+        String expectedResultBeforeLanguageChange = "UAH";
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange);
+        new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
+        String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
+                .clickOnNextButton().clickOnNextButton()
+                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+        String expectedResultAfterLanguageChange = "грн";
+        softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange);
+        softAssert.assertAll();
+    }
+
+
 }

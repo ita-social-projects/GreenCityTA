@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,16 +21,19 @@ public class SuccessfulSavingPage extends BasePage {
         super(driver);
     }
 
+    @Step("Read the message about a successful order saving")
     public String getTextFromSuccessfulSavingAlert() {
         sleep(4000);
         return successfulSavingAlert.getText();
     }
 
+    @Step("Navigate to personal account page")
     public UbsUserOrders clickToPersonalAccountButton() {
         toPersonalAccountButton.click();
         return new UbsUserOrders(driver);
     }
 
+    @Step("Make other order")
     public SelectRegion clickOnMakeOtherOrderButton() {
         makeOtherOrderButton.click();
         return new SelectRegion(driver);
