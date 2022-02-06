@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.user_data;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,29 +41,36 @@ public class UserData extends BasePage {
         super(driver);
     }
 
+    @Step("click on 'Edit data' button")
     public EditUserData clickOnEditDataButton()  {
         this.sleep(3000);
         editData.click();
         return  new EditUserData(driver);
 
     }
+    @Step("get data from 'Name' field")
     public String getTextFromNameField(){
         return name.getText();
     }
+    @Step("get data from 'Surname' field")
     public String getTextFromSurnameField(){
         return surname.getText();
     }
+    @Step("get data from 'Email' field")
     public String getTextFromEmailField(){
         return email.getText();
     }
+    @Step("get data from 'Phone' field")
     public String getTextFromPhoneField(){
         return phone.getText();
     }
+    @Step("click on 'Change password' button")
     public ChangePassword clickOnChangePasswordButton(){
         this.sleep(10000);
         changePassword.click();
         return new ChangePassword(driver);
     }
+    @Step("click on 'Delete profile' button")
     public DeleteProfile clickOnDeleteProfileButton(){
         deleteProfile.click();
         return new DeleteProfile(driver);
@@ -74,7 +82,7 @@ public class UserData extends BasePage {
         }
         return addressContainerList;
     }
-
+    @Step("choose number of address, which you want to get data")
     public DisplayAddressContainer chooseAddressShow(String number) {
         this.sleep(3000);
         return getAddress()

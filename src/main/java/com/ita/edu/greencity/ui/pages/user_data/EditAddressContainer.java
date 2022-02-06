@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.user_data;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,54 +42,54 @@ public class EditAddressContainer {
     @FindBy(how = How.XPATH, using = "(//*[contains(@type, 'submit')])[2]")
     private WebElement saveChanges;
 
-    public EditAddressContainer setCityAddress(final String newData) {
+    @Step("set value {cityInput} in 'city' field on 'Edit User Data' page")
+    public EditAddressContainer setCityAddress(final String cityInput) {
         city.clear();
-        city.sendKeys(newData);
+        city.sendKeys(cityInput);
         return this;
     }
-
-    public EditAddressContainer setRegionAddress(final String newData) {
+    @Step("set value {regionInput} in 'region' field on 'Edit User Data' page")
+    public EditAddressContainer setRegionAddress(final String regionInput) {
         region.clear();
-        region.sendKeys(newData);
+        region.sendKeys(regionInput);
         return this;
     }
-
-    public EditAddressContainer setDistrictAddress(final String newData) {
+    @Step("set value {districtInput} in 'district' field on 'Edit User Data' page")
+    public EditAddressContainer setDistrictAddress(final String districtInput) {
         district.clear();
-        district.sendKeys(newData);
+        district.sendKeys(districtInput);
         return this;
     }
-
-    public EditAddressContainer setStreetAddress(final String newData) {
+    @Step("set value {streetInput} in 'street' field on 'Edit User Data' page")
+    public EditAddressContainer setStreetAddress(final String streetInput) {
         street.clear();
-        street.sendKeys(newData);
+        street.sendKeys(streetInput);
         return this;
     }
-
-    public EditAddressContainer setHouseNumberAddress(final String newData) {
+    @Step("set value {houseInput} in 'house' field on 'Edit User Data' page")
+    public EditAddressContainer setHouseNumberAddress(final String houseInput) {
         houseNumber.clear();
-        houseNumber.sendKeys(newData);
+        houseNumber.sendKeys(houseInput);
         return this;
     }
-
-    public EditAddressContainer setHouseCorpusAddress(final String newData) {
+    @Step("set value {corpusInput} in 'corpus' field on 'Edit User Data' page")
+    public EditAddressContainer setHouseCorpusAddress(final String corpusInput) {
         houseCorpus.clear();
-        houseCorpus.sendKeys(newData);
+        houseCorpus.sendKeys(corpusInput);
         return this;
     }
-
-
-    public EditAddressContainer setEntranceNumberAddress(final String newData) {
+    @Step("set value {entranceInput} in 'entrance' field on 'Edit User Data' page")
+    public EditAddressContainer setEntranceNumberAddress(final String entranceInput) {
         entranceNumber.clear();
-        entranceNumber.sendKeys(newData);
+        entranceNumber.sendKeys(entranceInput);
         return this;
     }
-
+    @Step("click on 'Save changes' button on 'Edit User Data' page")
     public UserData clickOnSaveChangesButton(){
         saveChanges.click();
         return new UserData(driver);
     }
-
+    @Step("get address number on 'Edit User Data' page")
     public String getAddressNumber() {
         return addressNumber.getText();
     }
