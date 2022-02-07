@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -100,10 +101,12 @@ public class OrderDetailsPage extends BasePage {
 
         return this;
     }
-
+    @Step("Region dropdown chose  {value}")
     public OrderDetailsPage chooseRegionByValue(String value) {
         clickOnChangeRegionButton();
+        sleep(1000);
         clickOnchangeRegionDropdown();
+        sleep(1000);
         for (WebElement option : regionButtons) {
             if (option.getText().equals(value.trim())) {
                 option.click();
@@ -117,7 +120,7 @@ public class OrderDetailsPage extends BasePage {
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
-
+    @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lArrowsInput(int value) {
 
         for (int x = 0; x < value; x++) {
@@ -125,14 +128,14 @@ public class OrderDetailsPage extends BasePage {
         }
         return this;
     }
-
+    @Step("Number of 'Safe waste' service input value {value}")
     public OrderDetailsPage EnterNumberOfSafeWasteInput(String value) {
         sleep(2000);
         NumberOfSafeWasteInput.sendKeys(value, Keys.ENTER);
         return this;
     }
 
-
+    @Step("Number of 'Textile waste 20l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste20lInput(String value) {
         NumberOfTextileWaste20lInput.sendKeys(value, Keys.ENTER);
         return this;
@@ -154,12 +157,12 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public String getOrderAmount() {
-        String price = totalPrice.get(0).getText();
+        String price = totalAmount.get(0).getText();
         return price;
     }
 
     public String getAmountDue() {
-        String price = totalPrice.get(1).getText();
+        String price = totalAmount.get(1).getText();
         return price;
     }
 
@@ -172,7 +175,7 @@ public class OrderDetailsPage extends BasePage {
         String text = minimumOrderContainsAlert.getText();
         return text;
     }
-
+    @Step("Certificate input set value {value}")
         public OrderDetailsPage EnterCertificateInput (String value){
         certificateInput.click();
             certificateInput.sendKeys(value, Keys.ENTER);
@@ -228,7 +231,7 @@ public class OrderDetailsPage extends BasePage {
         learnAboutPackagesLink.click();
         return this;
     }
-
+    @Step("Comment input set value {value}")
     public OrderDetailsPage EnterCommentInput(String value) {
         commentInput.sendKeys(value, Keys.ENTER);
         return this;

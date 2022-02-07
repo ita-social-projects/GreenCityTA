@@ -21,7 +21,7 @@ enum EcoNewsCertificateEntityFields {
 public class EcoNewsCertificateEntity {
     public static final String INSERT_NEW_CERTIFICATE = " INSERT INTO certificate (code,status, expiration_date, points) VALUES ('%s', '%s', '%s', %s)";
     public static final String DELETE_CERTIFICATE = "DELETE  from certificate where code = '%s'";
-
+    public static final String SELECT_RANDOM_USED_CERTIFICATE_CODE = "SELECT code FROM certificate WHERE status = 'USED' ORDER BY RANDOM() LIMIT 1";
     private String code;
     private String creation_date;
     private String date_of_use;

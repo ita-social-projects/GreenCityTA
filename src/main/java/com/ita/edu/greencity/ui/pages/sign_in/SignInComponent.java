@@ -53,7 +53,6 @@ public class SignInComponent extends BasePage {
     public SignInComponent inputEmail(String emailInput) {
         email.clear();
         email.sendKeys(emailInput, Keys.ENTER);
-
         return this;
     }
 
