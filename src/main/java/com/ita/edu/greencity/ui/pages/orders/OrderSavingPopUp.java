@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,17 +21,20 @@ public class OrderSavingPopUp extends BasePage {
         super(driver);
     }
 
+    @Step("Delete the order")
     public UbsHomePage clickOnDeleteButton() {
         deleteButton.click();
         return new UbsHomePage(driver);
     }
 
+    @Step("Save the order")
     public SuccessfulSavingPage clickOnSaveButton() {
         sleep(3000);
         saveButton.click();
         return new SuccessfulSavingPage(driver);
     }
 
+    @Step("Close saving pop-up")
     public OrderPageConfirmation clickOnCloseButton() {
         closeButton.click();
         return new OrderPageConfirmation(driver);

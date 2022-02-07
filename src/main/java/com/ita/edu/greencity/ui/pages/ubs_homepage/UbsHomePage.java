@@ -83,6 +83,9 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
     private WebElement elementsInBurgerMenu;
 
+    @FindBy(how = How.XPATH, using = "//header/div[@class = 'header-right']/div/h2")
+    private WebElement homePageTitle;
+
 
     //_______________________________________________________________________
 
@@ -125,6 +128,10 @@ public class UbsHomePage extends BasePage {
     public String getMiddleText() {
         return middleText.getText();
 
+    }
+
+    public String getHomePageTitle(){
+        return homePageTitle.getText();
     }
 
     public boolean checkIfDivHowToPrepare() {

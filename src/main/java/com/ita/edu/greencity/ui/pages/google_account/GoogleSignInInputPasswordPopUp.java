@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.google_account;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,11 +19,13 @@ public class GoogleSignInInputPasswordPopUp extends BasePage {
         super(driver);
     }
 
+    @Step("Input password {password} into Google form to sign in Google account")
     public GoogleSignInInputPasswordPopUp inputPasswordIntoField(String password) {
         passwordInputField.sendKeys(password);
         return this;
     }
 
+    @Step("Click on continue button")
     public SignUpComponent clickOnContinueButton() {
         continueButton.click();
         sleep(10000);

@@ -4,6 +4,8 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.testng.Assert;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 public class HeaderTest extends TestRun {
 
     @Test
+    @Description("Test redirection to UBS site by clicking on logo")
+    @Issue("96")
     public void ubsLogoButtonTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickUbsLogo();
@@ -24,6 +28,8 @@ public class HeaderTest extends TestRun {
     }
 
     @Test
+    @Description("Test redirection to site by clicking on Sorting Rules button")
+    @Issue("96")
     public void sortingRulesRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickSortingRules();
@@ -35,6 +41,8 @@ public class HeaderTest extends TestRun {
     }
 
     @Test
+    @Description("Test redirection to site by clicking on EcoShop button")
+    @Issue("96")
     public void ecoShopRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickEcoShop();
@@ -46,6 +54,8 @@ public class HeaderTest extends TestRun {
     }
 
     @Test
+    @Description("Test redirection to site by clicking on GreenCity button")
+    @Issue("96")
     public void greenCityRedirectionTest() {
         HeaderComponent header = new HeaderComponent(driver);
         header.clickGreenCity();
@@ -55,6 +65,8 @@ public class HeaderTest extends TestRun {
     }
 
     @Test
+    @Description("Test to check switching btw languages and changing language at LocalStorage")
+    @Issue("96")
     public void languageSwitcherTest() {
         HeaderComponent header = new HeaderComponent(driver);
         String expectedUA = "ua";
@@ -74,42 +86,36 @@ public class HeaderTest extends TestRun {
     }
 
     @Test
+    @Description("Test if username displayed correctly")
+    @Issue("96")
     public void userNameCorrectnessTest() {
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .clickOnContinueButton();
-        HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
+        HeaderSignedOutComponent headerSignedOut = new HeaderSignedOutComponent(driver);
+        headerSignedOut.clickSignIn().inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn().clickOnContinueButton();
+        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
         String expected = provider.getUserName();
-        String actual = header2.getUserName();
+        String actual = headerSignedIn.getUserName();
         Assert.assertEquals(actual, expected);
     }
 
     @Test
+    @Description("Test if Settings button redirects to correct page")
+    @Issue("96")
     public void settingsButtonTest() {
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .clickOnContinueButton();
-        HeaderSignedInComponent header2 = new HeaderSignedInComponent(driver);
-        header2.clickUserMenu().clickSettings();
+        HeaderSignedOutComponent headerSignedOut = new HeaderSignedOutComponent(driver);
+        headerSignedOut.clickSignIn().inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn().clickOnContinueButton();
+        HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
+        headerSignedIn.clickUserMenu().clickSettings();
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/profile/10485/edit";
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
     }
 
     @Test
+    @Description("Test if after clicking on SignOut button there is redirection to main page")
+    @Issue("96")
     public void signOutButtonTest() {
         HeaderSignedOutComponent headerSignedOut = new HeaderSignedOutComponent(driver);
-        headerSignedOut.clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .clickOnContinueButton();
+        headerSignedOut.clickSignIn().inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn().clickOnContinueButton();
         HeaderSignedInComponent headerSignedIn = new HeaderSignedInComponent(driver);
         headerSignedIn.clickUserMenu().clickSignOut();
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";

@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders.payment;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,65 +27,92 @@ public class PaymentByFondyPage extends BasePage {
     private WebElement CVV2;
     @FindBy(how = How.XPATH, using = "//input[@name = 'f-email']")
     private WebElement emailField;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'f-error']")
-    private WebElement emailInputAlert;
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'f-btn-success-bg-lighten')]")
     private WebElement payButton;
+    @FindBy(how = How.XPATH, using = "//div[@class = 'f-error']")
+    private WebElement emailErrorMessage;
 
     public PaymentByFondyPage(WebDriver driver) {
         super(driver);
     }
 
+    @Step("Get the total amount of order to pay")
     public String getTotalPay() {
+        sleep(6000);
         return totalPay.getText();
     }
 
+    @Step("Get currency of order payment")
     public String getCurrency() {
         return currency.getText();
     }
 
-    public void clickOnLanguageChooser() {
+    private void clickOnLanguageChooser() {
         languageChooser.click();
     }
+    private List<WebElement> getListOfLanguages() {
+        return listOfLanguages;
+    }
 
-    public PaymentByFondyPage chooseLanguage(String value) {
+    @Step("Select language from available options")
+    public PaymentByFondyPage chooseLanguage(String language) {
+        sleep(5000);
         clickOnLanguageChooser();
-        for (WebElement option : listOfLanguages) {
-            if (option.getText().equals(value.trim()))
+        for (WebElement option : getListOfLanguages()) {
+            if (option.getText().equalsIgnoreCase(language)) {
                 option.click();
-            break;
+                break;
+            }
         }
         return this;
     }
 
-    public PaymentByFondyPage cardNumberInput(String value) {
+    @Step("Enter card number to make a payment | value = {cardNumber}")
+    public PaymentByFondyPage cardNumberInput(String cardNumberValue) {
         sleep(5000);
-        cardNumber.sendKeys(value);
+        cardNumber.sendKeys(cardNumberValue);
         return this;
     }
 
-    public PaymentByFondyPage expiryDateInput(String value) {
-        expiryDate.sendKeys(value);
+    @Step("Enter card expiry date to make a payment | value = {expiryDateValue}")
+    public PaymentByFondyPage expiryDateInput(String expiryDateValue) {
+        expiryDate.sendKeys(expiryDateValue);
         return this;
     }
 
-    public PaymentByFondyPage CVV2Input(String value) {
-        CVV2.sendKeys(value);
+    @Step("Enter card CVV2 value to make a payment | value = {CVV2Value}")
+    public PaymentByFondyPage CVV2Input(String CVV2Value) {
+        CVV2.sendKeys(CVV2Value);
         return this;
     }
 
-    public PaymentByFondyPage emailInput(String value) {
-        emailField.sendKeys(value);
+    @Step("Enter user's email address | value = {email}")
+    public PaymentByFondyPage emailInput(String email) {
+        emailField.sendKeys(email);
         return this;
     }
 
-    public String getTextFromEmailAlert() {
-        return emailInputAlert.getText();
+    @Step("Click on page title to focus")
+    public PaymentByFondyPage unfocus() {
+        totalPay.click();
+        return this;
     }
 
+    @Step("Click on email input field to focus on it")
+    public PaymentByFondyPage focusToEmailField() {
+        emailField.click();
+        return this;
+    }
+
+    @Step("Pay for the order")
     public Operation3dSecurePopUp clickOnPayButton() {
         payButton.click();
         return new Operation3dSecurePopUp(driver);
+    }
+
+    @Step("Get error message about invalid email address")
+    public String getEmailErrorMessage() {
+        return emailErrorMessage.getText();
     }
 
 }

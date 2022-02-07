@@ -3,8 +3,9 @@ package com.ita.edu.greencity.tests.ui.pages.sign_in;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
-import io.qameta.allure.Description;
+
 import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,12 +14,14 @@ import org.testng.annotations.Test;
 
 public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
 
-    @BeforeMethod(description = "go to sign in page")
+    @Description("go to 'sign in' form")
+    @BeforeMethod
     public void beforeMethod() {
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn();
     }
 
+    @Description("close 'sign in' form")
     @AfterMethod
     public void afterMethod() {
         SignInComponent signin = new SignInComponent(driver);
@@ -48,7 +51,7 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
         };
     }
 
-    @Description("test error messages below email field")
+    @Description("test email error messages")
     @Issue("28")
     @Test(dataProvider = "emailDataProvider")
     public void emailErrorTest(String email, String expected) {
@@ -62,6 +65,8 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
         Assert.assertEquals(actual, expected);
     }
 
+    @Description("test password error messages")
+    @Issue("28")
     @Test
     public void passwordErrorTest() {
         SignInComponent signin = new SignInComponent(driver);
@@ -76,6 +81,8 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
         Assert.assertEquals(actual, expected);
     }
 
+    @Description("test general error messages")
+    @Issue("28")
     @Test(dataProvider = "generalDataProvider")
     public void generalErrorTest(String email, String password) {
         SignInComponent signin = new SignInComponent(driver);

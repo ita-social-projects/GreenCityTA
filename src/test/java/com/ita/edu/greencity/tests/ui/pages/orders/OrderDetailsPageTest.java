@@ -2,16 +2,11 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
-import com.ita.edu.greencity.utils.ValueProvider;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
