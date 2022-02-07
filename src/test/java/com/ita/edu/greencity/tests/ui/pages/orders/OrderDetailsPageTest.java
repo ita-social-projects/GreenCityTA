@@ -15,9 +15,7 @@ public class OrderDetailsPageTest extends TestRun {
 EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
     private final String codeValueActive = "7777-6666";
     private final String statusValueActive = "ACTIVE";
-    private final String statusValueUsed = "USED";
     private final String expiration_dateValue = "2022-11-11 00:00:00";
-    private final String date_of_use_Value = "2022-01-01 00:00:00";
     private final int pointsValue = 500;
 
 
