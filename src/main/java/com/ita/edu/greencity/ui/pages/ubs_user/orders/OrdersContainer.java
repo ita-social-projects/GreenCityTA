@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.ubs_user.orders;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,60 +23,80 @@ public class OrdersContainer {
         PageFactory.initElements(parentContext, this);
     }
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@src, 'ubs-admin-orders/arrow_up.svg')]")
-    private WebElement orderDetailsArrowUp;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-id')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-content')]")
+    private WebElement orderDetails;
+
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
     private WebElement orderId;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-date')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-date')]")
     private WebElement orderDate;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-status')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-status')]")
     private WebElement orderStatus;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'empty_card-paymentStatus')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentStatus')]")
     private WebElement orderPaymentStatus;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_sum')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentAmount')]")
     private WebElement orderPaymentAmount;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
-    private WebElement cancelOrderButton;
+    private WebElement cancelButton;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
-    private WebElement payForOrderButton;
+    private WebElement payButton;
 
-    public WebElement clickOnOrderDetailsArrowUp() {
-        return orderDetailsArrowUp;
-    }
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
 
+    @Step("get order id")
     public String getOrderId() {
         return orderId.getText();
     }
 
+    @Step("get order date")
     public String getOrderDate() {
         return orderDate.getText();
     }
 
+    @Step("get order status")
     public String getOrderStatus() {
         return orderStatus.getText();
     }
 
+    @Step("get order payment status")
     public String getOrderPaymentStatus() {
         return orderPaymentStatus.getText();
     }
 
+    @Step("get order payment amount")
     public String getOrderPaymentAmount() {
         return orderPaymentAmount.getText();
     }
 
-    public WebElement getCancelOrderButton() {
-        return getPayForOrderButton();
+    @Step("click on cancel order button")
+    public CancelPopUp clickOnCancelButton() {
+        cancelButton.click();
+        return new CancelPopUp(driver);
     }
 
-    public WebElement getPayForOrderButton() {
-        return payForOrderButton;
+    @Step("click on pay for order button")
+    public PaymentPopUp clickOnPayButton() {
+        payButton.click();
+        return new PaymentPopUp(driver);
+    }
+
+    @Step("get order details")
+    public OrderDetails clickOnOrderDetailsArrowDown() {
+        orderDetailsArrowUp.click();
+        return new OrderDetails(driver, orderDetails);
+    }
+
+    @Step("get orders page")
+    public UbsUserOrders getUbsUserOrdersPage() {
+        return new UbsUserOrders(driver);
     }
 
 }
