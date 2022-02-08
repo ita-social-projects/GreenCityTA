@@ -2,14 +2,12 @@ package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
-import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.net.URL;
-import java.security.Key;
 import java.util.List;
 
 public class UbsHomePage extends BasePage {
@@ -83,13 +81,15 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
     private WebElement elementsInBurgerMenu;
 
-    @FindBy(how = How.XPATH, using = "//header/div[@class = 'header-right']/div/h2")
-    private WebElement homePageTitle;
-
+    @FindBy(how = How.XPATH, using = "//div//img")
+    private List<WebElement> listOfAllImgValue;
 
     //_______________________________________________________________________
 
 
+    public List<WebElement> getListOfAllImgValue(){
+        return listOfAllImgValue;
+    }
     public UbsHomePage(WebDriver driver) {
         super(driver);
     }
@@ -97,6 +97,7 @@ public class UbsHomePage extends BasePage {
     public void clickSingInButton(){
         singInButton.click();
     }
+
 
     public boolean checkImgArmoredTrackOnDisplay(){
         return imgArmoredTrack.isDisplayed();
@@ -124,14 +125,10 @@ public class UbsHomePage extends BasePage {
         headerButtonOrderCourier.click();
         return null;
     }
-
+    @Step("get text from title of message")
     public String getMiddleText() {
         return middleText.getText();
 
-    }
-
-    public String getHomePageTitle(){
-        return homePageTitle.getText();
     }
 
     public boolean checkIfDivHowToPrepare() {
@@ -143,6 +140,7 @@ public class UbsHomePage extends BasePage {
         return section4MiddleText.getText();
     }
 
+    @Step("looking for element on page by xpath{headerButtonOrderCourier}")
     public boolean checkIfButtonOnDisplay(){
         return headerButtonOrderCourier.isDisplayed();
     }
@@ -155,6 +153,7 @@ public class UbsHomePage extends BasePage {
         return burgerMenu.isDisplayed();
     }
 
+    @Step("make click on button")
     public UbsHomePage clickBurgerMenu() {
         burgerMenu.click();
         return null;
