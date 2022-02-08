@@ -86,7 +86,7 @@ public class UbsHomePage extends BasePage {
 
     //_______________________________________________________________________
 
-
+//__________________________________________________
     public List<WebElement> getListOfAllImgValue(){
         return listOfAllImgValue;
     }
