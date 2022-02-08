@@ -43,20 +43,21 @@ public class SignInComponent extends BasePage {
         this.sleep(250);
     }
 
+    @Step("click on close button")
     public UbsHomePage clickCloseBtn() {
         close.click();
 
         return new UbsHomePage(driver);
     }
 
-    @Step("email input set value {emailInput}")
+    @Step("input email | value = {emailInput}")
     public SignInComponent inputEmail(String emailInput) {
         email.clear();
         email.sendKeys(emailInput, Keys.ENTER);
-
         return this;
     }
 
+    @Step("input password | value = {passwordInput}")
     public SignInComponent inputPassword(String passwordInput) {
         password.clear();
         password.sendKeys(passwordInput, Keys.ENTER);
@@ -64,45 +65,52 @@ public class SignInComponent extends BasePage {
         return this;
     }
 
+    @Step("click on 'show-hide password' button")
     public SignInComponent clickShowHidePassword() {
         showHidePassword.click();
 
         return this;
     }
 
+    @Step("click on 'forgot password' link")
     public ForgotPasswordComponent clickForgotPassword() {
         forgotPassword.click();
 
         return new ForgotPasswordComponent(driver);
     }
 
+    @Step("click on 'sign in' button")
     public SelectRegion clickSignIn() {
         signIn.click();
 
         return new SelectRegion(driver);
     }
 
+    @Step("click on 'sign in with google' button")
     public SelectRegion clickSignInGoogle() {
         signInGoogle.click();
 
         return new SelectRegion(driver);
     }
 
+    @Step("click on 'sign up' link")
     public SignUpComponent clickSignUp() {
         signUp.click();
 
         return new SignUpComponent(driver);
     }
 
-    @Step("get text of error message")
+    @Step("get text of email error message")
     public String getErrorEmailMessage() {
         return errorEmail.getText();
     }
 
+    @Step("get text of password error message")
     public String getErrorPasswordMessage() {
         return errorPassword.getText();
     }
 
+    @Step("get text of title")
     public String getTitle() {
         return title.getText();
     }
@@ -114,10 +122,12 @@ public class SignInComponent extends BasePage {
         return this;
     }
 
+    @Step("get text of general error message")
     public String getErrorGeneralMessage() {
         return errorGeneral.getText();
     }
 
+    @Step("get attribute 'type' of password field")
     public String getPasswordType() {
         return password.getAttribute("type");
     }

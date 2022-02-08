@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.user_data;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,30 +35,30 @@ public class EditUserData extends BasePage {
         super(driver);
     }
 
+    @Step("set value {newName} in 'Name' field on 'Edit User Data' page")
     public EditUserData enterEditedName(final String newName){
         editName.clear();
         editName.sendKeys(newName);
         return this;
     }
-
+    @Step("set value {newSurname} in 'Surname' field on 'Edit User Data' page")
     public EditUserData enterEditedSurname(final String newSurname){
         editSurname.clear();
         editSurname.sendKeys(newSurname);
         return this;
     }
-
+    @Step("set value {newPhone} in 'Phone' field on 'Edit User Data' page")
     public EditUserData enterEditedPhone(final String newPhone){
         editPhone.clear();
         editPhone.sendKeys(newPhone);
         return this;
-
     }
-
+    @Step("click on 'Discard Changes' button on 'Edit User Data' page")
     public UserData clickOnDiscardChangesButton(){
         discardChanges.click();
         return new UserData(driver);
     }
-
+    @Step("click on 'Save changes' button on 'Edit User Data' page")
     public UserData clickOnSaveChangesButton(){
         saveChanges.click();
         return new UserData(driver);
@@ -71,6 +72,7 @@ public class EditUserData extends BasePage {
         return addressContainerList;
     }
 
+    @Step("choose number of address, which you want to edit")
     public EditAddressContainer chooseAddress(String numberAddress) {
         this.sleep(3000);
         return getAddress()

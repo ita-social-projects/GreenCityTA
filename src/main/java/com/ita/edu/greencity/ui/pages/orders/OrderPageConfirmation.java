@@ -1,7 +1,8 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.payment.PrePaymentAlert;
+import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,39 +40,42 @@ public class OrderPageConfirmation extends BasePage {
         super(driver);
     }
 
+    @Step("Navigate to Order details stage")
     public OrderDetailsPage clickOnOrderDetailsButton() {
         orderDetailsButton.click();
         return new OrderDetailsPage(driver);
     }
 
+    @Step("Navigate to Personal data stage")
     public OrderPagePersonalData clickOnPersonalDataButton() {
         personalDataButton.click();
         return new OrderPagePersonalData(driver);
     }
 
+    @Step("Get title from table with orders")
     public String getTitle() {
         return yourOrderTitle.getText();
     }
 
+    @Step("Get text from appropriate table header accordingly to its index")
     public String getNecessaryHeader(int index) {
         return headersList.get(index).getText();
     }
 
+    @Step("Get text from any table element accordingly to the row and the column where it is located")
     public String chooseOneElementFromYourOrderTable(int row, int column) {
         sleep(5000);
         return driver.findElement(By.xpath("//ul[@class = 'services-list w-100 p-0 m-0']/li[" + row + "]/span[" + column + "]"))
                 .getText();
     }
 
-    public double transformToDoubleValue(String str) {
-        return Double.parseDouble(str);
-    }
-
+    @Step("Get an appropriate total sum of the order accordingly to the index")
     public String getTotalSumWithCurrency(int index) {
         sleep(5000);
         return totalSumList.get(index).getText();
     }
 
+    @Step("Get text from an appropriate amount accordingly to the index")
     public String getNecessaryAmount(int index) {
         return amountsList.get(index).getText();
     }
@@ -84,25 +88,29 @@ public class OrderPageConfirmation extends BasePage {
         return driver.findElement(By.xpath("//select[contains(@class, 'payment-select shadow-none')]/option[@value = '" + value + "']"));
     }
 
+    @Step("Choose Fondy as a payment method")
     public OrderPageConfirmation choosePaymentMethod() {
         clickOnPaymentChooser();
         paymentOption("Fondy").click();
         return this;
     }
 
+    @Step("Return to the previous stage with personal data")
     public OrderPagePersonalData clickOnBackButton() {
         backButton.click();
         return new OrderPagePersonalData(driver);
     }
 
+    @Step("Cancel the order")
     public OrderSavingPopUp clickOnCancelButton() {
         cancelButton.click();
         return new OrderSavingPopUp(driver);
     }
 
-    public PrePaymentAlert clickOnOrderButton() {
+    @Step("Make the order")
+    public PaymentByFondyPage clickOnOrderButton() {
         orderButton.click();
-        return new PrePaymentAlert(driver);
+        return new PaymentByFondyPage(driver);
     }
 
 }

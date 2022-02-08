@@ -2,32 +2,37 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
-import com.ita.edu.greencity.utils.ValueProvider;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import org.testng.annotations.*;
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
 
-    static Connection con = null;
-    private String query1 = "INSERT INTO greencity_ubs.public.certificate (code,status, expiration_date, points) VALUES ('6666-7777', 'ACTIVE', '2022-11-11 00:00:00', 500)";
-    private String query2 = "DELETE  from greencity_ubs.public.certificate where code = '6666-7777'";
+
+EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
+    private final String codeValueActive = "7777-6666";
+    private final String statusValueActive = "ACTIVE";
+    private final String expiration_dateValue = "2022-11-11 00:00:00";
+    private final int pointsValue = 500;
+
+
+    @DataProvider
+    private Object[][] certificateDataProvider() {
+        final String codeValueActive = "7777-6666";
+        final String codeValueUsed = ecoNewsCertificateService.selectRandomUsedCertificate();
+
+        return new Object[][]{
+                {"Certificate for 500 UAH activated", codeValueActive},
+                {"Certificate has already been used ", codeValueUsed},
+        };
+    }
       @BeforeTest
     public void AddCertificate() throws Exception {
-        String dbUrl = provider.getDbUrl();
-        String dbUsername = provider.getDbUsername();
-        String dbPassword = provider.getDbPassword();
-        Class.forName("org.postgresql.Driver").getDeclaredConstructor().newInstance();
-        con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-        Statement stmt = con.createStatement();
-    stmt.executeUpdate(query1);
+          ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
+          ecoNewsCertificateService.addCertificate(codeValueActive,statusValueActive,expiration_dateValue,pointsValue);
     }
 @BeforeMethod
 public void preConditions(){
@@ -40,6 +45,8 @@ public void preConditions(){
             .clickOnContinueButton();
 
 }
+    @Description("Checks if comment save when we go to 'Personal data' page and return to 'Order details' page")
+    @Issue("88")
     @Test
     public void messageTest() {
         String expected = "Hello world";
@@ -54,11 +61,12 @@ public void preConditions(){
                 .getCommentInput();
          Assert.assertEquals(actual.trim(), expected);
     }
-
+    @Description("Checks if 'Order amount' is counted properly")
+    @Issue("89")
     @Test
-    public void orderSumTest() {
+    public void orderAmountTest() {
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-                orderDetailsPage.chooseRegionByValue(" Kyiv ")
+                orderDetailsPage.chooseRegionByValue(" Kyiv region")
                 .EnterNumberOfSafeWasteInput("20")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1");
@@ -69,26 +77,24 @@ public void preConditions(){
         float actualSum = Float.parseFloat(Arrays.stream(orderDetailsPage.getOrderAmount().split("\s")).toList().get(0));
         Assert.assertEquals(actualSum,expectedSum);
     }
-
-    @Test
-    public void couponTest() {
-        String expected = "Certificate for 500 UAH activated";
+    @Description("Checks coupon alert")
+    @Issue("90")
+    @Test(dataProvider = "certificateDataProvider")
+    public void couponTest(String expected,String coupon) {
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
         String actual = orderDetailsPage
                 .chooseRegionByValue(" Kyiv ")
                 .EnterNumberOfSafeWasteInput("20")
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
-                .EnterCertificateInput("6666-7777")
+                .EnterCertificateInput(coupon)
                 .clickOnActivateCertificateButton()
                 .getCertificateAlertMessage();
         Assert.assertTrue(actual.contains(expected));
     }
 
     @AfterTest
-    public void checkRegisteredUser() throws Exception {
-    Statement stmt = con.createStatement();
-    stmt.executeUpdate(query2);
-        con.close();
+    public void deleteCertificate() throws Exception {
+        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
     }
 }
