@@ -1,11 +1,10 @@
 package com.ita.edu.greencity.utils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 public class ValueProvider {
-    private  Properties properties;
+    private Properties properties;
 
     public ValueProvider() throws IOException {
 
@@ -19,4 +18,73 @@ public class ValueProvider {
         return properties.getProperty("baseURL");
     }
 
+    public String getUbsHomePageURL() {
+        return properties.getProperty("UbsHomePageURL");
+    }
+
+    public String getLocalUbsHomePageURL() {
+        return properties.getProperty("localUbsHomePageURL");
+    }
+
+    public String getEmail() {
+        return properties.getProperty("email");
+    }
+
+    public String getUserName() {
+        return properties.getProperty("userName");
+    }
+
+    public String getPassword() {
+        return properties.getProperty("password");
+    }
+
+    public String getCardNumber() {
+        return properties.getProperty("cardNumber");
+    }
+
+    public String getExpiryDate() {
+        return properties.getProperty("expiryDate");
+    }
+
+    public String getCVV2() {
+        return properties.getProperty("CVV2");
+    }
+
+    public String getJDBCGreenCityUsername() {
+        return properties.getProperty("JDBCGreenCityUsername");
+    }
+
+    public String getJDBCGreenCityPassword() {
+        return properties.getProperty("JDBCGreenCityPassword");
+    }
+
+    public String getJDBCGreenCityURL() {
+        return properties.getProperty("JDBCGreenCityURL");
+    }
+
+    public String getJDBCGreenCityUbsUsername() {
+        return properties.getProperty("JDBCGreenCityUbsUsername");
+    }
+
+    public String getJDBCGreenCityUbsPassword() {
+        return properties.getProperty("JDBCGreenCityUbsPassword");
+    }
+
+    public String getJDBCGreenCityUbsURL() {
+        return properties.getProperty("JDBCGreenCityUbsURL");
+    }
+
+    public void setPassword(String newPassword) {
+        FileReader reader = null;
+        try {
+            reader = new FileReader("src/main/resources/properties.properties");
+            properties.load(reader);
+            properties.getProperty("password");
+            properties.setProperty("password",newPassword);
+            OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
+            properties.store(os,"new password for rollback" );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
