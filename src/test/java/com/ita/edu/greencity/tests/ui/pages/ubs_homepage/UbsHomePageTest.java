@@ -1,21 +1,33 @@
 
 package com.ita.edu.greencity.tests.ui.pages.ubs_homepage;
+
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 
-public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_homepage.BeforeUbsHomePageTestRun {
+public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
 
 
     @Test
+    @Description("Check if url is current")
+    @Issue("")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkUbsCurrentsUrl() {
         String expected = "https://ita-social-projects.github.io/GreenCityClient/#/ubs";
         String actual = driver.getCurrentUrl();
@@ -23,14 +35,22 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if image on display")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkImgArmoredTrackOnDisplay() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+        basePage.implicitWait(5000);
         Assert.assertTrue(ubsHomePage.checkImgArmoredTrackOnDisplay());
+
     }
 
     @Test
+    @Description("Check if text equals sample")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkIfUbsTextEqualsEnLang() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "UBS Courier";
@@ -38,6 +58,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if correct text not equal with sample")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkErrorIfUbsTextEqualsEnLang() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "wrong!!!";
@@ -45,6 +68,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if style of text is correct")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkStyleOfElement() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "Lato, sans-serifsdfsdfsd";
@@ -52,6 +78,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if text equals sample")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void getSection4MiddleTextEnLang() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "We are accepting Fabric wastes (damaged clothes) for the utilization in a separate package of 120L size or 120L size";
@@ -59,6 +88,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if url is current")
+    @Issue("")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkOrderCurrentUrl() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver)
                 .clickHeaderButtonOrderCourier();
@@ -71,6 +103,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if text equals sample")
+    @Issue("")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkIfTextEquals(){
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "The UBS Courier service will save your time and money for getting to the sorting station. And as a bonus, you will receive a free delivery of our eco-products around Kyiv.";
@@ -78,12 +113,18 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if element on display")
+    @Issue("")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkIfDivHowToPrepareOnDisplay(){
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         Assert.assertTrue(ubsHomePage.checkIfDivHowToPrepare());
     }
 
     @Test
+    @Description("Check whether the number of crayfish matches the specified number")
+    @Issue("")
+    @Severity(SeverityLevel.NORMAL)
     public void checkLengthListHowToPrepare() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
@@ -98,6 +139,9 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Сheck that the text in the lines matches the specified text ")
+    @Issue("")
+    @Severity(SeverityLevel.NORMAL)
     public void checkElementsInListHowToPrepare() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
@@ -119,13 +163,20 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
         Assert.assertEquals(actual,expected);
     }
 
+
     @Test
+    @Description("Check if button is displayed")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkButton() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         Assert.assertTrue(ubsHomePage.checkIfButtonOnDisplay());
     }
 
     @Test
+    @Description("Check if text is correct")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
     public void checkTextPriceUbsCourier(){
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "The cost of the service “UBS Courier";
@@ -133,22 +184,39 @@ public class UbsHomePageTest extends com.ita.edu.greencity.tests.ui.pages.ubs_ho
     }
 
     @Test
+    @Description("Check if element on display")
+    @Issue("")
+    @Severity(SeverityLevel.CRITICAL)
     public void checkIfBurgerMenuonDisplay(){
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         Assert.assertTrue(ubsHomePage.checkIfBurgerMenuOnDisplay());
     }
 
-//    @Test
-//    public void clickBurgerMenu(){
-//            driver.manage().window().setSize(new Dimension(900,900));
-//            UbsHomePage ubsHomePage = new UbsHomePage(driver);
-//            ubsHomePage.clickBurgerMenu();
-//            List<WebElement> listOfMenu = driver.findElements(By.xpath("//ul[@role='tablist']//a"));
-//            System.out.println(listOfMenu.size());
-//            System.out.println(listOfMenu);
-//            int expected = 7;
-//            Assert.assertEquals(listOfMenu.size(), expected);
-//    }
+    @Test
+    @Description("Check if ...")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
+    public void clickBurgerMenu(){
+        driver.manage().window().setSize(new Dimension(900,900));
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
+        ubsHomePage.clickBurgerMenu();
+        List<WebElement> listOfMenu = driver.findElements(By.xpath("//ul[@role='tablist']//a"));
+        System.out.println(listOfMenu.size());
+        System.out.println(listOfMenu);
+        int expected = 7;
+        Assert.assertEquals(listOfMenu.size(), expected);
+    }
+
+    @Test
+    @Description("Check if ...")
+    @Issue("")
+    @Severity(SeverityLevel.NORMAL)
+    public void printListOfname(){
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
+        System.out.println(ubsHomePage.getListOfAllImgValue().size());
+        System.out.println(ubsHomePage.getListOfAllImgValue());
+        for(WebElement i : ubsHomePage.getListOfAllImgValue()) System.out.println(i.getAttribute("alt"));
+    }
 
 
 }

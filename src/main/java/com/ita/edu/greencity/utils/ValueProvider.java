@@ -50,18 +50,6 @@ public class ValueProvider {
         return properties.getProperty("CVV2");
     }
 
-    public String getDbUrl() {
-        return properties.getProperty("dbUrl");
-    }
-
-    public String getDbUsername() {
-        return properties.getProperty("dbUsername");
-    }
-
-    public String getDbPassword() {
-        return properties.getProperty("dbPassword");
-    }
-
     public String getJDBCGreenCityUsername() {
         return properties.getProperty("JDBCGreenCityUsername");
     }
