@@ -6,6 +6,7 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,8 +14,8 @@ import org.testng.asserts.SoftAssert;
 
 public class ValidationOfCommentTest extends TestRun {
     @BeforeMethod
-    public void beforeMethod() {
-        super.beforeMethod();
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
