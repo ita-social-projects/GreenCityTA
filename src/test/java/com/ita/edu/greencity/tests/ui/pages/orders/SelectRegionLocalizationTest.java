@@ -5,6 +5,7 @@ import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
+import jdk.jfr.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -16,15 +17,14 @@ import static java.util.Map.entry;
 public class SelectRegionLocalizationTest extends TestRun {
     @DataProvider(name = "languageChanger-provider")
     public Object[][] dataProviderMethod() {
-        return new String[][]{{"ua","uk"}, {"en","en"}};
+        return new String[][]{{"ua", "uk"}, {"en", "en"}};
     }
 
+    @Description("Verify localization of text at pop-up Select Region")
     @Test(dataProvider = "languageChanger-provider")
     void ChangeRegionLocalization(String lang, String expected) {
         SoftAssert softAssert = new SoftAssert();
-
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose(lang);
-
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         SelectRegion selectRegion = header.clickSignIn()
                 .inputEmail(provider.getEmail())
@@ -32,7 +32,7 @@ public class SelectRegionLocalizationTest extends TestRun {
                 .clickSignIn();
         softAssert.assertEquals(TestHelpersUtils.getLanguage(selectRegion.getBottomText()), expected,
                 "Incorrect language for BOTTOM text");
-        softAssert.assertEquals(TestHelpersUtils.getLanguage(selectRegion.getTitleText()),expected,
+        softAssert.assertEquals(TestHelpersUtils.getLanguage(selectRegion.getTitleText()), expected,
                 "Incorrect language for TITLE text");
         softAssert.assertAll();
     }
@@ -41,19 +41,20 @@ public class SelectRegionLocalizationTest extends TestRun {
     public Object[][] dataProviderButtons() {
         return new Object[][]{
                 {"ua", Map.ofEntries(
-                        entry("continueButtonText","Продовжити"),
-                        entry("backButtonText","Назад")
+                        entry("continueButtonText", "Продовжити"),
+                        entry("backButtonText", "Назад")
                 )},
                 {"en", Map.ofEntries(
-                        entry("continueButtonText","Continue"),
-                        entry("backButtonText","Back")
+                        entry("continueButtonText", "Continue"),
+                        entry("backButtonText", "Back")
 
-                ) }
+                )}
         };
     }
 
+    @Description("Verify localization of Buttons text at pop-up Select Region")
     @Test(dataProvider = "buttonsName-provider")
-    void TipTextLocalization(String lang, Map<String,String> map) {
+    void TipTextLocalization(String lang, Map<String, String> map) {
         SoftAssert softAssert = new SoftAssert();
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose(lang);
         SelectRegion selectRegion = new HeaderSignedOutComponent(driver)

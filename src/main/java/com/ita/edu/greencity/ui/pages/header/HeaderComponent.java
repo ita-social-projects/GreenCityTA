@@ -5,6 +5,7 @@ import com.ita.edu.greencity.ui.pages.header.external_sites.EcoShop;
 import com.ita.edu.greencity.ui.pages.header.external_sites.GreenCity;
 import com.ita.edu.greencity.ui.pages.header.external_sites.SortingRules;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,35 +40,42 @@ public class HeaderComponent extends BasePage {
         super(driver);
     }
 
+    @Step("Click on UBS logo button")
     public UbsHomePage clickUbsLogo() {
         ubsLogo.click();
         return new UbsHomePage(driver);
     }
 
+    @Step("Click on About us button")
     public HeaderComponent clickAboutUs() {
         aboutUs.click();
         return this;
     }
 
+    @Step("Click on Sorting Rules button")
     public SortingRules clickSortingRules() {
         sortingRules.click();
         return new SortingRules(driver);
     }
 
+    @Step("Click on EcoShop button")
     public EcoShop clickEcoShop() {
         ecoShop.click();
         return new EcoShop(driver);
     }
 
+    @Step("Click on GreenCity button")
     public GreenCity clickGreenCity() {
         greenCity.click();
         return new GreenCity(driver);
     }
 
+    @Step("Get language from switcher")
     public String getLanguage() {
         return languageSwitcher.getText();
     }
 
+    @Step("Click on language switcher")
     public HeaderComponent clickLanguageSwitcher() {
         languageSwitcher.click();
         return this;
@@ -77,6 +85,7 @@ public class HeaderComponent extends BasePage {
         return languagesList;
     }
 
+    @Step("Choose {language} language")
     public HeaderComponent languageChoose(String language) {
         for (WebElement current : getLanguagesList()) {
             if (current != null & current.getAttribute("aria-label").equalsIgnoreCase(language)) {
