@@ -5,6 +5,7 @@ import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -13,8 +14,8 @@ import org.testng.annotations.BeforeMethod;
 public class BeforeUbsHomePageTestRun extends TestRun {
 
     @BeforeClass
-    public void beforeClass() {
-        super.beforeMethod();
+    public void beforeClass(ITestContext testContext) {
+        super.beforeMethod(testContext);
     }
 
     @BeforeMethod
