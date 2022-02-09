@@ -4,8 +4,10 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import jdk.jfr.Description;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,8 +15,8 @@ import org.testng.asserts.SoftAssert;
 
 public class ValidationOfCommentTest extends TestRun {
     @BeforeMethod
-    public void beforeMethod() {
-        super.beforeMethod();
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
         HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
@@ -24,6 +26,7 @@ public class ValidationOfCommentTest extends TestRun {
                 .clickOnContinueButton().EnterNumberOfTextileWaste120lInput("2");
     }
 
+    @Description("Verify that you can not enter comment longer than 255 characters")
     @Test
     public void incorrectLenghtOfComment()
     {
@@ -43,7 +46,7 @@ public class ValidationOfCommentTest extends TestRun {
         return new String[][]{{TestHelpersUtils.generateRandomComment(138)}, {""}};
     }
 
-
+    @Description("Verify that you can enter comment shorter than 255 characters")
     @Test(dataProvider = "correctComment-provider")
     public void correctLengthOfComment(String comment)
     {

@@ -78,13 +78,14 @@ public class UbsHomePage extends BasePage {
     private WebElement burgerMenu;
 
 
+
+
+
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
     private WebElement elementsInBurgerMenu;
 
     @FindBy(how = How.XPATH, using = "//div//img")
     private List<WebElement> listOfAllImgValue;
-
-    //_______________________________________________________________________
 
 //__________________________________________________
     public List<WebElement> getListOfAllImgValue(){

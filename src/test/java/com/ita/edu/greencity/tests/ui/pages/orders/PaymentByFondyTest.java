@@ -6,6 +6,7 @@ import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -27,8 +28,8 @@ public class PaymentByFondyTest extends TestRun {
 
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
-    public void beforeMethod() {
-        super.beforeMethod();
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourier()
                 .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()

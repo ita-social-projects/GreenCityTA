@@ -8,6 +8,7 @@ import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Description;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -24,8 +25,8 @@ public class OrderPageConfirmationTest extends TestRun {
     final String userPhoneNumber = "+380 (63) 114 46 78";
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
-    public void beforeMethod() {
-        super.beforeMethod();
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourier()
                 .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
@@ -81,20 +82,20 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
         String numberOfOrder = actualMessage.substring(28, 32);
-        String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
+        String expectedMessage = "Now you can find your " + numberOfOrder + " in your personal account and continue processing it at any time";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
-
-    @Description("Verify order deleting functionality")
-    @Test
-    public void verifyOrderDeletingTest() {
-        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
-                .clickOnCancelButton()
-                .clickOnDeleteButton()
-                .getHomePageTitle();
-        String expectedMessage = "It's even easier than before!";
-        Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
-    }
+//
+//    @Description("Verify order deleting functionality")
+//    @Test
+//    public void verifyOrderDeletingTest() {
+//        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+//                .clickOnCancelButton()
+//                .clickOnDeleteButton()
+//                .getHomePageTitle();
+//        String expectedMessage = "It's even easier than";
+//        Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
+//    }
 
     @Description("Verify whether after language changing the currency of order is changed")
     @Test

@@ -11,6 +11,8 @@ import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,8 +43,9 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     public void checkImgArmoredTrackOnDisplay() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
-        basePage.implicitWait(5000);
+        String xpath = "//div[1]/img[@src='assets/img/ubs/armored_truck.svg']";
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         Assert.assertTrue(ubsHomePage.checkImgArmoredTrackOnDisplay());
 
     }
