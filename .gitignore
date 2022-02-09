@@ -29,3 +29,6 @@ replay_pid*
 target
 .idea
 src/main/resources/properties.properties
+
+.DS_Store
+.allure/
