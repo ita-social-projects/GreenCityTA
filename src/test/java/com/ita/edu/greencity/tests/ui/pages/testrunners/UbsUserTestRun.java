@@ -10,8 +10,8 @@ import org.testng.annotations.BeforeMethod;
 
 public class UbsUserTestRun extends TestRun {
 
-    @BeforeClass
-    public void beforeClass(ITestContext iTestContext) {
+    @BeforeMethod
+    public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
         headerSignedOutComponent.clickSignIn()
@@ -24,18 +24,8 @@ public class UbsUserTestRun extends TestRun {
                 .clickUbsUser();
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-
-    }
-
     @AfterMethod
     public void afterMethod() {
-
-    }
-
-    @AfterClass
-    public void afterClass() {
         super.afterMethod();
     }
 }
