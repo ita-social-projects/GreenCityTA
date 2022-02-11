@@ -30,12 +30,20 @@ public class ValueProvider {
         return properties.getProperty("email");
     }
 
+    public String getEmailAdmin() {
+        return properties.getProperty("emailAdmin");
+    }
+
     public String getUserName() {
         return properties.getProperty("userName");
     }
 
     public String getPassword() {
         return properties.getProperty("password");
+    }
+
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
     }
 
     public String getCardNumber() {
