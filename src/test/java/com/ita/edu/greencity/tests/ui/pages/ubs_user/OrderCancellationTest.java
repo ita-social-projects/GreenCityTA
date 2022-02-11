@@ -4,6 +4,7 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.UbsUserTestRun;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.CancelPopUp;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -19,6 +20,7 @@ public class OrderCancellationTest extends UbsUserTestRun {
     }
 
     @Description("test all pop-up elements localization")
+    @Issue("105")
     @Test(dataProvider = "popUpElements")
     public void popUpElementsLocalization(String lang, String labelText, String noButton, String yesButton) {
         UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
