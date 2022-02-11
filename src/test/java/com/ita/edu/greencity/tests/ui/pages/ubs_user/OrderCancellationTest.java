@@ -1,7 +1,9 @@
 package com.ita.edu.greencity.tests.ui.pages.ubs_user;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.UbsUserTestRun;
+import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.CancelPopUp;
+import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -30,7 +32,7 @@ public class OrderCancellationTest extends UbsUserTestRun {
                 .clickLanguageSwitcher()
                 .languageChoose(lang);
 
-        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("256")
+        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("52")
                 .clickOnCancelButton();
 
         softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
@@ -39,5 +41,25 @@ public class OrderCancellationTest extends UbsUserTestRun {
         softAssert.assertAll();
 
         cancelPopUp.clickOnNoButton();
+    }
+
+    @Test()
+    public void verifyThatOnlyFormedAndUnpaidOrdersCanBeCancelled() {
+
+        UbsUser ubsUser = new UbsUser(driver);
+        SoftAssert softAssert = new SoftAssert();
+
+        OrdersContainer neededElement = ubsUser.clickOnOrdersButton()
+                .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid");
+
+        String orderId = neededElement.getOrderId();
+
+        softAssert.assertTrue(neededElement.getCancelButton().isDisplayed());
+
+        softAssert.assertEquals(neededElement.clickOnCancelButton()
+                .clickOnYesButton()
+                .getOrderByNumber(orderId), null, "Order was not cancelled");
+
+        softAssert.assertAll();
     }
 }

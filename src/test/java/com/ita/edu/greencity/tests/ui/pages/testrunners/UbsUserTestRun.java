@@ -15,7 +15,7 @@ public class UbsUserTestRun extends TestRun {
         super.beforeMethod(iTestContext);
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
         headerSignedOutComponent.clickSignIn()
-                .inputEmail("grabarskiy02@gmail.com")
+                .inputEmail("greencitytest62@gmail.com")
                 .inputPassword("123456Qw/")
                 .clickSignIn()
                 .clickOnContinueButton();

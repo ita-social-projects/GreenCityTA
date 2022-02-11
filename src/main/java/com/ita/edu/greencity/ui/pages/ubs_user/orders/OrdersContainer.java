@@ -82,6 +82,11 @@ public class OrdersContainer {
         return new CancelPopUp(driver);
     }
 
+    @Step("get cancel button of {getOrderId}")
+    public WebElement getCancelButton() {
+        return cancelButton;
+    }
+
     @Step("click on pay for order button")
     public PaymentPopUp clickOnPayButton() {
         payButton.click();
