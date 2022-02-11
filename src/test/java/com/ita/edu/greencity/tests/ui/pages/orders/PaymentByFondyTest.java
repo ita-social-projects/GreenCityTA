@@ -50,7 +50,8 @@ public class PaymentByFondyTest extends TestRun {
         String expected = "Please enter a valid email";
         String actual =  orderPageConfirmation
                 .clickOnOrderButton()
-                .chooseLanguage("English").emailInput("testgreencity@gmail.").unfocus().focusToEmailField().getEmailErrorMessage();
+                .chooseLanguage("English").emailInput("testgreencity@gmail.")
+                .unfocus().focusToEmailField().getEmailErrorMessage();
         Assert.assertEquals(actual,expected);
     }
 
