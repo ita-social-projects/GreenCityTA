@@ -96,12 +96,52 @@ public class UbsUserOrders extends BasePage {
         return ordersContainerList;
     }
 
-    @Step("get order from container")
-    public OrdersContainer getOrder(String numberOfOrder) {
+    @Step("get order from container by order number")
+    public OrdersContainer getOrderByNumber(String numberOfOrder) {
 
         return putElementsIntoContainer()
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
+    @Step("get order from container by order date")
+    public OrdersContainer getOrderByOrderDate(String orderDate) {
+
+        return putElementsIntoContainer()
+                .stream()
+                .filter(element -> element.getOrderDate().equals(orderDate))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
+    @Step("get order from container by order status")
+    public OrdersContainer getOrderByOrderStatus(String orderStatus) {
+
+        return putElementsIntoContainer()
+                .stream()
+                .filter(element -> element.getOrderStatus().equals(orderStatus))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
+    @Step("get order from container by payment status")
+    public OrdersContainer getOrderByPaymentStatus(String paymentStatus) {
+
+        return putElementsIntoContainer()
+                .stream()
+                .filter(element -> element.getPaymentStatus().equals(paymentStatus))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
+    @Step("get order from container by order date")
+    public OrdersContainer getOrderByOrderAndPaymentStatuses(String orderStatus, String paymentStatus) {
+
+        return putElementsIntoContainer()
+                .stream()
+                .filter(element -> element.getOrderStatus().equals(orderStatus) && element.getPaymentStatus().equals(paymentStatus))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     }

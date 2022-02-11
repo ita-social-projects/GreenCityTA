@@ -37,10 +37,10 @@ public class OrdersContainer {
     private WebElement orderStatus;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentStatus')]")
-    private WebElement orderPaymentStatus;
+    private WebElement paymentStatus;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentAmount')]")
-    private WebElement orderPaymentAmount;
+    private WebElement paymentAmount;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
     private WebElement cancelButton;
@@ -67,13 +67,13 @@ public class OrdersContainer {
     }
 
     @Step("get order payment status")
-    public String getOrderPaymentStatus() {
-        return orderPaymentStatus.getText();
+    public String getPaymentStatus() {
+        return paymentStatus.getText();
     }
 
     @Step("get order payment amount")
-    public String getOrderPaymentAmount() {
-        return orderPaymentAmount.getText();
+    public String getPaymentAmount() {
+        return paymentAmount.getText();
     }
 
     @Step("click on cancel order button")

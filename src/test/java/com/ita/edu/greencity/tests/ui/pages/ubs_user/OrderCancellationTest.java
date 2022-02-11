@@ -30,7 +30,7 @@ public class OrderCancellationTest extends UbsUserTestRun {
                 .clickLanguageSwitcher()
                 .languageChoose(lang);
 
-        CancelPopUp cancelPopUp = ubsUserOrders.getOrder("256")
+        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("256")
                 .clickOnCancelButton();
 
         softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
