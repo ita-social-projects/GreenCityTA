@@ -2,6 +2,9 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -56,6 +59,8 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
         };
     }
 
+    @Description("In this test we will verify error message with poor credential in 'Name field'")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "nameDataProvider")
     public void verifyNameErrorMessage(String name, String expectedErrorMessage){
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
@@ -74,6 +79,8 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
         Assert.assertEquals(actual,expectedErrorMessage);
     }
 
+    @Description("In this test we will verify error message with poor credential in 'Surname field'")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "surnameDataProvider")
     public void verifySurnameErrorMessage(String surname, String expectedErrorMessage){
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
@@ -92,6 +99,8 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
         Assert.assertEquals(actual,expectedErrorMessage);
     }
 
+    @Description("In this test we will verify error message with poor credential in 'Phone number field'")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "phoneNumberDataProvider")
     public void verifyPhoneNumberErrorMessage(String phoneNumber, String expectedErrorMessage){
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
@@ -110,6 +119,8 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
         Assert.assertEquals(actual,expectedErrorMessage);
     }
 
+    @Description("In this test we will verify error message with poor credential in 'Email field'")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "emailDataProvider")
     public void verifyEmailErrorMessage(String email, String expectedErrorMessage){
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
