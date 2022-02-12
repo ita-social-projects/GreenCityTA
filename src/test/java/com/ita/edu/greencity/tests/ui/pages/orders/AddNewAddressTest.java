@@ -3,6 +3,10 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.orders.AddNewAddress;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -15,6 +19,10 @@ public class AddNewAddressTest extends TestRun{
     final int INDEX_DISTRICT = 4;
     final int INDEX_STREET = 0;
 
+
+    @Description("In this test we will verify that button isn't clickable, when user don't fill mandatory fields, and after filling all mandatory fields the button is clickable")
+    @Issue("32")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void checkAddNewAddressButton() {
         AddNewAddress addNewAddress = new UbsHomePage(driver).pressOrderCourier()
