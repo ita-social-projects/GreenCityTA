@@ -99,7 +99,7 @@ public void preConditions(){
     @Description("Checks if orders from eco store saves when we go to 'Personal data' page and return to 'Order details' page")
     @Issue("117")
     @Test
-    public void ecoStoreWaitingTest() {
+    public void ecoStoreOrderTest() {
         String orderNumber1 = TestHelpersUtils.generateRandomOrderNumber();
         String orderNumber2 = TestHelpersUtils.generateRandomOrderNumber();
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
