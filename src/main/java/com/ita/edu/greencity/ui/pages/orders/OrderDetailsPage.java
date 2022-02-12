@@ -44,7 +44,7 @@ public class OrderDetailsPage extends BasePage {
     private List<WebElement> UseBonusesCheckmarks;
     @FindBy(xpath = "//a[@class='bonus-how-to-link']")
     private WebElement howToGetBonusesButton;
-    @FindBy(xpath = "//div[@class='bottom']//span[@class='checkmark']]")
+    @FindBy(xpath = "//div[@class='bottom']//span[@class='checkmark']")
     private List<WebElement> WaitingStoreOrderCheckmarks;
     @FindBy(xpath = "//input[contains(@id,'index')]")
     private List<WebElement> orderNumberInputs;
@@ -205,7 +205,7 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
-    public OrderDetailsPage ClickOnYesWaitingStoreOrderCheckmark() {
+    public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(1).click();
         return this;
     }
@@ -214,15 +214,18 @@ public class OrderDetailsPage extends BasePage {
         howToGetBonusesButton.click();
         return this;
     }
-
-    public OrderDetailsPage EnterOrderNumberInputs(String MessageText, int value) {
-        orderNumberInputs.get(value).sendKeys(MessageText);
+    @Step("Input eco store order value {value}")
+    public OrderDetailsPage EnterOrderNumberInputs(String orderNumber, int order) {
+        orderNumberInputs.get(order).sendKeys(orderNumber);
         return this;
     }
 
     public OrderDetailsPage clickOnAddAnotherNumberButton() {
         addAnotherNumberButton.click();
         return this;
+    }
+    public String getOrderNumberInputs(int order) {
+        return orderNumberInputs.get(order).getAttribute("value");
     }
 
     public OrderDetailsPage clickOnLearnAboutPackagesLink() {
