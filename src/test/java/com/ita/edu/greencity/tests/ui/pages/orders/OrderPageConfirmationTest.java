@@ -92,7 +92,7 @@ public class OrderPageConfirmationTest extends TestRun {
         String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnDeleteButton()
-                .getHomePageTitle();
+                .getTitleH1Text();
         String expectedMessage = "It's even easier than";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }

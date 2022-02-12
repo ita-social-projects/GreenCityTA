@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
@@ -7,6 +8,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
+
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
@@ -45,11 +48,11 @@ public void preConditions(){
             .clickOnContinueButton();
 
 }
-    @Description("Checks if comment save when we go to 'Personal data' page and return to 'Order details' page")
+    @Description("Checks if comment saves when we go to 'Personal data' page and return to 'Order details' page")
     @Issue("88")
     @Test
     public void messageTest() {
-        String expected = "Hello world";
+        String expected = TestHelpersUtils.generateRandomComment(20);
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
         String actual = orderDetailsPage.chooseRegionByValue(" Kyiv ")
                 .EnterNumberOfSafeWasteInput("20")
@@ -93,6 +96,30 @@ public void preConditions(){
         Assert.assertTrue(actual.contains(expected));
     }
 
+    @Description("Checks if orders from eco store saves when we go to 'Personal data' page and return to 'Order details' page")
+    @Issue("117")
+    @Test
+    public void ecoStoreWaitingTest() {
+        String orderNumber1 = TestHelpersUtils.generateRandomOrderNumber();
+        String orderNumber2 = TestHelpersUtils.generateRandomOrderNumber();
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        String actual1 = orderDetailsPage.chooseRegionByValue(" Kyiv ")
+                .EnterNumberOfSafeWasteInput("20")
+                .EnterNumberOfTextileWaste20lInput("1")
+                .EnterNumberOfTextileWaste120lInput("1")
+                .clickOnYesWaitingStoreOrderCheckmark()
+                .EnterOrderNumberInputs(orderNumber1,0)
+                .clickOnAddAnotherNumberButton()
+                .EnterOrderNumberInputs(orderNumber2,1)
+                .clickOnNextButton()
+                .clickOnBackButton()
+                .getOrderNumberInputs(0);
+        String actual2 = orderDetailsPage.getOrderNumberInputs(1);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actual1,orderNumber1);
+        softAssert.assertEquals(actual2,orderNumber2);
+
+    }
     @AfterTest
     public void deleteCertificate() throws Exception {
         ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
