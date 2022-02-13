@@ -1,8 +1,9 @@
-package com.ita.edu.greencity.ui.pages.employees;
+package com.ita.edu.greencity.tests.ui.pages.employees;
 
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
@@ -21,7 +22,7 @@ import org.testng.annotations.Test;
 public class EmployeesTest extends TestRun {
 
     @BeforeMethod
-    public void beforeMethod(ITestContext testContext) {
+    public void beforeMethod(ITestContext testContext)  {
         super.beforeMethod(testContext);
         SignInComponent signInComponent = new SignInComponent(driver);
         BasePage basePage = new BasePage(driver);
@@ -35,6 +36,7 @@ public class EmployeesTest extends TestRun {
         employees.clickButtonUbsAdmin();
         employees.clickEmployyesButton();
     }
+
 
     @Test
     @Description("Check if current url")
