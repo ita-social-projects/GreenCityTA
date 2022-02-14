@@ -38,7 +38,7 @@ public class UbsUserOrders extends BasePage {
     @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
     private WebElement orderHistoryTabButton;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-accordion')]/*[contains(@class, 'mat-expansion-panel')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-accordion')]/*[contains(@class, 'ng-star-inserted')]")
     private List<WebElement> orders;
 
 
@@ -103,7 +103,7 @@ public class UbsUserOrders extends BasePage {
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
                 .findFirst()
-                .orElseThrow(NullPointerException::new);
+                .orElse(null);
     }
 
     @Step("get order from container by order date")

@@ -5,6 +5,8 @@ import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.CancelPopUp;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
+import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsOrdersEntity;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsOrdersService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.DataProvider;
@@ -12,6 +14,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class OrderCancellationTest extends UbsUserTestRun {
+
+    EcoNewsOrdersService ecoNewsOrdersService = new EcoNewsOrdersService();
 
     @DataProvider
     public Object[][] popUpElements() {
@@ -32,7 +36,14 @@ public class OrderCancellationTest extends UbsUserTestRun {
                 .clickLanguageSwitcher()
                 .languageChoose(lang);
 
-        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("52")
+
+        try {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("86")
                 .clickOnCancelButton();
 
         softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
@@ -46,10 +57,10 @@ public class OrderCancellationTest extends UbsUserTestRun {
     @Test()
     public void verifyThatOnlyFormedAndUnpaidOrdersCanBeCancelled() {
 
-        UbsUser ubsUser = new UbsUser(driver);
+        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
         SoftAssert softAssert = new SoftAssert();
 
-        OrdersContainer neededElement = ubsUser.clickOnOrdersButton()
+        OrdersContainer neededElement = ubsUserOrders
                 .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid");
 
         String orderId = neededElement.getOrderId();
@@ -59,6 +70,9 @@ public class OrderCancellationTest extends UbsUserTestRun {
         softAssert.assertEquals(neededElement.clickOnCancelButton()
                 .clickOnYesButton()
                 .getOrderByNumber(orderId), null, "Order was not cancelled");
+
+        softAssert.assertEquals(ecoNewsOrdersService.getById(Long.parseLong(orderId)), null,
+                "Order was not deleted from DataBase");
 
         softAssert.assertAll();
     }

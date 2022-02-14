@@ -8,6 +8,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
+import java.time.Duration;
+
 public class OrdersContainer {
 
     private WebDriver driver;
@@ -23,9 +25,16 @@ public class OrdersContainer {
         PageFactory.initElements(parentContext, this);
     }
 
+    public void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-content')]")
-    private WebElement orderDetails;
+    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-expansion-panel-content')]")
+    private WebElement orderDetailsElement;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
     private WebElement orderId;
@@ -50,6 +59,20 @@ public class OrdersContainer {
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
     protected WebElement orderDetailsArrowUp;
+
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
+    private WebElement orderDetailsLabel;
+
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_of_order']/td[2]")
+    private WebElement orderAmount;
+
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
+    private WebElement amountDue;
+
+    @Step("get order details element")
+    public WebElement getOrderDetailsElement() {
+        return orderDetailsElement;
+    }
 
     @Step("get order id")
     public String getOrderId() {
@@ -76,13 +99,28 @@ public class OrdersContainer {
         return paymentAmount.getText();
     }
 
+    @Step("get label of order details page")
+    public String getOrderDetailsLabel() {
+        return orderDetailsLabel.getText();
+    }
+
+    @Step("get amount of order")
+    public String getOrderAmount() {
+        return orderAmount.getText();
+    }
+
+    @Step("get order amount due")
+    public String getAmountDue() {
+        return amountDue.getText();
+    }
+
     @Step("click on cancel order button")
     public CancelPopUp clickOnCancelButton() {
         cancelButton.click();
         return new CancelPopUp(driver);
     }
 
-    @Step("get cancel button of {getOrderId}")
+    @Step("get cancel button")
     public WebElement getCancelButton() {
         return cancelButton;
     }
@@ -94,14 +132,14 @@ public class OrdersContainer {
     }
 
     @Step("get order details")
-    public OrderDetails clickOnOrderDetailsArrowDown() {
+    public OrdersContainer clickOnOrderDetailsArrowDown() {
         orderDetailsArrowUp.click();
-        return new OrderDetails(driver, orderDetails);
+        sleep(1000);
+        return this;
     }
 
     @Step("get orders page")
     public UbsUserOrders getUbsUserOrdersPage() {
         return new UbsUserOrders(driver);
     }
-
 }
