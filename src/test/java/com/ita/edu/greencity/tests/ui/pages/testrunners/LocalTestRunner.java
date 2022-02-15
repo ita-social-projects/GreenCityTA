@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeSuite;
 import java.io.IOException;
 import java.time.Duration;
 
-public class LocalTestRunner {
+public class LocalTestRunner extends TestRun {
 
     protected WebDriver driver;
     protected static ValueProvider provider;
