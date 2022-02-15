@@ -34,11 +34,15 @@ public class OrderPageConfirmationTest extends TestRun {
     final int INDEX_OF_STREET = 0;
     final String STREET_TO_ADD = "Sevastopol's'ka Square";
     final String HOUSE_NUMBER_TO_ADD = "19";
+    final String CORPUS_TO_ADD = "2";
+    final String ENTRANCE_TO_ADD = "3";
     final int NEW_INDEX_OF_CITY = 0;
     final int NEW_INDEX_OF_DISTRICT = 4;
     final int NEW_INDEX_OF_STREET = 0;
     final String NEW_STREET_TO_ADD = "Lesi Ukrainky Boulevard";
     final String NEW_HOUSE_NUMBER_TO_ADD = "11";
+    final String NEW_CORPUS_TO_ADD = "3";
+    final String NEW_ENTRANCE_TO_ADD = "2";
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
     public void beforeMethod(ITestContext iTestContext) {
@@ -157,23 +161,26 @@ public class OrderPageConfirmationTest extends TestRun {
     @Description("Verify that info about the address of export is updated after language changing")
     @Test
     public void verifyExportAddressLocalizationTest(){
-        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnAddAddressButton()
+                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
+                .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Obolonskyi");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Heroiv Dnipra Street");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "14");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kyi");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Sevastopol's'ka Square");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "19");
         softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 1");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         new OrderDetailsPage(driver).clickOnNextButton().clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "м. Київ");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "район Оболонський");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Героїв Дніпра вул");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "14");
-        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "корпус 2");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 1");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "район Солом'янський");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Севастопольська польща");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "19");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "корпус 3");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 2");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область");
         softAssert.assertAll();
     }
@@ -184,17 +191,7 @@ public class OrderPageConfirmationTest extends TestRun {
     public void verifyExportAddressRelevanceAfterChangeTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .clickOnCityField()
-                .chooseCity(INDEX_OF_CITY)
-                .chooseDistrict(INDEX_OF_DISTRICT)
-                .enterStreet(STREET_TO_ADD)
-                .chooseStreet(INDEX_OF_STREET)
-                .enterHouseNumber(HOUSE_NUMBER_TO_ADD)
-                .enterHouseCorpus("3")
-                .enterEntranceNumber("2")
-                .enterStreet(STREET_TO_ADD)
-                .chooseStreet(INDEX_OF_STREET)
-                .clickOnAddAddressButton()
+                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
@@ -206,17 +203,7 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
 
         orderPageConfirmation.clickOnBackButton().clickOnAddAddressButton()
-                .clickOnCityField()
-                .chooseCity(NEW_INDEX_OF_CITY)
-                .chooseDistrict(NEW_INDEX_OF_DISTRICT)
-                .enterStreet(NEW_STREET_TO_ADD)
-                .chooseStreet(NEW_INDEX_OF_STREET)
-                .enterHouseNumber(NEW_HOUSE_NUMBER_TO_ADD)
-                .enterHouseCorpus("1")
-                .enterEntranceNumber("2")
-                .enterStreet(NEW_STREET_TO_ADD)
-                .chooseStreet(NEW_INDEX_OF_STREET)
-                .clickOnAddAddressButton()
+                .addFullAddress(NEW_INDEX_OF_CITY,NEW_INDEX_OF_DISTRICT,NEW_STREET_TO_ADD,NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
                 .clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
         softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pecherskiy");

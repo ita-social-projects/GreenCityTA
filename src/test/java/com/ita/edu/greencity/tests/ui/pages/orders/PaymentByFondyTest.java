@@ -25,6 +25,8 @@ public class PaymentByFondyTest extends TestRun {
     final int INDEX_OF_STREET = 0;
     final String STREET_TO_ADD = "Sevastopol's'ka Square";
     final String HOUSE_NUMBER_TO_ADD = "19";
+    final String CORPUS_TO_ADD = "2";
+    final String ENTRANCE_TO_ADD = "3";
 
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
@@ -77,15 +79,7 @@ public class PaymentByFondyTest extends TestRun {
         String expectedMessage = "Your order is accepted";
         String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .clickOnCityField()
-                .chooseCity(INDEX_OF_CITY)
-                .chooseDistrict(INDEX_OF_DISTRICT)
-                .enterStreet(STREET_TO_ADD)
-                .chooseStreet(INDEX_OF_STREET)
-                .enterHouseNumber(HOUSE_NUMBER_TO_ADD)
-                .enterStreet(STREET_TO_ADD)
-                .chooseStreet(INDEX_OF_STREET)
-                .clickOnAddAddressButton()
+                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())

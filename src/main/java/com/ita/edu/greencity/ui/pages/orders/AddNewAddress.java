@@ -176,4 +176,19 @@ public class AddNewAddress extends BasePage {
                 .enterHouseNumber(numberOfHouse);
         return new OrderPagePersonalData(driver);
     }
+
+    public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber){
+        OrderPagePersonalData orderPagePersonalData = new AddNewAddress(driver)
+                .clickOnCityField()
+                .chooseCity(indexCity)
+                .chooseDistrict(indexDistrict)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
+                .enterHouseNumber(numberOfHouse)
+                .enterHouseCorpus(corpusNumber)
+                .enterEntranceNumber(entranceNumber)
+                .clickOnAddAddressButton();
+        return new OrderPagePersonalData(driver);
+    }
+
 }
