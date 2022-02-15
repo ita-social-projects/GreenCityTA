@@ -37,12 +37,7 @@ public class AddNewAddressTest extends TestRun{
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertFalse(addNewAddress.getAddAddressButton().isEnabled(), "Address button is disabled");
 
-        addNewAddress.clickOnCityField()
-                .chooseCity(INDEX_CITY)
-                .chooseDistrict(INDEX_DISTRICT)
-                .enterStreet(STREET)
-                .chooseStreet(INDEX_STREET)
-                .enterHouseNumber(NUMBER_OF_HOUSE);
+        addNewAddress.addAddress(INDEX_CITY,INDEX_DISTRICT,STREET,INDEX_STREET,NUMBER_OF_HOUSE);
 
         softAssert.assertTrue(addNewAddress.getAddAddressButton().isEnabled(), "Address button is enabled");
         softAssert.assertAll();
