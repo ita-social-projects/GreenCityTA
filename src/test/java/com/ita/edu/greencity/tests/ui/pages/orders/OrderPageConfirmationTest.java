@@ -82,7 +82,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
         String numberOfOrder = actualMessage.substring(28, 32);
-        String expectedMessage = "Now you can find your " + numberOfOrder + " in your personal account and continue processing it at any time";
+        String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
@@ -93,7 +93,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnCancelButton()
                 .clickOnDeleteButton()
                 .getHomePageTitle();
-        String expectedMessage = "It's even easier than";
+        String expectedMessage = "It's even easier than before!";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
