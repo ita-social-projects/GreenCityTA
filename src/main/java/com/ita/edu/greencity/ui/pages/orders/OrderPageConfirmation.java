@@ -148,10 +148,6 @@ public class OrderPageConfirmation extends BasePage {
         return infoAboutExportAddressList.get(3).getText();
     }
 
-//    public String getOrderNumberInputs(int order) {
-//        return orderNumberInputs.get(order).getAttribute("value");
-//    }
-
     @Step("Return to the previous stage with personal data")
     public OrderPagePersonalData clickOnBackButton() {
         backButton.click();
