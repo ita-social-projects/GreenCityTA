@@ -1,13 +1,6 @@
 package com.ita.edu.greencity.utils.jdbc.services;
 
 import com.ita.edu.greencity.utils.jdbc.dao.EcoNewsCertificateDao;
-import com.ita.edu.greencity.utils.jdbc.dao.EcoNewsUserActionsDao;
-import com.ita.edu.greencity.utils.jdbc.dao.EcoNewsUsersDao;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsCertificateEntity;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUserActionsEntity;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
-
-import java.util.List;
 
 public class EcoNewsCertificateService {
     private EcoNewsCertificateDao ecoNewsCertificateDao;
@@ -25,6 +18,11 @@ public class EcoNewsCertificateService {
     }
     public String selectRandomUsedCertificate() {
         return ecoNewsCertificateDao.getRandomUsedCertificate().get(0);
+    }
+    public boolean checkIfCertificateExists(String codeValue) {
+         String value =ecoNewsCertificateDao.checkIfCertificateExists(codeValue).get(0);
+         if(value.equals("0")) return false;
+         else return true;
     }
 
 }

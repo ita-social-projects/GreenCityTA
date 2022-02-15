@@ -48,4 +48,20 @@ public class EcoNewsCertificateDao {
      return rows;
     }
 
+    public List<String> checkIfCertificateExists(String codeValue) {
+        Statement statement = ManagerDao.getUbs().getStatement();
+        List<String> rows = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsCertificateEntity.CHECK_IF_CERTIFICATE_EXISTS,codeValue));
+            while (resultSet.next()) {
+                rows.add(resultSet.getString("count"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.closeStatement(statement);
+        return rows;
+    }
+
 }
