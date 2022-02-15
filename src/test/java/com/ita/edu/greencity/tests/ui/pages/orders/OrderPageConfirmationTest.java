@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
@@ -28,6 +29,16 @@ public class OrderPageConfirmationTest extends TestRun {
     final String NEW_USER_LAST_NAME = "Winston";
     final String NEW_USER_EMAIL = "new_user@gmail.com";
     final String NEW_USER_PHONE_NUMBER = "+380 98 777 55 66";
+    final int INDEX_OF_CITY = 0;
+    final int INDEX_OF_DISTRICT = 4;
+    final int INDEX_OF_STREET = 0;
+    final String STREET_TO_ADD = "Sevastopol's'ka Square";
+    final String HOUSE_NUMBER_TO_ADD = "19";
+    final int NEW_INDEX_OF_CITY = 0;
+    final int NEW_INDEX_OF_DISTRICT = 4;
+    final int NEW_INDEX_OF_STREET = 0;
+    final String NEW_STREET_TO_ADD = "Lesi Ukrainky Boulevard";
+    final String NEW_HOUSE_NUMBER_TO_ADD = "11";
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
     public void beforeMethod(ITestContext iTestContext) {
@@ -87,7 +98,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
         String numberOfOrder = actualMessage.substring(28, 32);
-        String expectedMessage = "Now you can find your order " + numberOfOrder + " in your personal account and continue processing it at any time";
+        String expectedMessage = "Now you can find your order " + numberOfOrder + "in your personal account and continue processing it at any time";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
@@ -97,7 +108,7 @@ public class OrderPageConfirmationTest extends TestRun {
         String expectedNumberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(28, 32);
-        String actualNumberOfOrder = new HeaderSignedInComponent(driver).clickUbsUser()
+        String actualNumberOfOrder = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
                 .getOrderByNumber(expectedNumberOfOrder).getOrderId();
         Assert.assertEquals(actualNumberOfOrder, expectedNumberOfOrder, "Order with expected number does not exist");
     }
@@ -110,7 +121,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert().substring(28, 32);
         String expectedOrderStatus = "Formed";
-        String actualOrderStatus = new HeaderSignedInComponent(driver).clickUbsUser()
+        String actualOrderStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getOrderStatus();
         Assert.assertEquals(actualOrderStatus, expectedOrderStatus, "Order statuses do not match");
     }
@@ -143,27 +154,122 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertAll();
     }
 
+    @Description("Verify that info about the address of export is updated after language changing")
+    @Test
+    public void verifyExportAddressLocalizationTest(){
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Obolonskyi");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Heroiv Dnipra Street");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "14");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 1");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
+        new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
+        new OrderDetailsPage(driver).clickOnNextButton().clickOnNextButton();
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "м. Київ");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "район Оболонський");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Героїв Дніпра вул");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "14");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "корпус 2");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 1");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область");
+        softAssert.assertAll();
+    }
+
+
+    @Description("Verify that info about the address of export is updated after changing")
+    @Test
+    public void verifyExportAddressRelevanceAfterChangeTest() {
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnAddAddressButton()
+                .clickOnCityField()
+                .chooseCity(INDEX_OF_CITY)
+                .chooseDistrict(INDEX_OF_DISTRICT)
+                .enterStreet(STREET_TO_ADD)
+                .chooseStreet(INDEX_OF_STREET)
+                .enterHouseNumber(HOUSE_NUMBER_TO_ADD)
+                .enterHouseCorpus("3")
+                .enterEntranceNumber("2")
+                .enterStreet(STREET_TO_ADD)
+                .chooseStreet(INDEX_OF_STREET)
+                .clickOnAddAddressButton()
+                .clickOnNextButton();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solomyansiy");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), STREET_TO_ADD);
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), HOUSE_NUMBER_TO_ADD);
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 3");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
+
+        orderPageConfirmation.clickOnBackButton().clickOnAddAddressButton()
+                .clickOnCityField()
+                .chooseCity(NEW_INDEX_OF_CITY)
+                .chooseDistrict(NEW_INDEX_OF_DISTRICT)
+                .enterStreet(NEW_STREET_TO_ADD)
+                .chooseStreet(NEW_INDEX_OF_STREET)
+                .enterHouseNumber(NEW_HOUSE_NUMBER_TO_ADD)
+                .enterHouseCorpus("1")
+                .enterEntranceNumber("2")
+                .enterStreet(NEW_STREET_TO_ADD)
+                .chooseStreet(NEW_INDEX_OF_STREET)
+                .clickOnAddAddressButton()
+                .clickOnNextButton();
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pecherskiy");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), NEW_STREET_TO_ADD);
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), NEW_HOUSE_NUMBER_TO_ADD);
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 1");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
+        softAssert.assertAll();
+    }
 
     @Description("Verify that info about recipient is updated after changing")
     @Test
-    public void verifyRecipientCredentialsTest(){
+    public void verifyRecipientCredentialsTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(orderPageConfirmation.getRecipientName(),USER_FIRST_NAME);
-        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(),USER_LAST_NAME);
-        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(),provider.getEmail());
-        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(),USER_PHONE_NUMBER);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), provider.getEmail());
+        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), USER_PHONE_NUMBER);
 
         orderPageConfirmation.clickOnBackButton().enterFirstName(NEW_USER_FIRST_NAME)
-                        .entersurname(NEW_USER_LAST_NAME)
+                .entersurname(NEW_USER_LAST_NAME)
                 .enterEmail(NEW_USER_EMAIL)
                 .enterPhoneNumber(NEW_USER_PHONE_NUMBER).clickOnNextButton();
 
-        softAssert.assertEquals(orderPageConfirmation.getRecipientName(),NEW_USER_FIRST_NAME);
-        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(),NEW_USER_LAST_NAME);
-        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(),NEW_USER_EMAIL);
-        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(),NEW_USER_PHONE_NUMBER);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), NEW_USER_FIRST_NAME);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), NEW_USER_LAST_NAME);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), NEW_USER_EMAIL);
+        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), NEW_USER_PHONE_NUMBER);
         softAssert.assertAll();
+    }
+
+    @Description("Verify that after adding the eco store order it appears at the confirmation page")
+    @Test
+    public void verifyEcoStoreFunctionality(){
+        OrderDetailsPage orderDetailsPage = new OrderPagePersonalData(driver).clickOnBackButton();
+
+        String firstOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
+        String secondOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
+        String actual1 = orderDetailsPage
+                .clickOnYesWaitingStoreOrderCheckmark()
+                .EnterOrderNumberInputs(firstOrderNumber,0)
+                .clickOnAddAnotherNumberButton()
+                .EnterOrderNumberInputs(secondOrderNumber,1)
+                .clickOnNextButton()
+                .clickOnBackButton()
+                .getOrderNumberInputs(0);
+        String actual2 = orderDetailsPage.getOrderNumberInputs(1);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(actual1,firstOrderNumber);
+        softAssert.assertEquals(actual2,secondOrderNumber);
+
     }
 
 

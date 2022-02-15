@@ -41,6 +41,8 @@ public class OrderPageConfirmation extends BasePage {
     private List<WebElement> recipientCredentialsList;
     @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list']/li")
     private List<WebElement> infoAboutExportAddressList;
+    @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list d-flex']/li/strong")
+    private List<WebElement> ecoStoreOrderNumbersList;
 
 
     public OrderPageConfirmation(WebDriver driver) {
@@ -144,6 +146,10 @@ public class OrderPageConfirmation extends BasePage {
 
     public String getRegion(){
         return infoAboutExportAddressList.get(3).getText();
+    }
+
+    public String getOrderNumberInputs(int order) {
+        return orderNumberInputs.get(order).getAttribute("value");
     }
 
     @Step("Return to the previous stage with personal data")

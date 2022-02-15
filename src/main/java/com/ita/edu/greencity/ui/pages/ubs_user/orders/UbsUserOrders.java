@@ -5,6 +5,7 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,7 @@ public class UbsUserOrders extends BasePage {
 
     public UbsUserOrders(WebDriver driver) {
         super(driver);
+        loadData();
     }
 
     @FindBy(how = How.XPATH, using = ".//*[@class = 'if_empty ng-star-inserted']/span")
@@ -98,7 +100,8 @@ public class UbsUserOrders extends BasePage {
 
     @Step("get order from container by order number")
     public OrdersContainer getOrderByNumber(String numberOfOrder) {
-
+        sleep(10000);
+        waitUntilElementToBeClickable(By.xpath(".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]"),10);
         return putElementsIntoContainer()
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
@@ -154,6 +157,18 @@ public class UbsUserOrders extends BasePage {
     @Step("get header")
     public HeaderSignedInComponent getHeader() {
         return new HeaderSignedInComponent(driver);
+    }
+
+    public UbsUserOrders loadData(){
+        while (true){
+            try {
+                driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
+            } catch (Exception e) {
+                return this;
+            }
+            sleep(500);
+
+        }
     }
 
 }
