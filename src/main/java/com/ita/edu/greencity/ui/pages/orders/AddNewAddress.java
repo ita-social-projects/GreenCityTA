@@ -10,7 +10,6 @@ import java.util.List;
 
 public class AddNewAddress extends BasePage {
 
-
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-info-pop-up-title']")
     private WebElement newAddressTitle;
 
@@ -167,4 +166,29 @@ public class AddNewAddress extends BasePage {
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
     }
+
+    public OrderPagePersonalData addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse){
+        AddNewAddress addNewAddress = new AddNewAddress(driver).clickOnCityField()
+                .chooseCity(indexCity)
+                .chooseDistrict(indexDistrict)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
+                .enterHouseNumber(numberOfHouse);
+        return new OrderPagePersonalData(driver);
+    }
+
+    public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber){
+        OrderPagePersonalData orderPagePersonalData = new AddNewAddress(driver)
+                .clickOnCityField()
+                .chooseCity(indexCity)
+                .chooseDistrict(indexDistrict)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
+                .enterHouseNumber(numberOfHouse)
+                .enterHouseCorpus(corpusNumber)
+                .enterEntranceNumber(entranceNumber)
+                .clickOnAddAddressButton();
+        return new OrderPagePersonalData(driver);
+    }
+
 }

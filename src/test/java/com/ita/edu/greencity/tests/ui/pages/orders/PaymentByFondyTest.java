@@ -14,17 +14,19 @@ import java.util.Arrays;
 
 public class PaymentByFondyTest extends TestRun {
 
-    final String textileWaste120lAmount = "1";
-    final String safeWasteAmount = "1";
-    final String textileWaste20lAmount = "2";
-    final String userFirstName = "John";
-    final String userLastName = "Doe";
-    final String userPhoneNumber = "+380 (63) 114 46 78";
-    final int indexOfCity = 0;
-    final int indexOfDistrict = 4;
-    final int indexOfStreet = 0;
-    final String streetToAdd = "Sevastopol's'ka Square";
-    final String houseNumberToAdd = "19";
+    final String TEXTILE_WASTE_120L_AMOUNT = "1";
+    final String SAFE_WASTE_AMOUNT = "1";
+    final String TEXTILE_WASTE_20l_AMOUNT = "2";
+    final String USER_FIRST_NAME = "John";
+    final String USER_LAST_NAME = "Doe";
+    final String USER_PHONE_NUMBER = "+380 63 123 44 99";
+    final int INDEX_OF_CITY = 0;
+    final int INDEX_OF_DISTRICT = 4;
+    final int INDEX_OF_STREET = 0;
+    final String STREET_TO_ADD = "Sevastopol's'ka Square";
+    final String HOUSE_NUMBER_TO_ADD = "19";
+    final String CORPUS_TO_ADD = "2";
+    final String ENTRANCE_TO_ADD = "3";
 
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
@@ -34,13 +36,13 @@ public class PaymentByFondyTest extends TestRun {
         ubsHomePage.pressOrderCourier()
                 .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
                 .chooseRegionByIndex(0).clickOnContinueButton()
-                .EnterNumberOfTextileWaste120lInput(textileWaste120lAmount)
-                .EnterNumberOfSafeWasteInput(safeWasteAmount)
-                .EnterNumberOfTextileWaste20lInput(textileWaste20lAmount)
+                .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
+                .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
+                .EnterNumberOfTextileWaste20lInput(TEXTILE_WASTE_20l_AMOUNT)
                 .clickOnNextButton()
-                .enterFirstName(userFirstName)
-                .entersurname(userLastName).enterEmail(provider.getEmail())
-                .enterPhoneNumber(userPhoneNumber);
+                .enterFirstName(USER_FIRST_NAME)
+                .entersurname(USER_LAST_NAME).enterEmail(provider.getEmail())
+                .enterPhoneNumber(USER_PHONE_NUMBER);
     }
 
     @Description("Verify whether the error message about wrong email address is displayed")
@@ -50,7 +52,8 @@ public class PaymentByFondyTest extends TestRun {
         String expected = "Please enter a valid email";
         String actual =  orderPageConfirmation
                 .clickOnOrderButton()
-                .chooseLanguage("English").emailInput("testgreencity@gmail.").unfocus().focusToEmailField().getEmailErrorMessage();
+                .chooseLanguage("English").emailInput("testgreencity@gmail.")
+                .unfocus().focusToEmailField().getEmailErrorMessage();
         Assert.assertEquals(actual,expected);
     }
 
@@ -76,15 +79,7 @@ public class PaymentByFondyTest extends TestRun {
         String expectedMessage = "Your order is accepted";
         String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .clickOnCityField()
-                .chooseCity(indexOfCity)
-                .chooseDistrict(indexOfDistrict)
-                .enterStreet(streetToAdd)
-                .chooseStreet(indexOfStreet)
-                .enterHouseNumber(houseNumberToAdd)
-                .enterStreet(streetToAdd)
-                .chooseStreet(indexOfStreet)
-                .clickOnAddAddressButton()
+                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())
@@ -109,6 +104,20 @@ public class PaymentByFondyTest extends TestRun {
                         .getTotalPay()
                         .replace(",", "."));
         Assert.assertEquals(orderAmountInUbs, orderAmountInFondy);
+    }
+
+
+    @Description("Verify make other order functionality")
+    @Test
+    public void makeOtherOrderTest(){
+        String actual = new OrderPagePersonalData(driver).clickOnNextButton().clickOnOrderButton()
+                .cardNumberInput(provider.getCardNumber())
+                .expiryDateInput(provider.getExpiryDate())
+                .CVV2Input(provider.getCVV2())
+                .emailInput(provider.getEmail())
+                .clickOnPayButton().clickOnContinueButton().clickOnMakeOtherOrderButton().getTitleText();
+        String expected = "Welcome to UBS!";
+        Assert.assertTrue(actual.contains(expected));
     }
 
 }
