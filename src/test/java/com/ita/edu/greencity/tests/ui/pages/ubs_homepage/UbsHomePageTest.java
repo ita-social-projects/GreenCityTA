@@ -1,4 +1,3 @@
-
 package com.ita.edu.greencity.tests.ui.pages.ubs_homepage;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
@@ -20,7 +19,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 
 public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
@@ -109,7 +107,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if text equals sample")
     @Issue("")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkIfTextEquals(){
+    public void checkIfTextEquals() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "The UBS Courier service will save your time and money for getting to the sorting station. And as a bonus, you will receive a free delivery of our eco-products around Kyiv.";
         Assert.assertEquals(ubsHomePage.getMiddleText(), expected);
@@ -119,7 +117,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if element on display")
     @Issue("")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkIfDivHowToPrepareOnDisplay(){
+    public void checkIfDivHowToPrepareOnDisplay() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         Assert.assertTrue(ubsHomePage.checkIfDivHowToPrepare());
     }
@@ -138,7 +136,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
         actual.addAll(UlElement);
 //        UlElement.forEach(i->actual.add(i));
         System.out.println(actual.size());
-        Assert.assertEquals(actual.size(),expected);
+        Assert.assertEquals(actual.size(), expected);
     }
 
     @Test
@@ -149,7 +147,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         BasePage basePage = new BasePage(driver);
         basePage.implicitWait(5000);
-        List <String> expected = Arrays.asList(
+        List<String> expected = Arrays.asList(
                 ("check out our Rules of sorting wastes (link)."),
                 ("Everything you give to the Courier must be clean and dry – it’s Must Have."),
                 ("Recyclables and non-recyclable plastics can be put together in one package /sack of a 120 liters size - we will re-sort everything."),
@@ -160,10 +158,10 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
         );
         List<WebElement> UlElement = driver.findElements(By.xpath("//section[1]//*/div[@class='header-right']/ul[1]//*"));
         List<String> actual = new ArrayList<>();
-        UlElement.forEach(i->actual.add(i.getText()));
+        UlElement.forEach(i -> actual.add(i.getText()));
         System.out.println(actual.size());
         System.out.println(expected.size());
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
 
@@ -180,7 +178,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if text is correct")
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
-    public void checkTextPriceUbsCourier(){
+    public void checkTextPriceUbsCourier() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         String expected = "The cost of the service “UBS Courier";
         Assert.assertEquals(ubsHomePage.checkTextPriceUbsCourier(), expected);
@@ -190,7 +188,7 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if element on display")
     @Issue("")
     @Severity(SeverityLevel.CRITICAL)
-    public void checkIfBurgerMenuonDisplay(){
+    public void checkIfBurgerMenuonDisplay() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         Assert.assertTrue(ubsHomePage.checkIfBurgerMenuOnDisplay());
     }
@@ -199,8 +197,8 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if ...")
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
-    public void clickBurgerMenu(){
-        driver.manage().window().setSize(new Dimension(900,900));
+    public void clickBurgerMenu() {
+        driver.manage().window().setSize(new Dimension(900, 900));
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.clickBurgerMenu();
         List<WebElement> listOfMenu = driver.findElements(By.xpath("//ul[@role='tablist']//a"));
@@ -214,11 +212,11 @@ public class UbsHomePageTest extends BeforeUbsHomePageTestRun {
     @Description("Check if ...")
     @Issue("")
     @Severity(SeverityLevel.NORMAL)
-    public void printListOfname(){
+    public void printListOfname() {
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         System.out.println(ubsHomePage.getListOfAllImgValue().size());
         System.out.println(ubsHomePage.getListOfAllImgValue());
-        for(WebElement i : ubsHomePage.getListOfAllImgValue()) System.out.println(i.getAttribute("alt"));
+        for (WebElement i : ubsHomePage.getListOfAllImgValue()) System.out.println(i.getAttribute("alt"));
     }
 
 

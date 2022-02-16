@@ -10,20 +10,11 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
-    private WebDriver driver;
-
-    private DefaultElementLocatorFactory parentContext;
-
-    private WebElement rootElement;
-
-    public OrdersContainer(WebDriver driver, WebElement rootElement) {
-        this.rootElement = rootElement;
-        this.driver = driver;
-        parentContext = new DefaultElementLocatorFactory(rootElement);
-        PageFactory.initElements(parentContext, this);
-    }
-
-
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
+    private final WebDriver driver;
+    private final DefaultElementLocatorFactory parentContext;
+    private final WebElement rootElement;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-content')]")
     private WebElement orderDetails;
 
@@ -48,8 +39,12 @@ public class OrdersContainer {
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
     private WebElement payButton;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
+    public OrdersContainer(WebDriver driver, WebElement rootElement) {
+        this.rootElement = rootElement;
+        this.driver = driver;
+        parentContext = new DefaultElementLocatorFactory(rootElement);
+        PageFactory.initElements(parentContext, this);
+    }
 
     @Step("get order id")
     public String getOrderId() {

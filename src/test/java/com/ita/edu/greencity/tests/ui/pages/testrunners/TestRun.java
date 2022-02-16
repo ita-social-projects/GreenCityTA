@@ -21,12 +21,12 @@ import java.time.Duration;
 
 @Listeners(TestNGListener.class)
 public class TestRun {
-    protected WebDriver driver;
     protected static ValueProvider provider;
+    protected WebDriver driver;
 
     @BeforeSuite(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
-        for(ITestNGMethod method : iTestContext.getAllTestMethods()) {
+        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
             method.setRetryAnalyzerClass(RetryAnalyzer.class);
         }
         WebDriverManager.chromedriver().setup();
@@ -34,19 +34,19 @@ public class TestRun {
     }
 
     @BeforeMethod(description = "Configure chromedriver and go to UbsHomePageURL")
-    public void beforeMethod(ITestContext iTestContext){
+    public void beforeMethod(ITestContext iTestContext) {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(provider.getUbsHomePageURL());
-        LocalStorage localStorage = ((WebStorage)driver).getLocalStorage();
+        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
         localStorage.setItem("language", "en");
         driver.navigate().refresh();
-        iTestContext.setAttribute("driver",driver);
+        iTestContext.setAttribute("driver", driver);
     }
 
     @AfterMethod(description = "Quite chromedriver")
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }

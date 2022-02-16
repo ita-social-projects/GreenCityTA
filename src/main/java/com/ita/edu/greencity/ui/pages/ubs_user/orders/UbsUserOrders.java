@@ -16,33 +16,25 @@ import java.util.List;
 
 public class UbsUserOrders extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'if_empty ng-star-inserted']/span")
+    private WebElement emptyOrdersPageLabel;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
+    private WebElement newOrderButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')][contains(@class, 'mat-ripple')]")
+    private WebElement currentOrdersTab;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')]/*[contains(@class, 'mat-tab-label-content')]")
+    private WebElement currentOrdersTabButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')][contains(@class, 'mat-ripple')]")
+    private WebElement orderHistoryTab;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
+    private WebElement orderHistoryTabButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-accordion')]/*[contains(@class, 'mat-expansion-panel')]")
+    private List<WebElement> orders;
+
     public UbsUserOrders(WebDriver driver) {
         super(driver);
         loadData();
     }
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'if_empty ng-star-inserted']/span")
-    private WebElement emptyOrdersPageLabel;
-
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
-    private WebElement newOrderButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')][contains(@class, 'mat-ripple')]")
-    private WebElement currentOrdersTab;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')]/*[contains(@class, 'mat-tab-label-content')]")
-    private WebElement currentOrdersTabButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')][contains(@class, 'mat-ripple')]")
-    private WebElement orderHistoryTab;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
-    private WebElement orderHistoryTabButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-accordion')]/*[contains(@class, 'mat-expansion-panel')]")
-    private List<WebElement> orders;
-
 
     @Step("get element of new order button")
     public WebElement getNewOrderButton() {
@@ -101,7 +93,7 @@ public class UbsUserOrders extends BasePage {
     @Step("get order from container by order number")
     public OrdersContainer getOrderByNumber(String numberOfOrder) {
         sleep(10000);
-        waitUntilElementToBeClickable(By.xpath(".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]"),10);
+        waitUntilElementToBeClickable(By.xpath(".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]"), 10);
         return putElementsIntoContainer()
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
@@ -159,8 +151,8 @@ public class UbsUserOrders extends BasePage {
         return new HeaderSignedInComponent(driver);
     }
 
-    public UbsUserOrders loadData(){
-        while (true){
+    public UbsUserOrders loadData() {
+        while (true) {
             try {
                 driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
             } catch (Exception e) {

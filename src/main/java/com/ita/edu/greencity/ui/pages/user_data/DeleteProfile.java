@@ -18,12 +18,12 @@ public class DeleteProfile extends BasePage {
         super(driver);
     }
 
-    public UserData clickOnBackButton(){
+    public UserData clickOnBackButton() {
         backButton.click();
         return new UserData(driver);
     }
 
-    public UserData clickOnDeleteButton(){
+    public UserData clickOnDeleteButton() {
         deleteButton.click();
         return new UserData(driver);
     }

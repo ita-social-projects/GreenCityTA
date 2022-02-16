@@ -1,8 +1,6 @@
 package com.ita.edu.greencity.ui.pages.user_data;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -13,19 +11,17 @@ import java.util.List;
 
 public class DisplayAddressContainer {
 
+    @FindBy(how = How.CSS, using = "p.ng-star-inserted")
+    private List<WebElement> dataAddressTable;
+    @FindBy(how = How.CSS, using = "h5")
+    private WebElement addressNumberShow;
+    @FindBy(how = How.CSS, using = "label.form-label")
+    private List<WebElement> addressLabels;
+
     public DisplayAddressContainer(WebElement rootElement) {
         DefaultElementLocatorFactory parentContext = new DefaultElementLocatorFactory(rootElement);
         PageFactory.initElements(parentContext, this);
     }
-
-    @FindBy(how = How.CSS, using = "p.ng-star-inserted")
-    private List<WebElement> dataAddressTable;
-
-    @FindBy(how = How.CSS, using = "h5")
-    private WebElement addressNumberShow;
-
-    @FindBy(how = How.CSS, using = "label.form-label")
-    private List<WebElement> addressLabels;
 
     @Step("get address number data")
     public String getAddressNumberShow() {
@@ -101,7 +97,6 @@ public class DisplayAddressContainer {
     public String getEntranceLabel() {
         return addressLabels.get(6).getText();
     }
-
 
 
 }

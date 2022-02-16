@@ -4,6 +4,7 @@ import com.ita.edu.greencity.ui.elements.base_element.Element;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -32,7 +33,7 @@ public class ElementHandler implements InvocationHandler {
             element = locator.findElement();
         } catch (NoSuchElementException e) {
             if ("toString".equals(method.getName())) {
-                return "Proxy element for: " + locator.toString();
+                return "Proxy element for: " + locator;
             }
             throw e;
         }
