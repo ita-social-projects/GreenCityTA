@@ -8,10 +8,7 @@ import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -35,6 +32,7 @@ public class SignUpWithGoogleTest extends TestRun {
     @Description("Check correct registration of user with Google")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
+    @Link("https://jira.softserve.academy/browse/GC-218")
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";

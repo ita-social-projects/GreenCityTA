@@ -5,10 +5,7 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -32,6 +29,7 @@ public class SignUpPersonTest extends TestRun {
     @Description("Check correct registration of user to system")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
+    @Link("https://jira.softserve.academy/browse/GC-213")
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";
