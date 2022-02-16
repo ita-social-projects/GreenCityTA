@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -8,7 +9,6 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 public class AddNewAddress extends BasePage {
-
 
     @FindBy(how = How.XPATH, using = "//h2[@class ='personal-info-pop-up-title']")
     private WebElement newAddressTitle;
@@ -65,6 +65,7 @@ public class AddNewAddress extends BasePage {
     private WebElement commentToTheAddressErrorMessage;
 
 
+    @Step("choose street by index of list")
     public AddNewAddress chooseStreet(int index){
 //        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
         this.sleep(2000);
@@ -77,78 +78,117 @@ public class AddNewAddress extends BasePage {
         super(driver);
     }
 
+    @Step("get webElement 'addAddressButton'")
     public WebElement getAddAddressButton() {
         return addAddressButton;
     }
 
+    @Step("click on add address button")
     public OrderPagePersonalData clickOnAddAddressButton() {
         sleep(5000);
         addAddressButton.click();
         return new OrderPagePersonalData(driver);
     }
 
+    @Step("click on cancel button")
     public OrderPagePersonalData clickOnCancelButton() {
         cancelButton.click();
         return new OrderPagePersonalData(driver);
     }
 
+    @Step("enter comment to the address")
     public AddNewAddress enterAddressComment(final String addressComment) {
         addressCommentField.clear();
         addressCommentField.sendKeys(addressComment, Keys.ENTER);
         return this;
     }
 
+    @Step("enter entrance")
     public AddNewAddress enterEntranceNumber(final String houseCorpus) {
         entranceNumberField.clear();
         entranceNumberField.sendKeys(houseCorpus, Keys.ENTER);
         return this;
     }
 
+    @Step("enter house corpus")
     public AddNewAddress enterHouseCorpus(final String houseCorpus) {
         houseCorpusField.clear();
         houseCorpusField.sendKeys(houseCorpus, Keys.ENTER);
         return this;
     }
 
+    @Step("enter house number")
     public AddNewAddress enterHouseNumber(final String houseNumber) {
         houseNumberField.clear();
         houseNumberField.sendKeys(houseNumber, Keys.ENTER);
         return this;
     }
 
+    @Step("enter street")
     public AddNewAddress enterStreet(final String street) {
         streetField.clear();
         streetField.sendKeys(street);
         return this;
     }
 
+    @Step("choose city by index of list")
     public AddNewAddress chooseCity(int index) {
         clickOnCityField();
         listOfCities.get(index).click();
         return this;
     }
 
+    @Step("choose district by index of list")
     public AddNewAddress chooseDistrict(int index) {
         clickOnDistrictField();
         listOfDistricts.get(index).click();
         return this;
     }
 
+    @Step("click on district field")
     public AddNewAddress clickOnDistrictField() {
         districtField.click();
         return this;
     }
 
+    @Step("click on city field")
     public AddNewAddress clickOnCityField() {
         cityField.click();
         return this;
     }
 
+    @Step("get text from region field")
     public String getTextFromRegionField() {
         return regionField.getText();
     }
 
+    @Step("get text from new address title")
     public String getTextFromNewAddressTitle() {
         return newAddressTitle.getText();
     }
+
+    public OrderPagePersonalData addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse){
+        AddNewAddress addNewAddress = new AddNewAddress(driver).clickOnCityField()
+                .chooseCity(indexCity)
+                .chooseDistrict(indexDistrict)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
+                .enterHouseNumber(numberOfHouse);
+        return new OrderPagePersonalData(driver);
+    }
+
+    public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber){
+        OrderPagePersonalData orderPagePersonalData = new AddNewAddress(driver)
+                .clickOnCityField()
+                .chooseCity(indexCity)
+                .chooseDistrict(indexDistrict)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
+                .enterHouseNumber(numberOfHouse)
+                .enterHouseCorpus(corpusNumber)
+                .enterEntranceNumber(entranceNumber)
+                .clickOnAddAddressButton();
+        return new OrderPagePersonalData(driver);
+    }
+
 }

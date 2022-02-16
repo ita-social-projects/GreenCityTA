@@ -2,11 +2,14 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import java.util.List;
 
 
 public class OrderPagePersonalData extends BasePage {
@@ -67,10 +70,13 @@ public class OrderPagePersonalData extends BasePage {
     private WebElement nextButton;
 
     @FindBy(how = How.XPATH, using = "//img[@alt = 'edit image']")
-    private WebElement editCollectionAddressButton;
+    private List<WebElement> editSavedAddress;
 
     @FindBy(how = How.XPATH, using = "//img[@alt = 'delete image']")
-    private WebElement deleteCollectionAddressButton;
+    private List<WebElement> deleteSavedAddress;
+
+    @FindBy(how = How.XPATH, using = "//input[@name ='address']")
+    private List<WebElement> chooseSavedAddress;
 
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[2]/div/app-ubs-input-error/div")
     private WebElement nameErrorMessage;
@@ -93,130 +99,158 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
     private WebElement anotherClientPhoneNumberErrorMessage;
 
-
+    @Step("get text from error message (Another client phone number field)")
     public String getTextFromAnotherClientPhoneNumberErrorMessage() {
         return anotherClientPhoneNumberErrorMessage.getText();
     }
 
+    @Step("get text from error message (Another client surname field)")
     public String getTextFromAnotherClientSurnameErrorMessage() {
         return anotherClientSurnameErrorMessage.getText();
     }
 
+    @Step("get text from error message (Another client name field)")
     public String getTextFromAnotherClientNameErrorMessage() {
         return anotherClientNameErrorMessage.getText();
     }
 
+    @Step("get text from error message (Email field)")
     public String getTextFromEmailErrorMessage() {
         return emailErrorMessage.getText();
     }
 
+    @Step("get text from error message (Phone number field)")
     public String getTextFromPhoneNumberErrorMessage() {
         return phoneNumberErrorMessage.getText();
     }
 
+    @Step("get text from error message (Surname field)")
     public String getTextFromSurnameErrorMessage() {
         return surnameErrorMessage.getText();
     }
 
+    @Step("get text from error message (Name field)")
     public String getTextFromNameErrorMessage() {
         return nameErrorMessage.getText();
     }
 
-
-    public OrderPagePersonalData clickOnDeleteCollectionAddressButton() {
-        deleteCollectionAddressButton.click();
+    @Step("click on delete collection button")
+    public OrderPagePersonalData clickOnDeleteCollectionAddressButton(int indexOfSavedAddress) {
+        deleteSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
 
-    public AddNewAddress clickOnEditAddressButton() {
-        editCollectionAddressButton.click();
+    @Step("click on edit address button")
+    public AddNewAddress clickOnEditAddressButton(int indexOfSavedAddress) {
+        editSavedAddress.get(indexOfSavedAddress).click();
         return new AddNewAddress(driver);
     }
 
+    @Step("click on choose saved address button")
+    public AddNewAddress clickOnChooseAddressButton(int indexOfSavedAddress) {
+        chooseSavedAddress.get(indexOfSavedAddress).click();
+        return new AddNewAddress(driver);
+    }
+
+    @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
         sleep(5000);
         nextButton.click();
         return new OrderPageConfirmation(driver);
     }
 
+    @Step("click on cancel button")
     public UbsHomePage clickOnCancelButton() {
         cancelButton.click();
         return new UbsHomePage(driver);
     }
 
+    @Step("click on 'back' button")
     public OrderDetailsPage clickOnBackButton() {
         sleep(2000);
         backButton.click();
         return new OrderDetailsPage(driver);
     }
 
+    @Step("enter comment into 'Address comment' field")
     public OrderPagePersonalData enterAddressComment(final String addressComment) {
         addressCommentField.clear();
         addressCommentField.sendKeys(addressComment, Keys.ENTER);
         return this;
     }
 
+    @Step("get text title (Comment field)")
     public String getTextFromCommentTitle() {
         return commentTitle.getText();
     }
 
+    @Step("click on add address button")
     public AddNewAddress clickOnAddAddressButton() {
         this.sleep(2000);
         addAddressButton.click();
         return new AddNewAddress(driver);
     }
 
+    @Step("get text title (Address field)")
     public String getTextFromAddressTitle() {
         return addressTitle.getText();
     }
 
+    @Step("enter email (Another client email field)")
     public OrderPagePersonalData enterAnotherClientEmail(final String email) {
         anotherClientEmailField.clear();
         anotherClientEmailField.sendKeys(email, Keys.ENTER);
         return this;
     }
 
+    @Step("enter phone number (Another client phone number field)")
     public OrderPagePersonalData enterAnotherClientPhoneNumber(final String phoneNumber) {
         anotherClientPhoneNumberField.clear();
         anotherClientPhoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
 
+    @Step("enter surname (Another client surname field)")
     public OrderPagePersonalData enterAnotherClientLastName(final String lastName) {
         anotherClientLastNameField.clear();
         anotherClientLastNameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
+    @Step("enter first name (Another client first name field)")
     public OrderPagePersonalData enterAnotherClientFirstName(final String firstName) {
         anotherClientFirstNameField.clear();
         anotherClientFirstNameField.sendKeys(firstName, Keys.ENTER);
         return this;
     }
 
+    @Step("click on another client checkbox")
     public OrderPagePersonalData clickOnAnotherClientButton() {
         anotherClientButton.click();
         return this;
     }
 
+    @Step("enter email (Email field)")
     public OrderPagePersonalData enterEmail(final String email) {
         emailField.clear();
         emailField.sendKeys(email, Keys.ENTER);
         return this;
     }
 
+    @Step("enter phone number (Phone number field)")
     public OrderPagePersonalData enterPhoneNumber(final String phoneNumber) {
         phoneNumberField.clear();
         phoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
-
+    @Step("enter surname (Surname field)")
     public OrderPagePersonalData entersurname(final String lastName) {
         surnameField.clear();
         surnameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
+    @Step("enter first name (First name field)")
     public OrderPagePersonalData enterFirstName(final String firstName) {
         firstNameField.clear();
         firstNameField.sendKeys(firstName, Keys.ENTER);
@@ -228,6 +262,7 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
+    @Step("get text from title")
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
     }

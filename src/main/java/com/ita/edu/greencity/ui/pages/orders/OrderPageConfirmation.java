@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class OrderPageConfirmation extends BasePage {
@@ -35,6 +36,14 @@ public class OrderPageConfirmation extends BasePage {
     private WebElement cancelButton;
     @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button btn']")
     private WebElement orderButton;
+
+    @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list ng-star-inserted']/li")
+    private List<WebElement> recipientCredentialsList;
+    @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list']/li")
+    private List<WebElement> infoAboutExportAddressList;
+    @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list d-flex']/li/strong")
+    private List<WebElement> ecoStoreOrderNumbersList;
+
 
     public OrderPageConfirmation(WebDriver driver) {
         super(driver);
@@ -94,6 +103,54 @@ public class OrderPageConfirmation extends BasePage {
         paymentOption("Fondy").click();
         return this;
     }
+
+    public String getRecipientName(){
+       return Arrays.stream(recipientCredentialsList.get(0).getText().split("\s")).toList().get(0);
+    }
+
+    public String getRecipientSurname(){
+        return Arrays.stream(recipientCredentialsList.get(0).getText().split("\s")).toList().get(1);
+    }
+
+    public String getRecipientPhoneNumber(){
+        return recipientCredentialsList.get(1).getText();
+    }
+
+    public String getRecipientEmailAddress(){
+        return recipientCredentialsList.get(2).getText();
+    }
+
+    public String getCity(){
+        return infoAboutExportAddressList.get(0).getText();
+    }
+
+    public String getDistrict(){
+        return infoAboutExportAddressList.get(1).getText();
+    }
+
+    public String getStreet(){
+        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(0);
+    }
+
+    public String getHouseNumber(){
+        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(1);
+    }
+
+    public String getCorpus(){
+        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(2);
+    }
+
+    public String getEntrance(){
+        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(3);
+    }
+
+    public String getRegion(){
+        return infoAboutExportAddressList.get(3).getText();
+    }
+
+//    public String getOrderNumberInputs(int order) {
+//        return orderNumberInputs.get(order).getAttribute("value");
+//    }
 
     @Step("Return to the previous stage with personal data")
     public OrderPagePersonalData clickOnBackButton() {
