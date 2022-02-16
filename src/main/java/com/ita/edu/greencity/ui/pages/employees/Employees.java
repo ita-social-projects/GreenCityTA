@@ -14,11 +14,14 @@ public class Employees extends BasePage {
     public Employees(WebDriver driver) {
         super(driver);
     }
+    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-1']/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button")
+    private WebElement singInButton;
 
-    @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs/app-header/header/div/div/div/div/ul/ul[2]/li[1]")
+
+    @FindBy(how = How.XPATH, using = "//ul[@id='header_user-wrp']")
     private WebElement adminPopMenu;
 
-    @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs/app-header/header/div/div/div/div/ul/ul[2]/li[5]/a")
+    @FindBy(how = How.XPATH, using = "//*[@id='header_user-wrp']/li[5]/a")
     private WebElement buttonUbsAdmin;
 
     @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer/div/ul/li[4]")
@@ -36,21 +39,41 @@ public class Employees extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname='lastName']")
     private WebElement inputSurname;
 
-    @FindBy(how = How.XPATH, using = "//input[@class='ng-dirty ng-valid ng-touched']")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='phoneNumber']")
     private WebElement inputPhone;
 
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "//input[@formcontrolname='email']")
     private WebElement inputEmailArr;
 
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "//div[@class='checkbox-role ng-star-inserted'][1]")
     private WebElement buttonServiceManager;
 
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "//label[@class='checkbox-label-station']")
     private WebElement buttonSelectRegionInAddMenu;
 
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "//button[@class='addButton']")
     private WebElement buttonAddEmployeeInAddMenu;
 
+    @FindBy(how = How.XPATH, using = "/html/body/div[2]/div[3]/div/snack-bar-container/simple-snack-bar/span")
+    private WebElement errorNameMessage;
+
+    @FindBy(how = How.XPATH, using = "/html/body/div[2]/div[3]/div/snack-bar-container")
+    private WebElement errorPhoneMessage;
+
+
+    @FindBy(how = How.XPATH, using = "//simple-snack-bar[@class='mat-simple-snackbar ng-star-inserted']//span")
+    private WebElement errorSurnameMessage;
+
+
+
+
+
+
+
+    @Step("click on singInButton")
+    public void clickSingInButton(){
+        singInButton.click();
+    }
 
     @Step("click on pop-up menu")
     public void clickAdminPopMenu(){
@@ -94,28 +117,28 @@ public class Employees extends BasePage {
     @Step("input value to nameArr")
     public Employees sendKeysNameArr(String inputText){
         inputName.clear();
-        inputName.sendKeys(inputText, Keys.ENTER);
+        inputName.sendKeys(inputText);
         return this;
     }
 
     @Step("input value to surnameArr")
     public Employees sendKeysSurnameArr(String inputText){
         inputSurname.clear();
-        inputSurname.sendKeys(inputText, Keys.ENTER);
+        inputSurname.sendKeys(inputText);
         return this;
     }
 
     @Step("input value to phoneArr")
     public Employees sendKeysPhoneArr(String inputNum){
         inputPhone.clear();
-        inputPhone.sendKeys(inputNum, Keys.ENTER);
+        inputPhone.sendKeys(inputNum);
         return this;
     }
 
     @Step("input value to emailArr")
     public Employees sendKeysEmailArr(String inputEmail){
         inputEmailArr.clear();
-        inputEmailArr.sendKeys(inputEmail, Keys.ENTER);
+        inputEmailArr.sendKeys(inputEmail);
         return this;
     }
 
@@ -134,15 +157,17 @@ public class Employees extends BasePage {
         buttonAddEmployeeInAddMenu.click();
     }
 
-    public Employees loadData(){
+    public Employees loadData(String xpath){
         while (true){
             try {
-                driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
+                driver.findElement(By.xpath(xpath));
             } catch (Exception e) {
                 return this;
             }
             sleep(500);
-
         }
     }
+
+
+
 }

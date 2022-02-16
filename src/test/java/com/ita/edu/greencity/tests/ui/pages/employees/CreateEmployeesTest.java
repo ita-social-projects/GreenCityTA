@@ -14,6 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CreateEmployeesTest extends EmployeesTestRun {
+
+    String CORRECT_MENU_NAME = "Leonard";
+    String CORRECT_MENU_SURNAME = "Hofstadter";
+    String CORRECT_MENU_PHONE = "676706767";
+    String CORRECT_MENU_EMAIL = "test@ukr.net";
+
+
     @BeforeMethod
     public void beforeMethod(ITestContext testContext)   {
         super.beforeMethod(testContext);
@@ -23,7 +30,7 @@ public class CreateEmployeesTest extends EmployeesTestRun {
         SelectRegion selectRegion = new SelectRegion(driver);
         Employees employees = new Employees(driver);
         basePage.sleep(2000);
-        
+
     }
 
 
@@ -32,17 +39,24 @@ public class CreateEmployeesTest extends EmployeesTestRun {
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
     public void checkCorrectAddEmployee() {
+        System.out.println("00000");
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
-        basePage.sleep(5000);
+        basePage.sleep(6000);
         employees.pressButtonAddEmployee();
-        employees.sendKeysNameArr("Leonard");
-        employees.sendKeysSurnameArr("Hofstadter");
-        employees.sendKeysPhoneArr("676706767");
-        employees.sendKeysEmailArr("test@ukr.net");
+        employees.sendKeysNameArr(CORRECT_MENU_NAME);
+        System.out.println("1111");
+        employees.sendKeysSurnameArr(CORRECT_MENU_SURNAME);
+        System.out.println("2222");
+        employees.sendKeysPhoneArr(CORRECT_MENU_PHONE);
+        System.out.println("3333");
+        employees.sendKeysEmailArr(CORRECT_MENU_EMAIL);
+        System.out.println("44444");
         basePage.sleep(2000);
         employees.pressButtonServiceManager();
+        System.out.println("555555");
         employees.pressButtonSetectRegionAddMenu();
+        System.out.println("66666");
         employees.pressButtonAddEmployeeAddMenu();
 
 
