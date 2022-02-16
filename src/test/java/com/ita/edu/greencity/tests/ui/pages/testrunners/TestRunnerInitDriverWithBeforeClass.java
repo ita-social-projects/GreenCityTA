@@ -20,12 +20,12 @@ public class TestRunnerInitDriverWithBeforeClass extends TestRun {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
 
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }

@@ -2,7 +2,6 @@ package com.ita.edu.greencity.ui.pages.user_data;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,69 +53,82 @@ public class UserData extends BasePage {
     }
 
     @Step("click on 'Edit data' button")
-    public EditUserData clickOnEditDataButton()  {
+    public EditUserData clickOnEditDataButton() {
         this.sleep(3000);
         editData.click();
-        return  new EditUserData(driver);
+        return new EditUserData(driver);
 
     }
+
     @Step("get data from 'Name' field")
-    public String getTextFromNameField(){
+    public String getTextFromNameField() {
         return name.getText();
     }
+
     @Step("get data from 'Surname' field")
-    public String getTextFromSurnameField(){
+    public String getTextFromSurnameField() {
         return surname.getText();
     }
+
     @Step("get data from 'Email' field")
-    public String getTextFromEmailField(){
+    public String getTextFromEmailField() {
         return email.getText();
     }
+
     @Step("get data from 'Phone' field")
-    public String getTextFromPhoneField(){
+    public String getTextFromPhoneField() {
         return phone.getText();
     }
+
     @Step("get data from 'Name' label")
-    public String getTextFromNameLabel(){
+    public String getTextFromNameLabel() {
         return nameLabelText.getText();
     }
+
     @Step("get data from 'Surname' label")
-    public String getTextFromSurnameLabel(){
+    public String getTextFromSurnameLabel() {
         return surnameLabelText.getText();
     }
+
     @Step("get data from 'Email' label")
-    public String getTextFromEmailLabel(){
+    public String getTextFromEmailLabel() {
         return emailLabelText.getText();
     }
+
     @Step("get data from 'Phone' label")
-    public String getTextFromPhoneLabel(){
+    public String getTextFromPhoneLabel() {
         return phoneLabelText.getText();
     }
+
     @Step("get data from 'Edit data' button")
-    public String getTextFromEditDataButton(){
+    public String getTextFromEditDataButton() {
         return editData.getText();
     }
+
     @Step("get data from 'Change password' button")
-    public String getTextFromChangePasswordButton(){
+    public String getTextFromChangePasswordButton() {
         return changePassword.getText();
     }
+
     @Step("get data from 'Delete profile' button")
-    public String getTextFromDeleteProfileButton(){
+    public String getTextFromDeleteProfileButton() {
         return deleteProfile.getText();
     }
 
 
     @Step("click on 'Change password' button")
-    public ChangePassword clickOnChangePasswordButton(){
+    public ChangePassword clickOnChangePasswordButton() {
         this.sleep(10000);
         changePassword.click();
         return new ChangePassword(driver);
     }
+
     @Step("click on 'Delete profile' button")
-    public DeleteProfile clickOnDeleteProfileButton(){
+    public DeleteProfile clickOnDeleteProfileButton() {
         deleteProfile.click();
         return new DeleteProfile(driver);
     }
+
     private List<DisplayAddressContainer> getAddress() {
         List<DisplayAddressContainer> addressContainerList = new ArrayList<>();
         for (WebElement element : allAdresses) {
@@ -124,6 +136,7 @@ public class UserData extends BasePage {
         }
         return addressContainerList;
     }
+
     @Step("choose number of address, which you want to get data")
     public DisplayAddressContainer chooseAddressShow(String number) {
         this.sleep(3000);

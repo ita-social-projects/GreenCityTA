@@ -32,7 +32,7 @@ public class BeforeUbsHomePageTestRun extends TestRun {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
 
         if (driver != null) {
             driver.quit();
@@ -40,7 +40,7 @@ public class BeforeUbsHomePageTestRun extends TestRun {
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }

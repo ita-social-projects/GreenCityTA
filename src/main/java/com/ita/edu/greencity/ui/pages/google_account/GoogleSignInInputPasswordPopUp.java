@@ -9,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class GoogleSignInInputPasswordPopUp extends BasePage {
-    @FindBy (how = How.XPATH, using = "//*[@id='password']//input")
+    @FindBy(how = How.XPATH, using = "//*[@id='password']//input")
     private WebElement passwordInputField;
 
-    @FindBy (how = How.XPATH, using = "//*[@id='passwordNext']//button/span")
+    @FindBy(how = How.XPATH, using = "//*[@id='passwordNext']//button/span")
     private WebElement continueButton;
 
     public GoogleSignInInputPasswordPopUp(WebDriver driver) {

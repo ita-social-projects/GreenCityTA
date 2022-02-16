@@ -13,7 +13,6 @@ import java.util.List;
 public class UbsHomePage extends BasePage {
 
 
-
     @FindBy(how = How.XPATH, using = "//a[@class='ubs-header-sign-in']")
     private WebElement singInButton;
 
@@ -74,11 +73,11 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//h2[@class='price-header']")
     private WebElement priceUbsCourier;
 
+    @FindBy(how = How.XPATH, using = "//header/div[@class = 'header-right']/div/h2")
+    private WebElement homePageTitle;
+
     @FindBy(how = How.XPATH, using = "//div[@class='menu-icon-wrapper']")
     private WebElement burgerMenu;
-
-
-
 
 
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
@@ -87,20 +86,21 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div//img")
     private List<WebElement> listOfAllImgValue;
 
-//__________________________________________________
-    public List<WebElement> getListOfAllImgValue(){
-        return listOfAllImgValue;
-    }
     public UbsHomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickSingInButton(){
+    //__________________________________________________
+    public List<WebElement> getListOfAllImgValue() {
+        return listOfAllImgValue;
+    }
+
+    public void clickSingInButton() {
         singInButton.click();
     }
 
 
-    public boolean checkImgArmoredTrackOnDisplay(){
+    public boolean checkImgArmoredTrackOnDisplay() {
         return imgArmoredTrack.isDisplayed();
     }
 
@@ -118,7 +118,7 @@ public class UbsHomePage extends BasePage {
     }
 
     public String getHeaderText() {
-        return headerText.getCssValue("font-family").toString();
+        return headerText.getCssValue("font-family");
 
     }
 
@@ -126,10 +126,15 @@ public class UbsHomePage extends BasePage {
         headerButtonOrderCourier.click();
         return null;
     }
+
     @Step("get text from title of message")
     public String getMiddleText() {
         return middleText.getText();
 
+    }
+
+    public String getHomePageTitle() {
+        return homePageTitle.getText();
     }
 
     public boolean checkIfDivHowToPrepare() {
@@ -142,15 +147,15 @@ public class UbsHomePage extends BasePage {
     }
 
     @Step("looking for element on page by xpath{headerButtonOrderCourier}")
-    public boolean checkIfButtonOnDisplay(){
+    public boolean checkIfButtonOnDisplay() {
         return headerButtonOrderCourier.isDisplayed();
     }
 
-    public String checkTextPriceUbsCourier(){
+    public String checkTextPriceUbsCourier() {
         return priceUbsCourier.getText();
     }
 
-    public boolean checkIfBurgerMenuOnDisplay(){
+    public boolean checkIfBurgerMenuOnDisplay() {
         return burgerMenu.isDisplayed();
     }
 
