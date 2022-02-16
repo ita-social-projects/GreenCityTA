@@ -25,7 +25,7 @@ public class SignInComponent extends BasePage {
     private WebElement showHidePassword;
     @FindBy(how = How.XPATH, using = "//div[@class = 'forgot-wrapper']/a[@class = 'ubs-forgot-password']")
     private WebElement forgotPassword;
-    @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button']")
+    @FindBy(how = How.XPATH, using = "//app-submit-button/button[@class = 'ubs-primary-global-button']")
     private WebElement signIn;
     @FindBy(how = How.XPATH, using = "//app-google-btn/button[@class = 'google-sign-in']")
     private WebElement signInGoogle;
