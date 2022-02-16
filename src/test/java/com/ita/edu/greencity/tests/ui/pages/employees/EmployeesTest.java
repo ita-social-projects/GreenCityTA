@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 public class EmployeesTest extends TestRun {
 
     @BeforeMethod
-    public void beforeMethod(ITestContext testContext)  {
+    public void beforeMethod(ITestContext testContext) {
         super.beforeMethod(testContext);
         SignInComponent signInComponent = new SignInComponent(driver);
         BasePage basePage = new BasePage(driver);
@@ -36,7 +36,6 @@ public class EmployeesTest extends TestRun {
         employees.clickButtonUbsAdmin();
         employees.clickEmployyesButton();
     }
-
 
     @Test
     @Description("Check if current url")

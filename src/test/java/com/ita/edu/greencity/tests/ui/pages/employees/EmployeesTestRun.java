@@ -31,6 +31,7 @@ public class EmployeesTestRun extends TestRun {
         basePage.implicitWait(5000);
         selectRegion.clickOnCloseButton();
         employees.clickAdminPopMenu();
+        employees.loadData();
 
     }
 

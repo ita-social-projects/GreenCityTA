@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.employees;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,6 +39,17 @@ public class Employees extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@class='ng-dirty ng-valid ng-touched']")
     private WebElement inputPhone;
 
+    @FindBy(how = How.XPATH, using = "")
+    private WebElement inputEmailArr;
+
+    @FindBy(how = How.XPATH, using = "")
+    private WebElement buttonServiceManager;
+
+    @FindBy(how = How.XPATH, using = "")
+    private WebElement buttonSelectRegionInAddMenu;
+
+    @FindBy(how = How.XPATH, using = "")
+    private WebElement buttonAddEmployeeInAddMenu;
 
 
     @Step("click on pop-up menu")
@@ -100,4 +112,37 @@ public class Employees extends BasePage {
         return this;
     }
 
+    @Step("input value to emailArr")
+    public Employees sendKeysEmailArr(String inputEmail){
+        inputEmailArr.clear();
+        inputEmailArr.sendKeys(inputEmail, Keys.ENTER);
+        return this;
+    }
+
+    @Step("press on sevrice man")
+    public void pressButtonServiceManager(){
+        buttonServiceManager.click();
+    }
+
+    @Step("press on select region")
+    public void pressButtonSetectRegionAddMenu(){
+        buttonSelectRegionInAddMenu.click();
+    }
+
+    @Step("press on add empl")
+    public void pressButtonAddEmployeeAddMenu(){
+        buttonAddEmployeeInAddMenu.click();
+    }
+
+    public Employees loadData(){
+        while (true){
+            try {
+                driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
+            } catch (Exception e) {
+                return this;
+            }
+            sleep(500);
+
+        }
+    }
 }
