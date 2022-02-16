@@ -3,7 +3,7 @@
 <suite name="Test Suite" configfailurepolicy="continue" verbose="1" parallel="classes" thread-count="3">
 
 
-    <test name="Quick_test" thread-count="3">
+    <test name="Sign-in tests" thread-count="3">
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_in.LoginTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_in.ErrorMessagesTest"></class>
