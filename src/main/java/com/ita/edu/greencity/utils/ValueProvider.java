@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class ValueProvider {
-    private Properties properties;
+    private final Properties properties;
 
     public ValueProvider() throws IOException {
 
@@ -30,6 +30,10 @@ public class ValueProvider {
         return properties.getProperty("email");
     }
 
+    public String getEmailAdmin() {
+        return properties.getProperty("emailAdmin");
+    }
+
     public String getUserName() {
         return properties.getProperty("userName");
     }
@@ -40,6 +44,23 @@ public class ValueProvider {
 
     public String getUserWithoutOrdersEmail() {
         return properties.getProperty("userWithoutOrdersEmail");
+    }
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
+    }
+
+    public void setPassword(String newPassword) {
+        FileReader reader = null;
+        try {
+            reader = new FileReader("src/main/resources/properties.properties");
+            properties.load(reader);
+            properties.getProperty("password");
+            properties.setProperty("password", newPassword);
+            OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
+            properties.store(os, "new password for rollback");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getCardNumber() {
@@ -76,19 +97,5 @@ public class ValueProvider {
 
     public String getJDBCGreenCityUbsURL() {
         return properties.getProperty("JDBCGreenCityUbsURL");
-    }
-
-    public void setPassword(String newPassword) {
-        FileReader reader = null;
-        try {
-            reader = new FileReader("src/main/resources/properties.properties");
-            properties.load(reader);
-            properties.getProperty("password");
-            properties.setProperty("password",newPassword);
-            OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
-            properties.store(os,"new password for rollback" );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -9,21 +9,18 @@ import org.openqa.selenium.support.How;
 
 public class CancelPopUp extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'warning-text']")
+    private WebElement cancelOrderWarningLabel;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'question-text']")
+    private WebElement cancelOrderQuestionLabel;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-cancel']")
+    private WebElement noButton;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-pay']")
+    private WebElement yesButton;
+
     public CancelPopUp(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'warning-text']")
-    private WebElement cancelOrderWarningLabel;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'question-text']")
-    private WebElement cancelOrderQuestionLabel;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-cancel']")
-    private WebElement noButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-pay']")
-    private WebElement yesButton;
 
     @Step("get text of warning label")
     public String getEnsuranceOfCancelingLabelText() {

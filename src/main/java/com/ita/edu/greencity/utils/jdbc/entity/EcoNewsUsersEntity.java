@@ -1,7 +1,5 @@
 package com.ita.edu.greencity.utils.jdbc.entity;
 
-import org.bouncycastle.cms.PasswordRecipientId;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +25,12 @@ enum EcoNewsUsersEntityFields {
     UUID(18),
     PHONE_NUMBER(19);
 
-    private int number;
-    private EcoNewsUsersEntityFields(int number){
+    private final int number;
+
+    EcoNewsUsersEntityFields(int number) {
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
@@ -106,6 +106,38 @@ public class EcoNewsUsersEntity {
         this.languageId = 0;
         this.uuid = null;
         this.phoneNumber = null;
+    }
+
+    public static EcoNewsUsersEntity getEcoNewsUsersEntity(List<String> row) {
+        return new EcoNewsUsersEntity()
+                .setId(Long.parseLong(row.get(EcoNewsUsersEntityFields.ID.getNumber())))
+                .setDateOfRegistration(row.get(EcoNewsUsersEntityFields.DATE_OF_REGISTRATION.getNumber()))
+                .setEmail(row.get(EcoNewsUsersEntityFields.EMAIL.getNumber()))
+                .setEmailNotification(Integer.parseInt(row.get(EcoNewsUsersEntityFields.EMAIL_NOTIFICATION.getNumber())))
+                .setName(row.get(EcoNewsUsersEntityFields.NAME.getNumber()))
+                .setRole(Integer.parseInt(row.get(EcoNewsUsersEntityFields.ROLE.getNumber())))
+                .setUserStatus(Integer.parseInt(row.get(EcoNewsUsersEntityFields.USER_STATUS.getNumber())))
+                .setRefreshTokenKey(row.get(EcoNewsUsersEntityFields.REFRESH_TOKEN_KEY.getNumber()))
+                .setProfilePicture(row.get(EcoNewsUsersEntityFields.PROFILE_PICTURE.getNumber()))
+                .setRating(Double.parseDouble(row.get(EcoNewsUsersEntityFields.RATING.getNumber())))
+                .setLastActivityTime(row.get(EcoNewsUsersEntityFields.LAST_ACTIVITY_TIME.getNumber()))
+                .setFirstName(row.get(EcoNewsUsersEntityFields.FIRST_NAME.getNumber()))
+                .setCity(row.get(EcoNewsUsersEntityFields.CITY.getNumber()))
+                .setUserCredo(row.get(EcoNewsUsersEntityFields.USER_CREDO.getNumber()))
+                .setShowLocation(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_LOCATION.getNumber())))
+                .setShowEcoPlace(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_ECO_PLACE.getNumber())))
+                .setShowShoppingList(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_SHOPPING_LIST.getNumber())))
+                .setLanguageId(Long.parseLong(row.get(EcoNewsUsersEntityFields.LANGUAGE_ID.getNumber())))
+                .setUuid(row.get(EcoNewsUsersEntityFields.UUID.getNumber()))
+                .setPhoneNumber(row.get(EcoNewsUsersEntityFields.PHONE_NUMBER.getNumber()));
+    }
+
+    public static List<EcoNewsUsersEntity> getListEcoNewsUsersEntity(List<List<String>> rows) {
+        List<EcoNewsUsersEntity> result = new ArrayList<>();
+        for (List<String> currentRow : rows) {
+            result.add(getEcoNewsUsersEntity(currentRow));
+        }
+        return result;
     }
 
     public long getId() {
@@ -199,7 +231,7 @@ public class EcoNewsUsersEntity {
         return this;
     }
 
-    public String  getLastActivityTime() {
+    public String getLastActivityTime() {
         return lastActivityTime;
     }
 
@@ -313,36 +345,5 @@ public class EcoNewsUsersEntity {
                 ", uuid='" + uuid + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
-    }
-
-    public static EcoNewsUsersEntity getEcoNewsUsersEntity (List<String> row) {
-        return new EcoNewsUsersEntity()
-                .setId(Long.parseLong(row.get(EcoNewsUsersEntityFields.ID.getNumber())))
-                .setDateOfRegistration(row.get(EcoNewsUsersEntityFields.DATE_OF_REGISTRATION.getNumber()))
-                .setEmail(row.get(EcoNewsUsersEntityFields.EMAIL.getNumber()))
-                .setEmailNotification(Integer.parseInt(row.get(EcoNewsUsersEntityFields.EMAIL_NOTIFICATION.getNumber())))
-                .setName(row.get(EcoNewsUsersEntityFields.NAME.getNumber()))
-                .setRole(Integer.parseInt(row.get(EcoNewsUsersEntityFields.ROLE.getNumber())))
-                .setUserStatus(Integer.parseInt(row.get(EcoNewsUsersEntityFields.USER_STATUS.getNumber())))
-                .setRefreshTokenKey(row.get(EcoNewsUsersEntityFields.REFRESH_TOKEN_KEY.getNumber()))
-                .setProfilePicture(row.get(EcoNewsUsersEntityFields.PROFILE_PICTURE.getNumber()))
-                .setRating(Double.parseDouble(row.get(EcoNewsUsersEntityFields.RATING.getNumber())))
-                .setLastActivityTime(row.get(EcoNewsUsersEntityFields.LAST_ACTIVITY_TIME.getNumber()))
-                .setFirstName(row.get(EcoNewsUsersEntityFields.FIRST_NAME.getNumber()))
-                .setCity(row.get(EcoNewsUsersEntityFields.CITY.getNumber()))
-                .setUserCredo(row.get(EcoNewsUsersEntityFields.USER_CREDO.getNumber()))
-                .setShowLocation(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_LOCATION.getNumber())))
-                .setShowEcoPlace(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_ECO_PLACE.getNumber())))
-                .setShowShoppingList(Boolean.parseBoolean(row.get(EcoNewsUsersEntityFields.SHOW_SHOPPING_LIST.getNumber())))
-                .setLanguageId(Long.parseLong(row.get(EcoNewsUsersEntityFields.LANGUAGE_ID.getNumber())))
-                .setUuid(row.get(EcoNewsUsersEntityFields.UUID.getNumber()))
-                .setPhoneNumber(row.get(EcoNewsUsersEntityFields.PHONE_NUMBER.getNumber()));
-    }
-    public static List<EcoNewsUsersEntity> getListEcoNewsUsersEntity (List<List<String>> rows) {
-        List<EcoNewsUsersEntity> result = new ArrayList<>();
-        for(List<String> currentRow: rows){
-            result.add(getEcoNewsUsersEntity(currentRow));
-        }
-        return result;
     }
 }

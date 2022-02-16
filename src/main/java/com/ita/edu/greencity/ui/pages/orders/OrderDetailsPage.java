@@ -2,7 +2,6 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,7 +43,7 @@ public class OrderDetailsPage extends BasePage {
     private List<WebElement> UseBonusesCheckmarks;
     @FindBy(xpath = "//a[@class='bonus-how-to-link']")
     private WebElement howToGetBonusesButton;
-    @FindBy(xpath = "//div[@class='bottom']//span[@class='checkmark']]")
+    @FindBy(xpath = "//div[@class='bottom']//span[@class='checkmark']")
     private List<WebElement> WaitingStoreOrderCheckmarks;
     @FindBy(xpath = "//input[contains(@id,'index')]")
     private List<WebElement> orderNumberInputs;
@@ -99,6 +98,7 @@ public class OrderDetailsPage extends BasePage {
 
         return this;
     }
+
     @Step("Region dropdown chose  {value}")
     public OrderDetailsPage chooseRegionByValue(String value) {
         clickOnChangeRegionButton();
@@ -118,6 +118,7 @@ public class OrderDetailsPage extends BasePage {
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
+
     @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lArrowsInput(int value) {
 
@@ -126,6 +127,7 @@ public class OrderDetailsPage extends BasePage {
         }
         return this;
     }
+
     @Step("Number of 'Safe waste' service input value {value}")
     public OrderDetailsPage EnterNumberOfSafeWasteInput(String value) {
         sleep(2000);
@@ -173,14 +175,15 @@ public class OrderDetailsPage extends BasePage {
         String text = minimumOrderContainsAlert.getText();
         return text;
     }
-    @Step("Certificate input set value {value}")
-        public OrderDetailsPage EnterCertificateInput (String value){
-        certificateInput.click();
-            certificateInput.sendKeys(value, Keys.ENTER);
-            return this;
-        }
 
-    public String getCertificateAlertMessage () {
+    @Step("Certificate input set value {value}")
+    public OrderDetailsPage EnterCertificateInput(String value) {
+        certificateInput.click();
+        certificateInput.sendKeys(value, Keys.ENTER);
+        return this;
+    }
+
+    public String getCertificateAlertMessage() {
         return certificateAlert.getText().trim();
     }
 
@@ -205,7 +208,7 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
-    public OrderDetailsPage ClickOnYesWaitingStoreOrderCheckmark() {
+    public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(1).click();
         return this;
     }
@@ -215,8 +218,9 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
-    public OrderDetailsPage EnterOrderNumberInputs(String MessageText, int value) {
-        orderNumberInputs.get(value).sendKeys(MessageText);
+    @Step("Input eco store order value {value}")
+    public OrderDetailsPage EnterOrderNumberInputs(String orderNumber, int order) {
+        orderNumberInputs.get(order).sendKeys(orderNumber);
         return this;
     }
 
@@ -225,10 +229,15 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
+    public String getOrderNumberInputs(int order) {
+        return orderNumberInputs.get(order).getAttribute("value");
+    }
+
     public OrderDetailsPage clickOnLearnAboutPackagesLink() {
         learnAboutPackagesLink.click();
         return this;
     }
+
     @Step("Comment input set value {value}")
     public OrderDetailsPage EnterCommentInput(String value) {
         commentInput.sendKeys(value, Keys.ENTER);

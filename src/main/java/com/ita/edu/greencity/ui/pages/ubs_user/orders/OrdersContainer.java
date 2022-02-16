@@ -11,11 +11,34 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
-    private WebDriver driver;
+    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-expansion-panel-content')]")
+    private WebElement orderDetailsElement;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
+    private WebElement orderId;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-date')]")
+    private WebElement orderDate;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-status')]")
+    private WebElement orderStatus;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentStatus')]")
+    private WebElement paymentStatus;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentAmount')]")
+    private WebElement paymentAmount;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
+    private WebElement cancelButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
+    private WebElement payButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
+    private WebElement orderDetailsLabel;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_of_order']/td[2]")
+    private WebElement orderAmount;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
+    private WebElement amountDue;
 
-    private DefaultElementLocatorFactory parentContext;
-
-    private WebElement rootElement;
+    private final WebDriver driver;
+    private final DefaultElementLocatorFactory parentContext;
+    private final WebElement rootElement;
 
     public OrdersContainer(WebDriver driver, WebElement rootElement) {
         this.rootElement = rootElement;
@@ -23,50 +46,6 @@ public class OrdersContainer {
         parentContext = new DefaultElementLocatorFactory(rootElement);
         PageFactory.initElements(parentContext, this);
     }
-
-    public void sleep(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-expansion-panel-content')]")
-    private WebElement orderDetailsElement;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
-    private WebElement orderId;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-date')]")
-    private WebElement orderDate;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-status')]")
-    private WebElement orderStatus;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentStatus')]")
-    private WebElement paymentStatus;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentAmount')]")
-    private WebElement paymentAmount;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
-    private WebElement cancelButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
-    private WebElement payButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
-    private WebElement orderDetailsLabel;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_of_order']/td[2]")
-    private WebElement orderAmount;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
-    private WebElement amountDue;
 
     @Step("get order details element")
     public WebElement getOrderDetailsElement() {
@@ -141,4 +120,14 @@ public class OrdersContainer {
     public UbsUserOrders getUbsUserOrdersPage() {
         return new UbsUserOrders(driver);
     }
+
+    public void sleep(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
