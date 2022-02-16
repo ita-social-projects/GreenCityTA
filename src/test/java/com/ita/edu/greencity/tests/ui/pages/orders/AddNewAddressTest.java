@@ -10,7 +10,7 @@ import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class AddNewAddressTest extends TestRun{
+public class AddNewAddressTest extends TestRun {
 
     final String NUMBER_OF_TEXTILE_WASTE_120 = "5";
     final String STREET = "Sevastopol's'ka Square";
@@ -37,7 +37,7 @@ public class AddNewAddressTest extends TestRun{
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertFalse(addNewAddress.getAddAddressButton().isEnabled(), "Address button is disabled");
 
-        addNewAddress.addAddress(INDEX_CITY,INDEX_DISTRICT,STREET,INDEX_STREET,NUMBER_OF_HOUSE);
+        addNewAddress.addAddress(INDEX_CITY, INDEX_DISTRICT, STREET, INDEX_STREET, NUMBER_OF_HOUSE);
 
         softAssert.assertTrue(addNewAddress.getAddAddressButton().isEnabled(), "Address button is enabled");
         softAssert.assertAll();

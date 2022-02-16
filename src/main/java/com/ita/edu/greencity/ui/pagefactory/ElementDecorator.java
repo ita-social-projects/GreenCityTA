@@ -3,7 +3,6 @@ package com.ita.edu.greencity.ui.pagefactory;
 import com.ita.edu.greencity.ui.elements.base_element.BaseElement;
 import com.ita.edu.greencity.ui.elements.base_element.Element;
 import com.ita.edu.greencity.ui.elements.base_element.ImplementedBy;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.interactions.Locatable;
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class ElementDecorator implements FieldDecorator {
 
-    private ElementLocatorFactory factory;
+    private final ElementLocatorFactory factory;
 
 
     public ElementDecorator(ElementLocatorFactory factory) {
@@ -79,12 +78,8 @@ public class ElementDecorator implements FieldDecorator {
             return false;
         }
 
-        if (field.getAnnotation(FindBy.class) == null && field.getAnnotation(FindBys.class) == null &&
-                field.getAnnotation(FindAll.class) == null) {
-            return false;
-        }
-
-        return true;
+        return field.getAnnotation(FindBy.class) != null || field.getAnnotation(FindBys.class) != null ||
+                field.getAnnotation(FindAll.class) != null;
     }
 
     protected <T> T proxyForLocator(ClassLoader loader, Class<T> interfaceType, ElementLocator locator) {

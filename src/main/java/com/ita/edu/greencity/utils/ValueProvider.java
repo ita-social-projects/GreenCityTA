@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Properties;
 
 public class ValueProvider {
-    private Properties properties;
+    private final Properties properties;
 
     public ValueProvider() throws IOException {
 
@@ -36,6 +36,20 @@ public class ValueProvider {
 
     public String getPassword() {
         return properties.getProperty("password");
+    }
+
+    public void setPassword(String newPassword) {
+        FileReader reader = null;
+        try {
+            reader = new FileReader("src/main/resources/properties.properties");
+            properties.load(reader);
+            properties.getProperty("password");
+            properties.setProperty("password", newPassword);
+            OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
+            properties.store(os, "new password for rollback");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getCardNumber() {
@@ -72,19 +86,5 @@ public class ValueProvider {
 
     public String getJDBCGreenCityUbsURL() {
         return properties.getProperty("JDBCGreenCityUbsURL");
-    }
-
-    public void setPassword(String newPassword) {
-        FileReader reader = null;
-        try {
-            reader = new FileReader("src/main/resources/properties.properties");
-            properties.load(reader);
-            properties.getProperty("password");
-            properties.setProperty("password",newPassword);
-            OutputStream os = new FileOutputStream("src/main/resources/properties.properties");
-            properties.store(os,"new password for rollback" );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -1,6 +1,5 @@
 package com.ita.edu.greencity.tests.ui.pages.testrunners;
 
-import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -21,12 +20,12 @@ public class TestRunnerInitDriverWithBeforeClass extends TestRun {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
 
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }

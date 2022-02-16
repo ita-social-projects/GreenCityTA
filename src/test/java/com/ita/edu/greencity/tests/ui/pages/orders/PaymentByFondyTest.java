@@ -47,14 +47,14 @@ public class PaymentByFondyTest extends TestRun {
 
     @Description("Verify whether the error message about wrong email address is displayed")
     @Test
-    public void errorMessageEmailTest(){
+    public void errorMessageEmailTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
         String expected = "Please enter a valid email";
-        String actual =  orderPageConfirmation
+        String actual = orderPageConfirmation
                 .clickOnOrderButton()
                 .chooseLanguage("English").emailInput("testgreencity@gmail.")
                 .unfocus().focusToEmailField().getEmailErrorMessage();
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Description("Verify that order is made using existing address")
@@ -79,7 +79,7 @@ public class PaymentByFondyTest extends TestRun {
         String expectedMessage = "Your order is accepted";
         String actualMessage = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
+                .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())
@@ -109,7 +109,7 @@ public class PaymentByFondyTest extends TestRun {
 
     @Description("Verify make other order functionality")
     @Test
-    public void makeOtherOrderTest(){
+    public void makeOtherOrderTest() {
         String actual = new OrderPagePersonalData(driver).clickOnNextButton().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())
                 .expiryDateInput(provider.getExpiryDate())

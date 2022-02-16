@@ -6,10 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 public class LoginAndGoToUbs extends BasePage {
     @FindBy(how = How.CSS, using = "a.ubs-header-sign-in")
     private WebElement loginButton;
