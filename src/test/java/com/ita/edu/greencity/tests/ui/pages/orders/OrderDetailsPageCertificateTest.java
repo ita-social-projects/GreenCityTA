@@ -23,12 +23,12 @@ public class OrderDetailsPageCertificateTest extends TestRun {
     private final int pointsValue = 500;
 
 
-    private String nonExistCertificate(){
+    private String nonExistCertificate() {
         String value = TestHelpersUtils.generateRandomCertificateNumber();
-for(;ecoNewsCertificateService.checkIfCertificateExists(value);){
-    value = TestHelpersUtils.generateRandomOrderNumber();
-}
-return value;
+        for (; ecoNewsCertificateService.checkIfCertificateExists(value); ) {
+            value = TestHelpersUtils.generateRandomOrderNumber();
+        }
+        return value;
     }
 
     @DataProvider
@@ -42,40 +42,61 @@ return value;
                 {"Certificate not accepted, please try again", codeValueNotExist},
         };
     }
-    @BeforeTest
-    public void AddCertificate() throws Exception {
-        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
-        ecoNewsCertificateService.addCertificate(codeValueActive,statusValueActive,expiration_dateValue,pointsValue);
-    }
-    @BeforeMethod
-    public void preConditions(){
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .chooseRegionByIndex(0)
-                .clickOnContinueButton();
+        @DataProvider
+        private Object[][] certificateButtonProvider () {
+            final String randomCertificate = TestHelpersUtils.generateRandomCertificateNumber();
+            return new Object[][]{
+                    {false, ""},
+                    {true, randomCertificate},
+            };
+        }
+        @BeforeTest
+        public void AddCertificate () throws Exception {
+            ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
+            ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
+        }
+        @BeforeMethod
+        public void preConditions () {
+            HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
+            header.clickSignIn()
+                    .inputEmail(provider.getEmail())
+                    .inputPassword(provider.getPassword())
+                    .clickSignIn()
+                    .chooseRegionByIndex(0)
+                    .clickOnContinueButton();
 
+        }
+        @Description("Checks coupon alert")
+        @Issue("90")
+        @Test(dataProvider = "certificateDataProvider")
+        public void couponTest (String expected, String coupon){
+            OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+            String actual = orderDetailsPage
+                    .chooseRegionByValue(" Kyiv ")
+                    .EnterNumberOfSafeWasteInput("20")
+                    .EnterNumberOfTextileWaste20lInput("1")
+                    .EnterNumberOfTextileWaste120lInput("1")
+                    .EnterCertificateInput(coupon)
+                    .clickOnActivateCertificateButton()
+                    .getCertificateAlertMessage();
+            Assert.assertTrue(actual.contains(expected));
+        }
+        @Description("Checks coupon activate button")
+        @Issue("123")
+        @Test(dataProvider = "certificateButtonProvider")
+        public void couponActivateButtonTest (boolean expected, String coupon){
+            OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+            boolean isActive = orderDetailsPage
+                    .chooseRegionByValue(" Kyiv ")
+                    .EnterNumberOfSafeWasteInput("20")
+                    .EnterNumberOfTextileWaste20lInput("1")
+                    .EnterNumberOfTextileWaste120lInput("1")
+                    .EnterCertificateInput(coupon)
+                    .getCertificateButtonStatus();
+            Assert.assertEquals(isActive, expected);
+        }
+        @AfterTest
+        public void deleteCertificate () throws Exception {
+            ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
+        }
     }
-    @Description("Checks coupon alert")
-    @Issue("90")
-    @Test(dataProvider = "certificateDataProvider")
-    public void couponTest(String expected,String coupon) {
-        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        String actual = orderDetailsPage
-                .chooseRegionByValue(" Kyiv ")
-                .EnterNumberOfSafeWasteInput("20")
-                .EnterNumberOfTextileWaste20lInput("1")
-                .EnterNumberOfTextileWaste120lInput("1")
-                .EnterCertificateInput(coupon)
-                .clickOnActivateCertificateButton()
-                .getCertificateAlertMessage();
-        Assert.assertTrue(actual.contains(expected));
-    }
-
-    @AfterTest
-    public void deleteCertificate() throws Exception {
-        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
-    }
-}

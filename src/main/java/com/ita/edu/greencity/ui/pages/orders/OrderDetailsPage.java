@@ -180,14 +180,17 @@ public class OrderDetailsPage extends BasePage {
             return this;
         }
 
-    public String getCertificateAlertMessage () {
-        return certificateAlert.getText().trim();
-    }
-
 
     public OrderDetailsPage clickOnActivateCertificateButton() {
         activateCertificateButton.click();
         return this;
+    }
+
+    public boolean getCertificateButtonStatus() {
+        return activateCertificateButton.isEnabled();
+    }
+    public String getCertificateAlertMessage () {
+        return certificateAlert.getText().trim();
     }
 
     public OrderDetailsPage ClickOnNoUseBonusesCheckmark() {
