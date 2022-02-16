@@ -38,6 +38,10 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
+    public String getUserWithoutOrdersEmail() {
+        return properties.getProperty("userWithoutOrdersEmail");
+    }
+
     public String getCardNumber() {
         return properties.getProperty("cardNumber");
     }

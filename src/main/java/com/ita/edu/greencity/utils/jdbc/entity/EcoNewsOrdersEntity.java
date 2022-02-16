@@ -41,31 +41,31 @@ enum EcoNewsOrdersEntityFields {
 public class EcoNewsOrdersEntity {
     public static final String SELECT_BY_FIELD = "SELECT * FROM orders WHERE %s = '%s';";
 
-    private long id;
+    private Long id;
     private String comment;
     private String deliverFrom;
     private String deliverTo;
     private String note;
     private String orderDate;
     private String orderStatus;
-    private int pointsToUse;
+    private Integer pointsToUse;
     private String receivingStation;
-    private long ubsUserId;
-    private long usersId;
+    private Long ubsUserId;
+    private Long usersId;
     private String orderPaymentStatus;
     private String cancellationReason;
     private String cancellationComment;
     private String reasonNotTakingBagDescription;
     private String imageReasonNotTakingBags;
     private String dateOfExport;
-    private String employeeId;
-    private boolean blocked;
+    private Long employeeId;
+    private Boolean blocked;
     private String adminComment;
-    private String counterOrderPaymentId;
-    private long courierLocationsId;
-    private String sumTotalAmountWithoutDiscount;
+    private Long counterOrderPaymentId;
+    private Long courierLocationsId;
+    private Long sumTotalAmountWithoutDiscount;
 
-    public EcoNewsOrdersEntity(long id, String comment, String deliverFrom, String deliverTo, String note, String orderDate, String orderStatus, int pointsToUse, String receivingStation, long ubsUserId, long usersId, String orderPaymentStatus, String cancellationReason, String cancellationComment, String reasonNotTakingBagDescription, String imageReasonNotTakingBags, String dateOfExport, String employeeId, boolean blocked, String adminComment, String counterOrderPaymentId, long courierLocationsId, String sumTotalAmountWithoutDiscount) {
+    public EcoNewsOrdersEntity(Long id, String comment, String deliverFrom, String deliverTo, String note, String orderDate, String orderStatus, Integer pointsToUse, String receivingStation, Long ubsUserId, Long usersId, String orderPaymentStatus, String cancellationReason, String cancellationComment, String reasonNotTakingBagDescription, String imageReasonNotTakingBags, String dateOfExport, Long employeeId, Boolean blocked, String adminComment, Long counterOrderPaymentId, Long courierLocationsId, Long sumTotalAmountWithoutDiscount) {
         this.id = id;
         this.comment = comment;
         this.deliverFrom = deliverFrom;
@@ -92,7 +92,7 @@ public class EcoNewsOrdersEntity {
     }
 
     public EcoNewsOrdersEntity() {
-        this.id = 0;
+        this.id = null;
         this.comment = null;
         this.deliverFrom = null;
         this.deliverTo = null;
@@ -101,8 +101,8 @@ public class EcoNewsOrdersEntity {
         this.orderStatus = null;
         this.pointsToUse = 0;
         this.receivingStation = null;
-        this.ubsUserId = 0;
-        this.usersId = 0;
+        this.ubsUserId = null;
+        this.usersId = null;
         this.orderPaymentStatus = null;
         this.cancellationReason = null;
         this.cancellationComment = null;
@@ -113,7 +113,7 @@ public class EcoNewsOrdersEntity {
         this.blocked = false;
         this.adminComment = null;
         this.counterOrderPaymentId = null;
-        this.courierLocationsId = 0;
+        this.courierLocationsId = null;
         this.sumTotalAmountWithoutDiscount = null;
     }
 
@@ -270,11 +270,11 @@ public class EcoNewsOrdersEntity {
         return this;
     }
 
-    public String getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public EcoNewsOrdersEntity setEmployeeId(String employeeId) {
+    public EcoNewsOrdersEntity setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
         return this;
     }
@@ -297,11 +297,11 @@ public class EcoNewsOrdersEntity {
         return this;
     }
 
-    public String getCounterOrderPaymentId() {
+    public Long getCounterOrderPaymentId() {
         return counterOrderPaymentId;
     }
 
-    public EcoNewsOrdersEntity setCounterOrderPaymentId(String counterOrderPaymentId) {
+    public EcoNewsOrdersEntity setCounterOrderPaymentId(Long counterOrderPaymentId) {
         this.counterOrderPaymentId = counterOrderPaymentId;
         return this;
     }
@@ -315,11 +315,11 @@ public class EcoNewsOrdersEntity {
         return this;
     }
 
-    public String getSumTotalAmountWithoutDiscount() {
+    public Long getSumTotalAmountWithoutDiscount() {
         return sumTotalAmountWithoutDiscount;
     }
 
-    public EcoNewsOrdersEntity setSumTotalAmountWithoutDiscount(String sumTotalAmountWithoutDiscount) {
+    public EcoNewsOrdersEntity setSumTotalAmountWithoutDiscount(Long sumTotalAmountWithoutDiscount) {
         this.sumTotalAmountWithoutDiscount = sumTotalAmountWithoutDiscount;
         return this;
     }
@@ -372,15 +372,12 @@ public class EcoNewsOrdersEntity {
                 .setReasonNotTakingBagDescription(row.get(EcoNewsOrdersEntityFields.REASON_NOT_TAKING_BAG_DESCRIPTION.getNumber()))
                 .setImageReasonNotTakingBags(row.get(EcoNewsOrdersEntityFields.IMAGE_REASON_NOT_TAKING_BAGS.getNumber()))
                 .setDateOfExport(row.get(EcoNewsOrdersEntityFields.DATE_OF_EXPORT.getNumber()))
-//                .setEmployeeId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.EMPLOYEE_ID.getNumber())))
-                .setEmployeeId(row.get(EcoNewsOrdersEntityFields.EMPLOYEE_ID.getNumber()))
+                .setEmployeeId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.EMPLOYEE_ID.getNumber())))
                 .setBlocked(Boolean.parseBoolean(row.get(EcoNewsOrdersEntityFields.BLOCKED.getNumber())))
                 .setAdminComment(row.get(EcoNewsOrdersEntityFields.ADMIN_COMMENT.getNumber()))
-//                .setCounterOrderPaymentId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COUNTER_ORDER_PAYMENT_ID.getNumber())))
-                .setCounterOrderPaymentId(row.get(EcoNewsOrdersEntityFields.COUNTER_ORDER_PAYMENT_ID.getNumber()))
+                .setCounterOrderPaymentId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COUNTER_ORDER_PAYMENT_ID.getNumber())))
                 .setCourierLocationsId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COURIER_LOCATIONS_ID.getNumber())))
-//                .setSumTotalAmountWithoutDiscount(Long.parseLong(row.get(EcoNewsOrdersEntityFields.SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS.getNumber())))
-                .setSumTotalAmountWithoutDiscount(row.get(EcoNewsOrdersEntityFields.SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS.getNumber()));
+                .setSumTotalAmountWithoutDiscount(Long.parseLong(row.get(EcoNewsOrdersEntityFields.SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS.getNumber())));
     }
 
     public static List<EcoNewsOrdersEntity> getListEcoNewsOrdersEntity (List<List<String>> rows) {

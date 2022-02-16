@@ -17,43 +17,8 @@ public class OrderCancellationTest extends UbsUserTestRun {
 
     EcoNewsOrdersService ecoNewsOrdersService = new EcoNewsOrdersService();
 
-    @DataProvider
-    public Object[][] popUpElements() {
-        return new Object[][] {
-                {"ua", "У разі скасування дане замовлення буде видалено. Чи дійсно Ви бажаєте скасувати замовлення?", "Ні", "Так"},
-                {"en", "If you will cancel this order it will be deleted. Do you really want to cancel this order?", "No", "Yes"}
-        };
-    }
-
-    @Description("test all pop-up elements localization")
+    @Description("test capability to cancel only orders with order status 'formed' and payment status 'unpaid'")
     @Issue("105")
-    @Test(dataProvider = "popUpElements")
-    public void popUpElementsLocalization(String lang, String labelText, String noButton, String yesButton) {
-        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
-        SoftAssert softAssert = new SoftAssert();
-
-        ubsUserOrders.getHeader()
-                .clickLanguageSwitcher()
-                .languageChoose(lang);
-
-
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        CancelPopUp cancelPopUp = ubsUserOrders.getOrderByNumber("86")
-                .clickOnCancelButton();
-
-        softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
-        softAssert.assertEquals(cancelPopUp.getNoButton().getText(), noButton, "Wrong 'No' button text");
-        softAssert.assertEquals(cancelPopUp.getYesButton().getText(), yesButton, "Wrong 'Yes' button text");
-        softAssert.assertAll();
-
-        cancelPopUp.clickOnNoButton();
-    }
-
     @Test()
     public void verifyThatOnlyFormedAndUnpaidOrdersCanBeCancelled() {
 
@@ -76,4 +41,59 @@ public class OrderCancellationTest extends UbsUserTestRun {
 
         softAssert.assertAll();
     }
+
+    @Description("test 'No' button in cancellation pop-up window")
+    @Issue("105")
+    @Test
+    public void verifyThatFormedAndUnpaidOrdersAreNotCancelledByClickingNoInPopUpWindow() {
+        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
+        SoftAssert softAssert = new SoftAssert();
+
+        OrdersContainer neededElement = ubsUserOrders
+                .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid");
+
+        String orderId = neededElement.getOrderId();
+
+        softAssert.assertNotEquals(neededElement.clickOnCancelButton()
+                .clickOnNoButton()
+                .getOrderByNumber(orderId), null, "Order was cancelled");
+
+        softAssert.assertNotEquals(ecoNewsOrdersService.getById(Long.parseLong(orderId)), null,
+                "Order was deleted from DataBase");
+
+        softAssert.assertAll();
+    }
+
+    @DataProvider
+    public Object[][] popUpElements() {
+        return new Object[][] {
+                {"ua", "У разі скасування дане замовлення буде видалено. Чи дійсно Ви бажаєте скасувати замовлення?", "Ні", "Так"},
+                {"en", "If canceled, this order will be deleted. Do you really want to cancel the order?", "No", "Yes"}
+        };
+    }
+
+    @Description("test pop-up elements localization")
+    @Issue("105")
+    @Test(dataProvider = "popUpElements")
+    public void popUpElementsLocalization(String lang, String labelText, String noButton, String yesButton) {
+        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
+        SoftAssert softAssert = new SoftAssert();
+
+        ubsUserOrders.getHeader()
+                .clickLanguageSwitcher()
+                .languageChoose(lang);
+
+        CancelPopUp cancelPopUp = ubsUserOrders
+                .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid")
+                .clickOnCancelButton();
+
+        softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
+        softAssert.assertEquals(cancelPopUp.getNoButton().getText(), noButton, "Wrong 'No' button text");
+        softAssert.assertEquals(cancelPopUp.getYesButton().getText(), yesButton, "Wrong 'Yes' button text");
+        softAssert.assertAll();
+
+        cancelPopUp.clickOnNoButton();
+    }
+
+
 }
