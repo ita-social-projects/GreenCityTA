@@ -1,7 +1,5 @@
 package com.ita.edu.greencity.utils.jdbc.entity;
 
-import org.bouncycastle.cms.PasswordRecipientId;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +9,17 @@ enum EcoNewsUserActionsEntityFields {
     ACHIEVEMENT_CATEGORY_ID(2),
     COUNT(3);
 
-    private int number;
-    private EcoNewsUserActionsEntityFields(int number){
+    private final int number;
+
+    EcoNewsUserActionsEntityFields(int number) {
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
 }
+
 public class EcoNewsUserActionsEntity {
     public static final String SELECT_ALL = "SELECT * FROM user_actions;";
     public static final String SELECT_BY_FIELD = "SELECT * FROM user_actions WHERE %s = '%s';";
@@ -43,20 +44,24 @@ public class EcoNewsUserActionsEntity {
         this.count = 0;
     }
 
+    public static EcoNewsUserActionsEntity getEcoNewsUserActionsEntity(List<String> row) {
+        return new EcoNewsUserActionsEntity()
+                .setId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.ID.getNumber())))
+                .setUserId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.USER_ID.getNumber())))
+                .setAchievementCategoryId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.ACHIEVEMENT_CATEGORY_ID.getNumber())))
+                .setCount(Integer.parseInt(row.get(EcoNewsUserActionsEntityFields.COUNT.getNumber())));
+    }
+
+    public static List<EcoNewsUserActionsEntity> getListEcoNewsUserActionsEntity(List<List<String>> rows) {
+        List<EcoNewsUserActionsEntity> result = new ArrayList<>();
+        for (List<String> currentRow : rows) {
+            result.add(getEcoNewsUserActionsEntity(currentRow));
+        }
+        return result;
+    }
+
     public long getId() {
         return id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public long getAchievementCategoryId() {
-        return achievementCategoryId;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public EcoNewsUserActionsEntity setId(long id) {
@@ -64,14 +69,26 @@ public class EcoNewsUserActionsEntity {
         return this;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
     public EcoNewsUserActionsEntity setUserId(long userId) {
         this.userId = userId;
         return this;
     }
 
+    public long getAchievementCategoryId() {
+        return achievementCategoryId;
+    }
+
     public EcoNewsUserActionsEntity setAchievementCategoryId(long achievementCategoryId) {
         this.achievementCategoryId = achievementCategoryId;
         return this;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     public EcoNewsUserActionsEntity setCount(int count) {
@@ -87,20 +104,5 @@ public class EcoNewsUserActionsEntity {
                 ", achievementCategoryId=" + achievementCategoryId +
                 ", count=" + count +
                 '}';
-    }
-
-    public static EcoNewsUserActionsEntity getEcoNewsUserActionsEntity (List<String> row) {
-        return new EcoNewsUserActionsEntity()
-                .setId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.ID.getNumber())))
-                .setUserId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.USER_ID.getNumber())))
-                .setAchievementCategoryId(Long.parseLong(row.get(EcoNewsUserActionsEntityFields.ACHIEVEMENT_CATEGORY_ID.getNumber())))
-                .setCount(Integer.parseInt(row.get(EcoNewsUserActionsEntityFields.COUNT.getNumber())));
-    }
-    public static List<EcoNewsUserActionsEntity> getListEcoNewsUserActionsEntity (List<List<String>> rows) {
-        List<EcoNewsUserActionsEntity> result = new ArrayList<>();
-        for(List<String> currentRow: rows){
-            result.add(getEcoNewsUserActionsEntity(currentRow));
-        }
-        return result;
     }
 }

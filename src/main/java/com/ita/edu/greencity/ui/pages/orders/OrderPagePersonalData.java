@@ -99,6 +99,10 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
     private WebElement anotherClientPhoneNumberErrorMessage;
 
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
+    }
+
     @Step("get text from error message (Another client phone number field)")
     public String getTextFromAnotherClientPhoneNumberErrorMessage() {
         return anotherClientPhoneNumberErrorMessage.getText();
@@ -243,6 +247,7 @@ public class OrderPagePersonalData extends BasePage {
         phoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
+
     @Step("enter surname (Surname field)")
     public OrderPagePersonalData entersurname(final String lastName) {
         surnameField.clear();
@@ -257,7 +262,7 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
-    public OrderPagePersonalData clickForGetMessage(){
+    public OrderPagePersonalData clickForGetMessage() {
         UBSTitle.click();
         return this;
     }
@@ -265,9 +270,5 @@ public class OrderPagePersonalData extends BasePage {
     @Step("get text from title")
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
-    }
-
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
     }
 }

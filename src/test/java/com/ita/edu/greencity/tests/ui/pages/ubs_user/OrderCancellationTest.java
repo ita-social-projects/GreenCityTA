@@ -13,7 +13,7 @@ public class OrderCancellationTest extends UbsUserTestRun {
 
     @DataProvider
     public Object[][] popUpElements() {
-        return new Object[][] {
+        return new Object[][]{
                 {"ua", "У разі скасування дане замовлення буде видалено. Чи дійсно Ви бажаєте скасувати замовлення?", "Ні", "Так"},
                 {"en", "If you will cancel this order it will be deleted. Do you really want to cancel this order?", "No", "Yes"}
         };

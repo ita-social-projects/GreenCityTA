@@ -13,7 +13,6 @@ import java.util.List;
 public class UbsHomePage extends BasePage {
 
 
-
     @FindBy(how = How.XPATH, using = "//a[@class='ubs-header-sign-in']")
     private WebElement singInButton;
 
@@ -87,22 +86,21 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div//img")
     private List<WebElement> listOfAllImgValue;
 
-    //_______________________________________________________________________
-
-//__________________________________________________
-    public List<WebElement> getListOfAllImgValue(){
-        return listOfAllImgValue;
-    }
     public UbsHomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickSingInButton(){
+    //__________________________________________________
+    public List<WebElement> getListOfAllImgValue() {
+        return listOfAllImgValue;
+    }
+
+    public void clickSingInButton() {
         singInButton.click();
     }
 
 
-    public boolean checkImgArmoredTrackOnDisplay(){
+    public boolean checkImgArmoredTrackOnDisplay() {
         return imgArmoredTrack.isDisplayed();
     }
 
@@ -120,7 +118,7 @@ public class UbsHomePage extends BasePage {
     }
 
     public String getHeaderText() {
-        return headerText.getCssValue("font-family").toString();
+        return headerText.getCssValue("font-family");
 
     }
 
@@ -128,13 +126,14 @@ public class UbsHomePage extends BasePage {
         headerButtonOrderCourier.click();
         return null;
     }
+
     @Step("get text from title of message")
     public String getMiddleText() {
         return middleText.getText();
 
     }
 
-    public String getHomePageTitle(){
+    public String getHomePageTitle() {
         return homePageTitle.getText();
     }
 
@@ -148,15 +147,15 @@ public class UbsHomePage extends BasePage {
     }
 
     @Step("looking for element on page by xpath{headerButtonOrderCourier}")
-    public boolean checkIfButtonOnDisplay(){
+    public boolean checkIfButtonOnDisplay() {
         return headerButtonOrderCourier.isDisplayed();
     }
 
-    public String checkTextPriceUbsCourier(){
+    public String checkTextPriceUbsCourier() {
         return priceUbsCourier.getText();
     }
 
-    public boolean checkIfBurgerMenuOnDisplay(){
+    public boolean checkIfBurgerMenuOnDisplay() {
         return burgerMenu.isDisplayed();
     }
 

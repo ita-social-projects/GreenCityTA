@@ -8,12 +8,12 @@ import org.openqa.selenium.support.How;
 
 public class Messages extends BasePage {
 
+    @FindBy(how = How.XPATH, using = "//*[@class = 'if-empty ng-star-inserted']")
+    private WebElement emptyMessagesPageLabel;
+
     public Messages(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.XPATH, using = "//*[@class = 'if-empty ng-star-inserted']")
-    private WebElement emptyMessagesPageLabel;
 
     public String getEmptyMessagesPageLabel() {
         return emptyMessagesPageLabel.getText();

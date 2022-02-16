@@ -160,10 +160,10 @@ public class OrderPageConfirmationTest extends TestRun {
 
     @Description("Verify that info about the address of export is updated after language changing")
     @Test
-    public void verifyExportAddressLocalizationTest(){
+    public void verifyExportAddressLocalizationTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
+                .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
@@ -191,7 +191,7 @@ public class OrderPageConfirmationTest extends TestRun {
     public void verifyExportAddressRelevanceAfterChangeTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
-                .addFullAddress(INDEX_OF_CITY,INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
+                .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, HOUSE_NUMBER_TO_ADD, CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
@@ -203,7 +203,7 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region");
 
         orderPageConfirmation.clickOnBackButton().clickOnAddAddressButton()
-                .addFullAddress(NEW_INDEX_OF_CITY,NEW_INDEX_OF_DISTRICT,NEW_STREET_TO_ADD,NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
+                .addFullAddress(NEW_INDEX_OF_CITY, NEW_INDEX_OF_DISTRICT, NEW_STREET_TO_ADD, NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
                 .clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv");
         softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pecherskiy");
@@ -239,23 +239,23 @@ public class OrderPageConfirmationTest extends TestRun {
 
     @Description("Verify that after adding the eco store order it appears at the confirmation page")
     @Test
-    public void verifyEcoStoreFunctionality(){
+    public void verifyEcoStoreFunctionality() {
         OrderDetailsPage orderDetailsPage = new OrderPagePersonalData(driver).clickOnBackButton();
 
         String firstOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String secondOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String actual1 = orderDetailsPage
                 .clickOnYesWaitingStoreOrderCheckmark()
-                .EnterOrderNumberInputs(firstOrderNumber,0)
+                .EnterOrderNumberInputs(firstOrderNumber, 0)
                 .clickOnAddAnotherNumberButton()
-                .EnterOrderNumberInputs(secondOrderNumber,1)
+                .EnterOrderNumberInputs(secondOrderNumber, 1)
                 .clickOnNextButton()
                 .clickOnBackButton()
                 .getOrderNumberInputs(0);
         String actual2 = orderDetailsPage.getOrderNumberInputs(1);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actual1,firstOrderNumber);
-        softAssert.assertEquals(actual2,secondOrderNumber);
+        softAssert.assertEquals(actual1, firstOrderNumber);
+        softAssert.assertEquals(actual2, secondOrderNumber);
 
     }
 

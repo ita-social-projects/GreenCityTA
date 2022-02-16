@@ -11,29 +11,23 @@ import org.openqa.selenium.support.ui.Select;
 
 public class PaymentPopUp extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'text-order-sum']")
+    private WebElement orderSumLabel;
+    @FindBy(how = How.XPATH, using = ".//*[@formcontrolname = 'certificateCode']")
+    private WebElement certificateCodeTextBox;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn btn-activate')]")
+    private WebElement activeButton;
+    @FindBy(how = How.XPATH, using = ".//*[@formcontrolname = 'paymentSystem']")
+    private WebElement paymentMethodDropdown;
+    private final Select paymentMethodsList = new Select(paymentMethodDropdown);
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-cancel']")
+    private WebElement cancelButton;
+    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-pay']")
+    private WebElement payButton;
+
     public PaymentPopUp(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'text-order-sum']")
-    private WebElement orderSumLabel;
-
-    @FindBy(how = How.XPATH, using = ".//*[@formcontrolname = 'certificateCode']")
-    private WebElement certificateCodeTextBox;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn btn-activate')]")
-    private WebElement activeButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[@formcontrolname = 'paymentSystem']")
-    private WebElement paymentMethodDropdown;
-
-    private Select paymentMethodsList = new Select(paymentMethodDropdown);
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-cancel']")
-    private WebElement cancelButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[@class = 'btn btn-pay']")
-    private WebElement payButton;
 
     @Step("get sum of order label text")
     public String getOrderSumLabel() {

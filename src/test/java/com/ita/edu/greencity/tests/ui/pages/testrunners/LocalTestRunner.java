@@ -15,8 +15,8 @@ import java.time.Duration;
 
 public class LocalTestRunner extends TestRun {
 
-    protected WebDriver driver;
     protected static ValueProvider provider;
+    protected WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
@@ -25,18 +25,18 @@ public class LocalTestRunner extends TestRun {
     }
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(provider.getLocalUbsHomePageURL());
-        LocalStorage localStorage = ((WebStorage)driver).getLocalStorage();
+        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
         localStorage.setItem("language", "en");
         driver.navigate().refresh();
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }
