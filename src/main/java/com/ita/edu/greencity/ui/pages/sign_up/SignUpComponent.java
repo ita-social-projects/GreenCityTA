@@ -138,6 +138,7 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
+    @Step("Click on sign in link")
     public SignInComponent clickOnSignInLinkButton() {
         signInLinkButton.click();
         return new SignInComponent(driver);
@@ -147,6 +148,7 @@ public class SignUpComponent extends BasePage {
         return subTitle.getText();
     }
 
+    @Step("Click on title to unfocus")
     public SignUpComponent clickOnTextOfSubTitle() {
         subTitle.click();
         return this;

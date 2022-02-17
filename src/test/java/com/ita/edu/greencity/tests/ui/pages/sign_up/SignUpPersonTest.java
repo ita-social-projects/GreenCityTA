@@ -43,7 +43,10 @@ public class SignUpPersonTest extends TestRun {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertFalse(isDisabled, "SignUp button is disabled!");
         String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
-        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
+        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "Incorrect alert!");
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        softAssert.assertEquals(user,null, "User is in Data Base!");
+
         softAssert.assertAll();
     }
 

@@ -14,6 +14,7 @@
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpPersonTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpWithGoogleTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpPersonWithVerifyEmailTest"></class>
         </classes>
     </test>
     <test name="Sign_up_simple" thread-count="3">
