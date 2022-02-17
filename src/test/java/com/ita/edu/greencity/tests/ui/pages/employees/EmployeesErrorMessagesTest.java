@@ -92,8 +92,6 @@ public class EmployeesErrorMessagesTest {
     }
 
 
-
-
     String CORRECT_MENU_NAME = "Leonard";
     String NOT_CORRECT_MENU_NAME = "Leonard1";
     String CORRECT_MENU_SURNAME = "Hofstadter";

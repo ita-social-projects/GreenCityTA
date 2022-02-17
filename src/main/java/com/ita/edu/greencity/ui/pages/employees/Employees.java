@@ -27,7 +27,7 @@ public class Employees extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer/div/ul/li[4]")
     private WebElement buttonEmployees;
 
-    @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer-content/div/app-ubs-admin-employee/div/div[1]/div[2]/button")
+    @FindBy(how = How.XPATH, using = "//div[@class='employee-add']//button")
     private WebElement buttonAddEmployees;
 
     @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer-content/div/app-ubs-admin-employee/div/div[2]/app-ubs-admin-employee-table/div/mat-form-field/div/div[1]/div/input")
@@ -63,6 +63,20 @@ public class Employees extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//simple-snack-bar[@class='mat-simple-snackbar ng-star-inserted']//span")
     private WebElement errorSurnameMessage;
+
+    @FindBy(how = How.XPATH, using = "//button[@class='cancelButton']")
+    private WebElement cancelButton;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(), 'Leonard')]")
+    private WebElement locatorOfNewEmployee;
+
+    @FindBy(how = How.XPATH, using = "//div//button[@class='delete-employee ng-star-inserted']")
+    private WebElement locatorOfRemoveButton;
+
+    @FindBy(how = How.XPATH, using = "//button[@class='edit-employee-btn ng-star-inserted']")
+    private WebElement locatorOfEditEmployeeButton;
+
+
 
 
 
@@ -113,6 +127,11 @@ public class Employees extends BasePage {
         buttonAddEmployees.click();
     }
 
+    @Step("press on Cancel Button")
+        public void pressCancelButton(){
+        cancelButton.click();
+        }
+
 
     @Step("input value to nameArr")
     public Employees sendKeysNameArr(String inputText){
@@ -157,6 +176,31 @@ public class Employees extends BasePage {
         buttonAddEmployeeInAddMenu.click();
     }
 
+    @Step("press on locator Name")
+    public void pressLocatorName(){
+        locatorOfNewEmployee.click();
+    }
+
+
+    @Step("press on locator Name")
+    public void pressLocatorRemove(){
+        locatorOfRemoveButton.click();
+    }
+
+    @Step("")
+    public void locatorOfName(String name){
+        String xpath = String.format("//span[contains(text(), '%s')]", name);
+        driver.findElement(By.xpath(xpath)).click();
+    }
+
+    @Step("")
+    public boolean checkLocatorOfEditEmployeeButton(){
+        return locatorOfEditEmployeeButton.isDisplayed();
+    }
+
+
+
+
     public Employees loadData(String xpath){
         while (true){
             try {
@@ -167,6 +211,7 @@ public class Employees extends BasePage {
             sleep(500);
         }
     }
+
 
 
 

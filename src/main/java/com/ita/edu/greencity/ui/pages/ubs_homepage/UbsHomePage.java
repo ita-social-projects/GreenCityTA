@@ -79,6 +79,9 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='menu-icon-wrapper']")
     private WebElement burgerMenu;
 
+    @FindBy(how = How.XPATH, using = "//ul[@role='tablist']//a[contains(text(),'UBS courier')]")
+    private WebElement UBSCourierButtonBarMenu;
+
 
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
     private WebElement elementsInBurgerMenu;
@@ -166,9 +169,9 @@ public class UbsHomePage extends BasePage {
     }
 
 
-    //    public void clickSelectionImg() {
-//        selectionImg.click();
-//    }
+        public void clickUBSCourierButtonBarMenu() {
+            UBSCourierButtonBarMenu.click();
+    }
 
 //    public UbsHomePage getSectionMainText() {
 //        sectionMainText.click();

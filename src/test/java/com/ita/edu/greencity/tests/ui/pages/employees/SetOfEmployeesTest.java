@@ -1,20 +1,15 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EmployeesTest extends EmployeesTestRun {
-
+public class SetOfEmployeesTest extends EmployeesTestRun {
 
     @Test
     @Description("Check if current url")
@@ -34,24 +29,33 @@ public class EmployeesTest extends EmployeesTestRun {
     public void checkIfAddEmployeesButtonOnDisplay() {
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
-        String xpath = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer-content/div/app-ubs-admin-employee/div/div[1]/div[2]/button";
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         Assert.assertTrue(employees.checkIfButtonAddEmplOnDipl());
         System.out.println("Add button on display");
 
     }
 
-
     @Test
-    @Description("Check if Add Employees button on display")
+    @Description("")
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
-    public void addNewUser() {
+    public void checkEditEmployeeButton() {
+        String name = "Harry";
         Employees employees = new Employees(driver);
-//        employees.pressButtonAddEmployee();
-        Assert.assertTrue(employees.checkIfInputOnDisplay());
-        System.out.println("Input on display");
+        employees.locatorOfName(name);
+        employees.checkLocatorOfEditEmployeeButton();
+        employees.pressCancelButton();
+    }
+
+
+    @Test
+    @Description("")
+    @Issue("")
+    @Severity(SeverityLevel.TRIVIAL)
+    public void removeEmployee() {
+        String name = "Harry";
+        Employees employees = new Employees(driver);
+        employees.locatorOfName(name);
+        employees.pressLocatorRemove();
     }
 
     @Test
@@ -86,32 +90,6 @@ public class EmployeesTest extends EmployeesTestRun {
         employees.sendKeysPhoneArr("676706767");
         System.out.println("Input in phone");
     }
-
-    @Test
-    @Description("")
-    @Issue("")
-    @Severity(SeverityLevel.TRIVIAL)
-    public void writeTextInAddUserMenu() {
-        Employees employees = new Employees(driver);
-        employees.pressButtonAddEmployee();
-        employees.sendKeysNameArr("Leonard");
-        employees.sendKeysSurnameArr("Hofstadter");
-
-        System.out.println("Input is correct");
-    }
-
-    @Test
-    @Description("")
-    @Issue("")
-    @Severity(SeverityLevel.TRIVIAL)
-    public void removeEmployee() {
-        String name = "Harry";
-        Employees employees = new Employees(driver);
-        employees.locatorOfName(name);
-        employees.pressLocatorRemove();
-    }
-
-
 
 
 }
