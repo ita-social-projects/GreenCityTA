@@ -80,10 +80,10 @@ public class SignInComponent extends BasePage {
     }
 
     @Step("click on 'sign in' button")
-    public SelectRegion clickSignIn() {
+    public UbsHomePage clickSignIn() {
         signIn.click();
 
-        return new SelectRegion(driver);
+        return new UbsHomePage(driver);
     }
 
     @Step("click on 'sign in with google' button")
