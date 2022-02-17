@@ -16,7 +16,7 @@
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpWithGoogleTest"></class>
         </classes>
     </test>
-    <test name="Sign_up_simple" thread-count="1">
+    <test name="Sign_up_simple" thread-count="3">
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.CloseSignUpPopUpTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpErrorMessageTest"></class>
