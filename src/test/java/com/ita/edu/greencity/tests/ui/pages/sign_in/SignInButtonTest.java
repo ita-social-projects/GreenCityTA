@@ -32,17 +32,17 @@ public class SignInButtonTest extends TestRun {
         String expected_text = "text";
         String actual = signin.getPasswordType();
 
-        softAssert.assertEquals(actual, expected_password);
+        softAssert.assertEquals(actual, expected_password, "verify if the password is hidden");
 
         actual = signin
                 .clickShowHidePassword()
                 .getPasswordType();
-        softAssert.assertEquals(actual, expected_text);
+        softAssert.assertEquals(actual, expected_text, "verify if the password is shown");
 
         actual = signin
                 .clickShowHidePassword()
                 .getPasswordType();
-        softAssert.assertEquals(actual, expected_password);
+        softAssert.assertEquals(actual, expected_password, "verify if the password is hidden");
 
         softAssert.assertAll();
     }
