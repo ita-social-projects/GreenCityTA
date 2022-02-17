@@ -17,8 +17,8 @@ public class EditPersonalDataTest extends TestRun {
     @BeforeMethod
     public void loginToUBS(){
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
                 .clickSignIn()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
