@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.ui.utils;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
 import org.apache.tika.language.detect.LanguageDetector;
 
@@ -17,11 +18,17 @@ public class TestHelpersUtils {
 
     public static String generateRandomComment(int len) {
         String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
-                 +"lmnopqrstuvwxyz!@#$%& ";
+                + "lmnopqrstuvwxyz!@#$%& ";
         Random rnd = new Random();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++)
             sb.append(chars.charAt(rnd.nextInt(chars.length())));
         return sb.toString();
+    }
+
+    public static String generateRandomOrderNumber() {
+        Random rand = new Random();
+        String randomOrder = RandomStringUtils.randomNumeric(10);
+        return randomOrder;
     }
 }

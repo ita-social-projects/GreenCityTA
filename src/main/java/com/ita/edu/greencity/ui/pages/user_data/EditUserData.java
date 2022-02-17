@@ -1,9 +1,7 @@
 package com.ita.edu.greencity.ui.pages.user_data;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,40 +24,44 @@ public class EditUserData extends BasePage {
     private WebElement discardChanges;
 
     @FindBy(how = How.CSS, using = "button.btn.btn-success")
-    private WebElement  saveChanges;
+    private WebElement saveChanges;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@formarrayname, 'address')]")
-    private  List<WebElement>  adressTable;
+    private List<WebElement> adressTable;
 
     public EditUserData(WebDriver driver) {
         super(driver);
     }
 
     @Step("set value {newName} in 'Name' field on 'Edit User Data' page")
-    public EditUserData enterEditedName(final String newName){
+    public EditUserData enterEditedName(final String newName) {
         editName.clear();
         editName.sendKeys(newName);
         return this;
     }
+
     @Step("set value {newSurname} in 'Surname' field on 'Edit User Data' page")
-    public EditUserData enterEditedSurname(final String newSurname){
+    public EditUserData enterEditedSurname(final String newSurname) {
         editSurname.clear();
         editSurname.sendKeys(newSurname);
         return this;
     }
+
     @Step("set value {newPhone} in 'Phone' field on 'Edit User Data' page")
-    public EditUserData enterEditedPhone(final String newPhone){
+    public EditUserData enterEditedPhone(final String newPhone) {
         editPhone.clear();
         editPhone.sendKeys(newPhone);
         return this;
     }
+
     @Step("click on 'Discard Changes' button on 'Edit User Data' page")
-    public UserData clickOnDiscardChangesButton(){
+    public UserData clickOnDiscardChangesButton() {
         discardChanges.click();
         return new UserData(driver);
     }
+
     @Step("click on 'Save changes' button on 'Edit User Data' page")
-    public UserData clickOnSaveChangesButton(){
+    public UserData clickOnSaveChangesButton() {
         saveChanges.click();
         return new UserData(driver);
     }
@@ -81,7 +83,6 @@ public class EditUserData extends BasePage {
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     }
-
 
 
 }

@@ -16,7 +16,6 @@ public class SelectRegionAfterSignInTest extends TestRun {
     public final static String secondRegion = "Kyiv region";
 
 
-
     @Description("Verify equality of regions from pop-up and OrderDetailsPage")
     @Test
     public void changeRegionAfterSignIn() {

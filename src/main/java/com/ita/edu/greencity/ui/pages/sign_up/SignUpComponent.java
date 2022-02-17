@@ -149,7 +149,7 @@ public class SignUpComponent extends BasePage {
 
     @Step("Check the disability of sign-up button in sign-up pop up")
     public boolean checkDisabledSignUpButton() {
-        return (signUpButton.getAttribute("disabled")!= null);
+        return (signUpButton.getAttribute("disabled") != null);
     }
 
     @Step("Check the alert which appears after successful registration of user")
