@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class LoginTest extends TestRun {
 
@@ -26,15 +27,22 @@ public class LoginTest extends TestRun {
     public void loginTest() {
         SignInComponent signin = new SignInComponent(driver);
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
+        SoftAssert softAssert = new SoftAssert();
 
-        String expected = provider.getUserName();
-        signin
+        String expectedTitle = "It's even easier than before!";
+        String expectedUserName = provider.getUserName();
+
+        String actualTitle = signin
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn();
+                .clickSignIn()
+                .getHomePageTitle();
 
-        String actual = header.getUserName();
+        String actualUserName = header.getUserName();
 
-        Assert.assertEquals(actual, expected);
+        softAssert.assertEquals(actualUserName, expectedUserName, "verify whether correct account is logined");
+        softAssert.assertEquals(actualTitle, expectedTitle, "verify whether homepage is displayed");
+
+        softAssert.assertAll();
     }
 }
