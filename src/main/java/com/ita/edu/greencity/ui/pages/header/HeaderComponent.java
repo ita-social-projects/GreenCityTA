@@ -54,18 +54,21 @@ public class HeaderComponent extends BasePage {
 
     @Step("Click on Sorting Rules button")
     public SortingRules clickSortingRules() {
+        sleep(1000);
         sortingRules.click();
         return new SortingRules(driver);
     }
 
     @Step("Click on EcoShop button")
     public EcoShop clickEcoShop() {
+        sleep(1000);
         ecoShop.click();
         return new EcoShop(driver);
     }
 
     @Step("Click on GreenCity button")
     public GreenCity clickGreenCity() {
+        sleep(1000);
         greenCity.click();
         return new GreenCity(driver);
     }
