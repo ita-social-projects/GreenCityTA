@@ -11,18 +11,16 @@ import org.openqa.selenium.support.How;
 
 public class UbsUserOrderHistory extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
+    private WebElement newOrderButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')]/*[contains(@class, 'mat-tab-label-content')]")
+    private WebElement currentOrdersTabButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
+    private WebElement orderHistoryTabButton;
+
     public UbsUserOrderHistory(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]")
-    private WebElement newOrderButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '0')]/*[contains(@class, 'mat-tab-label-content')]")
-    private WebElement currentOrdersTabButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
-    private WebElement orderHistoryTabButton;
 
     @Step("click on new order button")
     public OrderDetailsPage clickOnNewOrderButton() {

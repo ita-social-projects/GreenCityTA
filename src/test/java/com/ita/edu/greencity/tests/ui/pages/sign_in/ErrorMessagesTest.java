@@ -3,7 +3,6 @@ package com.ita.edu.greencity.tests.ui.pages.sign_in;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
-
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.Assert;
@@ -33,7 +32,7 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
         final String expected = "Email is required";
         final String expectedIncorrect = "Please check that your e-mail address is indicated correctly";
 
-        return new Object[][] {
+        return new Object[][]{
                 {"", expected},
                 {"1234", expectedIncorrect},
                 {"testgreencity", expectedIncorrect},
@@ -44,7 +43,7 @@ public class ErrorMessagesTest extends TestRunnerInitDriverWithBeforeClass {
 
     @DataProvider
     private Object[][] generalDataProvider() {
-        return new Object[][] {
+        return new Object[][]{
                 {provider.getEmail(), "invalid"},
                 {provider.getEmail(), "123"},
                 {"email@gmail.com", provider.getPassword()},

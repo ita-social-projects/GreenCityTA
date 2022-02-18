@@ -23,19 +23,20 @@ import java.util.Properties;
 
 @Listeners(TestNGListener.class)
 public class TestRun {
-    protected WebDriver driver;
     protected static ValueProvider provider;
+    protected WebDriver driver;
 
     @BeforeSuite(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
-//        for(ITestNGMethod method : iTestContext.getAllTestMethods()) {
-//            method.setRetryAnalyzerClass(RetryAnalyzer.class);
-//        }
+        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
+            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+        }
         WebDriverManager.chromedriver().setup();
         provider = new ValueProvider();
     }
 
     @BeforeMethod(description = "Configure chromedriver and go to UbsHomePageURL")
+<<<<<<< HEAD
     public void beforeMethod(ITestContext iTestContext){
         ChromeOptions options = new ChromeOptions();
       //  options.addArguments("--headless");
@@ -50,20 +51,25 @@ public class TestRun {
        // options.addArguments("--user-data-dir");
         options.addArguments("--allow-running-insecure-content");
         driver = new ChromeDriver(options);
+=======
+    public void beforeMethod(ITestContext iTestContext) {
+        driver = new ChromeDriver();
+>>>>>>> b40bf5fa8837a2b30753eec9d5622d1ed10d085b
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get(provider.getUbsHomePageURL());
-        LocalStorage localStorage = ((WebStorage)driver).getLocalStorage();
+        LocalStorage localStorage = ((WebStorage) driver).getLocalStorage();
         localStorage.setItem("language", "en");
         driver.navigate().refresh();
-        iTestContext.setAttribute("driver",driver);
+        iTestContext.setAttribute("driver", driver);
     }
 
     @AfterMethod(description = "Quite chromedriver")
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }
+
     }
 
 

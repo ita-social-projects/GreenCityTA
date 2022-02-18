@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.List;
+
 
 public class OrderPagePersonalData extends BasePage {
 
@@ -68,10 +70,13 @@ public class OrderPagePersonalData extends BasePage {
     private WebElement nextButton;
 
     @FindBy(how = How.XPATH, using = "//img[@alt = 'edit image']")
-    private WebElement editCollectionAddressButton;
+    private List<WebElement> editSavedAddress;
 
     @FindBy(how = How.XPATH, using = "//img[@alt = 'delete image']")
-    private WebElement deleteCollectionAddressButton;
+    private List<WebElement> deleteSavedAddress;
+
+    @FindBy(how = How.XPATH, using = "//input[@name ='address']")
+    private List<WebElement> chooseSavedAddress;
 
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[2]/div/app-ubs-input-error/div")
     private WebElement nameErrorMessage;
@@ -93,6 +98,10 @@ public class OrderPagePersonalData extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
     private WebElement anotherClientPhoneNumberErrorMessage;
+
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
+    }
 
     @Step("get text from error message (Another client phone number field)")
     public String getTextFromAnotherClientPhoneNumberErrorMessage() {
@@ -130,14 +139,20 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("click on delete collection button")
-    public OrderPagePersonalData clickOnDeleteCollectionAddressButton() {
-        deleteCollectionAddressButton.click();
+    public OrderPagePersonalData clickOnDeleteCollectionAddressButton(int indexOfSavedAddress) {
+        deleteSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
 
     @Step("click on edit address button")
-    public AddNewAddress clickOnEditAddressButton() {
-        editCollectionAddressButton.click();
+    public AddNewAddress clickOnEditAddressButton(int indexOfSavedAddress) {
+        editSavedAddress.get(indexOfSavedAddress).click();
+        return new AddNewAddress(driver);
+    }
+
+    @Step("click on choose saved address button")
+    public AddNewAddress clickOnChooseAddressButton(int indexOfSavedAddress) {
+        chooseSavedAddress.get(indexOfSavedAddress).click();
         return new AddNewAddress(driver);
     }
 
@@ -232,6 +247,7 @@ public class OrderPagePersonalData extends BasePage {
         phoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
+
     @Step("enter surname (Surname field)")
     public OrderPagePersonalData entersurname(final String lastName) {
         surnameField.clear();
@@ -246,7 +262,7 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
-    public OrderPagePersonalData clickForGetMessage(){
+    public OrderPagePersonalData clickForGetMessage() {
         UBSTitle.click();
         return this;
     }
@@ -254,9 +270,5 @@ public class OrderPagePersonalData extends BasePage {
     @Step("get text from title")
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
-    }
-
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
     }
 }

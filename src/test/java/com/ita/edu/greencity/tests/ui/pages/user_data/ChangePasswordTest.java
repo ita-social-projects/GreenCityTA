@@ -9,7 +9,9 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 
 public class ChangePasswordTest extends TestRun {
@@ -26,7 +28,7 @@ public class ChangePasswordTest extends TestRun {
     @DataProvider(name = "dataProvider")
     private Object[][] dataProviderToChangeCurrentPassword() {
         return new Object[][]{
-                { "0000000700Qw1/"},
+                {"0000000700Qw1/"},
                 {".mypasswoRd1"},
         };
     }
@@ -34,8 +36,8 @@ public class ChangePasswordTest extends TestRun {
     @DataProvider(name = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     private Object[][] dataProviderToVerifyMessageWhenPasswordsNotMatch() {
         return new Object[][]{
-                {"1245367000Qw1/","14567000Qw1/"},
-                {"mypas3swoRd1+","mypasswoRd1"},
+                {"1245367000Qw1/", "14567000Qw1/"},
+                {"mypas3swoRd1+", "mypasswoRd1"},
         };
     }
 
@@ -44,7 +46,7 @@ public class ChangePasswordTest extends TestRun {
     @Issue("91")
     @Severity(SeverityLevel.CRITICAL)
     @Link("https://jira.softserve.academy/browse/GC-2450")
-    public void changeCurrentPassword( String newPassword) {
+    public void changeCurrentPassword(String newPassword) {
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         header.clickUserMenu()
                 .clickUbsUser()
@@ -67,11 +69,12 @@ public class ChangePasswordTest extends TestRun {
         Assert.assertEquals(actual, expectedTitle);
         provider.setPassword(newPassword);
     }
+
     @Test
     @Description("check the error message when the new password is the same as the old one")
     @Issue("92")
     @Severity(SeverityLevel.TRIVIAL)
-    public void verifyMessageWhenChangingPasswordToTheSame(){
+    public void verifyMessageWhenChangingPasswordToTheSame() {
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         String actual = header.clickUserMenu()
                 .clickUbsUser()
@@ -85,11 +88,12 @@ public class ChangePasswordTest extends TestRun {
         String expectedTitle = "Enter the new password!";
         Assert.assertEquals(actual, expectedTitle);
     }
+
     @Test(dataProvider = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     @Description("check the error message when the data in 'the new password' and 'repeat the password' fields are different")
     @Issue("93")
     @Severity(SeverityLevel.TRIVIAL)
-    public void verifyMessageWhenPasswordsNotMatch(String newPassword,String repeatPassword){
+    public void verifyMessageWhenPasswordsNotMatch(String newPassword, String repeatPassword) {
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         String actual = header.clickUserMenu()
                 .clickUbsUser()

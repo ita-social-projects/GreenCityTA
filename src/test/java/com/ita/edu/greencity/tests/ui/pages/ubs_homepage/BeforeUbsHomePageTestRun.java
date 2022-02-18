@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class BeforeUbsHomePageTestRun extends TestRun {
 
+
     @BeforeClass
     public void beforeClass(ITestContext testContext) {
         super.beforeMethod(testContext);
@@ -31,12 +32,15 @@ public class BeforeUbsHomePageTestRun extends TestRun {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
 
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
