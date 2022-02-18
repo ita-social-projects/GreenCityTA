@@ -37,7 +37,7 @@ public class UbsUser extends BasePage {
     }
 
     public UserData clickOnUserDataButton() {
-        this.sleep(4000);
+        this.sleep(7000);
         userDataButton.click();
         return new UserData(driver);
 

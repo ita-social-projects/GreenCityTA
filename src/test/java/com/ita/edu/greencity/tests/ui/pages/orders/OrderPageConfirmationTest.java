@@ -86,7 +86,7 @@ public class OrderPageConfirmationTest extends TestRun {
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
-    @Description("Verify order deleting functionality")
+ /*   @Description("Verify order deleting functionality")
     @Test
     public void verifyOrderDeletingTest() {
         String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
@@ -96,7 +96,7 @@ public class OrderPageConfirmationTest extends TestRun {
         String expectedMessage = "It's even easier than";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
-
+*/
     @Description("Verify whether after language changing the currency of order is changed")
     @Test
     public void localizationRelevanceOfCurrencyTest() {
