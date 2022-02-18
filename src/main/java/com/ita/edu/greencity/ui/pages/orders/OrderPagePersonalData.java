@@ -99,6 +99,21 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
     private WebElement anotherClientPhoneNumberErrorMessage;
 
+
+    @FindBy(how = How.XPATH, using = "//div[@class ='no-addresses ng-star-inserted']")
+    private WebElement absenceAnyAddresses;
+
+    @Step("get comment")
+    public String getComment() {
+        return addressCommentField.getAttribute("value");
+    }
+
+    @Step("get text from absence any addresses ")
+    public String getTextFromAbsenceAnyAddresses(){
+        return absenceAnyAddresses.getText();
+    }
+
+
     @Step("get text from error message (Another client phone number field)")
     public String getTextFromAnotherClientPhoneNumberErrorMessage() {
         return anotherClientPhoneNumberErrorMessage.getText();

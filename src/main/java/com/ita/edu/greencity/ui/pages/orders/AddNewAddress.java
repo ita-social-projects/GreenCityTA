@@ -40,9 +40,6 @@ public class AddNewAddress extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[contains(@formcontrolname, 'entranceNumber')]")
     private WebElement entranceNumberField;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = 'address-comment']//textarea[@formcontrolname= 'addressComment']")
-    private WebElement addressCommentField;
-
     @FindBy(how = How.XPATH, using = "//button[@class = 'secondary-global-button btn m-0 mr-2']")
     private WebElement cancelButton;
 
@@ -63,6 +60,48 @@ public class AddNewAddress extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//form/div[7]/div/app-ubs-input-error/div")
     private WebElement commentToTheAddressErrorMessage;
+
+
+    @FindBy(how = How.XPATH, using = "//input[@class ='shadow-none form-control ng-star-inserted pac-target-input ng-touched ng-dirty ng-invalid']")
+    private WebElement streetFieldAIsEmpty;
+
+    @FindBy(how = How.XPATH, using = "//input[@class ='shadow-none form-control ng-star-inserted pac-target-input ng-touched ng-dirty ng-valid']")
+    private WebElement streetFieldAIsFiled;
+
+    @FindBy(how = How.XPATH, using = "//div[@class = 'form-group comment-section']/textarea[@formcontrolname='addressComment']")
+    private WebElement commentToTheAddress;
+
+
+    @Step("get comment")
+    public String getCommentToTheAddress() {
+        return commentToTheAddress.getAttribute("value");
+    }
+
+    @Step("get webElement 'streetFieldAreFiled'")
+    public WebElement getStreetFieldAIsFiled() {
+        return streetFieldAIsFiled;
+    }
+
+    @Step("get webElement 'streetFieldAreEmpty'")
+    public WebElement getStreetFieldAIsEmpty() {
+        return streetFieldAIsEmpty;
+    }
+
+
+    @Step("get text from entrance error message")
+    public String getTextFromEntranceErrorMessage(){
+        return entranceErrorMessage.getText();
+    }
+
+    @Step("get text from corpus error message")
+    public String getTextFromCorpusErrorMessage(){
+        return corpusErrorMessage.getText();
+    }
+
+    @Step("get text from house error message")
+    public String getTextFromHouseErrorMessage(){
+        return houseErrorMessage.getText();
+    }
 
 
     @Step("choose street by index of list")
@@ -98,8 +137,8 @@ public class AddNewAddress extends BasePage {
 
     @Step("enter comment to the address")
     public AddNewAddress enterAddressComment(final String addressComment) {
-        addressCommentField.clear();
-        addressCommentField.sendKeys(addressComment, Keys.ENTER);
+        commentToTheAddress.clear();
+        commentToTheAddress.sendKeys(addressComment, Keys.ENTER);
         return this;
     }
 
@@ -167,14 +206,14 @@ public class AddNewAddress extends BasePage {
         return newAddressTitle.getText();
     }
 
-    public OrderPagePersonalData addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse){
+    public AddNewAddress addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse){
         AddNewAddress addNewAddress = new AddNewAddress(driver).clickOnCityField()
                 .chooseCity(indexCity)
                 .chooseDistrict(indexDistrict)
                 .enterStreet(street)
                 .chooseStreet(indexStreet)
                 .enterHouseNumber(numberOfHouse);
-        return new OrderPagePersonalData(driver);
+        return this;
     }
 
     public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber){
