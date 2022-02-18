@@ -161,7 +161,7 @@ public class SignUpComponent extends BasePage {
 
     @Step("Check the alert which appears after successful registration of user")
     public String getTextOfSuccessRegistrationAlert() {
-        sleep(5000);
+        sleep(7000);
         return successRegistrationAlert.getText();
     }
 
