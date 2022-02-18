@@ -14,8 +14,8 @@ public class Employees extends BasePage {
     public Employees(WebDriver driver) {
         super(driver);
     }
-    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-1']/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button")
-    private WebElement singInButton;
+//    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-1']/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button")
+//    private WebElement singInButton;
 
 
     @FindBy(how = How.XPATH, using = "//ul[@id='header_user-wrp']")
@@ -73,6 +73,10 @@ public class Employees extends BasePage {
     @FindBy(how = How.XPATH, using = "//div//button[@class='delete-employee ng-star-inserted']")
     private WebElement locatorOfRemoveButton;
 
+    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-2']/app-dialog-pop-up/div/div[2]/button[2]")
+    private WebElement locatorOfReaskRemoveButton;
+
+
     @FindBy(how = How.XPATH, using = "//button[@class='edit-employee-btn ng-star-inserted']")
     private WebElement locatorOfEditEmployeeButton;
 
@@ -84,10 +88,10 @@ public class Employees extends BasePage {
 
 
 
-    @Step("click on singInButton")
-    public void clickSingInButton(){
-        singInButton.click();
-    }
+//    @Step("click on singInButton")
+//    public void clickSingInButton(){
+//        singInButton.click();
+//    }
 
     @Step("click on pop-up menu")
     public void clickAdminPopMenu(){
@@ -185,6 +189,11 @@ public class Employees extends BasePage {
     @Step("press on locator Name")
     public void pressLocatorRemove(){
         locatorOfRemoveButton.click();
+    }
+
+    @Step("press on locator Name")
+    public void pressLocatorReaskRemoveButton(){
+        locatorOfReaskRemoveButton.click();
     }
 
     @Step("")

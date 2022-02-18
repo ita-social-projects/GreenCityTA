@@ -23,6 +23,7 @@
             <class name="com.ita.edu.greencity.tests.ui.pages.employees.CreateEmployeesTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.employees.SetOfEmployeesTest"></class>
         </classes>
+
     </test>
     <test name="Ubs_homepage" thread-count="3">
         <classes>

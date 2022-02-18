@@ -6,6 +6,8 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -52,10 +54,15 @@ public class SetOfEmployeesTest extends EmployeesTestRun {
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
     public void removeEmployee() {
-        String name = "Harry";
+        String name = "Leonardddd";
         Employees employees = new Employees(driver);
         employees.locatorOfName(name);
         employees.pressLocatorRemove();
+        employees.pressLocatorReaskRemoveButton();
+        String xpath = String.format("//span[contains(text(), '%s')]", name);
+        WebElement actual = driver.findElement(By.xpath(xpath));
+        Assert.assertFalse(actual.isDisplayed());
+
     }
 
     @Test
