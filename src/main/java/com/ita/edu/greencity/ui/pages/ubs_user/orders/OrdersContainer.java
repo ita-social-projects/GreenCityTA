@@ -10,20 +10,11 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
-    private WebDriver driver;
-
-    private DefaultElementLocatorFactory parentContext;
-
-    private WebElement rootElement;
-
-    public OrdersContainer(WebDriver driver, WebElement rootElement) {
-        this.rootElement = rootElement;
-        this.driver = driver;
-        parentContext = new DefaultElementLocatorFactory(rootElement);
-        PageFactory.initElements(parentContext, this);
-    }
-
-
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
+    private final WebDriver driver;
+    private final DefaultElementLocatorFactory parentContext;
+    private final WebElement rootElement;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-content')]")
     private WebElement orderDetails;
 
@@ -37,10 +28,10 @@ public class OrdersContainer {
     private WebElement orderStatus;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentStatus')]")
-    private WebElement orderPaymentStatus;
+    private WebElement paymentStatus;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-paymentAmount')]")
-    private WebElement orderPaymentAmount;
+    private WebElement paymentAmount;
 
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_cancel')]")
     private WebElement cancelButton;
@@ -48,8 +39,12 @@ public class OrdersContainer {
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
     private WebElement payButton;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
+    public OrdersContainer(WebDriver driver, WebElement rootElement) {
+        this.rootElement = rootElement;
+        this.driver = driver;
+        parentContext = new DefaultElementLocatorFactory(rootElement);
+        PageFactory.initElements(parentContext, this);
+    }
 
     @Step("get order id")
     public String getOrderId() {
@@ -67,13 +62,13 @@ public class OrdersContainer {
     }
 
     @Step("get order payment status")
-    public String getOrderPaymentStatus() {
-        return orderPaymentStatus.getText();
+    public String getPaymentStatus() {
+        return paymentStatus.getText();
     }
 
     @Step("get order payment amount")
-    public String getOrderPaymentAmount() {
-        return orderPaymentAmount.getText();
+    public String getPaymentAmount() {
+        return paymentAmount.getText();
     }
 
     @Step("click on cancel order button")
@@ -100,3 +95,5 @@ public class OrdersContainer {
     }
 
 }
+
+

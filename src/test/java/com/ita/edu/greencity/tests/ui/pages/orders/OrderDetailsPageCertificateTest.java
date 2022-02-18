@@ -95,6 +95,22 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                     .getCertificateButtonStatus();
             Assert.assertEquals(isActive, expected);
         }
+
+    @Description("Check does coupon cancel button work properly")
+    @Issue("124")
+    @Test
+    public void couponCancelButtonTest (){
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        String actual = orderDetailsPage
+                .chooseRegionByValue(" Kyiv ")
+                .EnterNumberOfSafeWasteInput("20")
+                .EnterNumberOfTextileWaste20lInput("1")
+                .EnterNumberOfTextileWaste120lInput("1")
+                .EnterCertificateInput(codeValueActive)
+                .clickOnCancelCertificateButton()
+                .getCertificateInput();
+        Assert.assertEquals(actual, "");
+    }
         @AfterTest
         public void deleteCertificate () throws Exception {
             ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);

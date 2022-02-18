@@ -17,8 +17,8 @@ import org.testng.asserts.SoftAssert;
 
 public class SignUpPersonTest extends TestRun {
 
-    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
     private final String userEmail = "registertesttest88@gmail.com";
+    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
 
     @BeforeTest(description = "Delete user by email if it exists in database before registration")
     public void checkRegisteredUser() {

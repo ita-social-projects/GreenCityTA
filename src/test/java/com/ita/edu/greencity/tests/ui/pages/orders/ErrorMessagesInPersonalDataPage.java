@@ -62,7 +62,7 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
     @Description("In this test we will verify error message with poor credential in 'Name field'")
     @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "nameDataProvider")
-    public void verifyNameErrorMessage(String name, String expectedErrorMessage){
+    public void verifyNameErrorMessage(String name, String expectedErrorMessage) {
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
 
         String actual = headerSignedOutComponent
@@ -76,13 +76,13 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
                 .enterFirstName(name)
                 .clickForGetMessage()
                 .getTextFromNameErrorMessage();
-        Assert.assertEquals(actual,expectedErrorMessage);
+        Assert.assertEquals(actual, expectedErrorMessage);
     }
 
     @Description("In this test we will verify error message with poor credential in 'Surname field'")
     @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "surnameDataProvider")
-    public void verifySurnameErrorMessage(String surname, String expectedErrorMessage){
+    public void verifySurnameErrorMessage(String surname, String expectedErrorMessage) {
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
 
         String actual = headerSignedOutComponent
@@ -96,13 +96,13 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
                 .entersurname(surname)
                 .clickForGetMessage()
                 .getTextFromSurnameErrorMessage();
-        Assert.assertEquals(actual,expectedErrorMessage);
+        Assert.assertEquals(actual, expectedErrorMessage);
     }
 
     @Description("In this test we will verify error message with poor credential in 'Phone number field'")
     @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "phoneNumberDataProvider")
-    public void verifyPhoneNumberErrorMessage(String phoneNumber, String expectedErrorMessage){
+    public void verifyPhoneNumberErrorMessage(String phoneNumber, String expectedErrorMessage) {
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
 
         String actual = headerSignedOutComponent
@@ -116,13 +116,13 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
                 .enterPhoneNumber(phoneNumber)
                 .clickForGetMessage()
                 .getTextFromPhoneNumberErrorMessage();
-        Assert.assertEquals(actual,expectedErrorMessage);
+        Assert.assertEquals(actual, expectedErrorMessage);
     }
 
     @Description("In this test we will verify error message with poor credential in 'Email field'")
     @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "emailDataProvider")
-    public void verifyEmailErrorMessage(String email, String expectedErrorMessage){
+    public void verifyEmailErrorMessage(String email, String expectedErrorMessage) {
         HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
 
         String actual = headerSignedOutComponent
@@ -136,6 +136,6 @@ public class ErrorMessagesInPersonalDataPage extends TestRun {
                 .enterEmail(email)
                 .clickForGetMessage()
                 .getTextFromEmailErrorMessage();
-        Assert.assertEquals(actual,expectedErrorMessage);
+        Assert.assertEquals(actual, expectedErrorMessage);
     }
 }

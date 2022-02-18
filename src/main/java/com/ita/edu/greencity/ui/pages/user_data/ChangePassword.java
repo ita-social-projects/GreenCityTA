@@ -35,37 +35,43 @@ public class ChangePassword extends BasePage {
     }
 
     @Step("enter data in field 'old password'")
-    public ChangePassword enterOldPassword(final String oldPasswordData){
+    public ChangePassword enterOldPassword(final String oldPasswordData) {
         oldPassword.clear();
         oldPassword.sendKeys(oldPasswordData);
         return this;
     }
+
     @Step("enter data in field 'new password'")
-    public ChangePassword enterNewPassword(final String newPasswordData){
+    public ChangePassword enterNewPassword(final String newPasswordData) {
         newPassword.clear();
         newPassword.sendKeys(newPasswordData);
         return this;
     }
+
     @Step("enter data in field 'repeat new password'")
-    public ChangePassword enterRepeatNewPassword(final String repeatPasswordData){
+    public ChangePassword enterRepeatNewPassword(final String repeatPasswordData) {
         repeatNewPassword.clear();
         repeatNewPassword.sendKeys(repeatPasswordData);
         return this;
     }
+
     @Step("click on 'Change password' button")
-    public UserData clickOnChangePasswordButton(){
+    public UserData clickOnChangePasswordButton() {
         changePasswordButton.click();
         return new UserData(driver);
     }
+
     @Step("click on 'Cancel' button")
-    public UserData clickOnCancelChangingPasswordButton(){
+    public UserData clickOnCancelChangingPasswordButton() {
         cancelChangingPasswordButton.click();
         return new UserData(driver);
     }
+
     @Step("get error message when the new password is the same as the old one")
     public String getErrorMessageTheSamePassword() {
         return errorMessageTheSamePassword.getText();
     }
+
     @Step("get error message when the data in 'the new password' and 'repeat the password' fields are different")
     public String getErrorMessageDontMatchPassword() {
         return errorMessageDontMatchPassword.getText();

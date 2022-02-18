@@ -8,23 +8,13 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-import java.time.Duration;
-
 public class OrderDetails {
 
     protected WebDriver driver;
-
-    private DefaultElementLocatorFactory parentContext;
-
     protected WebElement rootElement;
-
-    public OrderDetails(WebDriver driver, WebElement rootElement) {
-        this.rootElement = rootElement;
-        this.driver = driver;
-        parentContext = new DefaultElementLocatorFactory(rootElement);
-        PageFactory.initElements(parentContext, this);
-    }
-
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
+    private final DefaultElementLocatorFactory parentContext;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
     private WebElement orderDetailsLabel;
 
@@ -49,8 +39,12 @@ public class OrderDetails {
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
     private WebElement amountDue;
 
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
+    public OrderDetails(WebDriver driver, WebElement rootElement) {
+        this.rootElement = rootElement;
+        this.driver = driver;
+        parentContext = new DefaultElementLocatorFactory(rootElement);
+        PageFactory.initElements(parentContext, this);
+    }
 
     @Step("get label of order details page")
     public WebElement getOrderDetailsLabel() {
