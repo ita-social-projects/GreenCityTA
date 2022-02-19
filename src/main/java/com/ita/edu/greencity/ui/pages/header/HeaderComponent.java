@@ -99,7 +99,23 @@ public class HeaderComponent extends BasePage {
         return this;
     }
 
-    public String getAboutUsText() {
+    @Step("Get text from About us button")
+    public String getAboutUsButtonText() {
         return aboutUs.getText();
+    }
+
+    @Step("Get text from Sorting Rules button")
+    public String getSortingRulesButtonText() {
+        return sortingRules.getText();
+    }
+
+    @Step("Get text from Eco-Shop button")
+    public String getEcoShopButtonText() {
+        return ecoShop.getText();
+    }
+
+    @Step("Get text from Green City button")
+    public String getGreenCityButtonText() {
+        return greenCity.getText();
     }
 }
