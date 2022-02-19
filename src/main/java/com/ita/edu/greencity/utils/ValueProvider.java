@@ -39,6 +39,17 @@ public class ValueProvider {
         return properties.getProperty("adminPassword");
     }
 
+    public String getEmailForChangePassw() {
+        return properties.getProperty("emailForChangePassw");
+    }
+    public String getPasswordForChangePassw() {
+        return properties.getProperty("passwordForChangepassw");
+    }
+    public String getPasswordHash() {
+        return properties.getProperty("passwordHash");
+    }
+
+
 
     public String getPasswordForUserData() {
         return properties.getProperty("passwordForUserData");

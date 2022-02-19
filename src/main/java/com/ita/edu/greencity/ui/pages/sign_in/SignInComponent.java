@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.sign_in;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
@@ -85,6 +86,14 @@ public class SignInComponent extends BasePage {
 
         return new SelectRegion(driver);
     }
+    @Step("click on 'sign in' button")
+    public  HeaderSignedInComponent clickSignInHeaderComponent() {
+        signIn.click();
+
+        return new HeaderSignedInComponent (driver);
+    }
+
+
 
     @Step("click on 'sign in with google' button")
     public SelectRegion clickSignInGoogle() {

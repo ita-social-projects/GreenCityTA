@@ -106,7 +106,7 @@ public class OrderPageConfirmationTest extends TestRun {
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
-<<<<<<< HEAD
+
  /*   @Description("Verify order deleting functionality")
 =======
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
