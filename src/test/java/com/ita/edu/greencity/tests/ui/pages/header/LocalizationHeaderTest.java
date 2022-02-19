@@ -83,8 +83,7 @@ public class LocalizationHeaderTest extends TestRun {
         new HeaderSignedOutComponent(driver).clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .clickOnContinueButton();
+                .clickSignIn();
         HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
         header.clickLanguageSwitcher().languageChoose(language);
 

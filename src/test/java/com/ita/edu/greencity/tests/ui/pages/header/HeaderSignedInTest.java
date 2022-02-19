@@ -17,8 +17,7 @@ public class HeaderSignedInTest extends TestRun {
         headerSignedOut.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
-                .clickOnContinueButton();
+                .clickSignIn();
     }
 
     @Test
