@@ -115,6 +115,7 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
+        sleep(5000);
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
@@ -265,6 +266,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderPagePersonalData clickOnNextButton() {
         nextButton.click();
+        sleep(10000);
         return new OrderPagePersonalData(driver);
     }
 

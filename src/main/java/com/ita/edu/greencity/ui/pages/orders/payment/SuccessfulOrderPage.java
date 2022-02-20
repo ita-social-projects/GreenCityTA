@@ -26,6 +26,7 @@ public class SuccessfulOrderPage extends BasePage {
 
     @Step("Make other order")
     public SelectRegion clickOnMakeOtherOrderButton() {
+        sleep(7000);
         makeOtherOrderButton.click();
         return new SelectRegion(driver);
     }
