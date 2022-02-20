@@ -71,7 +71,7 @@ public class SelectRegion extends BasePage {
 
     @Step("click on Continue button at pop-up after logging in")
     public OrderDetailsPage clickOnContinueButton() {
-        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 10);
+        waitUntilElementToBeClickable(By.xpath("//button[@class='btn primaryButton primary-global-button']"), 60);
         continueButton.click();
         return new OrderDetailsPage(driver);
     }

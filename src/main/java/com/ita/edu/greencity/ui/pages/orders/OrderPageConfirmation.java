@@ -129,23 +129,29 @@ public class OrderPageConfirmation extends BasePage {
     }
 
     public String getStreet() {
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(0);
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(0);
     }
 
     public String getHouseNumber() {
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(1);
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(1);
     }
 
     public String getCorpus() {
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(2);
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(2);
     }
 
     public String getEntrance() {
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(3);
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(3);
     }
 
     public String getRegion() {
         return infoAboutExportAddressList.get(3).getText();
+    }
+
+
+    @Step("Get number of order from Eco store by its index")
+    public String getEcoStoreNumber(int index){
+        return ecoStoreOrderNumbersList.get(index).getText().replaceAll("[^0-9]","");
     }
 
     @Step("Return to the previous stage with personal data")
@@ -162,7 +168,9 @@ public class OrderPageConfirmation extends BasePage {
 
     @Step("Make the order")
     public PaymentByFondyPage clickOnOrderButton() {
+        sleep(5000);
         orderButton.click();
+        sleep(10000);
         return new PaymentByFondyPage(driver);
     }
 
