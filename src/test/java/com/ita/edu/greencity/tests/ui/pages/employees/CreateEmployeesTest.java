@@ -17,23 +17,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
-import org.testng.annotations.*;
 import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.time.Duration;
 
 public class CreateEmployeesTest {
-    String CORRECT_MENU_NAME = "Leonard";
-    String CORRECT_MENU_SURNAME = "Hofstadter";
-    String CORRECT_MENU_PHONE = "676706767";
-    String CORRECT_MENU_EMAIL = "test@ukr.net";
+    String CORRECT_MENU_NAME = "Leon";
+    String CORRECT_MENU_SURNAME = "Hofs";
+    String CORRECT_MENU_PHONE = "676706777";
+    String CORRECT_MENU_EMAIL = "testtest1@ukr.net";
 
     protected static ValueProvider provider;
     protected WebDriver driver;
+    private Employees employees;
+
     @BeforeClass(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
         for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
@@ -42,6 +45,7 @@ public class CreateEmployeesTest {
         WebDriverManager.chromedriver().setup();
         provider = new ValueProvider();
         System.out.println("0000");
+
     }
 
 
@@ -49,6 +53,7 @@ public class CreateEmployeesTest {
     @BeforeMethod
     public void beforeMethod(ITestContext iTestContext) {
         String xpathLoaderEmployeesPage = "//mat-spinner[@role = 'progressbar']";
+
         BasePage basePage = new BasePage(driver);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -105,15 +110,18 @@ public class CreateEmployeesTest {
     @Issue("")
     @Severity(SeverityLevel.TRIVIAL)
     public void checkCorrectAddEmployee() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             System.out.println("00000");
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
-        basePage.sleep(6000);
+//        basePage.sleep(6000);
+        employees.loadData("//div[@class='employee-add']//button");
         employees.pressButtonAddEmployee();
         employees.sendKeysNameArr(CORRECT_MENU_NAME);
         System.out.println("6666");
         employees.sendKeysSurnameArr(CORRECT_MENU_SURNAME);
         System.out.println("7777");
+
         employees.sendKeysPhoneArr(CORRECT_MENU_PHONE);
         System.out.println("8888");
         employees.sendKeysEmailArr(CORRECT_MENU_EMAIL);
@@ -128,7 +136,7 @@ public class CreateEmployeesTest {
         String actual = driver.findElement(By.xpath(xpath)).getText();
         Assert.assertEquals(actual, CORRECT_MENU_NAME);
 
-        employees.locatorOfName("Harry");
+        employees.locatorOfName("");
         System.out.println("correct add");
     }
 

@@ -28,7 +28,7 @@ public class Employees extends BasePage {
     private WebElement buttonEmployees;
 
     @FindBy(how = How.XPATH, using = "//div[@class='employee-add']//button")
-    private WebElement buttonAddEmployees;
+    public WebElement buttonAddEmployees;
 
     @FindBy(how = How.XPATH, using = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer-content/div/app-ubs-admin-employee/div/div[2]/app-ubs-admin-employee-table/div/mat-form-field/div/div[1]/div/input")
     private WebElement inputArr;
@@ -221,6 +221,12 @@ public class Employees extends BasePage {
         }
     }
 
+
+    @Step("")
+    public WebElement locatorOfElenent(){
+        return buttonAddEmployees;
+
+    }
 
 
 
