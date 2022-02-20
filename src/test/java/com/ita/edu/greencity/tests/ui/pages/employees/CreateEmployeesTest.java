@@ -8,10 +8,7 @@ import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -90,24 +87,25 @@ public class CreateEmployeesTest {
 
     @AfterMethod
     public void afterMethod(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
+        if (driver != null) {
+            driver.quit();
+        }
     }
     //
     @AfterClass
     public void tearDown(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 
 
 
     @Test
-    @Description("")
-    @Issue("")
+    @Link("https://jira.softserve.academy/browse/GC-2464")
+    @Description("Create new employee")
+    @Issue("133")
     @Severity(SeverityLevel.TRIVIAL)
     public void checkCorrectAddEmployee() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));

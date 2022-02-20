@@ -76,16 +76,16 @@ public class EmployeesTestRun {
 
     @AfterMethod
     public void afterMethod(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
+        if (driver != null) {
+            driver.quit();
+        }
     }
     //
     @AfterClass
     public void tearDown(){
-//        if (driver != null) {
-//            driver.quit();
-//        }
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }

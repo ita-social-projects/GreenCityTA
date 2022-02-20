@@ -203,6 +203,13 @@ public class Employees extends BasePage {
     }
 
     @Step("")
+    public boolean checkIfLocatorOfNameOnDisplay(String name){
+        String xpath = String.format("//span[contains(text(), '%s')]", name);
+        WebElement elem = driver.findElement(By.xpath(xpath));
+        return elem.isDisplayed();
+    }
+
+    @Step("")
     public boolean checkLocatorOfEditEmployeeButton(){
         return locatorOfEditEmployeeButton.isDisplayed();
     }

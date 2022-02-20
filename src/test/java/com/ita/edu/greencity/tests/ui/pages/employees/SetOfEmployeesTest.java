@@ -2,10 +2,7 @@ package com.ita.edu.greencity.tests.ui.pages.employees;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -37,10 +34,11 @@ public class SetOfEmployeesTest extends EmployeesTestRun {
     }
 
     @Test
-    @Description("")
-    @Issue("")
+    @Link("https://jira.softserve.academy/browse/GC-2466")
+    @Description("Check if edit button is able in menu of employee")
+    @Issue("134")
     @Severity(SeverityLevel.TRIVIAL)
-    public void checkEditEmployeeButton() {
+    public void checkCancelEditEmployeeButton() {
         String name = "Harry";
         Employees employees = new Employees(driver);
         employees.locatorOfName(name);
@@ -48,10 +46,27 @@ public class SetOfEmployeesTest extends EmployeesTestRun {
         employees.pressCancelButton();
     }
 
+    @Test
+    @Link("https://jira.softserve.academy/browse/GC-2467")
+    @Description("Check if admin can edit employee data")
+    @Issue("136")
+    @Severity(SeverityLevel.TRIVIAL)
+    public void checkEditEmployee() {
+        String name = "Looo";
+        Employees employees = new Employees(driver);
+        employees.locatorOfName(name);
+        employees.checkLocatorOfEditEmployeeButton();
+        employees.sendKeysNameArr(name);
+        employees.sendKeysPhoneArr("676700000");
+        employees.pressButtonAddEmployeeAddMenu();
+        employees.checkIfLocatorOfNameOnDisplay(name);
+    }
+
 
     @Test
-    @Description("")
-    @Issue("")
+    @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page")
+    @Description("remove employee")
+    @Issue("135")
     @Severity(SeverityLevel.TRIVIAL)
     public void removeEmployee() {
         String name = "Leonardddd";
