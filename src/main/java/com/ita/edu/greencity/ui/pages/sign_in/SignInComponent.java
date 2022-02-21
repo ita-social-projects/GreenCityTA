@@ -83,7 +83,6 @@ public class SignInComponent extends BasePage {
     @Step("click on 'sign in' button")
     public SelectRegion clickSignIn() {
         signIn.click();
-
         return new SelectRegion(driver);
     }
     @Step("click on 'sign in' button")

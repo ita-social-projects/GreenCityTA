@@ -2,20 +2,24 @@ package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
+import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsVerifyEmailsEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsVerifyEmailsService;
 import io.qameta.allure.*;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-
-public class SignUpPersonTest extends TestRun {
+public class SignUpPersonWithoutVerifyEmailTest extends TestRun {
 
     private final String userEmail = "registertesttest88@gmail.com";
     EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
+    EcoNewsVerifyEmailsService ecoNewsVerifyEmailsService = new EcoNewsVerifyEmailsService();
 
     @BeforeTest(description = "Delete user by email if it exists in database before registration")
     public void checkRegisteredUser() {
@@ -26,10 +30,10 @@ public class SignUpPersonTest extends TestRun {
     }
 
     @Test
-    @Description("Check correct registration of user to system")
+    @Description("Verify that user is not registered if he didn’t confirm email address in the mailbox")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
-    @Link("https://jira.softserve.academy/browse/GC-213")
+    @Link("https://jira.softserve.academy/browse/GC-512")
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";
@@ -39,14 +43,20 @@ public class SignUpPersonTest extends TestRun {
                 .inputPasswordIntoField(userPassword)
                 .inputConfirmPasswordIntoField(userPassword)
                 .clickOnSignUpButton();
-        boolean isDisabled = signUpComponent.checkDisabledSignUpButton();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertFalse(isDisabled, "SignUp button is disabled!");
         String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
-        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "Incorrect alert!");
-        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
-        softAssert.assertEquals(user,null, "User is in Data Base!");
-
+        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
+        new HeaderSignedOutComponent(driver).clickSignIn()
+                .inputEmail(userEmail)
+                .inputPassword(userPassword)
+                .clickSignIn();
+        EcoNewsVerifyEmailsEntity recordInVerifyEmails = ecoNewsVerifyEmailsService.selectByUserId(userEmail);
+        boolean isInDB = false;
+        if (recordInVerifyEmails != null) {
+            isInDB = true;
+        }
+        softAssert.assertTrue(isInDB, "User is not in Data Base!");
+        System.out.println(recordInVerifyEmails);
         softAssert.assertAll();
     }
 

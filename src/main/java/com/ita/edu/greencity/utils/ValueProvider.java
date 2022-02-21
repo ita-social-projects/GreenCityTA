@@ -67,10 +67,6 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
-    }
-  
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
@@ -85,8 +81,16 @@ public class ValueProvider {
         }
     }
 
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
+    }
+
     public String getCardNumber() {
         return properties.getProperty("cardNumber");
+    }
+
+    public String getInvalidCardNumber() {
+        return properties.getProperty("invalidCardNumber");
     }
 
     public String getExpiryDate() {
