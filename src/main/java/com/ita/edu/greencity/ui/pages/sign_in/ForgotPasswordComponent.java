@@ -10,21 +10,22 @@ import org.openqa.selenium.support.How;
 
 public class ForgotPasswordComponent extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//div[@class = 'title']/h1")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'restore-password-container']/h1")
     private WebElement title;
     @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']/img")
     private WebElement close;
-    @FindBy(how = How.XPATH, using = "//label[@for = 'email']/input[@id = 'email']")
+    @FindBy(how = How.XPATH, using = "//form/input[@id = 'email']")
     private WebElement email;
     @FindBy(how = How.XPATH, using = "//button[@type = 'submit']")
     private WebElement submit;
-    @FindBy(how = How.XPATH, using = "//app-google-btn[@class = 'google-sing-in-button']/button[@class = 'google-sign-in']")
+    @FindBy(how = How.XPATH, using = "//button[@class = 'google-sign-in']")
     private WebElement signInGoogle;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'mentioned-password']/a[@class = 'ubs-sign-in-link']")
+    @FindBy(how = How.XPATH, using = "//a[@class = 'sign-in-link']")
     private WebElement backToSignIn;
 
     public ForgotPasswordComponent(WebDriver driver) {
         super(driver);
+        this.sleep(250);
     }
 
     public UbsHomePage clickClose() {

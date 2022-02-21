@@ -25,25 +25,25 @@ public class SignUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@id='firstname-err-msg']/app-error/div")
     private WebElement blankUserNameFieldAlert;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'password']//input[@id='password']")
+    @FindBy(how = How.XPATH, using = "//input[@id='password']")
     private WebElement passwordField;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'password']//app-error/div")
+    @FindBy(how = How.XPATH, using = "//div[@id='password-err-msg']//app-error/div")
     private WebElement blankPasswordFieldAlert;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'password']//img[@class='image-show-hide-password']")
+    @FindBy(how = How.XPATH, using = "//input[@id='password']/..//img[@class='show-password-img']")
     private WebElement showHidePasswordButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//input[@id='password']")
+    @FindBy(how = How.XPATH, using = "//input[@id='repeatPassword']")
     private WebElement confirmPasswordField;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//app-error/div")
+    @FindBy(how = How.XPATH, using = "//div[@id='confirm-err-msg']//app-error/div")
     private WebElement blankConfirmPasswordFieldAlert;
 
-    @FindBy(how = How.XPATH, using = "//*[@formcontrolname = 'repeatPassword']//img[@class='image-show-hide-password']")
+    @FindBy(how = How.XPATH, using = "//input[@id='repeatPassword']/..//img[@class='show-password-img']")
     private WebElement showHideConfirmPasswordButton;
 
-    @FindBy(how = How.XPATH, using = "//button[@class='ubs-primary-global-button']")
+    @FindBy(how = How.XPATH, using = "//div[@class='wrapper']//button[@class='primary-global-button']")
     private WebElement signUpButton;
 
     @FindBy(how = How.XPATH, using = "//button[@class='google-sign-in']")
@@ -52,8 +52,8 @@ public class SignUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//a[@class='ubs-exist-sign-in']")
     private WebElement signInLinkButton;
 
-    @FindBy(how = How.XPATH, using = "//div[@class='title']")
-    private WebElement title;
+    @FindBy(how = How.XPATH, using = "//app-sign-up/h2")
+    private WebElement subTitle;
 
     @FindBy(how = How.XPATH, using = "//*[contains(@id,'cdk-overlay-')]/snack-bar-container/simple-snack-bar/span")
     private WebElement successRegistrationAlert;
@@ -138,13 +138,20 @@ public class SignUpComponent extends BasePage {
         return this;
     }
 
+    @Step("Click on sign in link")
     public SignInComponent clickOnSignInLinkButton() {
         signInLinkButton.click();
         return new SignInComponent(driver);
     }
 
     public String getTextOfTitle() {
-        return title.getText();
+        return subTitle.getText();
+    }
+
+    @Step("Click on title to unfocus")
+    public SignUpComponent clickOnTextOfSubTitle() {
+        subTitle.click();
+        return this;
     }
 
     @Step("Check the disability of sign-up button in sign-up pop up")
@@ -154,7 +161,7 @@ public class SignUpComponent extends BasePage {
 
     @Step("Check the alert which appears after successful registration of user")
     public String getTextOfSuccessRegistrationAlert() {
-        sleep(5000);
+        sleep(7000);
         return successRegistrationAlert.getText();
     }
 

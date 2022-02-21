@@ -26,7 +26,7 @@ public class SignUpErrorMessageTest extends TestRun {
                 .inputUserNameIntoField("")
                 .inputPasswordIntoField("")
                 .inputConfirmPasswordIntoField("")
-                .clickOnSignUpButton();
+                .clickOnTextOfSubTitle();
         String actualEmailAlert = signUpComponent.getTextOfBlankEmailFieldAlert();
         String actualUserNameAlert = signUpComponent.getTextOfBlankUserNameFieldAlert();
         String actualPasswordAlert = signUpComponent.getTextOfBlankPasswordFieldAlert();
@@ -51,7 +51,7 @@ public class SignUpErrorMessageTest extends TestRun {
                 .inputUserNameIntoField(RandomStringUtils.randomAlphabetic(10))
                 .inputPasswordIntoField("tesT_123")
                 .inputConfirmPasswordIntoField("test")
-                .clickOnSignUpButton();
+                .clickOnTextOfSubTitle();
         String actualAlert = signUpComponent.getTextOfBlankConfirmPasswordFieldAlert();
         Assert.assertEquals(actualAlert, "Passwords do not match");
     }
@@ -69,7 +69,7 @@ public class SignUpErrorMessageTest extends TestRun {
                 .inputUserNameIntoField("." + RandomStringUtils.randomAlphabetic(4))
                 .inputPasswordIntoField(password)
                 .inputConfirmPasswordIntoField(password)
-                .clickOnSignUpButton();
+                .clickOnTextOfSubTitle();
         String actualEmailAlert = signUpComponent.getTextOfBlankEmailFieldAlert();
         String actualUserNameAlert = signUpComponent.getTextOfBlankUserNameFieldAlert();
         String actualPasswordAlert = signUpComponent.getTextOfBlankPasswordFieldAlert();
@@ -93,7 +93,7 @@ public class SignUpErrorMessageTest extends TestRun {
                 .inputUserNameIntoField(RandomStringUtils.randomAlphabetic(10))
                 .inputPasswordIntoField(password)
                 .inputConfirmPasswordIntoField(password)
-                .clickOnSignUpButton();
+                .clickOnTextOfSubTitle();
         String actualAlert = signUpComponent.getTextOfBlankPasswordFieldAlert();
         Assert.assertEquals(actualAlert, "Password must be at least 8 characters long");
     }
