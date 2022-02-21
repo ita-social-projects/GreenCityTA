@@ -25,7 +25,7 @@ public class AddNewAddressTest extends TestRun {
     @Severity(SeverityLevel.CRITICAL)
     @Test
     public void checkAddNewAddressButton() {
-        AddNewAddress addNewAddress = new UbsHomePage(driver).pressOrderCourier()
+        AddNewAddress addNewAddress = new UbsHomePage(driver).pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()

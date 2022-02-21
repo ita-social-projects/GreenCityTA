@@ -83,14 +83,22 @@ public class SignInComponent extends BasePage {
     @Step("click on 'sign in' button")
     public UbsHomePage clickSignIn() {
         signIn.click();
+
         return new UbsHomePage(driver);
+    }
+
+    @Step("click on 'sign in' button after calling-up courier")
+    public SelectRegion clickSignInAfterCallUpCourier() {
+        signIn.click();
+
+        return new SelectRegion(driver);
     }
   
     @Step("click on 'sign in' button")
     public  HeaderSignedInComponent clickSignInHeaderComponent() {
         signIn.click();
 
-        return new HeaderSignedInComponent (driver);
+        return new HeaderSignedInComponent(driver);
     }
 
 

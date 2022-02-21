@@ -3,7 +3,6 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
-import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
@@ -48,7 +47,7 @@ public class OrderPageConfirmationTest extends TestRun {
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
-        ubsHomePage.pressOrderCourier()
+        ubsHomePage.pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
