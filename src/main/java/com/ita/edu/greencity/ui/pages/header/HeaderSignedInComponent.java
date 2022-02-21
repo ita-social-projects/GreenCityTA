@@ -57,4 +57,19 @@ public class HeaderSignedInComponent extends HeaderComponent {
     public String getUserName() {
         return userMenu.getText();
     }
+
+    @Step("Get text from Settings button")
+    public String getSettingsButtonText() {
+        return settings.getText();
+    }
+
+    @Step("Get text from Sign out button")
+    public String getSignOutButtonText() {
+        return signOut.getText();
+    }
+
+    @Step("Get text from Ubs User button")
+    public String getUbsUserButtonText() {
+        return ubsUser.getText();
+    }
 }

@@ -66,7 +66,13 @@
         </classes>
     </test>
 
-
+    <test name="Header_test" thread-count="1">
+        <classes>
+            <class name="com.ita.edu.greencity.tests.ui.pages.header.HeaderSignedInTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.header.HeaderTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.header.LocalizationHeaderTest"></class>
+        </classes>
+    </test>
     <!--<test name="UI Tests" annotations="JDK" preserve-order="true">
         <classes>
             <class name="com.ita.edu.teachua.ui.tests.RestorePasswordViaGmailApiTest"/>
