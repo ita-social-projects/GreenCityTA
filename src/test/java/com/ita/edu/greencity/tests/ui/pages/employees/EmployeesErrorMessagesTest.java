@@ -8,32 +8,26 @@ import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.*;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
-import org.testng.annotations.Test;
 import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
 
-public class CreateEmployeesTest {
-    String CORRECT_MENU_NAME = "Leon";
-    String CORRECT_MENU_SURNAME = "Hofs";
-    String CORRECT_MENU_PHONE = "676706777";
-    String CORRECT_MENU_EMAIL = "testtest1@ukr.net";
+public class EmployeesErrorMessagesTest {
 
     protected static ValueProvider provider;
     protected WebDriver driver;
-    private Employees employees;
-
     @BeforeClass(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
         for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
@@ -42,7 +36,6 @@ public class CreateEmployeesTest {
         WebDriverManager.chromedriver().setup();
         provider = new ValueProvider();
         System.out.println("0000");
-
     }
 
 
@@ -50,7 +43,6 @@ public class CreateEmployeesTest {
     @BeforeMethod
     public void beforeMethod(ITestContext iTestContext) {
         String xpathLoaderEmployeesPage = "//mat-spinner[@role = 'progressbar']";
-
         BasePage basePage = new BasePage(driver);
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -100,45 +92,76 @@ public class CreateEmployeesTest {
     }
 
 
+    String CORRECT_MENU_NAME = "Leonard";
+    String NOT_CORRECT_MENU_NAME = "Leonard1";
+    String CORRECT_MENU_SURNAME = "Hofstadter";
+    String NOT_CORRECT_MENU_SURNAME = "Hofstadter2";
+    String CORRECT_MENU_PHONE = "676706767";
+    String CORRECT_MENU_EMAIL = "test@ukr.net";
+    final String xpathErroeMessageAddEmployeeName = "/html/body/div[2]/div[3]/div/snack-bar-container/simple-snack-bar/span";
+    final String expectedErrorName = "firstName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
+    final String expectedErrorPhone = "phoneNumber: Invalid phone number format.";
+    final String expectedErrorSurname = "lastName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
 
-
-    @Test
-    @Link("https://jira.softserve.academy/browse/GC-2464")
-    @Description("Create new employee")
-    @Issue("133")
-    @Severity(SeverityLevel.TRIVIAL)
-    public void checkCorrectAddEmployee() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-            System.out.println("00000");
+    public void exampleMethod(String name, String surname, String phone){
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
-//        basePage.sleep(6000);
-        employees.loadData("//div[@class='employee-add']//button");
+        basePage.sleep(5000);
         employees.pressButtonAddEmployee();
-        employees.sendKeysNameArr(CORRECT_MENU_NAME);
         System.out.println("6666");
-        employees.sendKeysSurnameArr(CORRECT_MENU_SURNAME);
+        employees.sendKeysNameArr(name);
+        basePage.sleep(5000);
+        employees.sendKeysSurnameArr(surname);
+        employees.sendKeysPhoneArr(phone);
         System.out.println("7777");
-
-        employees.sendKeysPhoneArr(CORRECT_MENU_PHONE);
-        System.out.println("8888");
+        basePage.sleep(5000);
         employees.sendKeysEmailArr(CORRECT_MENU_EMAIL);
-        System.out.println("9999");
-        basePage.sleep(9000);
         employees.pressButtonServiceManager();
-        System.out.println("----");
+        basePage.sleep(5000);
         employees.pressButtonSetectRegionAddMenu();
-        System.out.println("====");
+        System.out.println("8888");
         employees.pressButtonAddEmployeeAddMenu();
-        String xpath = String.format("//span[contains(text(), '%s')]", CORRECT_MENU_NAME);
-        String actual = driver.findElement(By.xpath(xpath)).getText();
-        Assert.assertEquals(actual, CORRECT_MENU_NAME);
+        basePage.sleep(5000);
+        employees.loadData(xpathErroeMessageAddEmployeeName);
+        System.out.println("9999");
 
-        employees.locatorOfName("");
-        System.out.println("correct add");
     }
 
+    @Description("test name error messages")
+    @Issue("")
+    @Test()
+    public void checkErrorMessageName() {
+        exampleMethod(NOT_CORRECT_MENU_NAME, CORRECT_MENU_SURNAME, CORRECT_MENU_PHONE);
+        System.out.println("-----");
+        String actual = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/snack-bar-container/simple-snack-bar/span")).getText();
+        System.out.println(actual);
+        System.out.println("====");
+        Assert.assertEquals(actual, expectedErrorName);
+    }
 
+    @Description("test name error messages")
+    @Issue("")
+    @Test()
+    public void checkErrorMessageSurname() {
+        exampleMethod(CORRECT_MENU_NAME, NOT_CORRECT_MENU_SURNAME, CORRECT_MENU_PHONE);
+        System.out.println("-----");
+        String actual = driver.findElement(By.xpath("//simple-snack-bar[@class='mat-simple-snackbar ng-star-inserted']//span")).getText();
+        System.out.println(actual);
+        System.out.println("====");
+        Assert.assertEquals(actual, expectedErrorSurname);
+    }
+
+    @Description("test name error messages")
+    @Issue("")
+    @Test()
+    public void checkErrorMessagePhone() {
+        exampleMethod(CORRECT_MENU_NAME, NOT_CORRECT_MENU_SURNAME, CORRECT_MENU_PHONE);
+        System.out.println("-----");
+        String actual = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/snack-bar-container")).getText();
+        System.out.println(actual);
+        System.out.println("====");
+        Assert.assertEquals(actual, expectedErrorPhone);
+    }
 
 
 }

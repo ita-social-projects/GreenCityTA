@@ -1,20 +1,14 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class EmployeesTest extends EmployeesTestRun {
-
+public class SetOfEmployeesTest extends EmployeesTestRun {
 
     @Test
     @Description("Check if current url")
@@ -34,24 +28,56 @@ public class EmployeesTest extends EmployeesTestRun {
     public void checkIfAddEmployeesButtonOnDisplay() {
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
-        String xpath = "/html/body/app-root/app-ubs-admin/app-ubs-admin-sidebar/app-ubs-base-sidebar/div/mat-drawer-container/mat-drawer-content/div/app-ubs-admin-employee/div/div[1]/div[2]/button";
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
         Assert.assertTrue(employees.checkIfButtonAddEmplOnDipl());
         System.out.println("Add button on display");
 
     }
 
+    @Test
+    @Link("https://jira.softserve.academy/browse/GC-2466")
+    @Description("Check if edit button is able in menu of employee")
+    @Issue("134")
+    @Severity(SeverityLevel.TRIVIAL)
+    public void checkCancelEditEmployeeButton() {
+        String name = "Harry";
+        Employees employees = new Employees(driver);
+        employees.locatorOfName(name);
+        employees.checkLocatorOfEditEmployeeButton();
+        employees.pressCancelButton();
+    }
 
     @Test
-    @Description("Check if Add Employees button on display")
-    @Issue("")
+    @Link("https://jira.softserve.academy/browse/GC-2467")
+    @Description("Check if admin can edit employee data")
+    @Issue("136")
     @Severity(SeverityLevel.TRIVIAL)
-    public void addNewUser() {
+    public void checkEditEmployee() {
+        String name = "Looo";
         Employees employees = new Employees(driver);
-//        employees.pressButtonAddEmployee();
-        Assert.assertTrue(employees.checkIfInputOnDisplay());
-        System.out.println("Input on display");
+        employees.locatorOfName(name);
+        employees.checkLocatorOfEditEmployeeButton();
+        employees.sendKeysNameArr(name);
+        employees.sendKeysPhoneArr("676700000");
+        employees.pressButtonAddEmployeeAddMenu();
+        employees.checkIfLocatorOfNameOnDisplay(name);
+    }
+
+
+    @Test
+    @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page")
+    @Description("remove employee")
+    @Issue("135")
+    @Severity(SeverityLevel.TRIVIAL)
+    public void removeEmployee() {
+        String name = "Leonardddd";
+        Employees employees = new Employees(driver);
+        employees.locatorOfName(name);
+        employees.pressLocatorRemove();
+        employees.pressLocatorReaskRemoveButton();
+        String xpath = String.format("//span[contains(text(), '%s')]", name);
+        WebElement actual = driver.findElement(By.xpath(xpath));
+        Assert.assertFalse(actual.isDisplayed());
+
     }
 
     @Test
@@ -86,32 +112,6 @@ public class EmployeesTest extends EmployeesTestRun {
         employees.sendKeysPhoneArr("676706767");
         System.out.println("Input in phone");
     }
-
-    @Test
-    @Description("")
-    @Issue("")
-    @Severity(SeverityLevel.TRIVIAL)
-    public void writeTextInAddUserMenu() {
-        Employees employees = new Employees(driver);
-        employees.pressButtonAddEmployee();
-        employees.sendKeysNameArr("Leonard");
-        employees.sendKeysSurnameArr("Hofstadter");
-
-        System.out.println("Input is correct");
-    }
-
-    @Test
-    @Description("")
-    @Issue("")
-    @Severity(SeverityLevel.TRIVIAL)
-    public void removeEmployee() {
-        String name = "Harry";
-        Employees employees = new Employees(driver);
-        employees.locatorOfName(name);
-        employees.pressLocatorRemove();
-    }
-
-
 
 
 }
