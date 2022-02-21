@@ -48,8 +48,10 @@ public class OrderPageConfirmationTest extends TestRun {
       public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
-        ubsHomePage.pressOrderCourier()
-                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
+        ubsHomePage.pressOrderCourierUnlogin()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
@@ -119,6 +121,8 @@ public class OrderPageConfirmationTest extends TestRun {
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
+
+
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
@@ -148,6 +152,7 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify order deleting functionality")
+
     @Test
     public void verifyOrderDeletingTest() {
         String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()

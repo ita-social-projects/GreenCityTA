@@ -4,7 +4,6 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import io.qameta.allure.Issue;
-import io.qameta.allure.Link;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
@@ -14,24 +13,18 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
-public class ChangePasswordTest extends TestRun {
+public class VerifyMessageChangePassword extends TestRun {
     @BeforeMethod
     public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
+                .clickSignInAfterCallUpCourier()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
 
-    @DataProvider(name = "dataProvider")
-    private Object[][] dataProviderToChangeCurrentPassword() {
-        return new Object[][]{
-                {"0000000700Qw1/"},
-                {".mypasswoRd1"},
-        };
-    }
+
 
     @DataProvider(name = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     private Object[][] dataProviderToVerifyMessageWhenPasswordsNotMatch() {
@@ -41,34 +34,7 @@ public class ChangePasswordTest extends TestRun {
         };
     }
 
-    @Test(dataProvider = "dataProviderToChangeCurrentPassword")
-    @Description("test to change the current account password")
-    @Issue("91")
-    @Severity(SeverityLevel.CRITICAL)
-    @Link("https://jira.softserve.academy/browse/GC-2450")
-    public void changeCurrentPassword(String newPassword) {
-        HeaderSignedInComponent header = new HeaderSignedInComponent(driver);
-        header.clickUserMenu()
-                .clickUbsUser()
-                .getUbsUserPage()
-                .clickOnUserDataButton()
-                .clickOnChangePasswordButton()
-                .enterOldPassword(provider.getPassword())
-                .enterNewPassword(newPassword)
-                .enterRepeatNewPassword(newPassword)
-                .clickOnChangePasswordButton();
-        header.clickUserMenu().clickSignOut();
-        driver.navigate().refresh();
-        HeaderSignedOutComponent headerOut = new HeaderSignedOutComponent(driver);
-        String actual = headerOut.clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(newPassword)
-                .clickSignIn()
-                .getTitleText();
-        String expectedTitle = "Welcome to UBS! First choose location of waste disposal. Currently we work only in Kyiv and selected cities.";
-        Assert.assertEquals(actual, expectedTitle);
-        provider.setPassword(newPassword);
-    }
+
 
     @Test
     @Description("check the error message when the new password is the same as the old one")

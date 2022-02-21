@@ -21,6 +21,11 @@ public class EcoNewsCertificateService {
     public String selectRandomUsedCertificate() {
         return ecoNewsCertificateDao.getRandomUsedCertificate().get(0);
     }
+    public boolean checkIfCertificateExists(String codeValue) {
+         String value =ecoNewsCertificateDao.checkIfCertificateExists(codeValue).get(0);
+         if(value.equals("0")) return false;
+         else return true;
+    }
 
 }
 

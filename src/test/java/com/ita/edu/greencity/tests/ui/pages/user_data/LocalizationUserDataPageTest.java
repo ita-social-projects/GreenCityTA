@@ -22,9 +22,9 @@ public class LocalizationUserDataPageTest extends TestRun {
     @BeforeMethod
     public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
+                .clickSignInAfterCallUpCourier()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }

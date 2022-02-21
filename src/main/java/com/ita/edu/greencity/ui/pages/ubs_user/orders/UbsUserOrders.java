@@ -87,7 +87,6 @@ public class UbsUserOrders extends BasePage {
             ordersContainerList.add(new OrdersContainer(driver, element));
         }
 
-
         return ordersContainerList;
     }
 
@@ -160,8 +159,6 @@ public class UbsUserOrders extends BasePage {
                 return this;
             }
             sleep(500);
-
         }
     }
-
 }
