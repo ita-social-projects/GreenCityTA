@@ -35,7 +35,7 @@
     <test name="Orders_tests" thread-count="3">
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.orders.AddNewAddressTest"></class>
-            <class name="com.ita.edu.greencity.tests.ui.pages.orders.ErrorMessagesInPersonalDataPage"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.OrderPersonalDataPageTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.orders.OrderDetailsPageTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.orders.OrderPageConfirmationTest"></class>
             <class name="com.ita.edu.greencity.tests.ui.pages.orders.PaymentByFondyTest"></class>

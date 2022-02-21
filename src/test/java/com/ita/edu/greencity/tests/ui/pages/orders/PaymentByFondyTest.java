@@ -35,7 +35,9 @@ public class PaymentByFondyTest extends TestRun {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourierUnlogin()
-                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
@@ -114,10 +116,14 @@ public class PaymentByFondyTest extends TestRun {
                 .clickOnCancelButton()
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert().substring(28, 33);
-        String actualOrderNumber = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
+        String actualOrderNumber = new HeaderSignedInComponent(driver)
+                .clickUserMenu()
+                .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getOrderId();
         String expectedPaymentStatus = "Paid";
-        String actualPaymentStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
+        String actualPaymentStatus = new HeaderSignedInComponent(driver)
+                .clickUserMenu()
+                .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getPaymentStatus();
         Assert.assertEquals(actualOrderNumber,numberOfOrder, "Order with such number does not exist");
         Assert.assertEquals(actualPaymentStatus, expectedPaymentStatus, "Payment statuses do not match");

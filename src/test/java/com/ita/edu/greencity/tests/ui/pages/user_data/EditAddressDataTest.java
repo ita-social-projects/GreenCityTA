@@ -21,7 +21,7 @@ public class EditAddressDataTest extends TestRun {
         new HeaderSignedOutComponent(driver).clickSignIn()
                 .inputEmail(provider.getEmailForUserData())
                 .inputPassword(provider.getPasswordForUserData())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
