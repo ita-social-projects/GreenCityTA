@@ -23,7 +23,7 @@ public class SelectRegionAfterSignInTest extends TestRun {
         String actual = header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .chooseRegionByValue(defaultRegion)
                 .clickOnContinueButton().getLocationFromTitle().substring(11).trim();
         Assert.assertEquals(actual, defaultRegion);
@@ -37,7 +37,7 @@ public class SelectRegionAfterSignInTest extends TestRun {
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton();
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
@@ -51,7 +51,7 @@ public class SelectRegionAfterSignInTest extends TestRun {
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnBackButton();
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
@@ -65,7 +65,7 @@ public class SelectRegionAfterSignInTest extends TestRun {
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnCloseButton();
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
@@ -79,7 +79,7 @@ public class SelectRegionAfterSignInTest extends TestRun {
         SelectRegion selectRegion = header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn();
+                .clickSignInAfterCallUpCourier();
         softAssert.assertEquals(selectRegion.getListOfRegions().get(0).getText(), defaultRegion, "Incorrect default value of dropdown");
         softAssert.assertTrue(selectRegion.getListOfRegions().stream().map(WebElement::getText).collect(Collectors.toList()).contains(secondRegion), "Dropdown do not have 'Kyiv region' option");
         softAssert.assertAll();

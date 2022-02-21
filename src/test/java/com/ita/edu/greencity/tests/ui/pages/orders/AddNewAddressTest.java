@@ -25,10 +25,10 @@ public class AddNewAddressTest extends TestRun {
     @Severity(SeverityLevel.CRITICAL)
     @Test
     public void checkAddNewAddressButton() {
-        boolean addNewAddressIsEnabled = new UbsHomePage(driver).pressOrderCourier()
+        boolean addNewAddressIsEnabled = new UbsHomePage(driver).pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()
@@ -67,10 +67,10 @@ public class AddNewAddressTest extends TestRun {
     @Test(dataProvider = "dataProvider")
     public void verifyWarningMessageOfTheFillDataNearTheRequiredFields(String value, String expectedErrorMessage) {
         AddNewAddress addNewAddress = new UbsHomePage(driver)
-                .pressOrderCourier()
+                .pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()
@@ -97,10 +97,10 @@ public class AddNewAddressTest extends TestRun {
     @Test
     public void checkErasedDataFromPopUpAfterClosing() {
         boolean streetFieldAisEmpty = new UbsHomePage(driver)
-                .pressOrderCourier()
+                .pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()

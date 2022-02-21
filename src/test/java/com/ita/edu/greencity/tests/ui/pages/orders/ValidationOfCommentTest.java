@@ -21,7 +21,7 @@ public class ValidationOfCommentTest extends TestRun {
         header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton().EnterNumberOfTextileWaste120lInput("2");
     }

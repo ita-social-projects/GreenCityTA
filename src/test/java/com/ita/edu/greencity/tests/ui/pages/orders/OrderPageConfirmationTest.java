@@ -3,6 +3,7 @@ package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
@@ -48,7 +49,9 @@ public class OrderPageConfirmationTest extends TestRun {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourierUnlogin()
-                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
@@ -119,8 +122,7 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
 
- /*   @Description("Verify order deleting functionality")
-=======
+
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
@@ -141,12 +143,13 @@ public class OrderPageConfirmationTest extends TestRun {
                 .getTextFromSuccessfulSavingAlert().substring(28, 33);
         String expectedOrderStatus = "Formed";
         String actualOrderStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
-                .getOrderByNumber(numberOfOrder).getOrderStatus();
+                .getOrderByNumber(numberOfOrder)
+                .getOrderStatus();
         Assert.assertEquals(actualOrderStatus, expectedOrderStatus, "Order statuses do not match");
     }
 
     @Description("Verify order deleting functionality")
->>>>>>> b40bf5fa8837a2b30753eec9d5622d1ed10d085b
+
     @Test
     public void verifyOrderDeletingTest() {
         String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
@@ -156,7 +159,7 @@ public class OrderPageConfirmationTest extends TestRun {
         String expectedMessage = "It's even easier than before!";
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
-*/
+
     @Description("Verify whether after language changing the currency of order is changed")
     @Test
     public void localizationRelevanceOfCurrencyTest() {

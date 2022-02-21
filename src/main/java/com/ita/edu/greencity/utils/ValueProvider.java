@@ -89,10 +89,6 @@ public class ValueProvider {
         }
     }
 
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
-    }
-
     public String getCardNumber() {
         return properties.getProperty("cardNumber");
     }
