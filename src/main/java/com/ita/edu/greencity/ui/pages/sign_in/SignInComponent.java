@@ -14,7 +14,7 @@ import org.openqa.selenium.support.How;
 
 public class SignInComponent extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//div[@class = 'title']/h1")
+    @FindBy(how = How.XPATH, using = "//app-sign-in[@class = 'ng-star-inserted']/h1")
     private WebElement title;
     @FindBy(how = How.XPATH, using = "//a[@class = 'close-modal-window']/img")
     private WebElement close;
@@ -24,13 +24,13 @@ public class SignInComponent extends BasePage {
     private WebElement password;
     @FindBy(how = How.XPATH, using = "//span[@class = 'show-hide-btn']")
     private WebElement showHidePassword;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'forgot-wrapper']/a[@class = 'ubs-forgot-password']")
+    @FindBy(how = How.XPATH, using = "//a[@class = 'forgot-password']")
     private WebElement forgotPassword;
-    @FindBy(how = How.XPATH, using = "//app-sign-in/form/button")
+    @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button']")
     private WebElement signIn;
     @FindBy(how = How.XPATH, using = "//app-google-btn/button[@class = 'google-sign-in']")
     private WebElement signInGoogle;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'missing-account']/p/a[@class = 'ubs-sign-up-link']")
+    @FindBy(how = How.XPATH, using = "//a[@class = 'sign-up-link']")
     private WebElement signUp;
     @FindBy(how = How.XPATH, using = "//div[@id = 'email-err-msg']/app-error/div")
     private WebElement errorEmail;
@@ -81,10 +81,11 @@ public class SignInComponent extends BasePage {
     }
 
     @Step("click on 'sign in' button")
-    public SelectRegion clickSignIn() {
+    public UbsHomePage clickSignIn() {
         signIn.click();
-        return new SelectRegion(driver);
+        return new UbsHomePage(driver);
     }
+  
     @Step("click on 'sign in' button")
     public  HeaderSignedInComponent clickSignInHeaderComponent() {
         signIn.click();
