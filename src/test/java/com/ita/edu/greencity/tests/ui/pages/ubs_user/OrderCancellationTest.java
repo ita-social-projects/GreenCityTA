@@ -90,17 +90,6 @@ public class OrderCancellationTest extends TestRun {
 
         SoftAssert softAssert = new SoftAssert();
 
-        CancelPopUp cancelPopUpEn = new UbsUserOrders(driver)
-                .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid")
-                .clickOnCancelButton();
-
-        softAssert.assertEquals(cancelPopUpEn.getEnsuranceOfCancelingLabelText(), expectedWarningMessageEn,
-                "Wrong label text");
-        softAssert.assertEquals(cancelPopUpEn.getNoButton().getText(), "No", "Wrong 'No' button text");
-        softAssert.assertEquals(cancelPopUpEn.getYesButton().getText(), "Yes", "Wrong 'Yes' button text");
-
-        cancelPopUpEn.clickOnNoButton();
-
         new UbsUserOrders(driver).getHeader()
                 .clickLanguageSwitcher()
                 .languageChoose("ua");
@@ -113,6 +102,23 @@ public class OrderCancellationTest extends TestRun {
                 "Wrong label text");
         softAssert.assertEquals(cancelPopUpUa.getNoButton().getText(), "Ні", "Wrong 'No' button text");
         softAssert.assertEquals(cancelPopUpUa.getYesButton().getText(), "Так", "Wrong 'Yes' button text");
+
+        cancelPopUpUa.clickOnNoButton();
+
+        new UbsUserOrders(driver).getHeader()
+                .clickLanguageSwitcher()
+                .languageChoose("en");
+
+        CancelPopUp cancelPopUpEn = new UbsUserOrders(driver)
+                .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid")
+                .clickOnCancelButton();
+
+        softAssert.assertEquals(cancelPopUpEn.getEnsuranceOfCancelingLabelText(), expectedWarningMessageEn,
+                "Wrong label text");
+        softAssert.assertEquals(cancelPopUpEn.getNoButton().getText(), "No", "Wrong 'No' button text");
+        softAssert.assertEquals(cancelPopUpEn.getYesButton().getText(), "Yes", "Wrong 'Yes' button text");
+
+
         softAssert.assertAll();
     }
 
@@ -131,8 +137,7 @@ public class OrderCancellationTest extends TestRun {
 
         boolean orderCanBeCancelled = ubsUserOrders
                 .getOrderByOrderAndPaymentStatuses("Formed", paymentStatus)
-                .getCancelButton()
-                .isDisplayed();
+                .isCancelButtonDisplayed();
 
         Assert.assertFalse(orderCanBeCancelled, "Order with " + paymentStatus + " has 'Cancel' button");
     }

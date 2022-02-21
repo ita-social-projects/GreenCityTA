@@ -28,7 +28,7 @@ public class AddNewAddressTest extends TestRun {
         AddNewAddress addNewAddress = new UbsHomePage(driver).pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn()
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(NUMBER_OF_TEXTILE_WASTE_120)
                 .clickOnNextButton()

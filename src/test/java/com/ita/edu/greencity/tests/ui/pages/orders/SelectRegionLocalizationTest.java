@@ -29,7 +29,7 @@ public class SelectRegionLocalizationTest extends TestRun {
         SelectRegion selectRegion = header.clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn();
+                .clickSignInAfterCallUpCourier();
         softAssert.assertEquals(TestHelpersUtils.getLanguage(selectRegion.getBottomText()), expected,
                 "Incorrect language for BOTTOM text");
         softAssert.assertEquals(TestHelpersUtils.getLanguage(selectRegion.getTitleText()), expected,
@@ -61,7 +61,7 @@ public class SelectRegionLocalizationTest extends TestRun {
                 .clickSignIn()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignIn();
+                .clickSignInAfterCallUpCourier();
         softAssert.assertEquals(selectRegion.getContinueButtonText(), map.get("continueButtonText"),
                 "Incorrect localization for continueButtonText");
         softAssert.assertEquals(selectRegion.getBackButtonText(), map.get("backButtonText"),

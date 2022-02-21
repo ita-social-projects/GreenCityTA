@@ -128,6 +128,14 @@ public class OrdersContainer {
             e.printStackTrace();
         }
     }
+
+    public boolean isCancelButtonDisplayed() {
+        try {
+            return cancelButton.isDisplayed();
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }
 
 

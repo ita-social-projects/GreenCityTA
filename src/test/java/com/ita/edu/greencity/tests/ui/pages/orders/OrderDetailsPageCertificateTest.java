@@ -61,7 +61,7 @@ public class OrderDetailsPageCertificateTest extends TestRun {
             header.clickSignIn()
                     .inputEmail(provider.getEmail())
                     .inputPassword(provider.getPassword())
-                    .clickSignIn()
+                    .clickSignInAfterCallUpCourier()
                     .chooseRegionByIndex(0)
                     .clickOnContinueButton();
 

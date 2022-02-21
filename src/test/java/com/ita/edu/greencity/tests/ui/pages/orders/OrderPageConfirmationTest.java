@@ -48,7 +48,9 @@ public class OrderPageConfirmationTest extends TestRun {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourierUnlogin()
-                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignInAfterCallUpCourier()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
