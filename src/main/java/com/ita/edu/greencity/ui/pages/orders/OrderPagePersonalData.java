@@ -145,21 +145,22 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("click on edit address button")
-    public AddNewAddress clickOnEditAddressButton(int indexOfSavedAddress) {
+    public OrderPagePersonalData clickOnEditAddressButton(int indexOfSavedAddress) {
         editSavedAddress.get(indexOfSavedAddress).click();
-        return new AddNewAddress(driver);
+        return this;
     }
 
     @Step("click on choose saved address button")
-    public AddNewAddress clickOnChooseAddressButton(int indexOfSavedAddress) {
+    public OrderPagePersonalData clickOnChooseAddressButton(int indexOfSavedAddress) {
         chooseSavedAddress.get(indexOfSavedAddress).click();
-        return new AddNewAddress(driver);
+        return this;
     }
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
-        sleep(5000);
+        sleep(8000);
         nextButton.click();
+        sleep(5000);
         return new OrderPageConfirmation(driver);
     }
 
@@ -270,5 +271,12 @@ public class OrderPagePersonalData extends BasePage {
     @Step("get text from title")
     public String getTextFromPersonalDataTitle() {
         return personalDataTitle.getText();
+    }
+
+    @Step("Refresh page")
+    public OrderDetailsPage refreshPage(){
+        sleep(3000);
+        driver.navigate().refresh();
+        return new OrderDetailsPage(driver);
     }
 }

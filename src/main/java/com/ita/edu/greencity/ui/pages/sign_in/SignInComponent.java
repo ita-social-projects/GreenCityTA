@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.sign_in;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
@@ -25,7 +26,7 @@ public class SignInComponent extends BasePage {
     private WebElement showHidePassword;
     @FindBy(how = How.XPATH, using = "//div[@class = 'forgot-wrapper']/a[@class = 'ubs-forgot-password']")
     private WebElement forgotPassword;
-    @FindBy(how = How.XPATH, using = "//app-submit-button/button[@class = 'ubs-primary-global-button']")
+    @FindBy(how = How.XPATH, using = "//app-sign-in/form/button")
     private WebElement signIn;
     @FindBy(how = How.XPATH, using = "//app-google-btn/button[@class = 'google-sign-in']")
     private WebElement signInGoogle;
@@ -82,9 +83,16 @@ public class SignInComponent extends BasePage {
     @Step("click on 'sign in' button")
     public SelectRegion clickSignIn() {
         signIn.click();
-
         return new SelectRegion(driver);
     }
+    @Step("click on 'sign in' button")
+    public  HeaderSignedInComponent clickSignInHeaderComponent() {
+        signIn.click();
+
+        return new HeaderSignedInComponent (driver);
+    }
+
+
 
     @Step("click on 'sign in with google' button")
     public SelectRegion clickSignInGoogle() {

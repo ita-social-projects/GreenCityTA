@@ -16,28 +16,8 @@ import java.util.Arrays;
 public class OrderDetailsPageTest extends TestRun {
 
 
-    private final String codeValueActive = "7777-6666";
-    private final String statusValueActive = "ACTIVE";
-    private final String expiration_dateValue = "2022-11-11 00:00:00";
-    private final int pointsValue = 500;
-    EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
 
-    @DataProvider
-    private Object[][] certificateDataProvider() {
-        final String codeValueActive = "7777-6666";
-        final String codeValueUsed = ecoNewsCertificateService.selectRandomUsedCertificate();
 
-        return new Object[][]{
-                {"Certificate for 500 UAH activated", codeValueActive},
-                {"Certificate has already been used ", codeValueUsed},
-        };
-    }
-
-    @BeforeTest
-    public void AddCertificate() throws Exception {
-        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
-        ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
-    }
 
     @BeforeMethod
     public void preConditions() {
@@ -50,6 +30,7 @@ public class OrderDetailsPageTest extends TestRun {
                 .clickOnContinueButton();
 
     }
+
 
     @Description("Checks if comment saves when we go to 'Personal data' page and return to 'Order details' page")
     @Issue("88")
@@ -85,22 +66,6 @@ public class OrderDetailsPageTest extends TestRun {
         Assert.assertEquals(actualSum, expectedSum);
     }
 
-    @Description("Checks coupon alert")
-    @Issue("90")
-    @Test(dataProvider = "certificateDataProvider")
-    public void couponTest(String expected, String coupon) {
-        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-        String actual = orderDetailsPage
-                .chooseRegionByValue(" Kyiv ")
-                .EnterNumberOfSafeWasteInput("20")
-                .EnterNumberOfTextileWaste20lInput("1")
-                .EnterNumberOfTextileWaste120lInput("1")
-                .EnterCertificateInput(coupon)
-                .clickOnActivateCertificateButton()
-                .getCertificateAlertMessage();
-        Assert.assertTrue(actual.contains(expected));
-    }
-
     @Description("Checks if orders from eco store saves when we go to 'Personal data' page and return to 'Order details' page")
     @Issue("117")
     @Test
@@ -121,13 +86,13 @@ public class OrderDetailsPageTest extends TestRun {
                 .getOrderNumberInputs(0);
         String actual2 = orderDetailsPage.getOrderNumberInputs(1);
         SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(actual1,orderNumber1);
+        softAssert.assertEquals(actual2,orderNumber2);
+        softAssert.assertAll();
+
         softAssert.assertEquals(actual1, orderNumber1);
         softAssert.assertEquals(actual2, orderNumber2);
 
-    }
-
-    @AfterTest
-    public void deleteCertificate() throws Exception {
-        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
     }
 }

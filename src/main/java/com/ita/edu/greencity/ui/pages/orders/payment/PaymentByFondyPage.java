@@ -111,6 +111,12 @@ public class PaymentByFondyPage extends BasePage {
         return new Operation3dSecurePopUp(driver);
     }
 
+//    @Step("Pay for the order")
+//    public Operation3dSecurePopUp clickOnPayButton() {
+//        payButton.click();
+//        return new Operation3dSecurePopUp(driver);
+//    }
+
     @Step("Get error message about invalid email address")
     public String getEmailErrorMessage() {
         return emailErrorMessage.getText();
