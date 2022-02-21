@@ -159,7 +159,6 @@ public class UbsUserOrders extends BasePage {
                 return this;
             }
             sleep(500);
-
         }
     }
 

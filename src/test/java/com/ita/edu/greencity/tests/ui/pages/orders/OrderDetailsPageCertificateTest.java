@@ -4,15 +4,13 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
-
-import java.util.Arrays;
 
 public class OrderDetailsPageCertificateTest extends TestRun {
     EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
@@ -31,6 +29,24 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         return value;
     }
 
+        @BeforeTest
+        public void AddCertificate () throws Exception {
+            ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
+            ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
+        }
+        @BeforeMethod
+        public void preConditions (ITestContext iTestContext) {
+            super.beforeMethod(iTestContext);
+            UbsHomePage ubsHomePage = new UbsHomePage(driver);
+            ubsHomePage.pressOrderCourier()
+                    .inputEmail(provider.getEmail())
+                    .inputPassword(provider.getPassword())
+                    .clickSignIn()
+                    .clickOnContinueButton();
+
+        }
+
+
     @DataProvider
     private Object[][] certificateDataProvider() {
         final String codeValueActive = this.codeValueActive;
@@ -42,30 +58,6 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                 {"Certificate not accepted, please try again", codeValueNotExist},
         };
     }
-        @DataProvider
-        private Object[][] certificateButtonProvider () {
-            final String randomCertificate = TestHelpersUtils.generateRandomCertificateNumber();
-            return new Object[][]{
-                    {false, ""},
-                    {true, randomCertificate},
-            };
-        }
-        @BeforeTest
-        public void AddCertificate () throws Exception {
-            ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
-            ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
-        }
-        @BeforeMethod
-        public void preConditions () {
-            HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-            header.clickSignIn()
-                    .inputEmail(provider.getEmail())
-                    .inputPassword(provider.getPassword())
-                    .clickSignIn()
-                    .chooseRegionByIndex(0)
-                    .clickOnContinueButton();
-
-        }
         @Description("Checks coupon alert")
         @Issue("90")
         @Test(dataProvider = "certificateDataProvider")
@@ -81,6 +73,16 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                     .getCertificateAlertMessage();
             Assert.assertTrue(actual.contains(expected));
         }
+
+
+    @DataProvider
+    private Object[][] certificateButtonProvider () {
+        final String randomCertificate = TestHelpersUtils.generateRandomCertificateNumber();
+        return new Object[][]{
+                {false, ""},
+                {true, randomCertificate},
+        };
+    }
         @Description("Checks coupon activate button")
         @Issue("123")
         @Test(dataProvider = "certificateButtonProvider")

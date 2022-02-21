@@ -4,10 +4,12 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
+import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -20,13 +22,14 @@ public class OrderDetailsPageTest extends TestRun {
 
 
     @BeforeMethod
-    public void preConditions() {
-        HeaderSignedOutComponent header = new HeaderSignedOutComponent(driver);
-        header.clickSignIn()
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
+        ubsHomePage.pressOrderCourier()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
                 .clickSignIn()
-                .chooseRegionByIndex(0)
+                //.chooseRegionByIndex(0)
                 .clickOnContinueButton();
 
     }
@@ -91,8 +94,6 @@ public class OrderDetailsPageTest extends TestRun {
         softAssert.assertEquals(actual2,orderNumber2);
         softAssert.assertAll();
 
-        softAssert.assertEquals(actual1, orderNumber1);
-        softAssert.assertEquals(actual2, orderNumber2);
 
     }
 }
