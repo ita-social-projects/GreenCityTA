@@ -18,6 +18,13 @@
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpPersonWithoutVerifyEmailTest"></class>
         </classes>
     </test>
+    <test name="UbsUser_tests" thread-count="3">
+        <classes>
+            <class name="com.ita.edu.greencity.tests.ui.pages.ubs_user.EmptyUbsUserOrderPageTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.ubs_user.OrderCancellationTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.ubs_user.OrderPageTest"></class>
+        </classes>
+    </test>
     <test name="Sign_up_simple" thread-count="3">
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.CloseSignUpPopUpTest"></class>

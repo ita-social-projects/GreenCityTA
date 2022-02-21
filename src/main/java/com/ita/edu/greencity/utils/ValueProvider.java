@@ -67,6 +67,14 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
+
+    public String getUserWithoutOrdersEmail() {
+        return properties.getProperty("userWithoutOrdersEmail");
+    }
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
+    }
+
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
