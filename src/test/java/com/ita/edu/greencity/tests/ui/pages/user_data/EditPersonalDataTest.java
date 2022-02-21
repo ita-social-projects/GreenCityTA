@@ -15,19 +15,20 @@ import org.testng.asserts.SoftAssert;
 
 public class EditPersonalDataTest extends TestRun {
     @BeforeMethod
-    public void loginToUBS(){
+    public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
                 .clickSignIn()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
+
     @DataProvider(name = "personalDataProvider")
     public Object[][] personalDataProvider() {
         return new Object[][]{
-                {"TestName","TestSurname","0970101011","+380 (97) 010 10 11"},
-                {"Name","Surname","0991234567","+380 (99) 123 45 67"},
+                {"TestName", "TestSurname", "0970101011", "+380 (97) 010 10 11"},
+                {"Name", "Surname", "0991234567", "+380 (99) 123 45 67"},
 
         };
     }
@@ -36,7 +37,7 @@ public class EditPersonalDataTest extends TestRun {
     @Description("check the ability to edit all personal data")
     @Issue("95")
     @Severity(SeverityLevel.CRITICAL)
-    public void editPersonalData(String newName, String newSurname, String newNumber, String expectedNumber ) {
+    public void editPersonalData(String newName, String newSurname, String newNumber, String expectedNumber) {
         new HeaderSignedInComponent(driver)
                 .clickUserMenu()
                 .clickUbsUser()
@@ -49,9 +50,9 @@ public class EditPersonalDataTest extends TestRun {
                 .clickOnSaveChangesButton();
         UserData userData = new UserData(driver);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(userData.getTextFromPhoneField(), expectedNumber,"error in PhoneField");
+        softAssert.assertEquals(userData.getTextFromPhoneField(), expectedNumber, "error in PhoneField");
         softAssert.assertEquals(userData.getTextFromNameField(), newName, "error in NameField");
-        softAssert.assertEquals(userData.getTextFromSurnameField(), newSurname,"error in SurnameField");
+        softAssert.assertEquals(userData.getTextFromSurnameField(), newSurname, "error in SurnameField");
         softAssert.assertAll();
     }
 }

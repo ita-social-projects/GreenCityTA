@@ -104,48 +104,54 @@ public class OrderPageConfirmation extends BasePage {
         return this;
     }
 
-    public String getRecipientName(){
-       return Arrays.stream(recipientCredentialsList.get(0).getText().split("\s")).toList().get(0);
+    public String getRecipientName() {
+        return Arrays.stream(recipientCredentialsList.get(0).getText().split("\s")).toList().get(0);
     }
 
-    public String getRecipientSurname(){
+    public String getRecipientSurname() {
         return Arrays.stream(recipientCredentialsList.get(0).getText().split("\s")).toList().get(1);
     }
 
-    public String getRecipientPhoneNumber(){
+    public String getRecipientPhoneNumber() {
         return recipientCredentialsList.get(1).getText();
     }
 
-    public String getRecipientEmailAddress(){
+    public String getRecipientEmailAddress() {
         return recipientCredentialsList.get(2).getText();
     }
 
-    public String getCity(){
+    public String getCity() {
         return infoAboutExportAddressList.get(0).getText();
     }
 
-    public String getDistrict(){
+    public String getDistrict() {
         return infoAboutExportAddressList.get(1).getText();
     }
 
-    public String getStreet(){
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(0);
+    public String getStreet() {
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(0);
     }
 
-    public String getHouseNumber(){
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(1);
+    public String getHouseNumber() {
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(1);
     }
 
-    public String getCorpus(){
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(2);
+    public String getCorpus() {
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(2);
     }
 
-    public String getEntrance(){
-        return Arrays.stream(infoAboutExportAddressList.get(0).getText().split(", ")).toList().get(3);
+    public String getEntrance() {
+        return Arrays.stream(infoAboutExportAddressList.get(2).getText().split(", ")).toList().get(3);
     }
 
-    public String getRegion(){
+    public String getRegion() {
         return infoAboutExportAddressList.get(3).getText();
+    }
+
+
+    @Step("Get number of order from Eco store by its index")
+    public String getEcoStoreNumber(int index){
+        return ecoStoreOrderNumbersList.get(index).getText().replaceAll("[^0-9]","");
     }
 
     @Step("Return to the previous stage with personal data")
@@ -162,7 +168,9 @@ public class OrderPageConfirmation extends BasePage {
 
     @Step("Make the order")
     public PaymentByFondyPage clickOnOrderButton() {
+        sleep(5000);
         orderButton.click();
+        sleep(10000);
         return new PaymentByFondyPage(driver);
     }
 

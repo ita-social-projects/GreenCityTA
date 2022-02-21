@@ -6,13 +6,9 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
-
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,8 +17,8 @@ import org.testng.annotations.Test;
 
 public class SignUpWithGoogleTest extends TestRun {
 
-    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
     private final String userEmail = "registertesttest88@gmail.com";
+    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
 
     @BeforeTest(description = "Delete user by email if it exists in database before registration")
     public void checkRegisteredUser() {
@@ -36,6 +32,7 @@ public class SignUpWithGoogleTest extends TestRun {
     @Description("Check correct registration of user with Google")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
+    @Link("https://jira.softserve.academy/browse/GC-218")
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";
@@ -44,10 +41,8 @@ public class SignUpWithGoogleTest extends TestRun {
                 .clickOnContinueButton()
                 .inputPasswordIntoField(userPassword)
                 .clickOnContinueButton();
-        new SelectRegion(driver).clickOnCloseButton();
-        signUpComponent.clickOnExitButton();
         String actualUserName = new HeaderSignedInComponent(driver).getUserName();
-        Assert.assertEquals(actualUserName,"Tetsregistr Tetsregistr");
+        Assert.assertEquals(actualUserName, "Tetsregistr Tetsregistr");
     }
 
     @AfterTest(description = "Delete user by email in database after registration")

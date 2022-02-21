@@ -5,9 +5,9 @@ import java.util.List;
 
 enum EcoNewsCertificateEntityFields {
     CODE(0), CREATION_DATE(1), DATE_OF_USE(2), EXPIRATION_DATE(3), ORDER_ID(4), POINTS(5), STATUS(6);
-    private int number;
+    private final int number;
 
-    private EcoNewsCertificateEntityFields(int number) {
+    EcoNewsCertificateEntityFields(int number) {
         this.number = number;
     }
 
@@ -22,6 +22,7 @@ public class EcoNewsCertificateEntity {
     public static final String INSERT_NEW_CERTIFICATE = " INSERT INTO certificate (code,status, expiration_date, points) VALUES ('%s', '%s', '%s', %s)";
     public static final String DELETE_CERTIFICATE = "DELETE  from certificate where code = '%s'";
     public static final String SELECT_RANDOM_USED_CERTIFICATE_CODE = "SELECT code FROM certificate WHERE status = 'USED' ORDER BY RANDOM() LIMIT 1";
+    public static final String CHECK_IF_CERTIFICATE_EXISTS = "SELECT COUNT(1) FROM certificate WHERE code = '%s'";
     private String code;
     private String creation_date;
     private String date_of_use;
@@ -50,6 +51,24 @@ public class EcoNewsCertificateEntity {
         this.status = null;
     }
 
+    public static EcoNewsCertificateEntity getEcoNewsCertificateEntity(List<String> row) {
+        return new EcoNewsCertificateEntity()
+                .setCode(row.get(EcoNewsCertificateEntityFields.CODE.getNumber()))
+                .setCreation_date(row.get(EcoNewsCertificateEntityFields.CREATION_DATE.getNumber()))
+                .setDate_of_use(row.get(EcoNewsCertificateEntityFields.DATE_OF_USE.getNumber()))
+                .setExpiration_date(row.get(EcoNewsCertificateEntityFields.EXPIRATION_DATE.getNumber()))
+                .setOrder_id(Long.parseLong(row.get(EcoNewsCertificateEntityFields.ORDER_ID.getNumber())))
+                .setPoints(Integer.parseInt(row.get(EcoNewsCertificateEntityFields.POINTS.getNumber())))
+                .setStatus(row.get(EcoNewsCertificateEntityFields.STATUS.getNumber()));
+    }
+
+    public static List<EcoNewsCertificateEntity> getListEcoNewsCertificateEntity(List<List<String>> rows) {
+        List<EcoNewsCertificateEntity> result = new ArrayList<>();
+        for (List<String> currentRow : rows) {
+            result.add(getEcoNewsCertificateEntity(currentRow));
+        }
+        return result;
+    }
 
     public String getCode() {
         return code;
@@ -125,24 +144,5 @@ public class EcoNewsCertificateEntity {
                 ", points=" + points +
                 ", status='" + status + '\'' +
                 '}';
-    }
-
-    public static EcoNewsCertificateEntity getEcoNewsCertificateEntity(List<String> row) {
-        return new EcoNewsCertificateEntity()
-                .setCode(row.get(EcoNewsCertificateEntityFields.CODE.getNumber()))
-                .setCreation_date(row.get(EcoNewsCertificateEntityFields.CREATION_DATE.getNumber()))
-                .setDate_of_use(row.get(EcoNewsCertificateEntityFields.DATE_OF_USE.getNumber()))
-                .setExpiration_date(row.get(EcoNewsCertificateEntityFields.EXPIRATION_DATE.getNumber()))
-                .setOrder_id(Long.parseLong(row.get(EcoNewsCertificateEntityFields.ORDER_ID.getNumber())))
-                .setPoints(Integer.parseInt(row.get(EcoNewsCertificateEntityFields.POINTS.getNumber())))
-                .setStatus(row.get(EcoNewsCertificateEntityFields.STATUS.getNumber()));
-    }
-
-    public static List<EcoNewsCertificateEntity> getListEcoNewsCertificateEntity(List<List<String>> rows) {
-        List<EcoNewsCertificateEntity> result = new ArrayList<>();
-        for (List<String> currentRow : rows) {
-            result.add(getEcoNewsCertificateEntity(currentRow));
-        }
-        return result;
     }
 }

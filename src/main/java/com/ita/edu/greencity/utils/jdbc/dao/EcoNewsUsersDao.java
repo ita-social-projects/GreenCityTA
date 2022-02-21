@@ -11,7 +11,7 @@ public class EcoNewsUsersDao {
     public void deleteById(long id) {
         Statement statement = ManagerDao.get().getStatement();
         try {
-            statement.execute(String.format(EcoNewsUsersEntity.DELETE_BY_ID,String.valueOf(id)));
+            statement.execute(String.format(EcoNewsUsersEntity.DELETE_BY_ID, id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class EcoNewsUsersDao {
         Statement statement = ManagerDao.get().getStatement();
         List<List<String>> rows = null;
         try {
-            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsUsersEntity.SELECT_BY_FIELD,field, value));
+            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsUsersEntity.SELECT_BY_FIELD, field, value));
             rows = ManagerDao.get().parseResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,12 +45,12 @@ public class EcoNewsUsersDao {
     }
 
     public EcoNewsUsersEntity selectById(long id) {
-        List<EcoNewsUsersEntity> result = selectByField("id",String.valueOf(id));
-        return result.size()>0 ? result.get(0) : null;
+        List<EcoNewsUsersEntity> result = selectByField("id", String.valueOf(id));
+        return result.size() > 0 ? result.get(0) : null;
     }
 
     public EcoNewsUsersEntity selectByEmail(String email) {
-        List<EcoNewsUsersEntity> result = selectByField("email",email);
-        return result.size()>0 ? result.get(0) : null;
+        List<EcoNewsUsersEntity> result = selectByField("email", email);
+        return result.size() > 0 ? result.get(0) : null;
     }
 }

@@ -8,12 +8,12 @@ import org.openqa.selenium.support.How;
 
 public class Invoice extends BasePage {
 
+    @FindBy(how = How.CLASS_NAME, using = "more-about-bonuses-link")
+    private WebElement findOutWhatBonusesAreAccruedForButton;
+
     public Invoice(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.CLASS_NAME, using = "more-about-bonuses-link")
-    private WebElement findOutWhatBonusesAreAccruedForButton;
 
     public void clickOnFindOutWhatBonusesAreAccruedForButton() {
         findOutWhatBonusesAreAccruedForButton.click();

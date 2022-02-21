@@ -115,6 +115,9 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class = 'warning-subtitle ng-star-inserted']")
     private WebElement warningSubtitle;
 
+    public OrderPagePersonalData(WebDriver driver) {
+        super(driver);
+    }
 
     @Step("get webElement 'anotherClientFirstNameField'")
     public WebElement getAnotherClientFirstNameField() {
@@ -213,15 +216,15 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("click on edit address button")
-    public AddNewAddress clickOnEditAddressButton(int indexOfSavedAddress) {
+    public OrderPagePersonalData clickOnEditAddressButton(int indexOfSavedAddress) {
         editSavedAddress.get(indexOfSavedAddress).click();
-        return new AddNewAddress(driver);
+        return this;
     }
 
     @Step("click on choose saved address button")
-    public AddNewAddress clickOnChooseAddressButton(int indexOfSavedAddress) {
+    public OrderPagePersonalData clickOnChooseAddressButton(int indexOfSavedAddress) {
         chooseSavedAddress.get(indexOfSavedAddress).click();
-        return new AddNewAddress(driver);
+        return this;
     }
     @Step("check count of saved address")
     public boolean verifyCountOfAddress(){
@@ -234,8 +237,9 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
-        sleep(5000);
+        sleep(8000);
         nextButton.click();
+        sleep(5000);
         return new OrderPageConfirmation(driver);
     }
 
@@ -323,6 +327,7 @@ public class OrderPagePersonalData extends BasePage {
         phoneNumberField.sendKeys(phoneNumber, Keys.ENTER);
         return this;
     }
+
     @Step("enter surname (Surname field)")
     public OrderPagePersonalData entersurname(final String lastName) {
         surnameField.clear();
@@ -330,7 +335,7 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
-    @Step("enter first name {firstName}")
+    @Step("enter first name (First name field)")
     public OrderPagePersonalData enterFirstName(final String firstName) {
         firstNameField.clear();
         firstNameField.sendKeys(firstName, Keys.ENTER);
@@ -348,7 +353,10 @@ public class OrderPagePersonalData extends BasePage {
         return personalDataTitle.getText();
     }
 
-    public OrderPagePersonalData(WebDriver driver) {
-        super(driver);
+    @Step("Refresh page")
+    public OrderDetailsPage refreshPage(){
+        sleep(3000);
+        driver.navigate().refresh();
+        return new OrderDetailsPage(driver);
     }
 }

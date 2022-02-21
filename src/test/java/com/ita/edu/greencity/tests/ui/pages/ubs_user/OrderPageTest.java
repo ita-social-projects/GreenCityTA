@@ -27,7 +27,7 @@ public class OrderPageTest extends UbsUserTestRun {
 
     @DataProvider
     public Object[][] pageTabs() {
-        return new Object[][] {
+        return new Object[][]{
                 {"ua", "Поточні замовлення", "Історія замовлень"},
                 {"en", "Current orders", "Order history"}
         };

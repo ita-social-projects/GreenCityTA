@@ -5,10 +5,7 @@ import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
-import io.qameta.allure.Description;
-import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -17,8 +14,8 @@ import org.testng.asserts.SoftAssert;
 
 public class SignUpPersonTest extends TestRun {
 
-    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
     private final String userEmail = "registertesttest88@gmail.com";
+    EcoNewsUsersService ecoNewsUsersService = new EcoNewsUsersService();
 
     @BeforeTest(description = "Delete user by email if it exists in database before registration")
     public void checkRegisteredUser() {
@@ -32,6 +29,7 @@ public class SignUpPersonTest extends TestRun {
     @Description("Check correct registration of user to system")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
+    @Link("https://jira.softserve.academy/browse/GC-213")
     public void test() {
         SignUpComponent signUpComponent = new HeaderSignedOutComponent(driver).clickSignUp();
         String userPassword = "Tetsregistr_1";
@@ -45,7 +43,10 @@ public class SignUpPersonTest extends TestRun {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertFalse(isDisabled, "SignUp button is disabled!");
         String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
-        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
+        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "Incorrect alert!");
+        EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
+        softAssert.assertEquals(user,null, "User is in Data Base!");
+
         softAssert.assertAll();
     }
 

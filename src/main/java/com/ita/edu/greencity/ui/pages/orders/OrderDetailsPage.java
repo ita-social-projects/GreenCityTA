@@ -2,7 +2,6 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,7 +32,7 @@ public class OrderDetailsPage extends BasePage {
     @FindBy(xpath = ".//div[@formarrayname='formArrayCertificates']/input")
     private WebElement certificateInput;
     @FindBy(xpath = "//button[@class='primary-global-button btn ng-star-inserted']")
-    private WebElement activateCertificateButton;
+    private WebElement activateOrCancelCertificateButton;
     @FindBy(xpath = "//div[@class='messages-container']/small")
     private WebElement certificateAlert;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
@@ -99,6 +98,7 @@ public class OrderDetailsPage extends BasePage {
 
         return this;
     }
+
     @Step("Region dropdown chose  {value}")
     public OrderDetailsPage chooseRegionByValue(String value) {
         clickOnChangeRegionButton();
@@ -115,9 +115,11 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
+        sleep(5000);
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
+
     @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lArrowsInput(int value) {
 
@@ -126,6 +128,7 @@ public class OrderDetailsPage extends BasePage {
         }
         return this;
     }
+
     @Step("Number of 'Safe waste' service input value {value}")
     public OrderDetailsPage EnterNumberOfSafeWasteInput(String value) {
         sleep(2000);
@@ -173,21 +176,32 @@ public class OrderDetailsPage extends BasePage {
         String text = minimumOrderContainsAlert.getText();
         return text;
     }
-    @Step("Certificate input set value {value}")
-        public OrderDetailsPage EnterCertificateInput (String value){
-        certificateInput.click();
-            certificateInput.sendKeys(value, Keys.ENTER);
-            return this;
-        }
 
+    @Step("Certificate input set value {value}")
+    public OrderDetailsPage EnterCertificateInput(String value) {
+        certificateInput.click();
+        certificateInput.sendKeys(value, Keys.ENTER);
+        return this;
+    }
+
+    public OrderDetailsPage clickOnActivateCertificateButton() {
+        activateOrCancelCertificateButton.click();
+        return this;
+    }
+
+    public OrderDetailsPage clickOnCancelCertificateButton() {
+        activateOrCancelCertificateButton.click();
+        return this;
+    }
+
+    public boolean getCertificateButtonStatus() {
+        return activateOrCancelCertificateButton.isEnabled();
+    }
     public String getCertificateAlertMessage () {
         return certificateAlert.getText().trim();
     }
-
-
-    public OrderDetailsPage clickOnActivateCertificateButton() {
-        activateCertificateButton.click();
-        return this;
+    public String getCertificateInput() {
+        return certificateInput.getAttribute("value");
     }
 
     public OrderDetailsPage ClickOnNoUseBonusesCheckmark() {
@@ -214,6 +228,7 @@ public class OrderDetailsPage extends BasePage {
         howToGetBonusesButton.click();
         return this;
     }
+
     @Step("Input eco store order value {value}")
     public OrderDetailsPage EnterOrderNumberInputs(String orderNumber, int order) {
         orderNumberInputs.get(order).sendKeys(orderNumber);
@@ -224,6 +239,7 @@ public class OrderDetailsPage extends BasePage {
         addAnotherNumberButton.click();
         return this;
     }
+
     public String getOrderNumberInputs(int order) {
         return orderNumberInputs.get(order).getAttribute("value");
     }
@@ -232,6 +248,7 @@ public class OrderDetailsPage extends BasePage {
         learnAboutPackagesLink.click();
         return this;
     }
+
     @Step("Comment input set value {value}")
     public OrderDetailsPage EnterCommentInput(String value) {
         commentInput.sendKeys(value, Keys.ENTER);
@@ -249,6 +266,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderPagePersonalData clickOnNextButton() {
         nextButton.click();
+        sleep(10000);
         return new OrderPagePersonalData(driver);
     }
 

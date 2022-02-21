@@ -17,28 +17,30 @@ import org.testng.asserts.SoftAssert;
 
 public class EditAddressDataTest extends TestRun {
     @BeforeMethod
-    public void loginToUBS(){
+    public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
                 .clickSignIn()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
     }
+
     @DataProvider(name = "dataProviderAddress")
     private Object[][] dataProviderAddress() {
         return new Object[][]{
-                {"Address №2","Київ","Київська область","Святошинський", "вулиця Львівська" , "1" ,"2","3"},
-                {"Address №2","Київ","Київська область","Печерський", "Деміївська вулиця" , "6" ,"5","4"},
+                {"Address №2", "Київ", "Київська область", "Святошинський", "вулиця Львівська", "1", "2", "3"},
+                {"Address №2", "Київ", "Київська область", "Печерський", "Деміївська вулиця", "6", "5", "4"},
         };
     }
+
     @Test(dataProvider = "dataProviderAddress")
     @Description("check the ability to edit all data related to the address")
     @Issue("94")
     @Severity(SeverityLevel.CRITICAL)
     @Link("https://jira.softserve.academy/browse/GC-2368")
-    public void editAddress(String numberAddress,String city, String region, String district,
-                            String street, String number, String corpus, String entrance ){
+    public void editAddress(String numberAddress, String city, String region, String district,
+                            String street, String number, String corpus, String entrance) {
         new HeaderSignedInComponent(driver)
                 .clickUserMenu()
                 .clickUbsUser()
@@ -57,13 +59,13 @@ public class EditAddressDataTest extends TestRun {
 
         UserData userData = new UserData(driver);
         SoftAssert asert = new SoftAssert();
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCity(),city,"assert in City");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getRegion(),region,"assert in Region");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getDistrict(),district,"assert in District");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getStreet(),street,"assert in Street");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getHouse(),number,"assert in House");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCorpus(),corpus,"assert in Corpus");
-        asert.assertEquals(userData.chooseAddressShow(numberAddress).getEntrance(),entrance,"assert in Entrance");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCity(), city, "assert in City");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getRegion(), region, "assert in Region");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getDistrict(), district, "assert in District");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getStreet(), street, "assert in Street");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getHouse(), number, "assert in House");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getCorpus(), corpus, "assert in Corpus");
+        asert.assertEquals(userData.chooseAddressShow(numberAddress).getEntrance(), entrance, "assert in Entrance");
         asert.assertAll();
 
     }

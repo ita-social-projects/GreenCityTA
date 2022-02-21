@@ -9,8 +9,8 @@ import java.util.List;
 
 public class EcoNewsUsersService {
 
-    private EcoNewsUsersDao ecoNewsUsersDao;
-    private EcoNewsUserActionsDao ecoNewsUserActionsDao;
+    private final EcoNewsUsersDao ecoNewsUsersDao;
+    private final EcoNewsUserActionsDao ecoNewsUserActionsDao;
 
     public EcoNewsUsersService() {
         this.ecoNewsUsersDao = new EcoNewsUsersDao();

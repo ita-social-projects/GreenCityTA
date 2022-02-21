@@ -22,8 +22,8 @@ public class LocalizationUserDataPageTest extends TestRun {
     @BeforeMethod
     public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
-                .inputEmail(provider.getEmail())
-                .inputPassword(provider.getPassword())
+                .inputEmail(provider.getEmailForUserData())
+                .inputPassword(provider.getPasswordForUserData())
                 .clickSignIn()
                 .chooseRegionByValue("Kyiv")
                 .clickOnContinueButton();
@@ -33,17 +33,17 @@ public class LocalizationUserDataPageTest extends TestRun {
     public Object[][] dataProviderPersonalInfo() {
         return new Object[][]{
                 {"en", Map.ofEntries(
-                        entry("nameText","Name"),
-                        entry("surnameText","Surname"),
-                        entry("emailText","email"),
-                        entry("phoneText","phone")
+                        entry("nameText", "Name"),
+                        entry("surnameText", "Surname"),
+                        entry("emailText", "email"),
+                        entry("phoneText", "phone")
 
-                ) },
+                )},
                 {"ua", Map.ofEntries(
-                        entry("nameText","Ім'я"),
-                        entry("surnameText","Прізвище"),
-                        entry("emailText","Електронна скринька"),
-                        entry("phoneText","№ телефону")
+                        entry("nameText", "Ім'я"),
+                        entry("surnameText", "Прізвище"),
+                        entry("emailText", "Електронна скринька"),
+                        entry("phoneText", "№ телефону")
                 )}
 
         };
@@ -52,24 +52,24 @@ public class LocalizationUserDataPageTest extends TestRun {
     @DataProvider(name = "dataProviderAddressInfo")
     public Object[][] dataProviderAddressInfo() {
         return new Object[][]{
-                {"Address №1","en", Map.ofEntries(
-                        entry("cityText","City"),
-                        entry("regionText","Region"),
-                        entry("districtText","District"),
-                        entry("streetText","Street"),
-                        entry("houseText","House"),
-                        entry("corpusText","Corpus"),
-                        entry("entranceText","Entrance")
+                {"Address №1", "en", Map.ofEntries(
+                        entry("cityText", "City"),
+                        entry("regionText", "Region"),
+                        entry("districtText", "District"),
+                        entry("streetText", "Street"),
+                        entry("houseText", "House"),
+                        entry("corpusText", "Corpus"),
+                        entry("entranceText", "Entrance")
 
-                ) },
-                {"Адреса №1","ua", Map.ofEntries(
-                        entry("cityText","Місто"),
-                        entry("regionText","Область"),
-                        entry("districtText","Район"),
-                        entry("streetText","Вулиця"),
-                        entry("houseText","Будинок"),
-                        entry("corpusText","Корпус"),
-                        entry("entranceText","Під'їзд")
+                )},
+                {"Адреса №1", "ua", Map.ofEntries(
+                        entry("cityText", "Місто"),
+                        entry("regionText", "Область"),
+                        entry("districtText", "Район"),
+                        entry("streetText", "Вулиця"),
+                        entry("houseText", "Будинок"),
+                        entry("corpusText", "Корпус"),
+                        entry("entranceText", "Під'їзд")
                 )}
 
         };
@@ -79,26 +79,27 @@ public class LocalizationUserDataPageTest extends TestRun {
     public Object[][] dataProviderButtonsText() {
         return new Object[][]{
                 {"en", Map.ofEntries(
-                        entry("editDataText","Edit data"),
-                        entry("changePasswordText","Change password"),
-                        entry("deleteProfileText","Delete profile")
+                        entry("editDataText", "Edit data"),
+                        entry("changePasswordText", "Change password"),
+                        entry("deleteProfileText", "Delete profile")
 
 
-                ) },
+                )},
                 {"ua", Map.ofEntries(
-                        entry("editDataText","Редагувати дані"),
-                        entry("changePasswordText","Змінити пароль"),
-                        entry("deleteProfileText","Видалити профіль")
+                        entry("editDataText", "Редагувати дані"),
+                        entry("changePasswordText", "Змінити пароль"),
+                        entry("deleteProfileText", "Видалити профіль")
 
                 )}
 
         };
     }
+
     @Test(dataProvider = "dataProviderPersonalInfo")
     @Description("check whether personal information labels change when changing language")
     @Issue("102")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyLocalizationPersonalInfo( String lang, Map<String,String> map){
+    public void verifyLocalizationPersonalInfo(String lang, Map<String, String> map) {
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose(lang);
         UserData userData = new HeaderSignedInComponent(driver)
                 .clickUserMenu()
@@ -122,7 +123,7 @@ public class LocalizationUserDataPageTest extends TestRun {
     @Description("check whether address information labels change when changing language")
     @Issue("102")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyLocalizationAddressInfo(String numberAddress,String lang, Map<String,String> map){
+    public void verifyLocalizationAddressInfo(String numberAddress, String lang, Map<String, String> map) {
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose(lang);
         UserData userData = new HeaderSignedInComponent(driver)
                 .clickUserMenu()
@@ -153,7 +154,7 @@ public class LocalizationUserDataPageTest extends TestRun {
     @Description("check whether all button`s text are changed when changing language")
     @Issue("102")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyLocalizationButtonsText(String lang, Map<String,String> map) {
+    public void verifyLocalizationButtonsText(String lang, Map<String, String> map) {
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose(lang);
         UserData userData = new HeaderSignedInComponent(driver)
                 .clickUserMenu()
@@ -171,11 +172,6 @@ public class LocalizationUserDataPageTest extends TestRun {
         softAssert.assertAll();
 
     }
-
-
-
-
-
 
 
 }

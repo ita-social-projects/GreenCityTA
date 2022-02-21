@@ -50,6 +50,7 @@ public class PaymentByFondyPage extends BasePage {
     private void clickOnLanguageChooser() {
         languageChooser.click();
     }
+
     private List<WebElement> getListOfLanguages() {
         return listOfLanguages;
     }
@@ -109,6 +110,12 @@ public class PaymentByFondyPage extends BasePage {
         payButton.click();
         return new Operation3dSecurePopUp(driver);
     }
+
+//    @Step("Pay for the order")
+//    public Operation3dSecurePopUp clickOnPayButton() {
+//        payButton.click();
+//        return new Operation3dSecurePopUp(driver);
+//    }
 
     @Step("Get error message about invalid email address")
     public String getEmailErrorMessage() {

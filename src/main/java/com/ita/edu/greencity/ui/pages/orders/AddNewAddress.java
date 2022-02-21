@@ -2,7 +2,9 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -105,10 +107,10 @@ public class AddNewAddress extends BasePage {
 
 
     @Step("choose street by index of list")
-    public AddNewAddress chooseStreet(int index){
+    public AddNewAddress chooseStreet(int index) {
 //        waitUntilElementToBeClickable(By.xpath("//span[@class='pac-matched']"),10);
         this.sleep(2000);
-      listOfStreet.get(index).click();
+        listOfStreet.get(index).click();
         this.sleep(2000);
         return this;
     }
@@ -216,7 +218,7 @@ public class AddNewAddress extends BasePage {
         return this;
     }
 
-    public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber){
+    public OrderPagePersonalData addFullAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse, String corpusNumber, String entranceNumber) {
         OrderPagePersonalData orderPagePersonalData = new AddNewAddress(driver)
                 .clickOnCityField()
                 .chooseCity(indexCity)
@@ -226,7 +228,10 @@ public class AddNewAddress extends BasePage {
                 .enterHouseNumber(numberOfHouse)
                 .enterHouseCorpus(corpusNumber)
                 .enterEntranceNumber(entranceNumber)
+                .enterStreet(street)
+                .chooseStreet(indexStreet)
                 .clickOnAddAddressButton();
+        sleep(20000);
         return new OrderPagePersonalData(driver);
     }
 

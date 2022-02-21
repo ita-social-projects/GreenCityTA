@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +12,6 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 public class UbsHomePage extends BasePage {
-
 
 
     @FindBy(how = How.XPATH, using = "//a[@class='ubs-header-sign-in']")
@@ -80,6 +80,9 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[@class='menu-icon-wrapper']")
     private WebElement burgerMenu;
 
+    @FindBy(how = How.XPATH, using = "//ul[@role='tablist']//a[contains(text(),'UBS courier')]")
+    private WebElement UBSCourierButtonBarMenu;
+
 
     @FindBy(how = How.XPATH, using = "//ul[@role='tablist']")
     private WebElement elementsInBurgerMenu;
@@ -87,22 +90,21 @@ public class UbsHomePage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div//img")
     private List<WebElement> listOfAllImgValue;
 
-    //_______________________________________________________________________
-
-//__________________________________________________
-    public List<WebElement> getListOfAllImgValue(){
-        return listOfAllImgValue;
-    }
     public UbsHomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickSingInButton(){
+    //__________________________________________________
+    public List<WebElement> getListOfAllImgValue() {
+        return listOfAllImgValue;
+    }
+
+    public void clickSingInButton() {
         singInButton.click();
     }
 
 
-    public boolean checkImgArmoredTrackOnDisplay(){
+    public boolean checkImgArmoredTrackOnDisplay() {
         return imgArmoredTrack.isDisplayed();
     }
 
@@ -110,9 +112,14 @@ public class UbsHomePage extends BasePage {
         return h1Text.getText();
     }
 
-    public SignInComponent pressOrderCourier() {
+    public SignInComponent pressOrderCourierUnlogin() {
         headerButtonOrderCourier.click();
         return new SignInComponent(driver);
+    }
+
+    public SelectRegion pressOrderCourierLogin() {
+        headerButtonOrderCourier.click();
+        return new SelectRegion(driver);
     }
 
     public String getTextHeaderMainText() {
@@ -120,7 +127,7 @@ public class UbsHomePage extends BasePage {
     }
 
     public String getHeaderText() {
-        return headerText.getCssValue("font-family").toString();
+        return headerText.getCssValue("font-family");
 
     }
 
@@ -128,13 +135,14 @@ public class UbsHomePage extends BasePage {
         headerButtonOrderCourier.click();
         return null;
     }
+
     @Step("get text from title of message")
     public String getMiddleText() {
         return middleText.getText();
 
     }
 
-    public String getHomePageTitle(){
+    public String getHomePageTitle() {
         return homePageTitle.getText();
     }
 
@@ -148,15 +156,15 @@ public class UbsHomePage extends BasePage {
     }
 
     @Step("looking for element on page by xpath{headerButtonOrderCourier}")
-    public boolean checkIfButtonOnDisplay(){
+    public boolean checkIfButtonOnDisplay() {
         return headerButtonOrderCourier.isDisplayed();
     }
 
-    public String checkTextPriceUbsCourier(){
+    public String checkTextPriceUbsCourier() {
         return priceUbsCourier.getText();
     }
 
-    public boolean checkIfBurgerMenuOnDisplay(){
+    public boolean checkIfBurgerMenuOnDisplay() {
         return burgerMenu.isDisplayed();
     }
 
@@ -167,9 +175,9 @@ public class UbsHomePage extends BasePage {
     }
 
 
-    //    public void clickSelectionImg() {
-//        selectionImg.click();
-//    }
+        public void clickUBSCourierButtonBarMenu() {
+            UBSCourierButtonBarMenu.click();
+    }
 
 //    public UbsHomePage getSectionMainText() {
 //        sectionMainText.click();

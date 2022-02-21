@@ -5,14 +5,15 @@ import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class EmptyUbsUserOrderPageTest extends UbsUserTestRun {
 
     @DataProvider
     private Object[][] emptyOrderPageLabelAndButton() {
-        return new Object[][] {
+        return new Object[][]{
                 {"ua", "Ви ще не зробили замовлень у нас.", "Нове замовлення"},
                 {"en", "You haven't made any orders with us yet.", "New order"}
         };
