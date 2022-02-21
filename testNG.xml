@@ -25,6 +25,18 @@
             <class name="com.ita.edu.greencity.tests.ui.pages.sign_up.SignUpVisibilityOfInputPasswordTest"></class>
         </classes>
     </test>
+    <test name="Orders_tests" thread-count="3">
+        <classes>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.AddNewAddressTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.ErrorMessagesInPersonalDataPage"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.OrderDetailsPageTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.OrderPageConfirmationTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.PaymentByFondyTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.SelectRegionAfterSignInTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.SelectRegionLocalizationTest"></class>
+            <class name="com.ita.edu.greencity.tests.ui.pages.orders.ValidationOfCommentTest"></class>
+        </classes>
+    </test>
 
 
     <!--<test name="UI Tests" annotations="JDK" preserve-order="true">
