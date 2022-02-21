@@ -29,6 +29,31 @@ public class ValueProvider {
     public String getEmail() {
         return properties.getProperty("email");
     }
+    public String getEmailForUserData() {
+        return properties.getProperty("emailForUserData");
+    }
+    public String getAdminEmail() {
+        return properties.getProperty("adminEmail");
+    }
+    public String getAdminPassword() {
+        return properties.getProperty("adminPassword");
+    }
+
+    public String getEmailForChangePassw() {
+        return properties.getProperty("emailForChangePassw");
+    }
+    public String getPasswordForChangePassw() {
+        return properties.getProperty("passwordForChangepassw");
+    }
+    public String getPasswordHash() {
+        return properties.getProperty("passwordHash");
+    }
+
+
+
+    public String getPasswordForUserData() {
+        return properties.getProperty("passwordForUserData");
+    }
 
     public String getEmailAdmin() {
         return properties.getProperty("emailAdmin");
