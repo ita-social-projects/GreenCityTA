@@ -78,7 +78,7 @@ public class UbsUserOrders extends BasePage {
         return new UbsUserOrderHistory(driver);
     }
 
-    @Step("push all orders to orders container")
+    @Step("put all orders to orders container")
     private List<OrdersContainer> putElementsIntoContainer() {
 
         List<OrdersContainer> ordersContainerList = new ArrayList<>();
@@ -92,8 +92,7 @@ public class UbsUserOrders extends BasePage {
 
     @Step("get order from container by order number")
     public OrdersContainer getOrderByNumber(String numberOfOrder) {
-        sleep(10000);
-        waitUntilElementToBeClickable(By.xpath(".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]"), 10);
+
         return putElementsIntoContainer()
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
@@ -131,7 +130,7 @@ public class UbsUserOrders extends BasePage {
                 .orElseThrow(NullPointerException::new);
     }
 
-    @Step("get order from container by order date")
+    @Step("get order from container by order status and payment status")
     public OrdersContainer getOrderByOrderAndPaymentStatuses(String orderStatus, String paymentStatus) {
 
         return putElementsIntoContainer()

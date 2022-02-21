@@ -1,19 +1,36 @@
 package com.ita.edu.greencity.tests.ui.pages.ubs_user;
 
-import com.ita.edu.greencity.tests.ui.pages.testrunners.UbsUserTestRun;
-import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.CancelPopUp;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsOrdersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsOrdersService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class OrderCancellationTest extends UbsUserTestRun {
+public class OrderCancellationTest extends TestRun {
+
+    @BeforeMethod
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
+        HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
+        headerSignedOutComponent.clickSignIn()
+                .inputEmail(provider.getUserWithOrdersEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn();
+
+        new HeaderSignedInComponent(driver).clickUserMenu()
+                .clickUbsUser();
+    }
 
     EcoNewsOrdersService ecoNewsOrdersService = new EcoNewsOrdersService();
 
@@ -64,36 +81,65 @@ public class OrderCancellationTest extends UbsUserTestRun {
         softAssert.assertAll();
     }
 
-    @DataProvider
-    public Object[][] popUpElements() {
-        return new Object[][]{
-                {"ua", "У разі скасування дане замовлення буде видалено. Чи дійсно Ви бажаєте скасувати замовлення?", "Ні", "Так"},
-                {"en", "If canceled, this order will be deleted. Do you really want to cancel the order?", "No", "Yes"}
-        };
-    }
-
     @Description("test pop-up elements localization")
     @Issue("105")
-    @Test(dataProvider = "popUpElements")
-    public void popUpElementsLocalization(String lang, String labelText, String noButton, String yesButton) {
-        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
+    @Test()
+    public void popUpElementsLocalization() {
+        final String expectedWarningMessageEn = "If canceled, this order will be deleted. Do you really want to cancel the order?";
+        final String expectedWarningMessageUa = "У разі скасування дане замовлення буде видалено. Чи дійсно Ви бажаєте скасувати замовлення?";
+
         SoftAssert softAssert = new SoftAssert();
 
-        ubsUserOrders.getHeader()
-                .clickLanguageSwitcher()
-                .languageChoose(lang);
-
-        CancelPopUp cancelPopUp = ubsUserOrders
+        CancelPopUp cancelPopUpEn = new UbsUserOrders(driver)
                 .getOrderByOrderAndPaymentStatuses("Formed", "Unpaid")
                 .clickOnCancelButton();
 
-        softAssert.assertEquals(cancelPopUp.getEnsuranceOfCancelingLabelText(), labelText, "Wrong label text");
-        softAssert.assertEquals(cancelPopUp.getNoButton().getText(), noButton, "Wrong 'No' button text");
-        softAssert.assertEquals(cancelPopUp.getYesButton().getText(), yesButton, "Wrong 'Yes' button text");
-        softAssert.assertAll();
+        softAssert.assertEquals(cancelPopUpEn.getEnsuranceOfCancelingLabelText(), expectedWarningMessageEn,
+                "Wrong label text");
+        softAssert.assertEquals(cancelPopUpEn.getNoButton().getText(), "No", "Wrong 'No' button text");
+        softAssert.assertEquals(cancelPopUpEn.getYesButton().getText(), "Yes", "Wrong 'Yes' button text");
 
-        cancelPopUp.clickOnNoButton();
+        cancelPopUpEn.clickOnNoButton();
+
+        new UbsUserOrders(driver).getHeader()
+                .clickLanguageSwitcher()
+                .languageChoose("ua");
+
+        CancelPopUp cancelPopUpUa = new UbsUserOrders(driver)
+                .getOrderByOrderAndPaymentStatuses("Сформовано", "Не оплачено")
+                .clickOnCancelButton();
+
+        softAssert.assertEquals(cancelPopUpUa.getEnsuranceOfCancelingLabelText(), expectedWarningMessageUa,
+                "Wrong label text");
+        softAssert.assertEquals(cancelPopUpUa.getNoButton().getText(), "Ні", "Wrong 'No' button text");
+        softAssert.assertEquals(cancelPopUpUa.getYesButton().getText(), "Так", "Wrong 'Yes' button text");
+        softAssert.assertAll();
     }
 
+    @DataProvider
+    public Object[][] paymentStatuses() {
+        return new Object[][] {
+                {"Half paid"},
+                {"Paid"}
+        };
+    }
+
+    @Description("test impossibility cancellation of order with {paymentStatus} payment status")
+    @Test(dataProvider = "paymentStatuses")
+    public void verifyThatFormedAndDifferentFromUnpaidOrderCanNotBeCancelled(String paymentStatus) {
+        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
+
+        boolean orderCanBeCancelled = ubsUserOrders
+                .getOrderByOrderAndPaymentStatuses("Formed", paymentStatus)
+                .getCancelButton()
+                .isDisplayed();
+
+        Assert.assertFalse(orderCanBeCancelled, "Order with " + paymentStatus + " has 'Cancel' button");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        super.afterMethod();
+    }
 
 }

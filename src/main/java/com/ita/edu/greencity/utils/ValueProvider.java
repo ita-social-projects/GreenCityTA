@@ -71,8 +71,9 @@ public class ValueProvider {
     public String getUserWithoutOrdersEmail() {
         return properties.getProperty("userWithoutOrdersEmail");
     }
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
+
+    public String getUserWithOrdersEmail() {
+        return properties.getProperty("userWithOrdersEmail");
     }
 
     public void setPassword(String newPassword) {
