@@ -27,8 +27,12 @@ public class TestHelpersUtils {
     }
 
     public static String generateRandomOrderNumber() {
-        Random rand = new Random();
         String randomOrder = RandomStringUtils.randomNumeric(10);
         return randomOrder;
+    }
+
+    public static String generateRandomCertificateNumber(){
+        String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
+        return number;
     }
 }
