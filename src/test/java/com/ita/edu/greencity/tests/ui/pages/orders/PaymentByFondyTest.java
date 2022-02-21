@@ -34,7 +34,7 @@ public class PaymentByFondyTest extends TestRun {
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
-        ubsHomePage.pressOrderCourier()
+        ubsHomePage.pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
