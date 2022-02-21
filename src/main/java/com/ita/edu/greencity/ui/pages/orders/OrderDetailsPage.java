@@ -32,7 +32,7 @@ public class OrderDetailsPage extends BasePage {
     @FindBy(xpath = ".//div[@formarrayname='formArrayCertificates']/input")
     private WebElement certificateInput;
     @FindBy(xpath = "//button[@class='primary-global-button btn ng-star-inserted']")
-    private WebElement activateCertificateButton;
+    private WebElement activateOrCancelCertificateButton;
     @FindBy(xpath = "//div[@class='messages-container']/small")
     private WebElement certificateAlert;
     @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
@@ -115,6 +115,7 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
+        sleep(5000);
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
@@ -183,14 +184,24 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
-    public String getCertificateAlertMessage() {
-        return certificateAlert.getText().trim();
+    public OrderDetailsPage clickOnActivateCertificateButton() {
+        activateOrCancelCertificateButton.click();
+        return this;
     }
 
-
-    public OrderDetailsPage clickOnActivateCertificateButton() {
-        activateCertificateButton.click();
+    public OrderDetailsPage clickOnCancelCertificateButton() {
+        activateOrCancelCertificateButton.click();
         return this;
+    }
+
+    public boolean getCertificateButtonStatus() {
+        return activateOrCancelCertificateButton.isEnabled();
+    }
+    public String getCertificateAlertMessage () {
+        return certificateAlert.getText().trim();
+    }
+    public String getCertificateInput() {
+        return certificateInput.getAttribute("value");
     }
 
     public OrderDetailsPage ClickOnNoUseBonusesCheckmark() {
@@ -255,6 +266,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderPagePersonalData clickOnNextButton() {
         nextButton.click();
+        sleep(10000);
         return new OrderPagePersonalData(driver);
     }
 

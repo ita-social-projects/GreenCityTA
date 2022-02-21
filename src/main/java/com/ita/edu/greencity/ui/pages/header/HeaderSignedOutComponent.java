@@ -31,4 +31,14 @@ public class HeaderSignedOutComponent extends HeaderComponent {
         signUp.click();
         return new SignUpComponent(driver);
     }
+
+    @Step("Get text from Sign in button")
+    public String getSignInButtonText() {
+        return signIn.getText();
+    }
+
+    @Step("Get text from Sign up button")
+    public String getSignUpButtonText() {
+        return signUp.getText();
+    }
 }
