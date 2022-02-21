@@ -28,7 +28,7 @@ public class UbsUserOrders extends BasePage {
     private WebElement orderHistoryTab;
     @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
     private WebElement orderHistoryTabButton;
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-accordion')]/*[contains(@class, 'mat-expansion-panel')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-header')]")
     private List<WebElement> orders;
 
     public UbsUserOrders(WebDriver driver) {
@@ -86,6 +86,7 @@ public class UbsUserOrders extends BasePage {
         for (WebElement element : orders) {
             ordersContainerList.add(new OrdersContainer(driver, element));
         }
+
 
         return ordersContainerList;
     }

@@ -45,7 +45,7 @@ public class OrderPageConfirmationTest extends TestRun {
     final String NEW_ENTRANCE_TO_ADD = "2";
 
     @BeforeMethod(description = "Navigate to Order confirmation page")
-    public void beforeMethod(ITestContext iTestContext) {
+      public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourier()
@@ -136,10 +136,14 @@ public class OrderPageConfirmationTest extends TestRun {
         String numberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton()
-                .getTextFromSuccessfulSavingAlert().substring(28, 33);
+                .getTextFromSuccessfulSavingAlert()
+                .substring(29, 32);
+       // System.out.println(numberOfOrder);
+        System.out.println(numberOfOrder);
         String expectedOrderStatus = "Formed";
         String actualOrderStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
-                .getOrderByNumber(numberOfOrder).getOrderStatus();
+                .getOrderByNumber(numberOfOrder)
+                .getOrderStatus();
         Assert.assertEquals(actualOrderStatus, expectedOrderStatus, "Order statuses do not match");
     }
 

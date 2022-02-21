@@ -23,7 +23,7 @@ public class SuccessfulSavingPage extends BasePage {
 
     @Step("Read the message about a successful order saving")
     public String getTextFromSuccessfulSavingAlert() {
-        sleep(4000);
+        //sleep(7000);
         return successfulSavingAlert.getText();
     }
 
