@@ -55,16 +55,15 @@ public class OrderPageTest extends TestRun {
     @Issue("106")
     @Test(dataProvider = "pageTabs")
     public void pageTabsLocalizationTest(String language, String firstTabText, String secondTabText) {
-        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
         SoftAssert softAssert = new SoftAssert();
 
-        ubsUserOrders.getHeader()
+        new UbsUserOrders(driver).getHeader()
                 .clickLanguageSwitcher()
                 .languageChoose(language);
 
-        softAssert.assertEquals(ubsUserOrders.getCurrentOrdersTabButton().getText(), firstTabText,
+        softAssert.assertEquals(new UbsUserOrders(driver).getCurrentOrdersTabButton().getText(), firstTabText,
                 "Wrong current orders tab label text");
-        softAssert.assertEquals(ubsUserOrders.getOrderHistoryTabButton().getText(), secondTabText,
+        softAssert.assertEquals(new UbsUserOrders(driver).getOrderHistoryTabButton().getText(), secondTabText,
                 "Wrong order history tab label text");
         softAssert.assertAll();
     }
@@ -76,7 +75,7 @@ public class OrderPageTest extends TestRun {
         UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
 
         Assert.assertTrue(Boolean.parseBoolean(ubsUserOrders.getCurrentOrdersTab().getAttribute("aria-selected")),
-                "Current orders tab is not selected by defaul");
+                "Current orders tab is not selected by default");
     }
 
     @AfterMethod

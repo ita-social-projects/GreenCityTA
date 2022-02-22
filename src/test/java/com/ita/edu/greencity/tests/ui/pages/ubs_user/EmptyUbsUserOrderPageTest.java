@@ -41,16 +41,15 @@ public class EmptyUbsUserOrderPageTest extends TestRun {
     @Issue("107")
     @Test(dataProvider = "emptyOrderPageLabelAndButton")
     public void verifyLabelAndButtonLocalization(String language, String label, String newOrderButtonText) {
-
-        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
         SoftAssert softAssert = new SoftAssert();
-        ubsUserOrders.getHeader()
+
+        new UbsUserOrders(driver).getHeader()
                 .clickLanguageSwitcher()
                 .languageChoose(language);
 
-        softAssert.assertEquals(ubsUserOrders.getEmptyOrdersPageLabel(), label,
+        softAssert.assertEquals(new UbsUserOrders(driver).getEmptyOrdersPageLabel(), label,
                 "Order page isn't empty");
-        softAssert.assertEquals(ubsUserOrders.getNewOrderButton().getText(), newOrderButtonText,
+        softAssert.assertEquals(new UbsUserOrders(driver).getNewOrderButton().getText(), newOrderButtonText,
                 "New order button has wrong text");
         softAssert.assertAll();
     }
