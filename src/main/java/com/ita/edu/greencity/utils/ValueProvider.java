@@ -137,4 +137,8 @@ public class ValueProvider {
     public String getUserApiURL() {
         return properties.getProperty("baseUserApiURL");
     }
+
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
+    }
 }
