@@ -128,4 +128,12 @@ public class ValueProvider {
     public String getJDBCGreenCityUbsURL() {
         return properties.getProperty("JDBCGreenCityUbsURL");
     }
+
+    public String getUbsApiURL() {
+        return properties.getProperty("baseUbsApiURL");
+    }
+
+    public String getUserApiURL() {
+        return properties.getProperty("baseUserApiURL");
+    }
 }
