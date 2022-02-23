@@ -32,6 +32,16 @@ public class HeaderSignedOutComponent extends HeaderComponent {
         return new SignUpComponent(driver);
     }
 
+    @Step("Check the visibility of Sign In button")
+    public boolean checkSignInButtonIsVisible() {
+        return signIn.isDisplayed();
+    }
+
+    @Step("Check the visibility of Sign Up button")
+    public boolean checkSignUpButtonIsVisible() {
+        return signUp.isDisplayed();
+    }
+
     @Step("Get text from Sign in button")
     public String getSignInButtonText() {
         return signIn.getText();
