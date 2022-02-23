@@ -36,9 +36,9 @@ public class OrdersContainer {
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
     private WebElement amountDue;
 
-    private final WebDriver driver;
-    private final DefaultElementLocatorFactory parentContext;
-    private final WebElement rootElement;
+    private WebDriver driver;
+    private DefaultElementLocatorFactory parentContext;
+    private WebElement rootElement;
 
     public OrdersContainer(WebDriver driver, WebElement rootElement) {
         this.rootElement = rootElement;
