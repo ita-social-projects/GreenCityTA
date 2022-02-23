@@ -220,6 +220,7 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark() {
+        sleep(3000);
         WaitingStoreOrderCheckmarks.get(1).click();
         return this;
     }

@@ -1,8 +1,10 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -211,6 +213,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on delete collection button")
     public OrderPagePersonalData clickOnDeleteCollectionAddressButton(int indexOfSavedAddress) {
+        sleep(15000);
         deleteSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
@@ -223,6 +226,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on choose saved address button")
     public OrderPagePersonalData clickOnChooseAddressButton(int indexOfSavedAddress) {
+        sleep(15000);
         chooseSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
@@ -237,9 +241,9 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
-        sleep(8000);
-        nextButton.click();
         sleep(5000);
+        nextButton.click();
+        //sleep(5000);
         return new OrderPageConfirmation(driver);
     }
 
@@ -359,4 +363,11 @@ public class OrderPagePersonalData extends BasePage {
         driver.navigate().refresh();
         return new OrderDetailsPage(driver);
     }
+    
+    @Step("Verify that the address is deleted")
+    public OrderPagePersonalData checkAddressIsDeleted(){
+            while (deleteSavedAddress.size()!=1){
+                clickOnDeleteCollectionAddressButton(1);
+            }  return this;
+        }
 }

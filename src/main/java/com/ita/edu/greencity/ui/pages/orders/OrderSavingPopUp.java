@@ -2,7 +2,6 @@ package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
-import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,12 +33,10 @@ public class OrderSavingPopUp extends BasePage {
         sleep(3000);
         saveButton.click();
         loadData();
-       // sleep(15000);
-
         return new SuccessfulSavingPage(driver);
     }
 
-    public SuccessfulSavingPage loadData() {
+    private SuccessfulSavingPage loadData() {
         while (true) {
             try {
                 driver.findElement(By.xpath("//span[contains(@class,'spinner')]"));
