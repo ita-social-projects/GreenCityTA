@@ -116,10 +116,14 @@ public class PaymentByFondyTest extends TestRun {
                 .clickOnCancelButton()
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert().substring(28, 33);
-        String actualOrderNumber = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
+        String actualOrderNumber = new HeaderSignedInComponent(driver)
+                .clickUserMenu()
+                .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getOrderId();
         String expectedPaymentStatus = "Paid";
-        String actualPaymentStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
+        String actualPaymentStatus = new HeaderSignedInComponent(driver)
+                .clickUserMenu()
+                .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getPaymentStatus();
         Assert.assertEquals(actualOrderNumber,numberOfOrder, "Order with such number does not exist");
         Assert.assertEquals(actualPaymentStatus, expectedPaymentStatus, "Payment statuses do not match");

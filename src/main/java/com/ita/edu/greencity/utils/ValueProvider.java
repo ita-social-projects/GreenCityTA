@@ -90,10 +90,6 @@ public class ValueProvider {
         }
     }
 
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
-    }
-
     public String getCardNumber() {
         return properties.getProperty("cardNumber");
     }
@@ -132,5 +128,13 @@ public class ValueProvider {
 
     public String getJDBCGreenCityUbsURL() {
         return properties.getProperty("JDBCGreenCityUbsURL");
+    }
+
+    public String getUbsApiURL() {
+        return properties.getProperty("baseUbsApiURL");
+    }
+
+    public String getUserApiURL() {
+        return properties.getProperty("baseUserApiURL");
     }
 }
