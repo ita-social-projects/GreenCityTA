@@ -1,11 +1,13 @@
 package com.ita.edu.greencity.ui.pages.sign_in;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,7 +36,7 @@ public class SignInComponent extends BasePage {
     private WebElement signUp;
     @FindBy(how = How.XPATH, using = "//div[@id = 'email-err-msg']/app-error/div")
     private WebElement errorEmail;
-    @FindBy(how = How.XPATH, using = "//div[@id = 'pass-err-msg']/app-error/div")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'alert-general-error ng-star-inserted']")
     private WebElement errorPassword;
     @FindBy(how = How.XPATH, using = "//div[@class = 'alert-general-error ng-star-inserted']")
     private WebElement errorGeneral;
@@ -147,5 +149,16 @@ public class SignInComponent extends BasePage {
     @Step("get attribute 'type' of password field")
     public String getPasswordType() {
         return password.getAttribute("type");
+    }
+
+    public SignInComponent loadData(){
+        while (true){
+            try {
+                driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button/span"));
+            } catch (Exception e) {
+                return this;
+            }
+            sleep(500);
+        }
     }
 }
