@@ -92,7 +92,8 @@ public class UbsUserOrders extends BasePage {
 
     @Step("get order from container by order number")
     public OrdersContainer getOrderByNumber(String numberOfOrder) {
-
+        sleep(10000);
+        waitUntilElementToBeClickable(By.xpath(".//*[contains(@class, 'main_header')]/*[contains(@class, 'btn_pay')]"), 10);
         return putElementsIntoContainer()
                 .stream()
                 .filter(element -> element.getOrderId().equals(numberOfOrder))
