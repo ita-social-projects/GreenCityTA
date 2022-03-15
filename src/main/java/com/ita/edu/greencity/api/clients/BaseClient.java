@@ -16,6 +16,7 @@ public abstract class BaseClient {
        if (provider == null) {
            provider = new ValueProvider();
        }
+
        contentType = ContentType.JSON;
     }
 
