@@ -2,13 +2,9 @@
 
 ***INSERT GRAPHIC HERE (include hyperlink in image)***
 
-# Repository Title Goes Here
+# GreenCityTA
 
-> Subtitle or Short Description Goes Here
-
-> ideally one sentence
-
-> include terms/tags that can be searched
+> If you want to take care about our environment and get rid of your wastes, but you are extremely busy and can't get to the sorting station? UBS Courier will come to take your recyclable materials! We provide emergency garbage assistance
 
 **Badges will go here**
 
@@ -64,11 +60,11 @@
 - Images of what it should look like
 
 ### Required to install
-* Python (3.6.3)
-* PostgreSQL (9.5.9)
-* Django (1.11.6)
-* NodeJS (6.11.4)
-* Redis (3.0.6)
+* Java (16.0.2)
+* PostgreSQL (42.2.10)
+* Selenium (4.1.1)
+* TestNG (7.4.0)
+* Allure (2.11.2)
 
 ### Environment
 environmental variables
@@ -85,7 +81,7 @@ api.secret=${API_SECRET}
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/ita-social-projects/SOMEREPO`
+- Clone this repo to your local machine using `https://github.com/ita-social-projects/GreenCityTA.git`
 
 ### Setup
 
@@ -115,6 +111,8 @@ $ bower install
 
 ## Usage
 ### How to work with swagger UI
+- Use the following link to open Swagger UI UBS: https://greencity-ubs.azurewebsites.net/swagger-ui.html#
+- Use the following link to open Swagger UI User: https://greencity-user.azurewebsites.net/swagger-ui.html#
 ### How to run tests
 ### How to Checkstyle
 
