@@ -18,6 +18,7 @@ enum EcoNewsVerifyEmailsEntityFields {
         return number;
     }
 }
+
 public class EcoNewsVerifyEmailsEntity {
     public static final String SELECT_USER_ID_BY_FIELD = "SELECT * FROM verify_emails WHERE %s = '%s';";
 
@@ -60,21 +61,13 @@ public class EcoNewsVerifyEmailsEntity {
         return id;
     }
 
-    public String getExpiryDate() {
-        return expiryDate;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
     public EcoNewsVerifyEmailsEntity setId(Long id) {
         this.id = id;
         return this;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
     }
 
     public EcoNewsVerifyEmailsEntity setExpiryDate(String expiryDate) {
@@ -82,9 +75,17 @@ public class EcoNewsVerifyEmailsEntity {
         return this;
     }
 
+    public String getToken() {
+        return token;
+    }
+
     public EcoNewsVerifyEmailsEntity setToken(String token) {
         this.token = token;
         return this;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public EcoNewsVerifyEmailsEntity setUserId(Long userId) {

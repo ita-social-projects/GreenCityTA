@@ -1,5 +1,4 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
-
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
@@ -13,8 +12,9 @@ import io.qameta.allure.Link;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {

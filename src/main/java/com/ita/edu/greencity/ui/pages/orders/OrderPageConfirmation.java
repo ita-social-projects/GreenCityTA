@@ -150,8 +150,8 @@ public class OrderPageConfirmation extends BasePage {
 
 
     @Step("Get number of order from Eco store by its index")
-    public String getEcoStoreNumber(int index){
-        return ecoStoreOrderNumbersList.get(index).getText().replaceAll("[^0-9]","");
+    public String getEcoStoreNumber(int index) {
+        return ecoStoreOrderNumbersList.get(index).getText().replaceAll("[^0-9]", "");
     }
 
     @Step("Return to the previous stage with personal data")

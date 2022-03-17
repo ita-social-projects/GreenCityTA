@@ -118,6 +118,7 @@ public class OrderDetailsPage extends BasePage {
         }
         return this;
     }
+
     @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
         sleep(5000);
@@ -203,91 +204,93 @@ public class OrderDetailsPage extends BasePage {
     public boolean getCertificateButtonStatus() {
         return activateOrCancelCertificateButton.isEnabled();
     }
-    public String getCertificateAlertMessage () {
-        sleep(20000);
-        return certificateAlert.getText().trim();
-    }
-    public String getCertificateInput() {
-        sleep(20000);
-        return certificateInput.getAttribute("value");
-    }
 
-    public OrderDetailsPage ClickOnNoUseBonusesCheckmark() {
-        UseBonusesCheckmarks.get(0).click();
-        return this;
-    }
+        public String getCertificateAlertMessage () {
+            return certificateAlert.getText().trim();
+        }
 
-    public OrderDetailsPage ClickOnYesUseBonusesCheckmark() {
-        UseBonusesCheckmarks.get(1).click();
-        return this;
-    }
-    public String getBonusesNumber() {
-        String value = bonusesText.getText().replaceAll("[^\\d.]", "");
-        return value;
-    }
+        public String getCertificateInput () {
+            sleep(20000);
+            return certificateInput.getAttribute("value");
+        }
 
-    public OrderDetailsPage ClickOnNoWaitingStoreOrderCheckmark() {
-        WaitingStoreOrderCheckmarks.get(0).click();
-        return this;
-    }
+        public OrderDetailsPage ClickOnNoUseBonusesCheckmark () {
+            UseBonusesCheckmarks.get(0).click();
+            return this;
+        }
 
-    public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark() {
-        WaitingStoreOrderCheckmarks.get(1).click();
-        return this;
-    }
+        public OrderDetailsPage ClickOnYesUseBonusesCheckmark () {
+            UseBonusesCheckmarks.get(1).click();
+            return this;
+        }
+        public String getBonusesNumber () {
+            String value = bonusesText.getText().replaceAll("[^\\d.]", "");
+            return value;
+        }
 
-    public OrderDetailsPage clickOnHowToGetBonusesButton() {
-        howToGetBonusesButton.click();
-        return this;
-    }
+        public OrderDetailsPage ClickOnNoWaitingStoreOrderCheckmark () {
+            WaitingStoreOrderCheckmarks.get(0).click();
+            return this;
+        }
 
-    @Step("Input eco store order {order} value {orderNumber}")
-    public OrderDetailsPage EnterOrderNumberInputs( int order, String orderNumber) {
-        orderNumberInputs.get(order).sendKeys(orderNumber);
-        return this;
-    }
+        public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark () {
+            WaitingStoreOrderCheckmarks.get(1).click();
+            return this;
+        }
 
-    public OrderDetailsPage clickOnAddAnotherNumberButton() {
-        addAnotherNumberButton.click();
-        return this;
-    }
+        public OrderDetailsPage clickOnHowToGetBonusesButton () {
+            howToGetBonusesButton.click();
+            return this;
+        }
 
-    public String getOrderNumberInputs(int order) {
-        return orderNumberInputs.get(order).getAttribute("value");
-    }
+        @Step("Input eco store order {order} value {orderNumber}")
+        public OrderDetailsPage EnterOrderNumberInputs ( int order, String orderNumber){
+            orderNumberInputs.get(order).sendKeys(orderNumber);
+            return this;
+        }
 
-    public String getEcoStoreOrderAlert() {
-        return ecoStoreNumberAlert.getText();
-    }
+        public OrderDetailsPage clickOnAddAnotherNumberButton () {
+            addAnotherNumberButton.click();
+            return this;
+        }
 
-    public OrderDetailsPage clickOnLearnAboutPackagesLink() {
-        learnAboutPackagesLink.click();
-        return this;
-    }
+        public String getOrderNumberInputs ( int order){
+            return orderNumberInputs.get(order).getAttribute("value");
+        }
 
-    @Step("Comment input set value {value}")
-    public OrderDetailsPage EnterCommentInput(String value) {
-        commentInput.sendKeys(value, Keys.ENTER);
-        return this;
-    }
+        public String getEcoStoreOrderAlert () {
+            return ecoStoreNumberAlert.getText();
+        }
 
-    public String getCommentInput() {
-        return commentInput.getAttribute("value");
-    }
+        public OrderDetailsPage clickOnLearnAboutPackagesLink () {
+            learnAboutPackagesLink.click();
+            return this;
+        }
 
-    public OrderDetailsPage clickOnCancelOrderButton() {
-        cancelOrderButton.click();
-        return this;
-    }
+        @Step("Comment input set value {value}")
+        public OrderDetailsPage EnterCommentInput (String value){
+            commentInput.sendKeys(value, Keys.ENTER);
+            return this;
+        }
 
-    public OrderPagePersonalData clickOnNextButton() {
-        nextButton.click();
-        sleep(10000);
-        return new OrderPagePersonalData(driver);
-    }
-    public boolean checkNextButtonStatus() {
-        return nextButton.isEnabled();
-    }
+        public String getCommentInput () {
+            return commentInput.getAttribute("value");
+        }
+
+        public OrderDetailsPage clickOnCancelOrderButton () {
+            cancelOrderButton.click();
+            return this;
+        }
+
+        public OrderPagePersonalData clickOnNextButton () {
+            nextButton.click();
+            sleep(10000);
+            return new OrderPagePersonalData(driver);
+        }
+        public boolean checkNextButtonStatus () {
+            return nextButton.isEnabled();
+        }
+
 
 
 }

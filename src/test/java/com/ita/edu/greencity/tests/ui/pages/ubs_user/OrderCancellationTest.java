@@ -1,11 +1,9 @@
 package com.ita.edu.greencity.tests.ui.pages.ubs_user;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.UbsUserTestRun;
-import com.ita.edu.greencity.ui.pages.ubs_user.UbsUser;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.CancelPopUp;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.OrdersContainer;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsOrdersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsOrdersService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;

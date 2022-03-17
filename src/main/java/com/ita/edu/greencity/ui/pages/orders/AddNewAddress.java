@@ -74,6 +74,10 @@ public class AddNewAddress extends BasePage {
     private WebElement commentToTheAddress;
 
 
+    public AddNewAddress(WebDriver driver) {
+        super(driver);
+    }
+
     @Step("get comment")
     public String getCommentToTheAddress() {
         return commentToTheAddress.getAttribute("value");
@@ -89,22 +93,20 @@ public class AddNewAddress extends BasePage {
         return streetFieldAIsEmpty;
     }
 
-
     @Step("get text from entrance error message")
-    public String getTextFromEntranceErrorMessage(){
+    public String getTextFromEntranceErrorMessage() {
         return entranceErrorMessage.getText();
     }
 
     @Step("get text from corpus error message")
-    public String getTextFromCorpusErrorMessage(){
+    public String getTextFromCorpusErrorMessage() {
         return corpusErrorMessage.getText();
     }
 
     @Step("get text from house error message")
-    public String getTextFromHouseErrorMessage(){
+    public String getTextFromHouseErrorMessage() {
         return houseErrorMessage.getText();
     }
-
 
     @Step("choose street by index of list")
     public AddNewAddress chooseStreet(int index) {
@@ -113,10 +115,6 @@ public class AddNewAddress extends BasePage {
         listOfStreet.get(index).click();
         this.sleep(2000);
         return this;
-    }
-
-    public AddNewAddress(WebDriver driver) {
-        super(driver);
     }
 
     @Step("get webElement 'addAddressButton'")
@@ -208,7 +206,7 @@ public class AddNewAddress extends BasePage {
         return newAddressTitle.getText();
     }
 
-    public AddNewAddress addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse){
+    public AddNewAddress addAddress(int indexCity, int indexDistrict, String street, int indexStreet, String numberOfHouse) {
         AddNewAddress addNewAddress = new AddNewAddress(driver).clickOnCityField()
                 .chooseCity(indexCity)
                 .chooseDistrict(indexDistrict)

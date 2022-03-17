@@ -31,7 +31,7 @@ public class TestHelpersUtils {
         return randomOrder;
     }
 
-    public static String generateRandomCertificateNumber(){
+    public static String generateRandomCertificateNumber() {
         String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
         return number;
     }

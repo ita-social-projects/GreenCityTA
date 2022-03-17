@@ -10,16 +10,19 @@ import io.qameta.allure.Link;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
+
 import java.util.Arrays;
 
-public class OrderDetailsPageCertificateTest extends TestRun {
-    EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
 
+
+public class OrderDetailsPageCertificateTest extends TestRun {
     private final String codeValueActive = TestHelpersUtils.generateRandomCertificateNumber();
 
     private final String statusValueActive = "ACTIVE";
     private final String expiration_dateValue = "2022-11-11 00:00:00";
     private final int pointsValue = 500;
+
+    EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
 
     private String nonExistCertificate() {
         String value = TestHelpersUtils.generateRandomCertificateNumber();
@@ -74,14 +77,17 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         }
 
 
+
+
     @DataProvider
-    private Object[][] certificateButtonProvider () {
+    private Object[][] certificateButtonProvider() {
         final String randomCertificate = TestHelpersUtils.generateRandomCertificateNumber();
         return new Object[][]{
                 {false, ""},
                 {true, randomCertificate},
         };
     }
+
         @Description("Checks coupon activate button")
         @Issue("123")
         @Test(dataProvider = "certificateButtonProvider")
@@ -96,10 +102,14 @@ public class OrderDetailsPageCertificateTest extends TestRun {
             Assert.assertEquals(isActive, expected);
         }
 
+
+
+
+
     @Description("Check does coupon cancel button work properly")
     @Issue("124")
     @Test
-    public void couponCancelButtonTest (){
+    public void couponCancelButtonTest() {
         OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
         String actual = orderDetailsPage
                 .EnterNumberOfSafeWasteInput("20")
@@ -134,4 +144,5 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         public void deleteCertificate () throws Exception {
             ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
         }
-    }
+
+}

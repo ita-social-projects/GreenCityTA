@@ -10,7 +10,6 @@ import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
 import io.qameta.allure.*;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

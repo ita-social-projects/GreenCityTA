@@ -10,14 +10,14 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 public class ExportToExcel extends BasePage {
+    @FindBy(how = How.XPATH, using = "//mat-radio-button")
+    private List<WebElement> allRadioButton;
+    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-dialog-actions d-flex')]/button")
+    private List<WebElement> allButton;
+
     public ExportToExcel(WebDriver driver) {
         super(driver);
     }
-    @FindBy(how = How.XPATH, using = "//mat-radio-button")
-    private List<WebElement> allRadioButton;
-
-    @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-dialog-actions d-flex')]/button")
-    private List<WebElement> allButton;
 
     @Step("select 'Save current view' option")
     public ExportToExcel selectSaveCurrentView() {
@@ -25,11 +25,13 @@ public class ExportToExcel extends BasePage {
         allRadioButton.get(0).click();
         return this;
     }
+
     @Step("select 'Save all table' option")
     public ExportToExcel selectSaveAllTable() {
         allRadioButton.get(1).click();
         return this;
     }
+
     @Step("click on 'Cancel' button")
     public void cancelButton() {
         allButton.get(0).click();

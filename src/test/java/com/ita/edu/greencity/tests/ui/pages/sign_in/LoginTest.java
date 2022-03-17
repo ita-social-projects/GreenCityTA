@@ -1,12 +1,10 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_in;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRunnerInitDriverWithBeforeClass;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import io.qameta.allure.Description;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
