@@ -101,6 +101,16 @@ public class UbsUserOrders extends BasePage {
                 .orElse(null);
     }
 
+    @Step("get order from container by payment status")
+    public OrdersContainer getOrderByPaymentStatus(String paymentStatus) {
+
+        return putElementsIntoContainer()
+                .stream()
+                .filter(element -> element.getPaymentStatus().equals(paymentStatus))
+                .findFirst()
+                .orElseThrow(NullPointerException::new);
+    }
+
     @Step("get order from container by order status and payment status")
     public OrdersContainer getOrderByOrderAndPaymentStatuses(String orderStatus, String paymentStatus) {
 
