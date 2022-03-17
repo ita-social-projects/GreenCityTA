@@ -61,4 +61,18 @@ public class EcoNewsCertificateDao {
         return rows;
     }
 
+    public List<String> getCertificatePoints(String codeValue) {
+        Statement statement = ManagerDao.getUbs().getStatement();
+        List<String> rows = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsCertificateEntity.GET_CERTIFICATE_POINTS, codeValue));
+            while (resultSet.next()) {
+                rows.add(resultSet.getString("points"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.closeStatement(statement);
+        return rows;
+    }
 }

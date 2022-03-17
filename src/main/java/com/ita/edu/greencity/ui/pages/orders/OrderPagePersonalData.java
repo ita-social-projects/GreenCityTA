@@ -18,7 +18,7 @@ public class OrderPagePersonalData extends BasePage {
     private WebElement personalDataTitle;
 
     @FindBy(how = How.XPATH, using = "//h1[@class ='h1 text-center form-title']")
-    private WebElement UBSTitle;
+    private WebElement ubsTitle;
 
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'firstName']")
@@ -40,7 +40,7 @@ public class OrderPagePersonalData extends BasePage {
     private WebElement anotherClientFirstNameField;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'anotherClientLastName']")
-    private WebElement anotherClientLastNameField;
+    private WebElement anotherClientSurNameField;
 
     @FindBy(how = How.XPATH, using = "//input[@formcontrolname= 'anotherClientPhoneNumber']")
     private WebElement anotherClientPhoneNumberField;
@@ -99,9 +99,80 @@ public class OrderPagePersonalData extends BasePage {
     @FindBy(how = How.XPATH, using = "//form/div[1]/div[4]/div/app-ubs-input-error/div")
     private WebElement anotherClientPhoneNumberErrorMessage;
 
+
+    @FindBy(how = How.XPATH, using = "//div[@class ='no-addresses ng-star-inserted']")
+    private WebElement absenceAnyAddresses;
+
+    @FindBy(how = How.XPATH, using = "//button[@class = 'secondary-global-button']")
+    private WebElement continueButtonOnWarningBanner;
+
+    @FindBy(how = How.XPATH, using = "//button[@class = 'primary-global-button']")
+    private WebElement exitButtonOnWarningBanner;
+
+    @FindBy(how = How.XPATH, using = "//div[@class = 'warning-title ng-star-inserted']")
+    private WebElement warningTitle;
+
+    @FindBy(how = How.XPATH, using = "//div[@class = 'warning-subtitle ng-star-inserted']")
+    private WebElement warningSubtitle;
+
     public OrderPagePersonalData(WebDriver driver) {
         super(driver);
     }
+
+    @Step("get webElement 'anotherClientFirstNameField'")
+    public WebElement getAnotherClientFirstNameField() {
+        return anotherClientFirstNameField;
+    }
+
+    @Step("get webElement 'anotherClientSurNameField'")
+    public WebElement getAnotherClientSurNameField() {
+        return anotherClientSurNameField;
+    }
+
+    @Step("get webElement 'anotherClientPhoneNumberField'")
+    public WebElement getAnotherClientPhoneNumberField() {
+        return anotherClientPhoneNumberField;
+    }
+
+    @Step("get webElement 'anotherClientEmailField'")
+    public WebElement getAnotherClientEmailField() {
+        return anotherClientEmailField;
+    }
+
+    @Step("get text from warning Subtitle")
+    public String getTextFromWarningSubtitle(){
+        return warningSubtitle.getText();
+    }
+
+    @Step("get text from warning title")
+    public String getTextFromWarningTitle(){
+        return warningTitle.getText();
+    }
+
+
+    @Step("click on continue button on warning banner")
+    public OrderPagePersonalData clickOnContinueButtonOnWarningBanner() {
+        continueButtonOnWarningBanner.click();
+        return this;
+    }
+
+    @Step("click on exit button on warning banner")
+    public UbsHomePage clickOnExitButtonOnWarningBanner() {
+        exitButtonOnWarningBanner.click();
+        return new UbsHomePage(driver);
+    }
+
+
+    @Step("get comment")
+    public String getComment() {
+        return addressCommentField.getAttribute("value");
+    }
+
+    @Step("get text from absence any addresses ")
+    public String getTextFromAbsenceAnyAddresses(){
+        return absenceAnyAddresses.getText();
+    }
+
 
     @Step("get text from error message (Another client phone number field)")
     public String getTextFromAnotherClientPhoneNumberErrorMessage() {
@@ -155,6 +226,14 @@ public class OrderPagePersonalData extends BasePage {
         chooseSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
+    @Step("check count of saved address")
+    public boolean verifyCountOfAddress(){
+        for (int address = 0; address < chooseSavedAddress.size(); address++){
+            if (address>4)
+                return false;
+        }
+        return true;
+    }
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
@@ -165,9 +244,9 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("click on cancel button")
-    public UbsHomePage clickOnCancelButton() {
+    public OrderPagePersonalData clickOnCancelButton() {
         cancelButton.click();
-        return new UbsHomePage(driver);
+        return this;
     }
 
     @Step("click on 'back' button")
@@ -217,8 +296,8 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("enter surname (Another client surname field)")
     public OrderPagePersonalData enterAnotherClientLastName(final String lastName) {
-        anotherClientLastNameField.clear();
-        anotherClientLastNameField.sendKeys(lastName, Keys.ENTER);
+        anotherClientSurNameField.clear();
+        anotherClientSurNameField.sendKeys(lastName, Keys.ENTER);
         return this;
     }
 
@@ -263,8 +342,9 @@ public class OrderPagePersonalData extends BasePage {
         return this;
     }
 
-    public OrderPagePersonalData clickForGetMessage() {
-        UBSTitle.click();
+    @Step("click on ubsTitle")
+    public OrderPagePersonalData clickForGetMessage(){
+        ubsTitle.click();
         return this;
     }
 

@@ -35,4 +35,8 @@ public class TestHelpersUtils {
         String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
         return number;
     }
+    public static float checkIfNegative(float num){
+        if(num > 0) return num;
+        else return 0;
+    }
 }

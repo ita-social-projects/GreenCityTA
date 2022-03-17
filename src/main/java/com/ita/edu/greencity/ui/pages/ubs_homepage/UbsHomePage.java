@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.ui.pages.ubs_homepage;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
+import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -111,9 +112,15 @@ public class UbsHomePage extends BasePage {
         return h1Text.getText();
     }
 
-    public SignInComponent pressOrderCourier() {
+    public SignInComponent pressOrderCourierUnlogin() {
         headerButtonOrderCourier.click();
         return new SignInComponent(driver);
+    }
+
+    public SelectRegion pressOrderCourierLogin() {
+        sleep(20000);
+        headerButtonOrderCourier.click();
+        return new SelectRegion(driver);
     }
 
     public String getTextHeaderMainText() {
