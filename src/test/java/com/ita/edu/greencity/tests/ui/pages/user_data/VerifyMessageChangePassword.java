@@ -25,7 +25,6 @@ public class VerifyMessageChangePassword extends TestRun {
     }
 
 
-
     @DataProvider(name = "dataProviderToVerifyMessageWhenPasswordsNotMatch")
     private Object[][] dataProviderToVerifyMessageWhenPasswordsNotMatch() {
         return new Object[][]{
@@ -33,7 +32,6 @@ public class VerifyMessageChangePassword extends TestRun {
                 {"mypas3swoRd1+", "mypasswoRd1"},
         };
     }
-
 
 
     @Test

@@ -2,11 +2,8 @@ package com.ita.edu.greencity.utils.jdbc.services;
 
 import com.ita.edu.greencity.utils.jdbc.dao.EcoNewsUsersDao;
 import com.ita.edu.greencity.utils.jdbc.dao.EcoNewsVerifyEmailsDao;
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUserActionsEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsVerifyEmailsEntity;
-
-import java.util.List;
 
 public class EcoNewsVerifyEmailsService {
 

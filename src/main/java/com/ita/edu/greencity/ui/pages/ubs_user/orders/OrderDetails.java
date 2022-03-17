@@ -10,11 +10,11 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrderDetails {
 
+    private final DefaultElementLocatorFactory parentContext;
     protected WebDriver driver;
     protected WebElement rootElement;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
     protected WebElement orderDetailsArrowUp;
-    private final DefaultElementLocatorFactory parentContext;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
     private WebElement orderDetailsLabel;
 

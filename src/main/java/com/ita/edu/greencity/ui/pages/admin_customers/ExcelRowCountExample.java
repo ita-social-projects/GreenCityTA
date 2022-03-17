@@ -3,9 +3,7 @@ package com.ita.edu.greencity.ui.pages.admin_customers;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -16,9 +14,9 @@ import java.util.Objects;
 public class ExcelRowCountExample {
 
     public FileInputStream fis = null;
-    XSSFWorkbook workbook = null ;
+    XSSFWorkbook workbook = null;
     XSSFSheet sheet = null;
-    String filename= null;
+    String filename = null;
 
 
     private ExcelRowCountExample(String filename) throws IOException {
@@ -29,19 +27,8 @@ public class ExcelRowCountExample {
             sheet = workbook.getSheetAt(0);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             fis.close();
-        }
-    }
-
-    public int getRowCount(String sheetName) {
-        int index = workbook.getSheetIndex(sheetName);
-        if (index == -1)
-            return 0;
-        else {
-            sheet = workbook.getSheet(sheetName);
-            return sheet.getLastRowNum() + 1;
         }
     }
 
@@ -55,13 +42,13 @@ public class ExcelRowCountExample {
         return Objects.requireNonNull(erce).getRowCount("Sheet1") - 1;
 
     }
+
     public static void deleteExcelFile() {
 
         try {
             Files.deleteIfExists(
                     Paths.get("D:\\Downloads\\Customers-Table.xlsx"));
-        }
-        catch (NoSuchFileException e) {
+        } catch (NoSuchFileException e) {
             System.out.println(
                     "No such file/directory exists");
         } catch (IOException e) {
@@ -69,6 +56,16 @@ public class ExcelRowCountExample {
         }
 
 
+    }
+
+    public int getRowCount(String sheetName) {
+        int index = workbook.getSheetIndex(sheetName);
+        if (index == -1)
+            return 0;
+        else {
+            sheet = workbook.getSheet(sheetName);
+            return sheet.getLastRowNum() + 1;
+        }
     }
 
 }
