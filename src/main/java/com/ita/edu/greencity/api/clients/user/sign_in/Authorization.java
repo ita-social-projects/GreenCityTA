@@ -6,7 +6,7 @@ import com.ita.edu.greencity.api.models.user.UserCredentials;
 import java.io.IOException;
 
 public class Authorization {
-    private SuccessSignIn successSignIn;
+    private final SuccessSignIn successSignIn;
 
     public Authorization(String email, String password) throws IOException {
         UserCredentials credentials = new UserCredentials(email, password);

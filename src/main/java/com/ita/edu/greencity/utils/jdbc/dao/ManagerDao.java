@@ -11,10 +11,10 @@ import java.util.Map;
 
 public final class ManagerDao {
     private static volatile ManagerDao instance = null;
+    private final Map<Long, Connection> connections;
     private String userName;
     private String password;
     private String url;
-    private final Map<Long, Connection> connections;
     private ValueProvider property;
 
     private ManagerDao() {

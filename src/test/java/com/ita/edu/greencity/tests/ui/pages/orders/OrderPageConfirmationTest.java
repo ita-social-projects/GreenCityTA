@@ -122,7 +122,6 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
 
-
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
@@ -167,13 +166,13 @@ public class OrderPageConfirmationTest extends TestRun {
                 .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
         String expectedResultBeforeLanguageChange = "UAH";
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange,"Currencies are different before language change");
+        softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange, "Currencies are different before language change");
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
                 .clickOnNextButton().clickOnNextButton()
                 .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
         String expectedResultAfterLanguageChange = "грн";
-        softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange,"Currencies are different after language change");
+        softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange, "Currencies are different after language change");
         softAssert.assertAll();
     }
 
@@ -191,21 +190,21 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnChooseAddressButton(1)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv","Cities don't match");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kyi","Districts don't match");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Sevastopol's'ka Square","Streets don't match");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "19","House numbers don't match");
-        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2","Corpus numbers don't match");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3","Entrances don't match");
-        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region","Regions don't match");
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kyi", "Districts don't match");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Sevastopol's'ka Square", "Streets don't match");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "19", "House numbers don't match");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2", "Corpus numbers don't match");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3", "Entrances don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Regions don't match");
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         new OrderDetailsPage(driver).clickOnNextButton().clickOnNextButton();
-        softAssert.assertEquals(orderPageConfirmation.getCity(), "м. Київ","City is translated incorrectly");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "район Солом'янський","District is translated incorrectly");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Севастопольська площа","Street is translated incorrectly");
-        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "корпус 2","Corpus is translated incorrectly");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3","Entrance is translated incorrectly");
-        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область","Region is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "м. Київ", "City is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "район Солом'янський", "District is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), "Севастопольська площа", "Street is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "корпус 2", "Corpus is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3", "Entrance is translated incorrectly");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область", "Region is translated incorrectly");
         softAssert.assertAll();
     }
 
@@ -222,13 +221,13 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnChooseAddressButton(1)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv","Cities don't match");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kiy","Districts don't match");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), STREET_TO_ADD,"Streets don't match");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "46","House numbers don't match");
-        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2","Corpus numbers don't match");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3","Entrances don't match");
-        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region","Regions don't match");
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kiy", "Districts don't match");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), STREET_TO_ADD, "Streets don't match");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "46", "House numbers don't match");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2", "Corpus numbers don't match");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3", "Entrances don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Regions don't match");
 
         orderPageConfirmation.clickOnBackButton().clickOnAddAddressButton()
                 .addFullAddress(NEW_INDEX_OF_CITY, NEW_INDEX_OF_DISTRICT, NEW_STREET_TO_ADD, NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
@@ -236,13 +235,13 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnNextButton()
                 .clickOnChooseAddressButton(2)
                 .clickOnNextButton();
-        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv","City is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pechers'kiy","District is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getStreet(), NEW_STREET_TO_ADD,"Street is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), NEW_HOUSE_NUMBER_TO_ADD,"House number is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 3","Corpus is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2","Entrance is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region","Region is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "City is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pechers'kiy", "District is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getStreet(), NEW_STREET_TO_ADD, "Street is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), NEW_HOUSE_NUMBER_TO_ADD, "House number is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 3", "Corpus is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2", "Entrance is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Region is not changed");
         softAssert.assertAll();
     }
 
@@ -251,20 +250,20 @@ public class OrderPageConfirmationTest extends TestRun {
     public void verifyRecipientCredentialsTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME,"User names don't match");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME,"User surnames don't match");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), provider.getEmail(),"User emails don't match");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), USER_PHONE_NUMBER,"User phone numbers don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME, "User names don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME, "User surnames don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), provider.getEmail(), "User emails don't match");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), USER_PHONE_NUMBER, "User phone numbers don't match");
 
         orderPageConfirmation.clickOnBackButton().enterFirstName(NEW_USER_FIRST_NAME)
                 .entersurname(NEW_USER_LAST_NAME)
                 .enterEmail(NEW_USER_EMAIL)
                 .enterPhoneNumber(NEW_USER_PHONE_NUMBER).clickOnNextButton();
 
-        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), NEW_USER_FIRST_NAME,"User name is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), NEW_USER_LAST_NAME,"User surname is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), NEW_USER_EMAIL,"User email is not changed");
-        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), NEW_USER_PHONE_NUMBER,"User phone number is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientName(), NEW_USER_FIRST_NAME, "User name is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), NEW_USER_LAST_NAME, "User surname is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientEmailAddress(), NEW_USER_EMAIL, "User email is not changed");
+        softAssert.assertEquals(orderPageConfirmation.getRecipientPhoneNumber(), NEW_USER_PHONE_NUMBER, "User phone number is not changed");
         softAssert.assertAll();
     }
 
@@ -284,8 +283,8 @@ public class OrderPageConfirmationTest extends TestRun {
                 .getEcoStoreNumber(0);
         String actualSecondOrderNumber = new OrderPageConfirmation(driver).getEcoStoreNumber(1);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(actualFirstOrderNumber, firstOrderNumber,"Numbers of first order don't match");
-        softAssert.assertEquals(actualSecondOrderNumber, secondOrderNumber,"Numbers of second order don't match");
+        softAssert.assertEquals(actualFirstOrderNumber, firstOrderNumber, "Numbers of first order don't match");
+        softAssert.assertEquals(actualSecondOrderNumber, secondOrderNumber, "Numbers of second order don't match");
         softAssert.assertAll();
     }
 

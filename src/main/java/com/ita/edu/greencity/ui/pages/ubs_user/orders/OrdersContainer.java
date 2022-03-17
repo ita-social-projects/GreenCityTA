@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.ui.pages.ubs_user.orders;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +10,11 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
+    private final WebDriver driver;
+    private final DefaultElementLocatorFactory parentContext;
+    private final WebElement rootElement;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
     @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-expansion-panel-content')]")
     private WebElement orderDetailsElement;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
@@ -27,18 +31,12 @@ public class OrdersContainer {
     private WebElement cancelButton;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
     private WebElement payButton;
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
     private WebElement orderDetailsLabel;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_of_order']/td[2]")
     private WebElement orderAmount;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
     private WebElement amountDue;
-
-    private final WebDriver driver;
-    private final DefaultElementLocatorFactory parentContext;
-    private final WebElement rootElement;
 
     public OrdersContainer(WebDriver driver, WebElement rootElement) {
         this.rootElement = rootElement;

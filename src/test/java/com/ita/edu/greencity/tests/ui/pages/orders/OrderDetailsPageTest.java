@@ -4,19 +4,16 @@ import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
-import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
-
-
-
 
 
     @BeforeMethod
@@ -87,8 +84,8 @@ public class OrderDetailsPageTest extends TestRun {
         String actual2 = orderDetailsPage.getOrderNumberInputs(1);
         SoftAssert softAssert = new SoftAssert();
 
-        softAssert.assertEquals(actual1,orderNumber1);
-        softAssert.assertEquals(actual2,orderNumber2);
+        softAssert.assertEquals(actual1, orderNumber1);
+        softAssert.assertEquals(actual2, orderNumber2);
         softAssert.assertAll();
 
         softAssert.assertEquals(actual1, orderNumber1);

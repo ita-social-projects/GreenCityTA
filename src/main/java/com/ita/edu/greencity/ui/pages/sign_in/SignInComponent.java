@@ -93,14 +93,13 @@ public class SignInComponent extends BasePage {
 
         return new SelectRegion(driver);
     }
-  
+
     @Step("click on 'sign in' button")
-    public  HeaderSignedInComponent clickSignInHeaderComponent() {
+    public HeaderSignedInComponent clickSignInHeaderComponent() {
         signIn.click();
 
         return new HeaderSignedInComponent(driver);
     }
-
 
 
     @Step("click on 'sign in with google' button")
