@@ -1,7 +1,3 @@
-<a href="https://softserve.academy/"><img src="https://s.057.ua/section/newsInternalIcon/upload/images/news/icon/000/050/792/vnutr_5ce4f980ef15f.jpg" title="SoftServe IT Academy" alt="SoftServe IT Academy"></a>
-
-***INSERT GRAPHIC HERE (include hyperlink in image)***
-
 # GreenCityTA
 
 > If you want to take care about our environment and get rid of your wastes, but you are extremely busy and can't get to the sorting station? UBS Courier will come to take your recyclable materials! We provide emergency garbage assistance
@@ -11,13 +7,7 @@
 - build status
 - coverage
 - issues (waffle.io maybe)
-- devDependencies
-- npm package
-- slack
-- downloads
-- gitter chat
 - license
-- etc.
 
 [![Build Status](https://img.shields.io/travis/ita-social-projects/GreenCity/master?style=flat-square)](https://travis-ci.org/github/ita-social-projects/GreenCity)
 [![Coverage Status](https://img.shields.io/gitlab/coverage/ita-social-projects/GreenCity/master?style=flat-square)](https://coveralls.io)
@@ -25,13 +15,9 @@
 [![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCity?style=flat-square)](https://github.com/ita-social-projects/GreenCity/pulls)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
-- For more on these wonderful  badges, refer to <a href="https://shields.io/" target="_blank">shields.io</a>.
-
 ---
 
-## Table of Contents (Optional)
-
-> If your `README` has a lot of info, section headers might be nice.
+## Table of Contents
 
 - [Installation](#installation)
   - [Required to install](#Required-to-install)
@@ -56,9 +42,6 @@
 
 ## Installation
 
-- All the `code` required to get started
-- Images of what it should look like
-
 ### Required to install
 * Java (16.0.2)
 * PostgreSQL (42.2.10)
@@ -69,43 +52,38 @@
 ### Environment
 environmental variables
 ```properties
-spring.datasource.url=${DATASOURCE_URL}
-spring.datasource.username=${DATASOURCE_USER}
-spring.datasource.password=${DATASOURCE_PASSWORD}
-spring.mail.username=${EMAIL_ADDRESS}
-spring.mail.password=${EMAIL_PASSWORD}
-cloud.name=${CLOUD_NAME}
-api.key=${API_KEY}
-api.secret=${API_SECRET}
+baseURL=${BASE_URL}
+UbsHomePageURL=${UBS_HOME_PAGE_URL}
+baseUbsApiURL=${BASE_UBS_API_URL}
+baseUserApiURL=${BASE_USER_API_URK}
+localUbsHomePageURL=${LOCAL_UBS_HOME_PAGE_URL}
+email=${EMAIL}
+userName=${USERNAME}
+password=${PASSWORD}
+cardNumber=${CARD_NUMBER}
+expiryDate=${EXPIRY_DATE}
+CVV2=${CVV2}
+invalidCardNumber=${INVALID_CARD_NUMBER}
+JDBCGreenCityUsername=${JDBC_GREENCITY_USERNAME}
+JDBCGreenCityPassword=${JDBC_GREENCITY_PASSWORD}
+JDBCGreenCityURL=${JDBC_GREENCITY_URL}
+JDBCGreenCityUbsUsername=${JDBC_GREENCITY_UBS_USERNAME}
+JDBCGreenCityUbsPassword=${JDBC_GREENCITY_UBS_PASSWORD}
+JDBCGreenCityUbsURL=${JDBC_GREENCITY_UBS_URL}
+adminEmail=${ADMIN_EMAIL}
+adminPassword=${ADMIN_PASSWORD}
+passwordForUserData=${PASSWORD_FOR_USERDATA}
+emailForUserData=${EMAIL_FOR_USERDATA}
+emailForChangePassw=${EMAIL_FOR_CHANGE_PASSW}
+passwordForChangepassw=${PASSWORD_FOR_CHANGEPASSW}
+passwordHash=${PASSWORD_HASH}
+userWithoutOrdersEmail=${USER_WITHOUT_ORDERS_EMAIL}
 ```
 
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/ita-social-projects/GreenCityTA.git`
 
-### Setup
-
-- If you want more syntax highlighting, format your code like this:
-
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install SOMEREPOproductions
-```
-
-> now install npm and bower packages
-
-```shell
-$ npm install
-$ bower install
-```
-
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
-
-### How to run local
-
-### How to run Docker
 
 ---
 
@@ -113,12 +91,20 @@ $ bower install
 ### How to work with swagger UI
 - Use the following link to open Swagger UI UBS: https://greencity-ubs.azurewebsites.net/swagger-ui.html#
 - Use the following link to open Swagger UI User: https://greencity-user.azurewebsites.net/swagger-ui.html#
+
 ### How to run tests
-### How to Checkstyle
 
----
+First run:
+- `mvn install -Dmaven.test.skip=true` - install
+- `mvn test-compile` - compile
 
-## Documentation
+Running UI tests
+- `mvn test` - run tests, by default using pom maven setup
+- `mvn test -Dtestng.xml=*.xml` to execute the automation UI tests via maven.
+
+For example
+
+- `mvn test -Dtestng.xml=testNG.xml` to running all UI tests
 
 ---
 
@@ -132,7 +118,7 @@ $ bower install
     - 🍴 Fork this repo!
 
 - **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/ita-social-projects/SOMEREPO.git`
+    - 👯 Clone this repo to your local machine using `https://github.com/ita-social-projects/GreenCityTA.git`
 
 #### Step 2
 
@@ -140,9 +126,7 @@ $ bower install
 
 #### Step 3
 
-- 🔃 Create a new pull request using <a href="https://github.com/ita-social-projects/SOMEREPO/compare/" target="_blank">github.com/ita-social-projects/SOMEREPO</a>.
-
-### Issue flow
+- 🔃 Create a new pull request using <a href="https://github.com/ita-social-projects/GreenCityTA/compare/" target="_blank">github.com/ita-social-projects/GreenCityTA</a>.
 
 ---
 
@@ -150,14 +134,17 @@ $ bower install
 
 > Or Contributors/People
 
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam) 
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)
-[![@lhalam](https://avatars3.githubusercontent.com/u/3837059?s=100&v=4)](https://github.com/lhalam)  
+[![@roman266](https://avatars3.githubusercontent.com/roman266?s=100&v=4)](https://github.com/roman266)
+[![@tetiana-ustymenko](https://avatars3.githubusercontent.com/tetiana-ustymenko?s=100&v=4)](https://github.com/tetiana-ustymenko)
+[![@annachopyk](https://avatars3.githubusercontent.com/annachopyk?s=100&v=4)](https://github.com/annachopyk)
+[![@lhalam](https://avatars3.githubusercontent.com/lhalam?s=100&v=4)](https://github.com/lhalam) 
+[![@zubachihor](https://avatars3.githubusercontent.com/zubachihor?s=100&v=4)](https://github.com/zubachihor)
+[![@OlenaKulchytska](https://avatars3.githubusercontent.com/OlenaKulchytska?s=100&v=4)](https://github.com/OlenaKulchytska)
+[![@Dinara227](https://avatars3.githubusercontent.com/Dinara227?s=100&v=4)](https://github.com/Dinara227)
+[![@SchematicM](https://avatars3.githubusercontent.com/SchematicM?s=100&v=4)](https://github.com/SchematicM)
+[![@Levv4ik](https://avatars3.githubusercontent.com/Levv4ik?s=100&v=4)](https://github.com/Levv4ik)
+[![@Setupb](https://avatars3.githubusercontent.com/Setupb?s=100&v=4)](https://github.com/Setupb)
+[![@vanyahrabarskiy](https://avatars3.githubusercontent.com/vanyahrabarskiy?s=100&v=4)](https://github.com/vanyahrabarskiy)
 
 - You can just grab their GitHub profile image URL
 - You should probably resize their picture using `?s=200` at the end of the image URL.
@@ -175,9 +162,11 @@ $ bower install
 
 Reach out to me at one of the following places!
 
-- Website at <a href="http://Website.com" target="_blank">`Website.com`</a>
-- Facebook at <a href="https://www.facebook.com/LiubomyrHalamaha/" target="_blank">`Liubomyr Halamaha`</a>
-- Insert more social links here.
+- Website at <a href="https://ita-social-projects.github.io/GreenCityClient/#/ubs">`GreenCityUBS`</a>
+- Facebook at <a href="https://www.facebook.com/NowasteUkraine/">`Україна БЕЗ сміття`</a>
+- Instagram at <a href="https://www.instagram.com/nowasteukraine/">`nowasteukraine`</a>
+- Telegram at <a href="https://t.me/nowasteukraine">`Україна Без Сміття`</a>
+- YouTube at <a href="https://www.youtube.com/channel/UChFVBZ_HcaQYiF-GcMHiCNA">`Україна БЕЗ сміття`</a>
 
 ---
 

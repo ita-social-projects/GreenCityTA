@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.api.clients.ubs.calient;
+package com.ita.edu.greencity.api.clients.ubs.client;
 
 import com.ita.edu.greencity.api.clients.ubs.BaseClientUBS;
 import io.restassured.response.Response;
