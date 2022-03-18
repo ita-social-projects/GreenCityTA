@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui.utils;
+package com.ita.edu.greencity.tests.utils;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.PatternLayout;

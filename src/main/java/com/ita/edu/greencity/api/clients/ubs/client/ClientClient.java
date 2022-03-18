@@ -1,6 +1,7 @@
 package com.ita.edu.greencity.api.clients.ubs.client;
 
 import com.ita.edu.greencity.api.clients.ubs.BaseClientUBS;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class ClientClient extends BaseClientUBS {
         this.baseApiURL += "/client";
 
     }
-
+    @Step("get request {this.baseApiURL}/users-pointsToUse ")
     public Response getUserBonuses() {
         return preparedRequest()
                 .header("Authorization", String.format("Bearer %s", authToken))

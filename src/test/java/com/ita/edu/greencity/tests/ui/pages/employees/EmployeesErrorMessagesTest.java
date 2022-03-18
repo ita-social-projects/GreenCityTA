@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-import com.ita.edu.greencity.tests.ui.utils.RetryAnalyzer;
+import com.ita.edu.greencity.tests.utils.RetryAnalyzer;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;

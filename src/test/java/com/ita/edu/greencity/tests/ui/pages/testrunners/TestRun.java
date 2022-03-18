@@ -1,8 +1,8 @@
 package com.ita.edu.greencity.tests.ui.pages.testrunners;
 
 
-import com.ita.edu.greencity.tests.ui.utils.RetryAnalyzer;
-import com.ita.edu.greencity.tests.ui.utils.TestNGListener;
+import com.ita.edu.greencity.tests.utils.RetryAnalyzer;
+import com.ita.edu.greencity.tests.utils.TestNGListener;
 import com.ita.edu.greencity.utils.ValueProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
