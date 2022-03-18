@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
+import com.ita.edu.greencity.tests.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import io.qameta.allure.Description;
