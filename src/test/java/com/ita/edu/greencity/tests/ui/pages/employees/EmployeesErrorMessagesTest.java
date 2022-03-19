@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-import com.ita.edu.greencity.tests.ui.utils.RetryAnalyzer;
+import com.ita.edu.greencity.tests.utils.RetryAnalyzer;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
@@ -19,7 +19,6 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.annotations.*;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -27,7 +26,18 @@ import java.time.Duration;
 public class EmployeesErrorMessagesTest {
 
     protected static ValueProvider provider;
+    final String xpathErroeMessageAddEmployeeName = "/html/body/div[2]/div[3]/div/snack-bar-container/simple-snack-bar/span";
+    final String expectedErrorName = "firstName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
+    final String expectedErrorPhone = "phoneNumber: Invalid phone number format.";
+    final String expectedErrorSurname = "lastName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
     protected WebDriver driver;
+    String CORRECT_MENU_NAME = "Leonard";
+    String NOT_CORRECT_MENU_NAME = "Leonard1";
+    String CORRECT_MENU_SURNAME = "Hofstadter";
+    String NOT_CORRECT_MENU_SURNAME = "Hofstadter2";
+    String CORRECT_MENU_PHONE = "676706767";
+    String CORRECT_MENU_EMAIL = "test@ukr.net";
+
     @BeforeClass(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
         for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
@@ -37,8 +47,6 @@ public class EmployeesErrorMessagesTest {
         provider = new ValueProvider();
         System.out.println("0000");
     }
-
-
 
     @BeforeMethod
     public void beforeMethod(ITestContext iTestContext) {
@@ -76,34 +84,22 @@ public class EmployeesErrorMessagesTest {
         System.out.println("5555");
     }
 
-
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }
     }
+
     //
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
 
-
-    String CORRECT_MENU_NAME = "Leonard";
-    String NOT_CORRECT_MENU_NAME = "Leonard1";
-    String CORRECT_MENU_SURNAME = "Hofstadter";
-    String NOT_CORRECT_MENU_SURNAME = "Hofstadter2";
-    String CORRECT_MENU_PHONE = "676706767";
-    String CORRECT_MENU_EMAIL = "test@ukr.net";
-    final String xpathErroeMessageAddEmployeeName = "/html/body/div[2]/div[3]/div/snack-bar-container/simple-snack-bar/span";
-    final String expectedErrorName = "firstName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
-    final String expectedErrorPhone = "phoneNumber: Invalid phone number format.";
-    final String expectedErrorSurname = "lastName: must match \"[ЁёІіЇїҐґЄєА-Яа-яA-Za-z-'\\s.]{1,30}\"";
-
-    public void exampleMethod(String name, String surname, String phone){
+    public void exampleMethod(String name, String surname, String phone) {
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
         basePage.sleep(5000);

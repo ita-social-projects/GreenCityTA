@@ -176,8 +176,8 @@ public class UbsHomePage extends BasePage {
     }
 
 
-        public void clickUBSCourierButtonBarMenu() {
-            UBSCourierButtonBarMenu.click();
+    public void clickUBSCourierButtonBarMenu() {
+        UBSCourierButtonBarMenu.click();
     }
 
 //    public UbsHomePage getSectionMainText() {

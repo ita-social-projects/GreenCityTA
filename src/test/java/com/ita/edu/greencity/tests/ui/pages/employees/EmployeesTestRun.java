@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-import com.ita.edu.greencity.tests.ui.utils.RetryAnalyzer;
+import com.ita.edu.greencity.tests.utils.RetryAnalyzer;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
@@ -25,6 +25,7 @@ import java.time.Duration;
 public class EmployeesTestRun {
     protected static ValueProvider provider;
     protected WebDriver driver;
+
     @BeforeClass(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
         for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
@@ -34,7 +35,6 @@ public class EmployeesTestRun {
         provider = new ValueProvider();
         System.out.println("0000");
     }
-
 
 
     @BeforeMethod
@@ -75,14 +75,15 @@ public class EmployeesTestRun {
 
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }
     }
+
     //
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }

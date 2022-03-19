@@ -1,6 +1,5 @@
 package com.ita.edu.greencity.utils.jdbc.dao;
 
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsVerifyEmailsEntity;
 
 import java.sql.ResultSet;

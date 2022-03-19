@@ -142,12 +142,12 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("get text from warning Subtitle")
-    public String getTextFromWarningSubtitle(){
+    public String getTextFromWarningSubtitle() {
         return warningSubtitle.getText();
     }
 
     @Step("get text from warning title")
-    public String getTextFromWarningTitle(){
+    public String getTextFromWarningTitle() {
         return warningTitle.getText();
     }
 
@@ -171,7 +171,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("get text from absence any addresses ")
-    public String getTextFromAbsenceAnyAddresses(){
+    public String getTextFromAbsenceAnyAddresses() {
         return absenceAnyAddresses.getText();
     }
 
@@ -230,10 +230,11 @@ public class OrderPagePersonalData extends BasePage {
         chooseSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
+
     @Step("check count of saved address")
-    public boolean verifyCountOfAddress(){
-        for (int address = 0; address < chooseSavedAddress.size(); address++){
-            if (address>4)
+    public boolean verifyCountOfAddress() {
+        for (int address = 0; address < chooseSavedAddress.size(); address++) {
+            if (address > 4)
                 return false;
         }
         return true;
@@ -347,7 +348,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("click on ubsTitle")
-    public OrderPagePersonalData clickForGetMessage(){
+    public OrderPagePersonalData clickForGetMessage() {
         ubsTitle.click();
         return this;
     }
@@ -358,7 +359,7 @@ public class OrderPagePersonalData extends BasePage {
     }
 
     @Step("Refresh page")
-    public OrderDetailsPage refreshPage(){
+    public OrderDetailsPage refreshPage() {
         sleep(3000);
         driver.navigate().refresh();
         return new OrderDetailsPage(driver);

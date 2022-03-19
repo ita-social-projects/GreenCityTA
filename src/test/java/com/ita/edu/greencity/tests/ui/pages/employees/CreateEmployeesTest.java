@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.employees;
 
-import com.ita.edu.greencity.tests.ui.utils.RetryAnalyzer;
+import com.ita.edu.greencity.tests.utils.RetryAnalyzer;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
@@ -18,20 +18,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
-import org.testng.annotations.Test;
 import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.time.Duration;
 
 public class CreateEmployeesTest {
+    protected static ValueProvider provider;
+    protected WebDriver driver;
     String CORRECT_MENU_NAME = "Leon";
     String CORRECT_MENU_SURNAME = "Hofs";
     String CORRECT_MENU_PHONE = "676706777";
     String CORRECT_MENU_EMAIL = "testtest1@ukr.net";
-
-    protected static ValueProvider provider;
-    protected WebDriver driver;
     private Employees employees;
 
     @BeforeClass(description = "Make chromedriver setup")
@@ -44,7 +42,6 @@ public class CreateEmployeesTest {
         System.out.println("0000");
 
     }
-
 
 
     @BeforeMethod
@@ -86,20 +83,19 @@ public class CreateEmployeesTest {
 
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         if (driver != null) {
             driver.quit();
         }
     }
+
     //
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
-
-
 
 
     @Test
@@ -109,7 +105,7 @@ public class CreateEmployeesTest {
     @Severity(SeverityLevel.TRIVIAL)
     public void checkCorrectAddEmployee() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-            System.out.println("00000");
+        System.out.println("00000");
         Employees employees = new Employees(driver);
         BasePage basePage = new BasePage(driver);
 //        basePage.sleep(6000);
@@ -137,8 +133,6 @@ public class CreateEmployeesTest {
         employees.locatorOfName("");
         System.out.println("correct add");
     }
-
-
 
 
 }

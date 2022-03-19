@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui.utils;
+package com.ita.edu.greencity.tests.utils;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
@@ -31,7 +31,7 @@ public class TestHelpersUtils {
         return randomOrder;
     }
 
-    public static String generateRandomCertificateNumber(){
+    public static String generateRandomCertificateNumber() {
         String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
         return number;
     }

@@ -197,9 +197,11 @@ public class OrderDetailsPage extends BasePage {
     public boolean getCertificateButtonStatus() {
         return activateOrCancelCertificateButton.isEnabled();
     }
-    public String getCertificateAlertMessage () {
+
+    public String getCertificateAlertMessage() {
         return certificateAlert.getText().trim();
     }
+
     public String getCertificateInput() {
         return certificateInput.getAttribute("value");
     }
