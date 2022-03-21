@@ -140,4 +140,12 @@ public class ValueProvider {
     public String getUserApiURL() {
         return properties.getProperty("baseUserApiURL");
     }
+
+    public String getData() {
+        return properties.getProperty("data");
+    }
+
+    public String getSignature() {
+        return properties.getProperty("signature");
+    }
 }
