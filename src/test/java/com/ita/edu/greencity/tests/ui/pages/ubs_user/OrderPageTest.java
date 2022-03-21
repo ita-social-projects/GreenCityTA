@@ -1,15 +1,33 @@
 package com.ita.edu.greencity.tests.ui.pages.ubs_user;
 
-import com.ita.edu.greencity.tests.ui.pages.testrunners.UbsUserTestRun;
+import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.ubs_user.orders.UbsUserOrders;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class OrderPageTest extends UbsUserTestRun {
+public class OrderPageTest extends TestRun {
+
+    @BeforeMethod
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
+        HeaderSignedOutComponent headerSignedOutComponent = new HeaderSignedOutComponent(driver);
+        headerSignedOutComponent.clickSignIn()
+                .inputEmail(provider.getUserWithOrdersEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignIn();
+
+        new HeaderSignedInComponent(driver).clickUserMenu()
+                .clickUbsUser();
+    }
 
     @Description("test presence of 'current orders' and 'order history' tabs on the page")
     @Issue("106")
@@ -37,16 +55,15 @@ public class OrderPageTest extends UbsUserTestRun {
     @Issue("106")
     @Test(dataProvider = "pageTabs")
     public void pageTabsLocalizationTest(String language, String firstTabText, String secondTabText) {
-        UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
         SoftAssert softAssert = new SoftAssert();
 
-        ubsUserOrders.getHeader()
+        new UbsUserOrders(driver).getHeader()
                 .clickLanguageSwitcher()
                 .languageChoose(language);
 
-        softAssert.assertEquals(ubsUserOrders.getCurrentOrdersTabButton().getText(), firstTabText,
+        softAssert.assertEquals(new UbsUserOrders(driver).getCurrentOrdersTabButton().getText(), firstTabText,
                 "Wrong current orders tab label text");
-        softAssert.assertEquals(ubsUserOrders.getOrderHistoryTabButton().getText(), secondTabText,
+        softAssert.assertEquals(new UbsUserOrders(driver).getOrderHistoryTabButton().getText(), secondTabText,
                 "Wrong order history tab label text");
         softAssert.assertAll();
     }
@@ -58,6 +75,11 @@ public class OrderPageTest extends UbsUserTestRun {
         UbsUserOrders ubsUserOrders = new UbsUserOrders(driver);
 
         Assert.assertTrue(Boolean.parseBoolean(ubsUserOrders.getCurrentOrdersTab().getAttribute("aria-selected")),
-                "Current orders tab is not selected by defaul");
+                "Current orders tab is not selected by default");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        super.afterMethod();
     }
 }

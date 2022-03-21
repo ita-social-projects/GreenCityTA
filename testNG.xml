@@ -56,7 +56,7 @@
     <test name="Admin_customers" thread-count="1">
         <classes>
             <class name="com.ita.edu.greencity.tests.ui.pages.admin.customers.AdminCustomersTest"></class>
-              </classes>
+        </classes>
     </test>
 
     <test name="Employees" thread-count="3">
