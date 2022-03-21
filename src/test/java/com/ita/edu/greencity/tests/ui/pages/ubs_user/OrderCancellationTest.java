@@ -19,6 +19,8 @@ import org.testng.asserts.SoftAssert;
 
 public class OrderCancellationTest extends TestRun {
 
+    EcoNewsOrdersService ecoNewsOrdersService = new EcoNewsOrdersService();
+
     @BeforeMethod
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
@@ -32,7 +34,11 @@ public class OrderCancellationTest extends TestRun {
                 .clickUbsUser();
     }
 
-    EcoNewsOrdersService ecoNewsOrdersService = new EcoNewsOrdersService();
+    @AfterMethod
+    public void afterMethod() {
+        super.afterMethod();
+    }
+
 
     @Description("test capability to cancel only orders with order status 'formed' and payment status 'unpaid'")
     @Issue("105")
@@ -142,9 +148,6 @@ public class OrderCancellationTest extends TestRun {
         Assert.assertFalse(orderCanBeCancelled, "Order with " + paymentStatus + " has 'Cancel' button");
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        super.afterMethod();
-    }
+
 
 }

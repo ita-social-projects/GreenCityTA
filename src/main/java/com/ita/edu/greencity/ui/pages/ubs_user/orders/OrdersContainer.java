@@ -11,6 +11,12 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 public class OrdersContainer {
 
+    private final WebDriver driver;
+    private final DefaultElementLocatorFactory parentContext;
+    private final WebElement rootElement;
+
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
+    protected WebElement orderDetailsArrowUp;
     @FindBy(how = How.XPATH, using = "//*[contains(@class, 'mat-expansion-panel-content')]")
     private WebElement orderDetailsElement;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'order_list-num')]")
@@ -27,18 +33,12 @@ public class OrdersContainer {
     private WebElement cancelButton;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'btn_pay')]")
     private WebElement payButton;
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-indicator')]")
-    protected WebElement orderDetailsArrowUp;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'header_details']")
     private WebElement orderDetailsLabel;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_of_order']/td[2]")
     private WebElement orderAmount;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'sum_to_pay']/td[2]")
     private WebElement amountDue;
-
-    private WebDriver driver;
-    private DefaultElementLocatorFactory parentContext;
-    private WebElement rootElement;
 
     public OrdersContainer(WebDriver driver, WebElement rootElement) {
         this.rootElement = rootElement;
@@ -137,5 +137,3 @@ public class OrdersContainer {
         }
     }
 }
-
-

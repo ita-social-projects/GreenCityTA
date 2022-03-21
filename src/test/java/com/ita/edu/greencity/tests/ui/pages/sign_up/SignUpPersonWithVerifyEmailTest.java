@@ -10,7 +10,6 @@ import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsUsersService;
 import io.qameta.allure.*;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -54,12 +53,12 @@ public class SignUpPersonWithVerifyEmailTest extends TestRun {
                 .clickOnContinueButton()
                 .inputPasswordIntoField(userPassword)
                 .clickOnContinueButton();
-        System.out.println();
         new PersonalGoogleAccountPage(driver).clickOnLetter()
                 .clickOnVerifyEmailButton();
         new HeaderComponentGreenCity(driver).clickOnSignInButton()
                 .inputEmail(userEmail)
                 .inputPassword(userPassword)
+                .loadData()
                 .clickSignIn();
         String actualUserName = new HeaderSignedInComponent(driver).getUserName();
         softAssert.assertEquals(actualUserName, userName);

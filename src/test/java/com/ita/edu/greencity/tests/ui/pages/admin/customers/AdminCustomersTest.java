@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class AdminCustomersTest extends TestRun {
 
     @BeforeMethod
-    public void loginToUBS(){
+    public void loginToUBS() {
         new HeaderSignedOutComponent(driver).clickSignIn()
                 .inputEmail(provider.getAdminEmail())
                 .inputPassword(provider.getAdminPassword())
@@ -32,7 +32,7 @@ public class AdminCustomersTest extends TestRun {
     @Test
     @Description("check if a customer`s date in table and when you click on name are the same")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyCustomersDataInTableAndDuringClicking(){
+    public void verifyCustomersDataInTableAndDuringClicking() {
         ArrayList<String> dataFromTable = new ArrayList<>();
         AdminCustomers adminCustomers = new AdminCustomers(driver);
         dataFromTable.add(adminCustomers.chooseCustomer("Bohdan Melnyk").getСlientName());
@@ -58,13 +58,13 @@ public class AdminCustomersTest extends TestRun {
 
         customerData.clickOnBackButton();
         SoftAssert asert = new SoftAssert();
-        asert.assertEquals(data.get(0) , dataFromTable.get(0),"СlientName dont match");
-        asert.assertEquals(data.get(1) , dataFromTable.get(1),"СlientPhone dont match");
-        asert.assertEquals(data.get(2) , dataFromTable.get(2),"СlientLastOrder dont match");
-        asert.assertEquals(data.get(3) , dataFromTable.get(3),"СlientEmail dont match");
-        asert.assertEquals(data.get(4) , dataFromTable.get(4),"СlientRegisterData dont match");
-        asert.assertEquals(data.get(5) , dataFromTable.get(5),"СlientOrdersNumber dont match");
-        asert.assertEquals(data.get(6) , dataFromTable.get(6),"СlientViolations dont match");
+        asert.assertEquals(data.get(0), dataFromTable.get(0), "СlientName dont match");
+        asert.assertEquals(data.get(1), dataFromTable.get(1), "СlientPhone dont match");
+        asert.assertEquals(data.get(2), dataFromTable.get(2), "СlientLastOrder dont match");
+        asert.assertEquals(data.get(3), dataFromTable.get(3), "СlientEmail dont match");
+        asert.assertEquals(data.get(4), dataFromTable.get(4), "СlientRegisterData dont match");
+        asert.assertEquals(data.get(5), dataFromTable.get(5), "СlientOrdersNumber dont match");
+        asert.assertEquals(data.get(6), dataFromTable.get(6), "СlientViolations dont match");
     }
 
     @Test
@@ -72,10 +72,11 @@ public class AdminCustomersTest extends TestRun {
     @Severity(SeverityLevel.NORMAL)
     public void verifyCorrectTotalCustomers() {
         String currentCustomers = new AdminCustomers(driver).getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
         String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomers();
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
+
     @Test
     @Description("check if admin can opportunity save current view of table to excel document ")
     @Severity(SeverityLevel.CRITICAL)
@@ -85,8 +86,8 @@ public class AdminCustomersTest extends TestRun {
                 .nextButton();
         int rowsInxlsxFile = ExcelRowCountExample.readFromExcelFile();
         String currentCustomers = new AdminCustomers(driver).getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        Assert.assertEquals(rowsInxlsxFile, Integer. parseInt(currentCustomers));
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        Assert.assertEquals(rowsInxlsxFile, Integer.parseInt(currentCustomers));
         ExcelRowCountExample.deleteExcelFile();
     }
 
@@ -96,13 +97,13 @@ public class AdminCustomersTest extends TestRun {
     public void filterByViolations() {
         String currentCustomers =
                 new AdminCustomers(driver)
-                .clickOnFilterButton()
+                        .clickOnFilterButton()
                         .inputViolationsFrom("1")
                         .inputViolationsTo("5")
-                .clickOnFilterButtonOnFilterPage()
-                .getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByViolations(1,5);
+                        .clickOnFilterButtonOnFilterPage()
+                        .getTotalCustomers();
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByViolations(1, 5);
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
 
@@ -117,8 +118,8 @@ public class AdminCustomersTest extends TestRun {
                         .inputBonusesTo("1200")
                         .clickOnFilterButtonOnFilterPage()
                         .getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByBonuses(10,1200);
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByBonuses(10, 1200);
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
 
@@ -133,8 +134,8 @@ public class AdminCustomersTest extends TestRun {
                         .inputDateLastOrderTo("2022-02-17")
                         .clickOnFilterButtonOnFilterPage()
                         .getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByLastOrder("2022-02-16","2022-02-17");
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByLastOrder("2022-02-16", "2022-02-17");
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
 
@@ -148,8 +149,8 @@ public class AdminCustomersTest extends TestRun {
                         .inputDateLastOrderFrom("2022-02-16")
                         .clickOnFilterButtonOnFilterPage()
                         .getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByRegisterDate("","");
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByRegisterDate("", "");
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
 
@@ -164,8 +165,8 @@ public class AdminCustomersTest extends TestRun {
                         .inputNumberOrdersTo("34")
                         .clickOnFilterButtonOnFilterPage()
                         .getTotalCustomers();
-        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":")+1).replaceAll(" ","");
-        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByOrderNumber(10,34);
+        currentCustomers = currentCustomers.substring(currentCustomers.indexOf(":") + 1).replaceAll(" ", "");
+        String exceptedCustomers = new AdminCustomersService().checkAllTotalCustomersByOrderNumber(10, 34);
         Assert.assertEquals(currentCustomers, exceptedCustomers);
     }
 

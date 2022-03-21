@@ -4,12 +4,9 @@ import com.ita.edu.greencity.api.clients.BaseClient;
 
 import java.io.IOException;
 
-public class ClientClient extends BaseClient {
-
-
-    public ClientClient() throws IOException {
+public class BaseClientUBS extends BaseClient {
+    public BaseClientUBS() throws IOException {
         super();
-        this.baseApiURL += "client/";
-
+        this.baseApiURL = provider.getUbsApiURL();
     }
 }

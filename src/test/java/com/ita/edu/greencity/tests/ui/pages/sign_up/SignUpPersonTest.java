@@ -26,7 +26,7 @@ public class SignUpPersonTest extends TestRun {
     }
 
     @Test
-    @Description("Check correct registration of user to system")
+    @Description("Check correct alert message about registration of user to system")
     @Issue("29")
     @Severity(SeverityLevel.CRITICAL)
     @Link("https://jira.softserve.academy/browse/GC-213")
@@ -45,8 +45,7 @@ public class SignUpPersonTest extends TestRun {
         String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
         softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "Incorrect alert!");
         EcoNewsUsersEntity user = ecoNewsUsersService.getByEmail(userEmail);
-        softAssert.assertEquals(user,null, "User is in Data Base!");
-
+        softAssert.assertEquals(user, null, "User is in Data Base!");
         softAssert.assertAll();
     }
 
