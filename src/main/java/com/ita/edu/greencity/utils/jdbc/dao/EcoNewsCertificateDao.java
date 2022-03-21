@@ -49,12 +49,11 @@ public class EcoNewsCertificateDao {
         Statement statement = ManagerDao.getUbs().getStatement();
         List<String> rows = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsCertificateEntity.CHECK_IF_CERTIFICATE_EXISTS,codeValue));
+            ResultSet resultSet = statement.executeQuery(String.format(EcoNewsCertificateEntity.CHECK_IF_CERTIFICATE_EXISTS, codeValue));
             while (resultSet.next()) {
                 rows.add(resultSet.getString("count"));
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         ManagerDao.closeStatement(statement);

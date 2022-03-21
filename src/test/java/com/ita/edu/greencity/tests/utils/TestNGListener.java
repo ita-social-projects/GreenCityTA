@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui.utils;
+package com.ita.edu.greencity.tests.utils;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;

@@ -5,7 +5,7 @@ import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsOrdersEntity;
 
 public class EcoNewsOrdersService {
 
-    private EcoNewsOrdersDao ecoNewsOrdersDao;
+    private final EcoNewsOrdersDao ecoNewsOrdersDao;
 
     public EcoNewsOrdersService() {
         this.ecoNewsOrdersDao = new EcoNewsOrdersDao();

@@ -125,7 +125,7 @@ public class PaymentByFondyTest extends TestRun {
                 .clickUserMenu()
                 .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getPaymentStatus();
-        Assert.assertEquals(actualOrderNumber,numberOfOrder, "Order with such number does not exist");
+        Assert.assertEquals(actualOrderNumber, numberOfOrder, "Order with such number does not exist");
         Assert.assertEquals(actualPaymentStatus, expectedPaymentStatus, "Payment statuses do not match");
     }
 

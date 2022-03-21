@@ -1,34 +1,30 @@
 package com.ita.edu.greencity.ui.pages.admin_customers;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.user_data.EditAddressContainer;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.JavascriptExecutor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminCustomers extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-row cdk-row ng-star-inserted')]")
+    private List<WebElement> allUsersData;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'table-buttons filter-btn')]")
+    private WebElement filterButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'table-buttons')][2]")
+    private WebElement exportToExcelButton;
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'countInfo')]")
+    private WebElement totalCustomers;
+
     public AdminCustomers(WebDriver driver) {
         super(driver);
         this.sleep(5000);
     }
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-row cdk-row ng-star-inserted')]")
-    private List<WebElement> allUsersData;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'table-buttons filter-btn')]")
-    private WebElement filterButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'table-buttons')][2]")
-    private WebElement exportToExcelButton;
-
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'countInfo')]")
-    private WebElement totalCustomers;
 
     private List<AdminCustomerContainer> getCustomers() {
         List<AdminCustomerContainer> adminCustomerList = new ArrayList<>();
@@ -49,16 +45,18 @@ public class AdminCustomers extends BasePage {
     }
 
     @Step("click on 'Filter' Button")
-    public CustomersFilter clickOnFilterButton(){
+    public CustomersFilter clickOnFilterButton() {
         filterButton.click();
         return new CustomersFilter(driver);
     }
+
     @Step("click on 'Export To Excel' Button")
-    public ExportToExcel clickOnExportToExcelButton(){
+    public ExportToExcel clickOnExportToExcelButton() {
         this.sleep(7000);
         exportToExcelButton.click();
         return new ExportToExcel(driver);
     }
+
     @Step("get value of current customers")
     public String getTotalCustomers() {
         this.sleep(7000);

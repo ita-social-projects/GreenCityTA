@@ -29,10 +29,12 @@ enum EcoNewsOrdersEntityFields {
     SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS(22);
 
 
-    private int number;
-    private EcoNewsOrdersEntityFields(int number) {
+    private final int number;
+
+    EcoNewsOrdersEntityFields(int number) {
         this.number = number;
     }
+
     public int getNumber() {
         return number;
     }
@@ -115,6 +117,41 @@ public class EcoNewsOrdersEntity {
         this.counterOrderPaymentId = null;
         this.courierLocationsId = null;
         this.sumTotalAmountWithoutDiscount = null;
+    }
+
+    public static EcoNewsOrdersEntity getEcoNewsOrdersEntity(List<String> row) {
+        return new EcoNewsOrdersEntity()
+                .setId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.ID.getNumber())))
+                .setComment(row.get(EcoNewsOrdersEntityFields.COMMENT.getNumber()))
+                .setDeliverFrom(row.get(EcoNewsOrdersEntityFields.DELIVER_FROM.getNumber()))
+                .setDeliverTo(row.get(EcoNewsOrdersEntityFields.DELIVER_TO.getNumber()))
+                .setNote(row.get(EcoNewsOrdersEntityFields.NOTE.getNumber()))
+                .setOrderDate(row.get(EcoNewsOrdersEntityFields.ORDER_DATE.getNumber()))
+                .setOrderStatus(row.get(EcoNewsOrdersEntityFields.ORDER_STATUS.getNumber()))
+                .setPointsToUse(Integer.parseInt(row.get(EcoNewsOrdersEntityFields.POINTS_TO_USE.getNumber())))
+                .setReceivingStation(row.get(EcoNewsOrdersEntityFields.RECEIVING_STATION.getNumber()))
+                .setUbsUserId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.UBS_USER_ID.getNumber())))
+                .setUsersId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.USERS_ID.getNumber())))
+                .setOrderPaymentStatus(row.get(EcoNewsOrdersEntityFields.ORDER_PAYMENT_STATUS.getNumber()))
+                .setCancellationReason(row.get(EcoNewsOrdersEntityFields.CANCELLATION_REASON.getNumber()))
+                .setCancellationComment(row.get(EcoNewsOrdersEntityFields.CANCELLATION_COMMENT.getNumber()))
+                .setReasonNotTakingBagDescription(row.get(EcoNewsOrdersEntityFields.REASON_NOT_TAKING_BAG_DESCRIPTION.getNumber()))
+                .setImageReasonNotTakingBags(row.get(EcoNewsOrdersEntityFields.IMAGE_REASON_NOT_TAKING_BAGS.getNumber()))
+                .setDateOfExport(row.get(EcoNewsOrdersEntityFields.DATE_OF_EXPORT.getNumber()))
+                .setEmployeeId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.EMPLOYEE_ID.getNumber())))
+                .setBlocked(Boolean.parseBoolean(row.get(EcoNewsOrdersEntityFields.BLOCKED.getNumber())))
+                .setAdminComment(row.get(EcoNewsOrdersEntityFields.ADMIN_COMMENT.getNumber()))
+                .setCounterOrderPaymentId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COUNTER_ORDER_PAYMENT_ID.getNumber())))
+                .setCourierLocationsId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COURIER_LOCATIONS_ID.getNumber())))
+                .setSumTotalAmountWithoutDiscount(Long.parseLong(row.get(EcoNewsOrdersEntityFields.SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS.getNumber())));
+    }
+
+    public static List<EcoNewsOrdersEntity> getListEcoNewsOrdersEntity(List<List<String>> rows) {
+        List<EcoNewsOrdersEntity> result = new ArrayList<>();
+        for (List<String> currentRow : rows) {
+            result.add(getEcoNewsOrdersEntity(currentRow));
+        }
+        return result;
     }
 
     public long getId() {
@@ -351,40 +388,5 @@ public class EcoNewsOrdersEntity {
                 ", courierLocationsId=" + courierLocationsId +
                 ", sumTotalAmountWithoutDiscount=" + sumTotalAmountWithoutDiscount +
                 '}';
-    }
-
-    public static EcoNewsOrdersEntity getEcoNewsOrdersEntity(List<String> row) {
-        return new EcoNewsOrdersEntity()
-                .setId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.ID.getNumber())))
-                .setComment(row.get(EcoNewsOrdersEntityFields.COMMENT.getNumber()))
-                .setDeliverFrom(row.get(EcoNewsOrdersEntityFields.DELIVER_FROM.getNumber()))
-                .setDeliverTo(row.get(EcoNewsOrdersEntityFields.DELIVER_TO.getNumber()))
-                .setNote(row.get(EcoNewsOrdersEntityFields.NOTE.getNumber()))
-                .setOrderDate(row.get(EcoNewsOrdersEntityFields.ORDER_DATE.getNumber()))
-                .setOrderStatus(row.get(EcoNewsOrdersEntityFields.ORDER_STATUS.getNumber()))
-                .setPointsToUse(Integer.parseInt(row.get(EcoNewsOrdersEntityFields.POINTS_TO_USE.getNumber())))
-                .setReceivingStation(row.get(EcoNewsOrdersEntityFields.RECEIVING_STATION.getNumber()))
-                .setUbsUserId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.UBS_USER_ID.getNumber())))
-                .setUsersId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.USERS_ID.getNumber())))
-                .setOrderPaymentStatus(row.get(EcoNewsOrdersEntityFields.ORDER_PAYMENT_STATUS.getNumber()))
-                .setCancellationReason(row.get(EcoNewsOrdersEntityFields.CANCELLATION_REASON.getNumber()))
-                .setCancellationComment(row.get(EcoNewsOrdersEntityFields.CANCELLATION_COMMENT.getNumber()))
-                .setReasonNotTakingBagDescription(row.get(EcoNewsOrdersEntityFields.REASON_NOT_TAKING_BAG_DESCRIPTION.getNumber()))
-                .setImageReasonNotTakingBags(row.get(EcoNewsOrdersEntityFields.IMAGE_REASON_NOT_TAKING_BAGS.getNumber()))
-                .setDateOfExport(row.get(EcoNewsOrdersEntityFields.DATE_OF_EXPORT.getNumber()))
-                .setEmployeeId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.EMPLOYEE_ID.getNumber())))
-                .setBlocked(Boolean.parseBoolean(row.get(EcoNewsOrdersEntityFields.BLOCKED.getNumber())))
-                .setAdminComment(row.get(EcoNewsOrdersEntityFields.ADMIN_COMMENT.getNumber()))
-                .setCounterOrderPaymentId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COUNTER_ORDER_PAYMENT_ID.getNumber())))
-                .setCourierLocationsId(Long.parseLong(row.get(EcoNewsOrdersEntityFields.COURIER_LOCATIONS_ID.getNumber())))
-                .setSumTotalAmountWithoutDiscount(Long.parseLong(row.get(EcoNewsOrdersEntityFields.SUM_TOTAL_AMOUNT_WITHOUT_DISCOUNTS.getNumber())));
-    }
-
-    public static List<EcoNewsOrdersEntity> getListEcoNewsOrdersEntity (List<List<String>> rows) {
-        List<EcoNewsOrdersEntity> result = new ArrayList<>();
-        for (List<String> currentRow : rows) {
-            result.add(getEcoNewsOrdersEntity(currentRow));
-        }
-        return result;
     }
 }
