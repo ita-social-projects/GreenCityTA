@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.ui.utils;
+package com.ita.edu.greencity.tests.utils;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tika.langdetect.OptimaizeLangDetector;

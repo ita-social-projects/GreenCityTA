@@ -53,12 +53,12 @@ public class SignUpPersonWithVerifyEmailTest extends TestRun {
                 .clickOnContinueButton()
                 .inputPasswordIntoField(userPassword)
                 .clickOnContinueButton();
-        System.out.println();
         new PersonalGoogleAccountPage(driver).clickOnLetter()
                 .clickOnVerifyEmailButton();
         new HeaderComponentGreenCity(driver).clickOnSignInButton()
                 .inputEmail(userEmail)
                 .inputPassword(userPassword)
+                .loadData()
                 .clickSignIn();
         String actualUserName = new HeaderSignedInComponent(driver).getUserName();
         softAssert.assertEquals(actualUserName, userName);

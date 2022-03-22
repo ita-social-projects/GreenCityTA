@@ -78,7 +78,7 @@ public class UbsUserOrders extends BasePage {
         return new UbsUserOrderHistory(driver);
     }
 
-    @Step("push all orders to orders container")
+    @Step("put all orders to orders container")
     private List<OrdersContainer> putElementsIntoContainer() {
 
         List<OrdersContainer> ordersContainerList = new ArrayList<>();
@@ -101,26 +101,6 @@ public class UbsUserOrders extends BasePage {
                 .orElse(null);
     }
 
-    @Step("get order from container by order date")
-    public OrdersContainer getOrderByOrderDate(String orderDate) {
-
-        return putElementsIntoContainer()
-                .stream()
-                .filter(element -> element.getOrderDate().equals(orderDate))
-                .findFirst()
-                .orElseThrow(NullPointerException::new);
-    }
-
-    @Step("get order from container by order status")
-    public OrdersContainer getOrderByOrderStatus(String orderStatus) {
-
-        return putElementsIntoContainer()
-                .stream()
-                .filter(element -> element.getOrderStatus().equals(orderStatus))
-                .findFirst()
-                .orElseThrow(NullPointerException::new);
-    }
-
     @Step("get order from container by payment status")
     public OrdersContainer getOrderByPaymentStatus(String paymentStatus) {
 
@@ -131,7 +111,7 @@ public class UbsUserOrders extends BasePage {
                 .orElseThrow(NullPointerException::new);
     }
 
-    @Step("get order from container by order date")
+    @Step("get order from container by order status and payment status")
     public OrdersContainer getOrderByOrderAndPaymentStatuses(String orderStatus, String paymentStatus) {
 
         return putElementsIntoContainer()

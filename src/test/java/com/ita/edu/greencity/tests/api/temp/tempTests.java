@@ -1,6 +1,6 @@
 package com.ita.edu.greencity.tests.api.temp;
 
-import com.ita.edu.greencity.api.clients.ubs.calient.ClientClient;
+import com.ita.edu.greencity.api.clients.ubs.client.ClientClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
 import com.ita.edu.greencity.api.models.ubs.client.SuccessUserPointToUse;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;

@@ -1,6 +1,11 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
+<<<<<<< HEAD
 import com.ita.edu.greencity.tests.ui.utils.TestHelpersUtils;
+=======
+import com.ita.edu.greencity.tests.utils.TestHelpersUtils;
+import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+>>>>>>> 26c1930cf9e1ad779316b6e72e69310f8231695f
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
