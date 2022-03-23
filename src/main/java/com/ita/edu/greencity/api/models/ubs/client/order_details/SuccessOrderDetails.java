@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.api.models.ubs.client;
+package com.ita.edu.greencity.api.models.ubs.client.order_details;
 
 import lombok.Data;
 
