@@ -2,6 +2,7 @@ package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsVerifyEmailsEntity;
@@ -40,14 +41,16 @@ public class SignUpPersonWithoutVerifyEmailTest extends TestRun {
                 .inputUserNameIntoField(userName)
                 .inputPasswordIntoField(userPassword)
                 .inputConfirmPasswordIntoField(userPassword)
-                .clickOnSignUpButton();
+                .clickOnSignUpButton()
+                .getTextOfSuccessRegistrationAlert();
         SoftAssert softAssert = new SoftAssert();
-        String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
-        softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
         new HeaderSignedOutComponent(driver).clickSignIn()
                 .inputEmail(userEmail)
                 .inputPassword(userPassword)
+                .loadData()
                 .clickSignIn();
+        String actual = new SignInComponent(driver).getErrorPasswordMessage();
+        softAssert.assertEquals(actual,"Bad email or password");
         EcoNewsVerifyEmailsEntity recordInVerifyEmails = ecoNewsVerifyEmailsService.selectByUserId(userEmail);
         boolean isInDB = recordInVerifyEmails != null;
         softAssert.assertTrue(isInDB, "User is not in Data Base!");

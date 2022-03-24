@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class PaymentPopUp extends BasePage {
 
+    @FindBy(how = How.XPATH, using = ".//*[contains(@id, 'mat-dialog')]")
+    private WebElement popUp;
     @FindBy(how = How.XPATH, using = ".//*[@class = 'text-order-sum']")
     private WebElement orderSumLabel;
     @FindBy(how = How.XPATH, using = ".//*[@formcontrolname = 'certificateCode']")
@@ -75,6 +77,14 @@ public class PaymentPopUp extends BasePage {
     public PaymentByFondyPage clickOnPayButton() {
         payButton.click();
         return new PaymentByFondyPage(driver);
+    }
+
+    public boolean isPaymentPopUpOpened() {
+        try {
+            return popUp.isDisplayed();
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
 }

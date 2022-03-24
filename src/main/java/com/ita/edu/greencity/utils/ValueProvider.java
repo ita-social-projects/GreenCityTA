@@ -71,6 +71,15 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
+
+    public String getUserWithoutOrdersEmail() {
+        return properties.getProperty("userWithoutOrdersEmail");
+    }
+
+    public String getUserWithOrdersEmail() {
+        return properties.getProperty("userWithOrdersEmail");
+    }
+
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
@@ -83,14 +92,6 @@ public class ValueProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getUserWithoutOrdersEmail() {
-        return properties.getProperty("userWithoutOrdersEmail");
-    }
-
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
     }
 
     public String getCardNumber() {
@@ -139,5 +140,9 @@ public class ValueProvider {
 
     public String getUserApiURL() {
         return properties.getProperty("baseUserApiURL");
+    }
+
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
     }
 }

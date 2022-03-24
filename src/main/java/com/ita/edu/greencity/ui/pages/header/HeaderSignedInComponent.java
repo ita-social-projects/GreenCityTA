@@ -48,13 +48,14 @@ public class HeaderSignedInComponent extends HeaderComponent {
 
     @Step("Click on UBS-user button")
     public UbsUserOrders clickUbsUser() {
-        this.sleep(3000);
+        sleep(3000);
         ubsUser.click();
         return new UbsUserOrders(driver);
     }
 
     @Step("Get user name")
     public String getUserName() {
+        sleep(500);
         return userMenu.getText();
     }
 
