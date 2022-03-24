@@ -40,22 +40,25 @@ public class OrderClient extends BaseClientUBS {
                 .get(String.format("%s/order-details", baseApiURL));
     }
 
-
+    @Step("get request {this.baseApiURL}/certificate ")
     public Response getCertificatesInfo(String certificate) {
         return preparedRequest()
                 .header("Authorization", String.format("Bearer %s", authToken))
-                .log().all()
+                .log()
+                .all()
                 .when()
                 .get(String.format("certificate/%s", certificate));
 
     }
 
+    @Step("get request {this.baseApiURL}/delete-order-address ")
     public Response deleteOrderAddressById(Long id) {
         return preparedRequest()
                 .header("Authorization", String.format("Bearer %s", authToken))
-                .log().all()
+                .log()
+                .all()
                 .when()
-                .get(String.format("%s/delete-order-address", id));
+                .post(String.format("%s/delete-order-address", id));
 
     }
 }

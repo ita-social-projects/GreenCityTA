@@ -3,7 +3,9 @@ package com.ita.edu.greencity.tests.api.temp;
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
 import com.ita.edu.greencity.api.models.ubs.client.UbsCertificate;
+import com.ita.edu.greencity.api.models.ubs.client.error_status_code.NotFound;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -16,6 +18,7 @@ import java.net.HttpURLConnection;
 public class CertificateTests extends ApiTestRunner {
     private Authorization authorization;
     private OrderClient orderClient;
+
     final String USED_CERTIFICATE = "4444-4444";
     final Long USED_CERTIFICATE_POINT = 500L;
     final String USED_CERTIFICATE_STATUS = "USED";
@@ -40,6 +43,7 @@ public class CertificateTests extends ApiTestRunner {
         orderClient = new OrderClient(authorization.getToken());
     }
 
+    @Description("[API] Receive info about used certificate")
     @Test
     public void usedCertificateTest() {
         Response response = orderClient.getCertificatesInfo(USED_CERTIFICATE);
@@ -56,6 +60,7 @@ public class CertificateTests extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("[API] Receive info about active certificate")
     @Test
     public void activeCertificateTest() {
         Response response = orderClient.getCertificatesInfo(ACTIVE_CERTIFICATE);
@@ -72,6 +77,7 @@ public class CertificateTests extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("[API] Receive info about expired certificate")
     @Test
     public void expiredCertificateTest() {
         Response response = orderClient.getCertificatesInfo(EXPIRED_CERTIFICATE);
@@ -88,26 +94,31 @@ public class CertificateTests extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("[API] Check unauthorized receiving info about certificate")
     @Test
     public void unauthorizedCertificateTest() throws IOException {
         orderClient = new OrderClient();
         Response response = orderClient.getCertificatesInfo(ACTIVE_CERTIFICATE);
         Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
-
     }
 
+    @Description("[API] Check the receipt of information about the incorrect certificate")
     @Test
-    public void notFoundCertificateTest() throws IOException {
+    public void notFoundCertificateTest() {
         Response response = orderClient.getCertificatesInfo(NOT_FOUND_CERTIFICATE);
-        Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_NOT_FOUND, "Status code not equals");
+        NotFound notFoundCertificate = response.as(NotFound.class);
+        SoftAssert softAssert = new SoftAssert();
 
+        softAssert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_NOT_FOUND, "Status code not equals");
+        softAssert.assertEquals(notFoundCertificate.getMessage(), "Certificate does not exist by this code: " + NOT_FOUND_CERTIFICATE);
+        softAssert.assertAll();
     }
 
+    @Description("[API] Check the receipt of information with bad request")
     @Test
-    public void badRequestCertificateTest() throws IOException {
+    public void badRequestCertificateTest() {
         Response response = orderClient.getCertificatesInfo(BAD_REQUEST_CERTIFICATE);
         Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_BAD_REQUEST, "Status code not equals");
 
     }
-
 }
