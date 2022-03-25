@@ -3,6 +3,7 @@ package com.ita.edu.greencity.tests.api.temp;
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
 import com.ita.edu.greencity.api.models.ubs.client.SuccessDeleteOrderAddress;
+import com.ita.edu.greencity.api.models.ubs.client.error_status_code.Forbidden;
 import com.ita.edu.greencity.api.models.ubs.client.error_status_code.NotFound;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
@@ -21,6 +22,7 @@ public class DeleteAddressTest extends ApiTestRunner {
 
     final Long NOT_FOUND_ID_ADDRESS = 12L;
     final Long ACTUAL_ID_ADDRESS = 207L;
+    final Long ANOTHER_CLIENT_ACTUAL_ID_ADDRESS = 62L;
 
 
     @BeforeClass
@@ -57,5 +59,18 @@ public class DeleteAddressTest extends ApiTestRunner {
         orderClient = new OrderClient();
         Response response = orderClient.deleteOrderAddressById(ACTUAL_ID_ADDRESS);
         Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
+    }
+
+    @Description("[API] Checks for inability to delete addresses another client")
+    @Test
+    public void deleteAnotherClientAddressById() {
+        Response response = orderClient.deleteOrderAddressById(ANOTHER_CLIENT_ACTUAL_ID_ADDRESS);
+        Forbidden forbiddenMessage = response.as(Forbidden.class);
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_FORBIDDEN, "Status code not equals");
+        softAssert.assertEquals(forbiddenMessage.getMessage(), "Cannot delete another user's address");
+        softAssert.assertAll();
     }
 }
