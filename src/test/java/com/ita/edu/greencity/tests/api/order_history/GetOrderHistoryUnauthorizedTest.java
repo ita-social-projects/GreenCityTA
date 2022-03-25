@@ -22,7 +22,7 @@ public class GetOrderHistoryUnauthorizedTest extends ApiTestRunner {
     @Description("[API] Check unauthorized getting of order history by orderId")
     public void getOrderHistoryUnauthorized() {
         Response response = orderClient.getOrderHistory(89, 2);
-        //UnauthorizedOrderHistory orderHistory = response.as(UnauthorizedOrderHistory.class);
+        String orderHistory = response.then().extract().body().asString();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 401, "Status code isn't right!");
         softAssert.assertAll();
