@@ -233,10 +233,12 @@ public class OrderDetailsPage extends BasePage {
             return this;
         }
 
+
         public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark () {
             WaitingStoreOrderCheckmarks.get(1).click();
             return this;
         }
+
 
         public OrderDetailsPage clickOnHowToGetBonusesButton () {
             howToGetBonusesButton.click();

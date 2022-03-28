@@ -17,9 +17,9 @@ public class ApiTestRunner {
 
     @BeforeSuite(alwaysRun = true)
     public void setUp(ITestContext iTestContext) throws IOException {
-        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
-            method.setRetryAnalyzerClass(RetryAnalyzer.class);
-        }
+//        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
+//            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+//        }
         WebDriverManager.chromedriver().setup();
         if (provider == null) {
             provider = new ValueProvider();
