@@ -21,12 +21,13 @@ public class SuccessfulOrderPage extends BasePage {
 
     @Step("Read the message about a successful order")
     public String getTextFromSuccessfulOrderMessage() {
+        sleep(5000);
         return successfulOrderMessage.getText();
     }
 
     @Step("Make other order")
     public SelectRegion clickOnMakeOtherOrderButton() {
-        sleep(7000);
+        sleep(5000);
         makeOtherOrderButton.click();
         return new SelectRegion(driver);
     }

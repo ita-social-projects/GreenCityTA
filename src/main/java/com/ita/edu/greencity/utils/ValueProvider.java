@@ -94,6 +94,10 @@ public class ValueProvider {
         }
     }
 
+    public String getPasswordAdmin() {
+        return properties.getProperty("passwordAdmin");
+    }
+
     public String getCardNumber() {
         return properties.getProperty("cardNumber");
     }
@@ -142,7 +146,11 @@ public class ValueProvider {
         return properties.getProperty("baseUserApiURL");
     }
 
-    public String getPasswordAdmin() {
-        return properties.getProperty("passwordAdmin");
+    public String getData() {
+        return properties.getProperty("data");
+    }
+
+    public String getSignature() {
+        return properties.getProperty("signature");
     }
 }

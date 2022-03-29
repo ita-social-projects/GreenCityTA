@@ -26,9 +26,9 @@ public class TestRun {
 
     @BeforeSuite(description = "Make chromedriver setup")
     public void beforeSuite(ITestContext iTestContext) throws IOException {
-        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
-            method.setRetryAnalyzerClass(RetryAnalyzer.class);
-        }
+//        for (ITestNGMethod method : iTestContext.getAllTestMethods()) {
+//            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+//        }
         WebDriverManager.chromedriver().setup();
         provider = new ValueProvider();
     }
