@@ -170,7 +170,7 @@ public class OrderPageConfirmation extends BasePage {
     private PaymentByFondyPage loadData() {
         while (true) {
             try {
-                driver.findElement(By.xpath("//span[contains(@class,'spinner')]"));
+                driver.findElement(By.xpath(provider.getSpinnerXpath()));
             } catch (Exception e) {
                 return new PaymentByFondyPage(driver);
             }

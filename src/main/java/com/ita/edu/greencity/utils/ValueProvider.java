@@ -146,11 +146,17 @@ public class ValueProvider {
         return properties.getProperty("baseUserApiURL");
     }
 
-    public String getData() {
-        return properties.getProperty("data");
+    public String getSpinnerXpath() {return properties.getProperty("spinnerXpath");}
+
+    public String getCorrectData() {return properties.getProperty("correctData");}
+    public String getCorrectSignature() {
+        return properties.getProperty("correctSignature");
     }
 
-    public String getSignature() {
-        return properties.getProperty("signature");
+    public String getIncorrectData() {
+        return properties.getProperty("incorrectData");
+    }
+    public String getIncorrectSignature() {
+        return properties.getProperty("incorrectSignature");
     }
 }

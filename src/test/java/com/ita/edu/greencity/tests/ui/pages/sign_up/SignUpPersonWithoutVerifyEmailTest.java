@@ -2,6 +2,7 @@ package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
+import com.ita.edu.greencity.ui.pages.sign_in.SignInComponent;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsUsersEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsVerifyEmailsEntity;

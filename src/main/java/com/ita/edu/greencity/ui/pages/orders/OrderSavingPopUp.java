@@ -39,7 +39,7 @@ public class OrderSavingPopUp extends BasePage {
     private SuccessfulSavingPage loadData() {
         while (true) {
             try {
-                driver.findElement(By.xpath("//span[contains(@class,'spinner')]"));
+                driver.findElement(By.xpath(provider.getSpinnerXpath()));
             } catch (Exception e) {
                 return new SuccessfulSavingPage(driver);
             }

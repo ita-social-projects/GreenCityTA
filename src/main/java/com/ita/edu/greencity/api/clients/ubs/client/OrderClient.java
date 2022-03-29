@@ -1,12 +1,7 @@
 package com.ita.edu.greencity.api.clients.ubs.client;
 
 import com.ita.edu.greencity.api.clients.ubs.BaseClientUBS;
-import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
-import com.ita.edu.greencity.api.clients.user.sign_in.SignInClient;
-import com.ita.edu.greencity.api.models.ubs.order.process_order.SuccessfulOrder;
 import com.ita.edu.greencity.api.models.ubs.order.process_order.UserOrder;
-import com.ita.edu.greencity.api.models.user.SuccessSignIn;
-import com.ita.edu.greencity.api.models.user.UserCredentials;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -34,7 +29,6 @@ public class OrderClient extends BaseClientUBS {
                 .log().all()
                 .when()
                 .post(String.format("%s/receiveLiqPayPayment", baseApiURL));
-
     }
 
 
@@ -46,7 +40,6 @@ public class OrderClient extends BaseClientUBS {
                 .log().all()
                 .when()
                 .post(String.format("%s/processOrder", baseApiURL));
-
     }
 }
 
