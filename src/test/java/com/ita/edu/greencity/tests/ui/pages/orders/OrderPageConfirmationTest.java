@@ -9,6 +9,7 @@ import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Link;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -62,26 +63,12 @@ public class OrderPageConfirmationTest extends TestRun {
                 .enterPhoneNumber(USER_PHONE_NUMBER);
     }
 
-//    public void beforeMethod(ITestContext iTestContext) {
-//        super.beforeMethod(iTestContext);
-//        UbsHomePage ubsHomePage = new UbsHomePage(driver);
-//        ubsHomePage.pressOrderCourier()
-//                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
-//                .chooseRegionByIndex(0).clickOnContinueButton()
-//                .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
-//                .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
-//                .EnterNumberOfTextileWaste20lInput(TEXTILE_WASTE_20l_AMOUNT)
-//                .clickOnNextButton()
-//                .enterFirstName(USER_FIRST_NAME)
-//                .entersurname(USER_LAST_NAME).enterEmail(provider.getEmail())
-//                .enterPhoneNumber(USER_PHONE_NUMBER);
-//    }
-
-
     @Description("Verify whether the result of addition all types of wastes is the same as one calculated in UBS")
+    @Issue("GC-2473")
     @Test
     public void theTotalSumOfOrderIdentityTest() {
-        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0).clickOnNextButton();
         String totalAmountOfTextileWaste120l = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(1, 5)
                 .split("\s")).toList().get(0);
@@ -110,9 +97,12 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify order saving functionality by checking whether the appropriate message appears")
+    @Issue("GC-2479")
     @Test
     public void verifyOrderSavingInPopupMessageTest() {
-        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+        String actualMessage = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0)
+                .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
@@ -121,25 +111,29 @@ public class OrderPageConfirmationTest extends TestRun {
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
-
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
+    @Issue("GC-2478")
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
-        String expectedNumberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
+        String expectedNumberOfOrder = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0).clickOnNextButton()
                 .clickOnCancelButton()
-                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(28, 33);
+                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
         String actualNumberOfOrder = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
-                .getOrderByNumber(expectedNumberOfOrder).getOrderId();
+                .getOrderByNumber(expectedNumberOfOrder)
+                .getOrderId();
         Assert.assertEquals(actualNumberOfOrder, expectedNumberOfOrder, "Order with expected number does not exist");
     }
 
     @Description("Verify order saving functionality by checking whether appropriate order status appears in user cabinet")
+    @Issue("GC-2480")
     @Test
     public void verifyOrderSavingThroughOrderStatusTest() {
-        String numberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
+        String numberOfOrder = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0)
+                .clickOnNextButton()
                 .clickOnCancelButton()
-                .clickOnSaveButton()
-                .getTextFromSuccessfulSavingAlert().substring(28, 33);
+                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
         String expectedOrderStatus = "Formed";
         String actualOrderStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
                 .getOrderByNumber(numberOfOrder)
@@ -148,10 +142,12 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify order deleting functionality")
-
+    @Issue("GC-2477")
     @Test
     public void verifyOrderDeletingTest() {
-        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+        String actualMessage = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0)
+                .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnDeleteButton()
                 .getHomePageTitle();
@@ -160,16 +156,24 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify whether after language changing the currency of order is changed")
+    @Issue("GC-2475")
     @Test
     public void localizationRelevanceOfCurrencyTest() {
-        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver).clickOnNextButton()
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver)
+                        .clickOnChooseAddressButton(0)
+                        .clickOnNextButton()
+                .getTotalSumWithCurrency(0)
+                .split("\s"))
+                .toList()
+                .get(1);
+        System.out.println(actualResultBeforeLanguageChange);
         String expectedResultBeforeLanguageChange = "UAH";
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange, "Currencies are different before language change");
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
-                .clickOnNextButton().clickOnNextButton()
+                .clickOnNextButton()
+                        .clickOnChooseAddressButton(0).clickOnNextButton()
                 .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
         String expectedResultAfterLanguageChange = "грн";
         softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange, "Currencies are different after language change");
@@ -177,6 +181,7 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify that info about the address of export is updated after language changing")
+    @Issue("GC-2454")
     @Link("https://github.com/ita-social-projects/GreenCity/issues/3868")
     @Test
     public void verifyExportAddressLocalizationTest() {
@@ -206,10 +211,13 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3", "Entrance is translated incorrectly");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область", "Region is translated incorrectly");
         softAssert.assertAll();
+        orderPageConfirmation.clickOnBackButton().clickOnDeleteCollectionAddressButton(1).refreshPage()
+                .clickOnNextButton().checkAddressIsDeleted();
     }
 
 
     @Description("Verify that info about the address of export is updated after its changing")
+    @Issue("GC-2474")
     @Link("https://github.com/ita-social-projects/GreenCity/issues/3868")
     @Test
     public void verifyExportAddressRelevanceAfterAddressChangeTest() {
@@ -243,12 +251,17 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2", "Entrance is not changed");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Region is not changed");
         softAssert.assertAll();
+        orderPageConfirmation.clickOnBackButton().clickOnDeleteCollectionAddressButton(1)
+                .clickOnDeleteCollectionAddressButton(2).refreshPage().clickOnNextButton().checkAddressIsDeleted();
+
     }
 
     @Description("Verify that info about recipient is updated after changing")
+    @Issue("GC-2476")
     @Test
     public void verifyRecipientCredentialsTest() {
-        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(0).clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME, "User names don't match");
         softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME, "User surnames don't match");
@@ -268,6 +281,7 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify that after adding the eco store order it appears at the confirmation page")
+    @Issue("GC-2463")
     @Test
     public void verifyEcoStoreFunctionality() {
         OrderDetailsPage orderDetailsPage = new OrderPagePersonalData(driver).clickOnBackButton();
@@ -287,6 +301,5 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(actualSecondOrderNumber, secondOrderNumber, "Numbers of second order don't match");
         softAssert.assertAll();
     }
-
 
 }
