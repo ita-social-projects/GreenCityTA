@@ -25,6 +25,7 @@ public class GetOrderDetailsUnauthorizedTest extends ApiTestRunner {
         String orderDetails = response.then().extract().body().asString();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 401, "Status code isn't right!");
+        softAssert.assertTrue(orderDetails.contains("Error Page"), "There isn't error message!");
         softAssert.assertAll();
     }
 }

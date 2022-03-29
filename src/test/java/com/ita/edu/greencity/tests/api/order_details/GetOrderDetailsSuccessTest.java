@@ -29,7 +29,7 @@ public class GetOrderDetailsSuccessTest extends ApiTestRunner {
         SuccessOrderDetails orderDetails = response.as(SuccessOrderDetails.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 200, "Status code isn't right!");
-        softAssert.assertEquals(orderDetails.getPoints(), 800, "Number of points in response isn't right!");
+        softAssert.assertEquals(orderDetails.getPoints(), 700, "Number of points in response isn't right!");
         softAssert.assertEquals(orderDetails.getBags().size(), 3, "Number of bags in response isn't right!");
         softAssert.assertAll();
     }
