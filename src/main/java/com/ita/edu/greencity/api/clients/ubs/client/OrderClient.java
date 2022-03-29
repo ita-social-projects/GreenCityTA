@@ -22,6 +22,28 @@ public class OrderClient extends BaseClientUBS {
     }
 
     public OrderClient() throws IOException {
+        super();
+        authToken = null;
+    }
+
+    @Step("get request {this.baseApiURL}/order_history ")
+    public Response getOrderHistory(int orderId, int languageId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/order_history/%d?lang=%d", baseApiURL, orderId, languageId));
+    }
+
+    @Step("get request {this.baseApiURL}/order-details ")
+    public Response getOrderDetails() {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/order-details", baseApiURL));
     }
 
     @Step("post request {this.baseApiURL}/receiveLiqPayPayment")
@@ -46,7 +68,6 @@ public class OrderClient extends BaseClientUBS {
                 .log().all()
                 .when()
                 .post(String.format("%s/processOrder", baseApiURL));
-
     }
 }
 
