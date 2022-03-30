@@ -1,8 +1,7 @@
-package com.ita.edu.greencity.api.models.ubs.client.Adress;
+package com.ita.edu.greencity.api.models.ubs.order.adress;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor

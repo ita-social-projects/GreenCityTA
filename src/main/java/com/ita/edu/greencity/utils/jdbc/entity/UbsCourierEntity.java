@@ -18,6 +18,7 @@ ID(1), COURIER_STATUS(2), CREATE_DATE(3), CREATED_BY_ID(4);
 }
 public class UbsCourierEntity {
     public static final String GET_RANDOM_COURIER_ID = "SELECT id FROM courier ORDER BY RANDOM() LIMIT 1";
+    public static final String CHECK_IF_COURIER_ID_EXISTS = "SELECT COUNT(1) FROM courier WHERE id = '%s'";
     private int id;
     private String courier_status;
     private String date;

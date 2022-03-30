@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.utils;
 
+import com.ita.edu.greencity.utils.jdbc.services.UbsCourierService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
 import org.apache.tika.language.detect.LanguageDetector;
@@ -38,5 +39,13 @@ public class TestHelpersUtils {
     public static float checkIfNegative(float num){
         if(num > 0) return num;
         else return 0;
+    }
+    public static int generateRandomWrongCourierIdNumber() {
+        UbsCourierService ubsCourierService = new UbsCourierService();
+        int number = Integer.parseInt(RandomStringUtils.randomNumeric(1));
+        while (ubsCourierService.checkIfCertificateExists(number)) {
+            number = Integer.parseInt(RandomStringUtils.randomNumeric(1));
+        }
+        return number;
     }
 }

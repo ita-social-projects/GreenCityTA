@@ -2,7 +2,7 @@ package com.ita.edu.greencity.tests.api.order_client;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
-import com.ita.edu.greencity.api.models.ubs.client.Adress.AddressListRoot;
+import com.ita.edu.greencity.api.models.ubs.order.adress.AddressListRoot;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.restassured.response.Response;
 import org.testng.Assert;

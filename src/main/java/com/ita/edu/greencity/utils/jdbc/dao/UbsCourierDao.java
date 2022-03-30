@@ -24,4 +24,18 @@ public class UbsCourierDao {
         ManagerDao.closeStatement(statement);
         return rows;
     }
+    public List<String> checkIfCourierIdExists(int courierID) {
+        Statement statement = ManagerDao.getUbs().getStatement();
+        List<String> rows = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(UbsCourierEntity.CHECK_IF_COURIER_ID_EXISTS, courierID));
+            while (resultSet.next()) {
+                rows.add(resultSet.getString("count"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.closeStatement(statement);
+        return rows;
+    }
 }
