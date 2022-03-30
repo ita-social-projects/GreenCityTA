@@ -9,6 +9,7 @@ import com.ita.edu.greencity.ui.pages.orders.OrderPageConfirmation;
 import com.ita.edu.greencity.ui.pages.orders.OrderPagePersonalData;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Link;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -20,6 +21,15 @@ import java.util.Arrays;
 
 public class OrderPageConfirmationTest extends TestRun {
 
+    final int FIRST_INDEX_OF_SAVED_ADDRESSES = 0;
+    final int SECOND_INDEX_OF_SAVED_ADDRESSES = 1;
+    final int THIRD_INDEX_OF_SAVED_ADDRESSES = 2;
+    final int FIRST_INDEX_OF_TOTAL_SUM = 0;
+    final int SECOND_INDEX_OF_TOTAL_SUM = 1;
+    final int FIRST_ECO_STORE_ORDER_NUMBER = 0;
+    final int SECOND_ECO_STORE_ORDER_NUMBER = 0;
+    final int SUM_PART = 0;
+    final int CURRENCY_PART = 1;
     final String TEXTILE_WASTE_120L_AMOUNT = "1";
     final String SAFE_WASTE_AMOUNT = "1";
     final String TEXTILE_WASTE_20l_AMOUNT = "2";
@@ -62,35 +72,21 @@ public class OrderPageConfirmationTest extends TestRun {
                 .enterPhoneNumber(USER_PHONE_NUMBER);
     }
 
-//    public void beforeMethod(ITestContext iTestContext) {
-//        super.beforeMethod(iTestContext);
-//        UbsHomePage ubsHomePage = new UbsHomePage(driver);
-//        ubsHomePage.pressOrderCourier()
-//                .inputEmail(provider.getEmail()).inputPassword(provider.getPassword()).clickSignIn()
-//                .chooseRegionByIndex(0).clickOnContinueButton()
-//                .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
-//                .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
-//                .EnterNumberOfTextileWaste20lInput(TEXTILE_WASTE_20l_AMOUNT)
-//                .clickOnNextButton()
-//                .enterFirstName(USER_FIRST_NAME)
-//                .entersurname(USER_LAST_NAME).enterEmail(provider.getEmail())
-//                .enterPhoneNumber(USER_PHONE_NUMBER);
-//    }
-
-
     @Description("Verify whether the result of addition all types of wastes is the same as one calculated in UBS")
+    @Issue("GC-2473")
     @Test
     public void theTotalSumOfOrderIdentityTest() {
-        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         String totalAmountOfTextileWaste120l = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(1, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
         String totalAmountOfSafeWaste = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(2, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
         String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(3, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
 
         double sumOfAllWasteTypesTotals = orderPageConfirmation
                 .transformToDoubleValue(totalAmountOfTextileWaste120l)
@@ -98,10 +94,10 @@ public class OrderPageConfirmationTest extends TestRun {
                 + orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste20l);
         double expectedOrderAmount = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(SUM_PART));
         double expectedAmountDue = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(SECOND_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(SUM_PART));
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(sumOfAllWasteTypesTotals, expectedOrderAmount, "Order amount is not the same");
@@ -110,9 +106,12 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify order saving functionality by checking whether the appropriate message appears")
+    @Issue("GC-2479")
     @Test
     public void verifyOrderSavingInPopupMessageTest() {
-        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+        String actualMessage = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
+                .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton()
                 .getTextFromSuccessfulSavingAlert();
@@ -121,25 +120,29 @@ public class OrderPageConfirmationTest extends TestRun {
         Assert.assertEquals(actualMessage, expectedMessage, "Messages do not match");
     }
 
-
     @Description("Verify order saving functionality by checking whether appropriate number appears in user cabinet")
+    @Issue("GC-2478")
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
-        String expectedNumberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
+        String expectedNumberOfOrder = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton()
                 .clickOnCancelButton()
-                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(28, 33);
+                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
         String actualNumberOfOrder = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
-                .getOrderByNumber(expectedNumberOfOrder).getOrderId();
+                .getOrderByNumber(expectedNumberOfOrder)
+                .getOrderId();
         Assert.assertEquals(actualNumberOfOrder, expectedNumberOfOrder, "Order with expected number does not exist");
     }
 
     @Description("Verify order saving functionality by checking whether appropriate order status appears in user cabinet")
+    @Issue("GC-2480")
     @Test
     public void verifyOrderSavingThroughOrderStatusTest() {
-        String numberOfOrder = new OrderPagePersonalData(driver).clickOnNextButton()
+        String numberOfOrder = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
+                .clickOnNextButton()
                 .clickOnCancelButton()
-                .clickOnSaveButton()
-                .getTextFromSuccessfulSavingAlert().substring(28, 33);
+                .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
         String expectedOrderStatus = "Formed";
         String actualOrderStatus = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
                 .getOrderByNumber(numberOfOrder)
@@ -148,10 +151,12 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify order deleting functionality")
-
+    @Issue("GC-2477")
     @Test
     public void verifyOrderDeletingTest() {
-        String actualMessage = new OrderPagePersonalData(driver).clickOnNextButton()
+        String actualMessage = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
+                .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnDeleteButton()
                 .getHomePageTitle();
@@ -160,23 +165,32 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify whether after language changing the currency of order is changed")
+    @Issue("GC-2475")
     @Test
     public void localizationRelevanceOfCurrencyTest() {
-        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver).clickOnNextButton()
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+        String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver)
+                        .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
+                        .clickOnNextButton()
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM)
+                        .split("\s"))
+                .toList()
+                .get(CURRENCY_PART);
+        System.out.println(actualResultBeforeLanguageChange);
         String expectedResultBeforeLanguageChange = "UAH";
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualResultBeforeLanguageChange, expectedResultBeforeLanguageChange, "Currencies are different before language change");
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
-                .clickOnNextButton().clickOnNextButton()
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+                .clickOnNextButton()
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton()
+                .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(1);
         String expectedResultAfterLanguageChange = "грн";
         softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange, "Currencies are different after language change");
         softAssert.assertAll();
     }
 
     @Description("Verify that info about the address of export is updated after language changing")
+    @Issue("GC-2454")
     @Link("https://github.com/ita-social-projects/GreenCity/issues/3868")
     @Test
     public void verifyExportAddressLocalizationTest() {
@@ -187,7 +201,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnNextButton()
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(1)
+                .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
@@ -206,10 +220,14 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3", "Entrance is translated incorrectly");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область", "Region is translated incorrectly");
         softAssert.assertAll();
+        orderPageConfirmation.clickOnBackButton()
+                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES).refreshPage()
+                .clickOnNextButton().checkAddressIsDeleted();
     }
 
 
     @Description("Verify that info about the address of export is updated after its changing")
+    @Issue("GC-2474")
     @Link("https://github.com/ita-social-projects/GreenCity/issues/3868")
     @Test
     public void verifyExportAddressRelevanceAfterAddressChangeTest() {
@@ -218,7 +236,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, "46", CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(1)
+                .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
@@ -233,7 +251,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .addFullAddress(NEW_INDEX_OF_CITY, NEW_INDEX_OF_DISTRICT, NEW_STREET_TO_ADD, NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(2)
+                .clickOnChooseAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "City is not changed");
         softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pechers'kiy", "District is not changed");
@@ -243,12 +261,19 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2", "Entrance is not changed");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Region is not changed");
         softAssert.assertAll();
+        orderPageConfirmation.clickOnBackButton()
+                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
+                .clickOnDeleteCollectionAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
+                .refreshPage().clickOnNextButton().checkAddressIsDeleted();
+
     }
 
     @Description("Verify that info about recipient is updated after changing")
+    @Issue("GC-2476")
     @Test
     public void verifyRecipientCredentialsTest() {
-        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver).clickOnNextButton();
+        OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME, "User names don't match");
         softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME, "User surnames don't match");
@@ -268,25 +293,28 @@ public class OrderPageConfirmationTest extends TestRun {
     }
 
     @Description("Verify that after adding the eco store order it appears at the confirmation page")
+    @Issue("GC-2463")
     @Test
     public void verifyEcoStoreFunctionality() {
+        final int FIRST_INDEX_OF_ECO_STORE_ORDER = 0;
+        final int SECOND_INDEX_OF_ECO_STORE_ORDER = 1;
         OrderDetailsPage orderDetailsPage = new OrderPagePersonalData(driver).clickOnBackButton();
 
         String firstOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String secondOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String actualFirstOrderNumber = orderDetailsPage
                 .clickOnYesWaitingStoreOrderCheckmark()
-                .EnterOrderNumberInputs(firstOrderNumber, 0)
+                .EnterOrderNumberInputs(firstOrderNumber, FIRST_INDEX_OF_ECO_STORE_ORDER)
                 .clickOnAddAnotherNumberButton()
-                .EnterOrderNumberInputs(secondOrderNumber, 1)
+                .EnterOrderNumberInputs(secondOrderNumber, SECOND_INDEX_OF_ECO_STORE_ORDER)
                 .clickOnNextButton().clickOnNextButton()
-                .getEcoStoreNumber(0);
-        String actualSecondOrderNumber = new OrderPageConfirmation(driver).getEcoStoreNumber(1);
+                .getEcoStoreNumber(FIRST_ECO_STORE_ORDER_NUMBER);
+        String actualSecondOrderNumber = new OrderPageConfirmation(driver)
+                .getEcoStoreNumber(SECOND_ECO_STORE_ORDER_NUMBER);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualFirstOrderNumber, firstOrderNumber, "Numbers of first order don't match");
         softAssert.assertEquals(actualSecondOrderNumber, secondOrderNumber, "Numbers of second order don't match");
         softAssert.assertAll();
     }
-
 
 }

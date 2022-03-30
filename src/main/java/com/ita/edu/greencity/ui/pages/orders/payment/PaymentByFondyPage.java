@@ -29,8 +29,6 @@ public class PaymentByFondyPage extends BasePage {
     private WebElement emailField;
     @FindBy(how = How.XPATH, using = "//button[contains(@class,'f-btn-success-bg-lighten')]")
     private WebElement payButton;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'f-error']")
-    private WebElement emailErrorMessage;
 
     public PaymentByFondyPage(WebDriver driver) {
         super(driver);
@@ -93,33 +91,10 @@ public class PaymentByFondyPage extends BasePage {
         return this;
     }
 
-    @Step("Click on page title to focus")
-    public PaymentByFondyPage unfocus() {
-        totalPay.click();
-        return this;
-    }
-
-    @Step("Click on email input field to focus on it")
-    public PaymentByFondyPage focusToEmailField() {
-        emailField.click();
-        return this;
-    }
-
     @Step("Pay for the order")
     public Operation3dSecurePopUp clickOnPayButton() {
         payButton.click();
         return new Operation3dSecurePopUp(driver);
-    }
-
-//    @Step("Pay for the order")
-//    public Operation3dSecurePopUp clickOnPayButton() {
-//        payButton.click();
-//        return new Operation3dSecurePopUp(driver);
-//    }
-
-    @Step("Get error message about invalid email address")
-    public String getEmailErrorMessage() {
-        return emailErrorMessage.getText();
     }
 
 }
