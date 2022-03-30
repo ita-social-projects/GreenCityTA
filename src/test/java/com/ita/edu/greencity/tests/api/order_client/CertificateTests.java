@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.api.temp;
+package com.ita.edu.greencity.tests.api.order_client;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
