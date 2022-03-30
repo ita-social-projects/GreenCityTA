@@ -13,10 +13,7 @@ import java.io.IOException;
 
 public class OrderClient extends BaseClientUBS {
     private final String authToken;
-    SuccessReqSaveOrderAddress successReqSaveOrderAddress = new SuccessReqSaveOrderAddress();
-    SuccessReqSaveOrderAddress addressList = new SuccessReqSaveOrderAddress();
-    ReqUpdateRecipientsData reqUpdateRecipientsData = new ReqUpdateRecipientsData();
-    ReqUpdateRecipientsData upDataList = new ReqUpdateRecipientsData();
+
 
     public OrderClient() throws IOException {
         super();

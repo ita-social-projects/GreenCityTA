@@ -47,9 +47,10 @@ public class DeleteAddressByIdTest extends ApiTestRunner {
     @Test
     public void successDeleteAddressById() {
         Response response = orderClient.deleteOrderAddressById(ACTUAL_ID_ADDRESS);
-        SuccessDeleteOrderAddress deleteOrderAddress = response.as(SuccessDeleteOrderAddress.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_OK, "Status code not equals");
+        orderClient.deleteOrderAddressById(ACTUAL_ID_ADDRESS);
+        softAssert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_BAD_REQUEST, "Status code not equals");
         softAssert.assertAll();
     }
 
@@ -58,6 +59,8 @@ public class DeleteAddressByIdTest extends ApiTestRunner {
     public void unauthorizedDeleteAddressByIdTest() throws IOException {
         orderClient = new OrderClient();
         Response response = orderClient.deleteOrderAddressById(ACTUAL_ID_ADDRESS);
+        Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
+        orderClient.deleteOrderAddressById(NOT_FOUND_ID_ADDRESS);
         Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
     }
 
