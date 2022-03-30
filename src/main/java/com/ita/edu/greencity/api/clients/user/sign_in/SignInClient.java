@@ -20,6 +20,6 @@ public class SignInClient extends BaseClientUser {
         return preparedRequest()
                 .body(credentials)
                 .when()
-                .post(baseApiURL + "ownSecurity/signIn");
+                .post(baseApiURL + "/ownSecurity/signIn");
     }
 }
