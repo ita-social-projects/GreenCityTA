@@ -12,12 +12,11 @@ import io.restassured.specification.RequestSpecification;
 import java.io.IOException;
 
 public class OrderClient extends BaseClientUBS {
+    private final String authToken;
     SuccessReqSaveOrderAddress successReqSaveOrderAddress = new SuccessReqSaveOrderAddress();
     SuccessReqSaveOrderAddress addressList = new SuccessReqSaveOrderAddress();
     ReqUpdateRecipientsData reqUpdateRecipientsData = new ReqUpdateRecipientsData();
     ReqUpdateRecipientsData upDataList = new ReqUpdateRecipientsData();
-
-    private final String authToken;
 
     public OrderClient() throws IOException {
         super();
@@ -62,14 +61,23 @@ public class OrderClient extends BaseClientUBS {
     }
 
 
-    @Step("post request {this.baseApiURL}/processOrder")
-    public Response processUserOrder(UserOrder userOrder) {
+    @Step("post request {this.baseApiURL}/ubs/findAll-order-address")
+    public Response getAllAddressesForOrder() {
         return preparedRequest()
                 .header("Authorization", String.format("Bearer %s", authToken))
-                .body(userOrder)
                 .log().all()
                 .when()
-                .post(String.format("%s/processOrder", baseApiURL));
+
+                .get(String.format("%s/findAll-order-address", baseApiURL));
+    }
+
+    @Step("post request {this.baseApiURL}/ubs/courier/{courierId}")
+    public Response getAllCourierLocations(String courierId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log().all()
+                .when()
+                .get(String.format("%s/courier/" + courierId, baseApiURL));
     }
 
     @Step("get request {this.baseApiURL}/order/{id}/cancellation ")
@@ -104,6 +112,17 @@ public class OrderClient extends BaseClientUBS {
 
     }
 
+    @Step("post request {this.baseApiURL}/processOrder")
+    public Response processUserOrder(UserOrder userOrder) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .body(userOrder)
+                .log().all()
+                .when()
+                .post(String.format("%s/processOrder", baseApiURL));
+    }
+
+
     @Step("get request {this.baseApiURL}/delete-order-address ")
     public Response deleteOrderAddressById(Long id) {
 
@@ -118,7 +137,6 @@ public class OrderClient extends BaseClientUBS {
 
     @Step("post request {this.baseApiURL}/save-order-address")
     public Response saveOrderAddressByRequest(SuccessReqSaveOrderAddress.AddressList addressList) {
-        SuccessReqSaveOrderAddress successReqSaveOrderAddress = new SuccessReqSaveOrderAddress();
         RequestSpecification requestSpecification = preparedRequest();
         if (authToken != null) {
             requestSpecification.header("Authorization", String.format("Bearer %s", authToken));

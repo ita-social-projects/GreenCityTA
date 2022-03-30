@@ -13,10 +13,10 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 
 public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
-    private Authorization authorization;
-    private OrderClient orderClient;
     private final int incorrectOrderId = -1;
     private final int languageIdEn = 2;
+    private Authorization authorization;
+    private OrderClient orderClient;
 
     @BeforeClass
     public void beforeClass() throws IOException {
