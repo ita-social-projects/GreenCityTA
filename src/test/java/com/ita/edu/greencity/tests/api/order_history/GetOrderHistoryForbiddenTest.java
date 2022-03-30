@@ -3,7 +3,6 @@ package com.ita.edu.greencity.tests.api.order_history;
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
 import com.ita.edu.greencity.api.models.ubs.client.error_status_code.Forbidden;
-import com.ita.edu.greencity.api.models.ubs.client.order_history.SuccessOrderHistory;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
@@ -16,8 +15,8 @@ import java.io.IOException;
 public class GetOrderHistoryForbiddenTest extends ApiTestRunner {
     private Authorization authorization;
     private OrderClient orderClient;
-    private int orderId = 89;
-    private int languageIdEn = 2;
+    private final int orderId = 89;
+    private final int languageIdEn = 2;
 
     @BeforeClass
     public void beforeClass() throws IOException {

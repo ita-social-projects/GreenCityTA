@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.ui.pages.sign_in;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.employees.Employees;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.orders.SelectRegion;
 import com.ita.edu.greencity.ui.pages.sign_up.SignUpComponent;
@@ -150,8 +149,8 @@ public class SignInComponent extends BasePage {
         return password.getAttribute("type");
     }
 
-    public SignInComponent loadData(){
-        while (true){
+    public SignInComponent loadData() {
+        while (true) {
             try {
                 driver.findElement(By.xpath("//*[@id=\"mat-dialog-0\"]/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button/span"));
             } catch (Exception e) {
