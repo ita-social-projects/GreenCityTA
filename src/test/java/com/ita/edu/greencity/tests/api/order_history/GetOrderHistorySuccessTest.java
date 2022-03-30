@@ -14,6 +14,9 @@ import java.io.IOException;
 
 public class GetOrderHistorySuccessTest extends ApiTestRunner {
 
+    private final int orderId = 140;
+    private final int languageIdEn = 2;
+    private final int firstNumOfOrderHistory = 0;
     private Authorization authorization;
     private OrderClient orderClient;
 
@@ -26,15 +29,12 @@ public class GetOrderHistorySuccessTest extends ApiTestRunner {
     @Test
     @Description("[API] Check success getting of order history by orderId")
     public void successGetOrderHistory() {
-        Response response = orderClient.getOrderHistory(89, 2);
+        Response response = orderClient.getOrderHistory(orderId, languageIdEn);
         SuccessOrderHistory[] orderHistory = response.as(SuccessOrderHistory[].class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 200, "Status code isn't right!");
         softAssert.assertEquals(orderHistory.length, 1, "Size of records in response isn't right!");
-        softAssert.assertEquals(orderHistory[0].getId(), 438, "Id isn't right! ");
-        softAssert.assertEquals(orderHistory[0].getEventDate(), "2022-02-14T17:05:03.279688", "EventDate isn't right! ");
-        softAssert.assertEquals(orderHistory[0].getEventName(), "Статус Замовлення - Сформовано", "EventName isn't right! ");
-        softAssert.assertEquals(orderHistory[0].getAuthorName(), "Клієнт", "AuthorName isn't right! ");
+        softAssert.assertEquals(orderHistory[firstNumOfOrderHistory].getId(), 633, "Id isn't right! ");
         softAssert.assertAll();
     }
 }

@@ -16,26 +16,22 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 public class CertificateTests extends ApiTestRunner {
-    private Authorization authorization;
-    private OrderClient orderClient;
-
     final String USED_CERTIFICATE = "4444-4444";
     final Long USED_CERTIFICATE_POINT = 500L;
     final String USED_CERTIFICATE_STATUS = "USED";
     final String USED_CERTIFICATE_DATE = "2022-02-07";
-
     final String ACTIVE_CERTIFICATE = "2667-5351";
     final Long ACTIVE_CERTIFICATE_POINT = 500L;
     final String ACTIVE_CERTIFICATE_STATUS = "ACTIVE";
     final String ACTIVE_CERTIFICATE_DATE = "2022-11-11";
-
     final String EXPIRED_CERTIFICATE = "3003-1988";
     final Long EXPIRED_CERTIFICATE_POINT = 1000L;
     final String EXPIRED_CERTIFICATE_STATUS = "EXPIRED";
     final String EXPIRED_CERTIFICATE_DATE = "2022-02-17";
-
     final String NOT_FOUND_CERTIFICATE = "1234-4321";
     final String BAD_REQUEST_CERTIFICATE = "TEST-1234";
+    private Authorization authorization;
+    private OrderClient orderClient;
 
     @BeforeClass
     public void beforeClass() throws IOException {

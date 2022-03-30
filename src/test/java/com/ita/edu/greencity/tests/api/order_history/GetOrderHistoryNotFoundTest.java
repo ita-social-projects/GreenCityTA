@@ -13,6 +13,8 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 
 public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
+    private final int incorrectOrderId = -1;
+    private final int languageIdEn = 2;
     private Authorization authorization;
     private OrderClient orderClient;
 
@@ -25,7 +27,7 @@ public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
     @Test
     @Description("[API] Check getting of order history by orderId that does not exist")
     public void successGetOrderHistory() {
-        Response response = orderClient.getOrderHistory(-1, 2);
+        Response response = orderClient.getOrderHistory(incorrectOrderId, languageIdEn);
         NotFound orderHistory = response.as(NotFound.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 404, "Status code isn't right!");

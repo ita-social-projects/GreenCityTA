@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.locators.UtilsLocators;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import io.qameta.allure.Step;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.How;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 public class OrderPageConfirmation extends BasePage {
 
@@ -25,8 +27,6 @@ public class OrderPageConfirmation extends BasePage {
     private List<WebElement> headersList;
     @FindBy(how = How.XPATH, using = "//app-ubs-submit-order//form/div[3]//p/span[2]/strong")
     private List<WebElement> totalSumList;
-    @FindBy(how = How.XPATH, using = "//app-ubs-submit-order//form/div[3]//p/span[1]")
-    private List<WebElement> amountsList;
 
     @FindBy(how = How.XPATH, using = "//select[contains(@class, 'payment-select shadow-none')]")
     private WebElement paymentChooser;
@@ -43,7 +43,6 @@ public class OrderPageConfirmation extends BasePage {
     private List<WebElement> infoAboutExportAddressList;
     @FindBy(how = How.XPATH, using = "//ul[@class = 'order-list d-flex']/li/strong")
     private List<WebElement> ecoStoreOrderNumbersList;
-
 
     public OrderPageConfirmation(WebDriver driver) {
         super(driver);
@@ -82,11 +81,6 @@ public class OrderPageConfirmation extends BasePage {
     public String getTotalSumWithCurrency(int index) {
         sleep(5000);
         return totalSumList.get(index).getText();
-    }
-
-    @Step("Get text from an appropriate amount accordingly to the index")
-    public String getNecessaryAmount(int index) {
-        return amountsList.get(index).getText();
     }
 
     private void clickOnPaymentChooser() {
@@ -162,6 +156,7 @@ public class OrderPageConfirmation extends BasePage {
 
     @Step("Cancel the order")
     public OrderSavingPopUp clickOnCancelButton() {
+        sleep(3000);
         cancelButton.click();
         return new OrderSavingPopUp(driver);
     }
@@ -170,8 +165,19 @@ public class OrderPageConfirmation extends BasePage {
     public PaymentByFondyPage clickOnOrderButton() {
         sleep(5000);
         orderButton.click();
-        sleep(10000);
+        loadData();
         return new PaymentByFondyPage(driver);
+    }
+
+    private PaymentByFondyPage loadData() {
+        while (true) {
+            try {
+                driver.findElement(UtilsLocators.SPINNER.getPath());
+            } catch (Exception e) {
+                return new PaymentByFondyPage(driver);
+            }
+            sleep(500);
+        }
     }
 
 }

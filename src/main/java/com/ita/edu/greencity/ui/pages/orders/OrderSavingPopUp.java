@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.locators.UtilsLocators;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Step;
@@ -31,7 +32,19 @@ public class OrderSavingPopUp extends BasePage {
     public SuccessfulSavingPage clickOnSaveButton() {
         sleep(3000);
         saveButton.click();
+        loadData();
         return new SuccessfulSavingPage(driver);
+    }
+
+    private SuccessfulSavingPage loadData() {
+        while (true) {
+            try {
+                driver.findElement(UtilsLocators.SPINNER.getPath());
+            } catch (Exception e) {
+                return new SuccessfulSavingPage(driver);
+            }
+            sleep(500);
+        }
     }
 
     @Step("Close saving pop-up")

@@ -211,6 +211,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on delete collection button")
     public OrderPagePersonalData clickOnDeleteCollectionAddressButton(int indexOfSavedAddress) {
+        sleep(15000);
         deleteSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
@@ -223,6 +224,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on choose saved address button")
     public OrderPagePersonalData clickOnChooseAddressButton(int indexOfSavedAddress) {
+        sleep(15000);
         chooseSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
@@ -238,9 +240,9 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
-        sleep(8000);
-        nextButton.click();
         sleep(5000);
+        nextButton.click();
+        //sleep(5000);
         return new OrderPageConfirmation(driver);
     }
 
@@ -359,5 +361,13 @@ public class OrderPagePersonalData extends BasePage {
         sleep(3000);
         driver.navigate().refresh();
         return new OrderDetailsPage(driver);
+    }
+
+    @Step("Verify that the address is deleted")
+    public OrderPagePersonalData checkAddressIsDeleted() {
+        while (deleteSavedAddress.size() != 1) {
+            clickOnDeleteCollectionAddressButton(1);
+        }
+        return this;
     }
 }

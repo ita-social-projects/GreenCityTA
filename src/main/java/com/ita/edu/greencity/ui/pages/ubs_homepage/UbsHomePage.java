@@ -113,11 +113,13 @@ public class UbsHomePage extends BasePage {
     }
 
     public SignInComponent pressOrderCourierUnlogin() {
+        sleep(3000);
         headerButtonOrderCourier.click();
         return new SignInComponent(driver);
     }
 
     public SelectRegion pressOrderCourierLogin() {
+        sleep(20000);
         headerButtonOrderCourier.click();
         return new SelectRegion(driver);
     }

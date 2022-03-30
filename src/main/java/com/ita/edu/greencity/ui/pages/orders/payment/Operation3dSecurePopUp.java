@@ -2,6 +2,7 @@ package com.ita.edu.greencity.ui.pages.orders.payment;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,8 +12,6 @@ public class Operation3dSecurePopUp extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//button[@type = 'submit']")
     private WebElement continueButton;
-    @FindBy(how = How.XPATH, using = "//div[@class = 'page-section page-section-header']/h1")
-    private WebElement pageTitle;
     @FindBy(how = How.XPATH, using = "//a[text() ='link']")
     private WebElement linkForRedirection;
 
@@ -31,13 +30,19 @@ public class Operation3dSecurePopUp extends BasePage {
     @Step("Press continue button")
     public SuccessfulOrderPage clickOnContinueButton() {
         continueButton.click();
-        sleep(5000);
+        loadData();
         return new SuccessfulOrderPage(driver);
     }
 
-    @Step("Read the page title")
-    public String getTextFromPageTitle() {
-        return pageTitle.getText();
+    public SuccessfulOrderPage loadData() {
+        while (true) {
+            try {
+                driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
+            } catch (Exception e) {
+                return new SuccessfulOrderPage(driver);
+            }
+            sleep(500);
+        }
     }
 
 }
