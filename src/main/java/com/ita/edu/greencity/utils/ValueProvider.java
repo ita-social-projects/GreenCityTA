@@ -146,8 +146,6 @@ public class ValueProvider {
         return properties.getProperty("baseUserApiURL");
     }
 
-    public String getSpinnerXpath() {return properties.getProperty("spinnerXpath");}
-
     public String getCorrectData() {return properties.getProperty("correctData");}
     public String getCorrectSignature() {
         return properties.getProperty("correctSignature");

@@ -125,7 +125,6 @@ public class ProcessOrderAuthorizedTest extends ApiTestRunner {
     @Test(dataProvider = "addressIdsProvider")
     public void addressIdValuesValidationTest(Long addressId) {
         UserOrder userOrder = createUserOrderObject(createPersonalDataObject());
-
         userOrder.setAddressId(addressId);
         Response responseForIncorrectValue = orderClient.processUserOrder(userOrder);
         SoftAssert softAssert = new SoftAssert();
