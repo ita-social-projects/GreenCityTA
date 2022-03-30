@@ -155,4 +155,44 @@ public class OrderClient extends BaseClientUBS {
                 .post(String.format("%s/update-recipients-data", baseApiURL));
 
     }
+
+    @Step("get request {this.baseApiURL}/getFondyStatus")
+    public Response getFondyStatus(int orderId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/getFondyStatus/%d", baseApiURL, orderId));
+    }
+
+    @Step("get request {this.baseApiURL}/getFondyStatus")
+    public Response getFondyStatus(String orderId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/getFondyStatus/%s", baseApiURL, orderId));
+    }
+
+    @Step("get request {this.baseApiURL}/getLiqPayStatus")
+    public Response getLiqPayStatus(int orderId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/getLiqPayStatus/%d", baseApiURL, orderId));
+    }
+
+    @Step("get request {this.baseApiURL}/getLiqPayStatus")
+    public Response getLiqPayStatus(String orderId) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .log()
+                .all()
+                .when()
+                .get(String.format("%s/getLiqPayStatus/%s", baseApiURL, orderId));
+    }
 }
