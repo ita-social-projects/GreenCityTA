@@ -15,6 +15,8 @@ import java.io.IOException;
 public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
     private Authorization authorization;
     private OrderClient orderClient;
+    private int incorrectOrderId = -1;
+    private int languageIdEn = 2;
 
     @BeforeClass
     public void beforeClass() throws IOException {
@@ -25,7 +27,7 @@ public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
     @Test
     @Description("[API] Check getting of order history by orderId that does not exist")
     public void successGetOrderHistory() {
-        Response response = orderClient.getOrderHistory(-1, 2);
+        Response response = orderClient.getOrderHistory(incorrectOrderId, languageIdEn);
         NotFound orderHistory = response.as(NotFound.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 404, "Status code isn't right!");

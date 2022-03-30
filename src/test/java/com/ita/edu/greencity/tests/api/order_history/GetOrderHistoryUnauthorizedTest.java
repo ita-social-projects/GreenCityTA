@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class GetOrderHistoryUnauthorizedTest extends ApiTestRunner {
     private OrderClient orderClient;
+    private int orderId = 89;
+    private int languageIdEn = 2;
 
     @BeforeClass
     public void beforeClass() throws IOException {
@@ -21,10 +23,11 @@ public class GetOrderHistoryUnauthorizedTest extends ApiTestRunner {
     @Test
     @Description("[API] Check unauthorized getting of order history by orderId")
     public void getOrderHistoryUnauthorized() {
-        Response response = orderClient.getOrderHistory(89, 2);
+        Response response = orderClient.getOrderHistory(orderId, languageIdEn);
         String orderHistory = response.then().extract().body().asString();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 401, "Status code isn't right!");
+        softAssert.assertTrue(orderHistory.contains("Error Page"), "There isn't error message!");
         softAssert.assertAll();
     }
 }

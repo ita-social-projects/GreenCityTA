@@ -2,6 +2,7 @@ package com.ita.edu.greencity.tests.api.order_history;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
+import com.ita.edu.greencity.api.models.ubs.client.error_status_code.Forbidden;
 import com.ita.edu.greencity.api.models.ubs.client.order_history.SuccessOrderHistory;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
@@ -12,14 +13,11 @@ import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
-public class GetOrderHistorySuccessTest extends ApiTestRunner {
-
+public class GetOrderHistoryForbiddenTest extends ApiTestRunner {
     private Authorization authorization;
     private OrderClient orderClient;
-    private int orderId = 140;
+    private int orderId = 89;
     private int languageIdEn = 2;
-    private int firstNumOfOrderHistory = 0;
-
 
     @BeforeClass
     public void beforeClass() throws IOException {
@@ -28,14 +26,13 @@ public class GetOrderHistorySuccessTest extends ApiTestRunner {
     }
 
     @Test
-    @Description("[API] Check success getting of order history by orderId")
+    @Description("[API] Check forbidden getting of order history by orderId")
     public void successGetOrderHistory() {
         Response response = orderClient.getOrderHistory(orderId, languageIdEn);
-        SuccessOrderHistory[] orderHistory = response.as(SuccessOrderHistory[].class);
+        Forbidden message = response.as(Forbidden.class);
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(response.getStatusCode(), 200, "Status code isn't right!");
-        softAssert.assertEquals(orderHistory.length, 1, "Size of records in response isn't right!");
-        softAssert.assertEquals(orderHistory[firstNumOfOrderHistory].getId(), 633, "Id isn't right! ");
+        softAssert.assertEquals(response.getStatusCode(), 403, "Status code isn't right!");
+        softAssert.assertEquals(message.getMessage(), "Cannot access another user's event history", "The message of response isn't right!");
         softAssert.assertAll();
     }
 }
