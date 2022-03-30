@@ -26,8 +26,9 @@ public class EcoNewsCertificateService {
         String value = ecoNewsCertificateDao.checkIfCertificateExists(codeValue).get(0);
         return !value.equals("0");
     }
+
     public String getCertificatePointsByCode(String codeValue) {
-       return ecoNewsCertificateDao.getCertificatePoints(codeValue).get(0);
+        return ecoNewsCertificateDao.getCertificatePoints(codeValue).get(0);
     }
 
 }

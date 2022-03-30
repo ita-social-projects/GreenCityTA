@@ -36,10 +36,12 @@ public class TestHelpersUtils {
         String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
         return number;
     }
-    public static float checkIfNegative(float num){
-        if(num > 0) return num;
+
+    public static float checkIfNegative(float num) {
+        if (num > 0) return num;
         else return 0;
     }
+
     public static int generateRandomWrongCourierIdNumber() {
         UbsCourierService ubsCourierService = new UbsCourierService();
         int number = Integer.parseInt(RandomStringUtils.randomNumeric(1));

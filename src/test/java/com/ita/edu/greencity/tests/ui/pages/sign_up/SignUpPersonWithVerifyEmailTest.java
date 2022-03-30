@@ -1,7 +1,6 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.ui.pages.google_account.GmailMainPage;
 import com.ita.edu.greencity.ui.pages.google_account.GoogleSignInInputEmailPopUp;
 import com.ita.edu.greencity.ui.pages.google_account.PersonalGoogleAccountPage;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;

@@ -2,8 +2,8 @@ package com.ita.edu.greencity.tests.api.order_cancellation;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
-import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.CancellationReason;
+import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
@@ -28,7 +28,7 @@ public class PostOrderCancellationReason extends ApiTestRunner {
     @Description("[API] Check success posting of order cancellation reason")
     public void successPostOrderCancellationReasonTest() {
         OrderCancellationReason orderCancellationReason = new OrderCancellationReason("thanks", CancellationReason.valueOf("MOVING_OUT"));
-        Response response = orderClient.postOrderCancellationReason(orderCancellationReason,417);
+        Response response = orderClient.postOrderCancellationReason(orderCancellationReason, 417);
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
@@ -36,7 +36,7 @@ public class PostOrderCancellationReason extends ApiTestRunner {
     @Description("[API] Check success posting of order cancellation reason")
     public void forbiddenPostOrderCancellationReasonTest() {
         OrderCancellationReason orderCancellationReason = new OrderCancellationReason("thanks", CancellationReason.valueOf("MOVING_OUT"));
-        Response response = orderClient.postOrderCancellationReason(orderCancellationReason,1);
+        Response response = orderClient.postOrderCancellationReason(orderCancellationReason, 1);
         Assert.assertEquals(response.getStatusCode(), 403);
     }
 }

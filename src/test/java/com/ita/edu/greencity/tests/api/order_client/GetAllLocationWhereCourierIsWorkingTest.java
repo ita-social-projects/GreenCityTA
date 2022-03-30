@@ -2,7 +2,6 @@ package com.ita.edu.greencity.tests.api.order_client;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
-import com.ita.edu.greencity.api.models.ubs.order.adress.AddressListRoot;
 import com.ita.edu.greencity.api.models.ubs.order.get_courier_locations.CourierLocationsRoot;
 import com.ita.edu.greencity.api.models.ubs.order.get_courier_locations.ErrorMessage;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
@@ -19,28 +18,32 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetAllLocationWhereCourierIsWorkingTest extends ApiTestRunner {
-    private OrderClient orderClient;
     UbsCourierService ubsCourierService = new UbsCourierService();
-    private int correctCourierId = Integer.parseInt(ubsCourierService.selectRandomUbsCourier());
-    private String wrongCourierId = String.valueOf(TestHelpersUtils.generateRandomWrongCourierIdNumber());
+    private OrderClient orderClient;
+    private final int correctCourierId = Integer.parseInt(ubsCourierService.selectRandomUbsCourier());
+    private final String wrongCourierId = String.valueOf(TestHelpersUtils.generateRandomWrongCourierIdNumber());
+
     @BeforeClass
     public void beforeClass() throws IOException {
         Authorization authorization = new Authorization(provider.getEmail(), provider.getPassword());
         orderClient = new OrderClient(authorization.getToken());
     }
+
     @Test
     public void successfulGetAllCourierAddressesTest() {
         Response response = orderClient.getAllCourierLocations("correctCourierId");
-        List<CourierLocationsRoot> courierLocations = response.as(new TypeRef<>() {});//Тип данних є масивом тому робимо ліст і тайпреф
+        List<CourierLocationsRoot> courierLocations = response.as(new TypeRef<>() {
+        });//Тип данних є масивом тому робимо ліст і тайпреф
         Assert.assertEquals(response.getStatusCode(), 200);
     }
+
     @Test
     public void wrong400CourierIdGetAllCourierAddressesTest() {
         Response response = orderClient.getAllCourierLocations(wrongCourierId);
         ErrorMessage message = response.as(ErrorMessage.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
-        softAssert.assertEquals(message.getMessage(),"Couldn't found courier by id: "+ wrongCourierId);
+        softAssert.assertEquals(message.getMessage(), "Couldn't found courier by id: " + wrongCourierId);
         softAssert.assertAll();
     }
 

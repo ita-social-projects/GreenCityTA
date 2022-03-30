@@ -9,8 +9,8 @@
 - issues (waffle.io maybe)
 - license
 
-[![Github Issues](https://img.shields.io/github/issues/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCity/issues)
-[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCity/pulls)
+[![Github Issues](https://img.shields.io/github/issues/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCityTA/issues)
+[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCityTA/pulls)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 ---

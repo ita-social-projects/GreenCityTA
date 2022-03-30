@@ -8,6 +8,7 @@ import lombok.Data;
 public class Coordinates {
     private double latitude;
     private double longitude;
+
     public Coordinates() {
     }
 

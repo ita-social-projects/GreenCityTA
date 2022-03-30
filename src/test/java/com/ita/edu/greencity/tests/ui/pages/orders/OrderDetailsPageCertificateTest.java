@@ -1,4 +1,5 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
+
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
 import com.ita.edu.greencity.tests.utils.TestHelpersUtils;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
@@ -12,7 +13,6 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.util.Arrays;
-
 
 
 public class OrderDetailsPageCertificateTest extends TestRun {
@@ -32,21 +32,22 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         return value;
     }
 
-        @BeforeTest
-        public void AddCertificate () throws Exception {
-            ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
-        }
-        @BeforeMethod
-        public void beforeMethod (ITestContext iTestContext) {
-            super.beforeMethod(iTestContext);
-            UbsHomePage ubsHomePage = new UbsHomePage(driver);
-            ubsHomePage.pressOrderCourierUnlogin()
-                    .inputEmail(provider.getEmail())
-                    .inputPassword(provider.getPassword())
-                    .clickSignInAfterCallUpCourier()
-                    .clickOnContinueButton();
+    @BeforeTest
+    public void AddCertificate() throws Exception {
+        ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
+    }
 
-        }
+    @BeforeMethod
+    public void beforeMethod(ITestContext iTestContext) {
+        super.beforeMethod(iTestContext);
+        UbsHomePage ubsHomePage = new UbsHomePage(driver);
+        ubsHomePage.pressOrderCourierUnlogin()
+                .inputEmail(provider.getEmail())
+                .inputPassword(provider.getPassword())
+                .clickSignInAfterCallUpCourier()
+                .clickOnContinueButton();
+
+    }
 
 
     @DataProvider
@@ -60,23 +61,22 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                 {"Certificate not accepted, please try again", codeValueNotExist},
         };
     }
-        @Description("Checks coupon alert")
-        @Issue("90")
-        @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page#test-cycles-tab")
-        @Test(dataProvider = "certificateDataProvider")
-        public void couponTest (String expected, String coupon){
-            OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-            String actual = orderDetailsPage
-                    .EnterNumberOfSafeWasteInput("20")
-                    .EnterNumberOfTextileWaste20lInput("1")
-                    .EnterNumberOfTextileWaste120lInput("1")
-                    .EnterCertificateInput(coupon)
-                    .clickOnActivateCertificateButton()
-                    .getCertificateAlertMessage();
-            Assert.assertTrue(actual.contains(expected));
-        }
 
-
+    @Description("Checks coupon alert")
+    @Issue("90")
+    @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page#test-cycles-tab")
+    @Test(dataProvider = "certificateDataProvider")
+    public void couponTest(String expected, String coupon) {
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        String actual = orderDetailsPage
+                .EnterNumberOfSafeWasteInput("20")
+                .EnterNumberOfTextileWaste20lInput("1")
+                .EnterNumberOfTextileWaste120lInput("1")
+                .EnterCertificateInput(coupon)
+                .clickOnActivateCertificateButton()
+                .getCertificateAlertMessage();
+        Assert.assertTrue(actual.contains(expected));
+    }
 
 
     @DataProvider
@@ -88,22 +88,19 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         };
     }
 
-        @Description("Checks coupon activate button")
-        @Issue("123")
-        @Test(dataProvider = "certificateButtonProvider")
-        public void couponActivateButtonTest (boolean expected, String coupon){
-            OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
-            boolean isActive = orderDetailsPage
-                    .EnterNumberOfSafeWasteInput("20")
-                    .EnterNumberOfTextileWaste20lInput("1")
-                    .EnterNumberOfTextileWaste120lInput("1")
-                    .EnterCertificateInput(coupon)
-                    .getCertificateButtonStatus();
-            Assert.assertEquals(isActive, expected);
-        }
-
-
-
+    @Description("Checks coupon activate button")
+    @Issue("123")
+    @Test(dataProvider = "certificateButtonProvider")
+    public void couponActivateButtonTest(boolean expected, String coupon) {
+        OrderDetailsPage orderDetailsPage = new OrderDetailsPage(driver);
+        boolean isActive = orderDetailsPage
+                .EnterNumberOfSafeWasteInput("20")
+                .EnterNumberOfTextileWaste20lInput("1")
+                .EnterNumberOfTextileWaste120lInput("1")
+                .EnterCertificateInput(coupon)
+                .getCertificateButtonStatus();
+        Assert.assertEquals(isActive, expected);
+    }
 
 
     @Description("Check does coupon cancel button work properly")
@@ -140,9 +137,10 @@ public class OrderDetailsPageCertificateTest extends TestRun {
         float expectedAmountDue = TestHelpersUtils.checkIfNegative(actualAmount - certificatePoints);
         Assert.assertEquals(actualAmountDue, expectedAmountDue);
     }
-        @AfterTest
-        public void deleteCertificate () throws Exception {
-            ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
-        }
+
+    @AfterTest
+    public void deleteCertificate() throws Exception {
+        ecoNewsCertificateService.deleteCertificateByCode(codeValueActive);
+    }
 
 }
