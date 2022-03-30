@@ -1,7 +1,7 @@
 package com.ita.edu.greencity.tests.ui.pages.sign_up;
 
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.ui.pages.google_account.GmailMainPage;
+import com.ita.edu.greencity.ui.pages.google_account.GoogleSignInInputEmailPopUp;
 import com.ita.edu.greencity.ui.pages.google_account.PersonalGoogleAccountPage;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedInComponent;
 import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
@@ -48,8 +48,8 @@ public class SignUpPersonWithVerifyEmailTest extends TestRun {
         String expectedAlert = signUpComponent.getTextOfSuccessRegistrationAlert();
         softAssert.assertEquals(expectedAlert, "Congratulations! You have successfully registered on the site. Please confirm your email address in the email box.", "No alert!");
         driver.get("https://www.gmail.com/");
-        new GmailMainPage(driver).clickOnSignInButton()
-                .inputEmailIntoField(userEmail)
+
+        new GoogleSignInInputEmailPopUp(driver).inputEmailIntoField(userEmail)
                 .clickOnContinueButton()
                 .inputPasswordIntoField(userPassword)
                 .clickOnContinueButton();

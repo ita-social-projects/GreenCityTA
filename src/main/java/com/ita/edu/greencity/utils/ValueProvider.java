@@ -71,15 +71,6 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
-
-    public String getUserWithoutOrdersEmail() {
-        return properties.getProperty("userWithoutOrdersEmail");
-    }
-
-    public String getUserWithOrdersEmail() {
-        return properties.getProperty("userWithOrdersEmail");
-    }
-
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
@@ -92,6 +83,14 @@ public class ValueProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUserWithoutOrdersEmail() {
+        return properties.getProperty("userWithoutOrdersEmail");
+    }
+
+    public String getUserWithOrdersEmail() {
+        return properties.getProperty("userWithOrdersEmail");
     }
 
     public String getPasswordAdmin() {

@@ -9,10 +9,8 @@
 - issues (waffle.io maybe)
 - license
 
-[![Build Status](https://img.shields.io/travis/ita-social-projects/GreenCity/master?style=flat-square)](https://travis-ci.org/github/ita-social-projects/GreenCity)
-[![Coverage Status](https://img.shields.io/gitlab/coverage/ita-social-projects/GreenCity/master?style=flat-square)](https://coveralls.io)
-[![Github Issues](https://img.shields.io/github/issues/ita-social-projects/GreenCity?style=flat-square)](https://github.com/ita-social-projects/GreenCity/issues)
-[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCity?style=flat-square)](https://github.com/ita-social-projects/GreenCity/pulls)
+[![Github Issues](https://img.shields.io/github/issues/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCityTA/issues)
+[![Pending Pull-Requests](https://img.shields.io/github/issues-pr/ita-social-projects/GreenCityTA?style=flat-square)](https://github.com/ita-social-projects/GreenCityTA/pulls)
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 ---
@@ -136,14 +134,14 @@ For example
 
 [![@roman266](https://avatars3.githubusercontent.com/roman266?s=100&v=4)](https://github.com/roman266)
 [![@tetiana-ustymenko](https://avatars3.githubusercontent.com/tetiana-ustymenko?s=100&v=4)](https://github.com/tetiana-ustymenko)
-[![@annachopyk](https://avatars3.githubusercontent.com/annachopyk?s=100&v=4)](https://github.com/annachopyk)
+[<img alt="@annachopyk" height="100" src="https://avatars3.githubusercontent.com/annachopyk" width="100"/>](https://github.com/annachopyk)
 [![@lhalam](https://avatars3.githubusercontent.com/lhalam?s=100&v=4)](https://github.com/lhalam) 
 [![@zubachihor](https://avatars3.githubusercontent.com/zubachihor?s=100&v=4)](https://github.com/zubachihor)
 [![@OlenaKulchytska](https://avatars3.githubusercontent.com/OlenaKulchytska?s=100&v=4)](https://github.com/OlenaKulchytska)
 [![@Dinara227](https://avatars3.githubusercontent.com/Dinara227?s=100&v=4)](https://github.com/Dinara227)
 [![@SchematicM](https://avatars3.githubusercontent.com/SchematicM?s=100&v=4)](https://github.com/SchematicM)
 [![@Levv4ik](https://avatars3.githubusercontent.com/Levv4ik?s=100&v=4)](https://github.com/Levv4ik)
-[![@Setupb](https://avatars3.githubusercontent.com/Setupb?s=100&v=4)](https://github.com/Setupb)
+[<img alt="@Setupb" height="100" src="https://avatars3.githubusercontent.com/Setupb" width="100"/>](https://github.com/Setupb)
 [![@vanyahrabarskiy](https://avatars3.githubusercontent.com/vanyahrabarskiy?s=100&v=4)](https://github.com/vanyahrabarskiy)
 
 - You can just grab their GitHub profile image URL

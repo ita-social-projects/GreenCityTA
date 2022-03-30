@@ -20,6 +20,7 @@ public class CustomerData extends BasePage {
     private List<WebElement> listOfAdditionalInfo;
     @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'ubs_customer-back')]")
     private WebElement backButton;
+
     public CustomerData(WebDriver driver) {
         super(driver);
     }
