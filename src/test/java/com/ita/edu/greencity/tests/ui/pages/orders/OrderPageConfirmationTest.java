@@ -21,6 +21,15 @@ import java.util.Arrays;
 
 public class OrderPageConfirmationTest extends TestRun {
 
+    final int FIRST_INDEX_OF_SAVED_ADDRESSES = 0;
+    final int SECOND_INDEX_OF_SAVED_ADDRESSES = 1;
+    final int THIRD_INDEX_OF_SAVED_ADDRESSES = 2;
+    final int FIRST_INDEX_OF_TOTAL_SUM = 0;
+    final int SECOND_INDEX_OF_TOTAL_SUM = 1;
+    final int FIRST_ECO_STORE_ORDER_NUMBER = 0;
+    final int SECOND_ECO_STORE_ORDER_NUMBER = 0;
+    final int SUM_PART = 0;
+    final int CURRENCY_PART = 1;
     final String TEXTILE_WASTE_120L_AMOUNT = "1";
     final String SAFE_WASTE_AMOUNT = "1";
     final String TEXTILE_WASTE_20l_AMOUNT = "2";
@@ -68,16 +77,16 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void theTotalSumOfOrderIdentityTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0).clickOnNextButton();
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         String totalAmountOfTextileWaste120l = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(1, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
         String totalAmountOfSafeWaste = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(2, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
         String totalAmountOfTextileWaste20l = Arrays.stream(orderPageConfirmation
                 .chooseOneElementFromYourOrderTable(3, 5)
-                .split("\s")).toList().get(0);
+                .split("\s")).toList().get(SUM_PART);
 
         double sumOfAllWasteTypesTotals = orderPageConfirmation
                 .transformToDoubleValue(totalAmountOfTextileWaste120l)
@@ -85,10 +94,10 @@ public class OrderPageConfirmationTest extends TestRun {
                 + orderPageConfirmation.transformToDoubleValue(totalAmountOfTextileWaste20l);
         double expectedOrderAmount = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(SUM_PART));
         double expectedAmountDue = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(1).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(SECOND_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(SUM_PART));
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(sumOfAllWasteTypesTotals, expectedOrderAmount, "Order amount is not the same");
@@ -101,7 +110,7 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void verifyOrderSavingInPopupMessageTest() {
         String actualMessage = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton()
@@ -116,7 +125,7 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void verifyOrderSavingThroughOrderNumberTest() {
         String expectedNumberOfOrder = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0).clickOnNextButton()
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
         String actualNumberOfOrder = new HeaderSignedInComponent(driver).clickUserMenu().clickUbsUser()
@@ -130,7 +139,7 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void verifyOrderSavingThroughOrderStatusTest() {
         String numberOfOrder = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnSaveButton().getTextFromSuccessfulSavingAlert().substring(29, 32);
@@ -146,7 +155,7 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void verifyOrderDeletingTest() {
         String actualMessage = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .clickOnCancelButton()
                 .clickOnDeleteButton()
@@ -160,12 +169,12 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void localizationRelevanceOfCurrencyTest() {
         String actualResultBeforeLanguageChange = Arrays.stream(new OrderPagePersonalData(driver)
-                        .clickOnChooseAddressButton(0)
+                        .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                         .clickOnNextButton()
-                .getTotalSumWithCurrency(0)
-                .split("\s"))
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM)
+                        .split("\s"))
                 .toList()
-                .get(1);
+                .get(CURRENCY_PART);
         System.out.println(actualResultBeforeLanguageChange);
         String expectedResultBeforeLanguageChange = "UAH";
         SoftAssert softAssert = new SoftAssert();
@@ -173,8 +182,8 @@ public class OrderPageConfirmationTest extends TestRun {
         new HeaderComponent(driver).clickLanguageSwitcher().languageChoose("UA");
         String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
                 .clickOnNextButton()
-                        .clickOnChooseAddressButton(0).clickOnNextButton()
-                .getTotalSumWithCurrency(0).split("\s")).toList().get(1);
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton()
+                .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(1);
         String expectedResultAfterLanguageChange = "грн";
         softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange, "Currencies are different after language change");
         softAssert.assertAll();
@@ -192,7 +201,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .clickOnNextButton()
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(1)
+                .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
@@ -211,7 +220,8 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3", "Entrance is translated incorrectly");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область", "Region is translated incorrectly");
         softAssert.assertAll();
-        orderPageConfirmation.clickOnBackButton().clickOnDeleteCollectionAddressButton(1).refreshPage()
+        orderPageConfirmation.clickOnBackButton()
+                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES).refreshPage()
                 .clickOnNextButton().checkAddressIsDeleted();
     }
 
@@ -226,7 +236,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, "46", CORPUS_TO_ADD, ENTRANCE_TO_ADD)
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(1)
+                .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
@@ -241,7 +251,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .addFullAddress(NEW_INDEX_OF_CITY, NEW_INDEX_OF_DISTRICT, NEW_STREET_TO_ADD, NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
                 .refreshPage()
                 .clickOnNextButton()
-                .clickOnChooseAddressButton(2)
+                .clickOnChooseAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "City is not changed");
         softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Pechers'kiy", "District is not changed");
@@ -251,8 +261,10 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2", "Entrance is not changed");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Region is not changed");
         softAssert.assertAll();
-        orderPageConfirmation.clickOnBackButton().clickOnDeleteCollectionAddressButton(1)
-                .clickOnDeleteCollectionAddressButton(2).refreshPage().clickOnNextButton().checkAddressIsDeleted();
+        orderPageConfirmation.clickOnBackButton()
+                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
+                .clickOnDeleteCollectionAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
+                .refreshPage().clickOnNextButton().checkAddressIsDeleted();
 
     }
 
@@ -261,7 +273,7 @@ public class OrderPageConfirmationTest extends TestRun {
     @Test
     public void verifyRecipientCredentialsTest() {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0).clickOnNextButton();
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getRecipientName(), USER_FIRST_NAME, "User names don't match");
         softAssert.assertEquals(orderPageConfirmation.getRecipientSurname(), USER_LAST_NAME, "User surnames don't match");
@@ -284,18 +296,21 @@ public class OrderPageConfirmationTest extends TestRun {
     @Issue("GC-2463")
     @Test
     public void verifyEcoStoreFunctionality() {
+        final int FIRST_INDEX_OF_ECO_STORE_ORDER = 0;
+        final int SECOND_INDEX_OF_ECO_STORE_ORDER = 1;
         OrderDetailsPage orderDetailsPage = new OrderPagePersonalData(driver).clickOnBackButton();
 
         String firstOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String secondOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String actualFirstOrderNumber = orderDetailsPage
                 .clickOnYesWaitingStoreOrderCheckmark()
-                .EnterOrderNumberInputs(firstOrderNumber, 0)
+                .EnterOrderNumberInputs(firstOrderNumber, FIRST_INDEX_OF_ECO_STORE_ORDER)
                 .clickOnAddAnotherNumberButton()
-                .EnterOrderNumberInputs(secondOrderNumber, 1)
+                .EnterOrderNumberInputs(secondOrderNumber, SECOND_INDEX_OF_ECO_STORE_ORDER)
                 .clickOnNextButton().clickOnNextButton()
-                .getEcoStoreNumber(0);
-        String actualSecondOrderNumber = new OrderPageConfirmation(driver).getEcoStoreNumber(1);
+                .getEcoStoreNumber(FIRST_ECO_STORE_ORDER_NUMBER);
+        String actualSecondOrderNumber = new OrderPageConfirmation(driver)
+                .getEcoStoreNumber(SECOND_ECO_STORE_ORDER_NUMBER);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(actualFirstOrderNumber, firstOrderNumber, "Numbers of first order don't match");
         softAssert.assertEquals(actualSecondOrderNumber, secondOrderNumber, "Numbers of second order don't match");

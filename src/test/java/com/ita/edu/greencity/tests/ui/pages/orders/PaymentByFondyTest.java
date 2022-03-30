@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 public class PaymentByFondyTest extends TestRun {
 
+    final int FIRST_INDEX_OF_SAVED_ADDRESSES = 0;
     final String TEXTILE_WASTE_120L_AMOUNT = "1";
     final String SAFE_WASTE_AMOUNT = "1";
     final String TEXTILE_WASTE_20l_AMOUNT = "2";
@@ -56,7 +57,7 @@ public class PaymentByFondyTest extends TestRun {
     public void paymentWIthExistingAddressTest() {
         String expectedMessage = "Your order is accepted";
         String actualMessage = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())
@@ -94,7 +95,7 @@ public class PaymentByFondyTest extends TestRun {
     @Test
     public void verifyPaymentApprovalThroughOrderNumberAndPaymentStatusTest() {
         String numberOfOrder = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .choosePaymentMethod().clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())
@@ -121,11 +122,12 @@ public class PaymentByFondyTest extends TestRun {
     @Issue("GC-2484")
     @Test
     public void orderAmountInUbsAndFondyIdentityTest() {
+        final int FIRST_INDEX_OF_TOTAL_SUM = 0;
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0).clickOnNextButton();
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         double orderAmountInUbs = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(0).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(0));
 
         double orderAmountInFondy = orderPageConfirmation
                 .transformToDoubleValue(orderPageConfirmation
@@ -140,7 +142,7 @@ public class PaymentByFondyTest extends TestRun {
     @Test
     public void makeOtherOrderTest() {
         String actual = new OrderPagePersonalData(driver)
-                .clickOnChooseAddressButton(0)
+                .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton()
                 .clickOnOrderButton()
                 .cardNumberInput(provider.getCardNumber())

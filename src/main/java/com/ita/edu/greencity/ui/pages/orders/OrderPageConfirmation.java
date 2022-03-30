@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
+import com.ita.edu.greencity.ui.locators.UtilsLocators;
 import com.ita.edu.greencity.ui.pages.BasePage;
 import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import io.qameta.allure.Step;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.How;
 
 import java.util.Arrays;
 import java.util.List;
+
+
 
 public class OrderPageConfirmation extends BasePage {
 
@@ -170,7 +173,7 @@ public class OrderPageConfirmation extends BasePage {
     private PaymentByFondyPage loadData() {
         while (true) {
             try {
-                driver.findElement(By.xpath("//span[contains(@class,'spinner')]"));
+                driver.findElement(UtilsLocators.SPINNER.getPath());
             } catch (Exception e) {
                 return new PaymentByFondyPage(driver);
             }
