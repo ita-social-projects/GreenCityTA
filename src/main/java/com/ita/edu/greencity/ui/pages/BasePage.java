@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.ui.pages;
 
+import com.ita.edu.greencity.utils.ValueProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class BasePage {
 
     protected WebDriver driver;
+    protected ValueProvider provider;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

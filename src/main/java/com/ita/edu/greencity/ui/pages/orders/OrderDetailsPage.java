@@ -35,12 +35,14 @@ public class OrderDetailsPage extends BasePage {
     private WebElement activateOrCancelCertificateButton;
     @FindBy(xpath = "//div[@class='messages-container']/small")
     private WebElement certificateAlert;
-    @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][1]//small")
+    @FindBy(xpath = "//div[@class='totalInfo']//small[contains(text(),'500')]")
     private WebElement minimumOrderAmountAlert;
-    @FindBy(xpath = "//div[@class='validMes ng-star-inserted'][2]//small")
+    @FindBy(xpath = "//div[@class='totalInfo']//small[contains(text(),'120')]")
     private WebElement minimumOrderContainsAlert;
     @FindBy(xpath = "//div[@class='points']//span[@class='checkmark']")
     private List<WebElement> UseBonusesCheckmarks;
+    @FindBy(xpath = "//div[@class='points']/p")
+    private WebElement bonusesText;
     @FindBy(xpath = "//a[@class='bonus-how-to-link']")
     private WebElement howToGetBonusesButton;
     @FindBy(xpath = "//div[@class='bottom']//span[@class='checkmark']")
@@ -51,6 +53,8 @@ public class OrderDetailsPage extends BasePage {
     private WebElement tipTextHint;
     @FindBy(xpath = "//button[@class='addOrderBtn']")
     private WebElement addAnotherNumberButton;
+    @FindBy(xpath = "//div[@class='order-notification ng-star-inserted']/small")
+    private WebElement ecoStoreNumberAlert;
     @FindBy(xpath = "//p[@class='link']")
     private WebElement learnAboutPackagesLink;
     @FindBy(xpath = "//textarea[@formcontrolname='orderComment']")
@@ -114,13 +118,13 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
+    @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
         sleep(5000);
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
 
-    @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lArrowsInput(int value) {
 
         for (int x = 0; x < value; x++) {
@@ -157,13 +161,14 @@ public class OrderDetailsPage extends BasePage {
         return price;
     }
 
+
     public String getOrderAmount() {
         String price = totalAmount.get(0).getText();
         return price;
     }
 
     public String getAmountDue() {
-        String price = totalAmount.get(1).getText();
+        String price = totalAmount.get(2).getText();
         return price;
     }
 
@@ -186,6 +191,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderDetailsPage clickOnActivateCertificateButton() {
         activateOrCancelCertificateButton.click();
+        sleep(10000);
         return this;
     }
 
@@ -203,6 +209,7 @@ public class OrderDetailsPage extends BasePage {
     }
 
     public String getCertificateInput() {
+        sleep(20000);
         return certificateInput.getAttribute("value");
     }
 
@@ -216,22 +223,29 @@ public class OrderDetailsPage extends BasePage {
         return this;
     }
 
+    public String getBonusesNumber() {
+        String value = bonusesText.getText().replaceAll("[^\\d.]", "");
+        return value;
+    }
+
     public OrderDetailsPage ClickOnNoWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(0).click();
         return this;
     }
+
 
     public OrderDetailsPage clickOnYesWaitingStoreOrderCheckmark() {
         WaitingStoreOrderCheckmarks.get(1).click();
         return this;
     }
 
+
     public OrderDetailsPage clickOnHowToGetBonusesButton() {
         howToGetBonusesButton.click();
         return this;
     }
 
-    @Step("Input eco store order value {value}")
+    @Step("Input eco store order {order} value {orderNumber}")
     public OrderDetailsPage EnterOrderNumberInputs(String orderNumber, int order) {
         orderNumberInputs.get(order).sendKeys(orderNumber);
         return this;
@@ -244,6 +258,10 @@ public class OrderDetailsPage extends BasePage {
 
     public String getOrderNumberInputs(int order) {
         return orderNumberInputs.get(order).getAttribute("value");
+    }
+
+    public String getEcoStoreOrderAlert() {
+        return ecoStoreNumberAlert.getText();
     }
 
     public OrderDetailsPage clickOnLearnAboutPackagesLink() {
@@ -270,6 +288,10 @@ public class OrderDetailsPage extends BasePage {
         nextButton.click();
         sleep(10000);
         return new OrderPagePersonalData(driver);
+    }
+
+    public boolean checkNextButtonStatus() {
+        return nextButton.isEnabled();
     }
 
 

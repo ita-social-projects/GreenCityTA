@@ -2,7 +2,6 @@ package com.ita.edu.greencity.api.clients.user.sign_in;
 
 import com.ita.edu.greencity.api.models.user.SuccessSignIn;
 import com.ita.edu.greencity.api.models.user.UserCredentials;
-import io.qameta.allure.Step;
 
 import java.io.IOException;
 

@@ -23,6 +23,7 @@ public class EcoNewsCertificateEntity {
     public static final String DELETE_CERTIFICATE = "DELETE  from certificate where code = '%s'";
     public static final String SELECT_RANDOM_USED_CERTIFICATE_CODE = "SELECT code FROM certificate WHERE status = 'USED' ORDER BY RANDOM() LIMIT 1";
     public static final String CHECK_IF_CERTIFICATE_EXISTS = "SELECT COUNT(1) FROM certificate WHERE code = '%s'";
+    public static final String GET_CERTIFICATE_POINTS = "SELECT points FROM certificate WHERE code = '%s'";
     private String code;
     private String creation_date;
     private String date_of_use;
