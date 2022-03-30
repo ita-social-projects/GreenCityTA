@@ -130,7 +130,7 @@ public class OrderCancellationTest extends TestRun {
 
     @DataProvider
     public Object[][] paymentStatuses() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Half paid"},
                 {"Paid"}
         };
@@ -147,7 +147,6 @@ public class OrderCancellationTest extends TestRun {
 
         Assert.assertFalse(orderCanBeCancelled, "Order with " + paymentStatus + " has 'Cancel' button");
     }
-
 
 
 }

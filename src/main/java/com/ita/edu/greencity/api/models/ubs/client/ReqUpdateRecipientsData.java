@@ -9,7 +9,7 @@ public class ReqUpdateRecipientsData {
     public List<ReqUpdateRecipientsData> upDataList;
 
     @Data
-    static class UpDataList{
+    static class UpDataList {
         private String recipientEmail = "setupb1@ukr.net";
         private Integer recipientId = 267;
         private String recipientName = "Yurii";

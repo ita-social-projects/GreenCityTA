@@ -1,4 +1,5 @@
 package com.ita.edu.greencity.api.models.ubs.client;
+
 import lombok.Data;
 
 import java.util.List;

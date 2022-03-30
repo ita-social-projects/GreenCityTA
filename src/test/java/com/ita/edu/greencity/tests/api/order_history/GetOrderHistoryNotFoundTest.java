@@ -15,8 +15,8 @@ import java.io.IOException;
 public class GetOrderHistoryNotFoundTest extends ApiTestRunner {
     private Authorization authorization;
     private OrderClient orderClient;
-    private int incorrectOrderId = -1;
-    private int languageIdEn = 2;
+    private final int incorrectOrderId = -1;
+    private final int languageIdEn = 2;
 
     @BeforeClass
     public void beforeClass() throws IOException {

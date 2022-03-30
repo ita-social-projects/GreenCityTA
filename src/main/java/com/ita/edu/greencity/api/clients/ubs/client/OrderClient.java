@@ -1,14 +1,13 @@
 package com.ita.edu.greencity.api.clients.ubs.client;
 
 import com.ita.edu.greencity.api.clients.ubs.BaseClientUBS;
-import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.api.models.ubs.client.ReqUpdateRecipientsData;
 import com.ita.edu.greencity.api.models.ubs.client.SuccessReqSaveOrderAddress;
+import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.api.models.ubs.order.process_order.UserOrder;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-
 
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ public class OrderClient extends BaseClientUBS {
     ReqUpdateRecipientsData reqUpdateRecipientsData = new ReqUpdateRecipientsData();
     ReqUpdateRecipientsData upDataList = new ReqUpdateRecipientsData();
 
-    private String authToken;
+    private final String authToken;
 
     public OrderClient() throws IOException {
         super();
@@ -121,7 +120,7 @@ public class OrderClient extends BaseClientUBS {
     public Response saveOrderAddressByRequest(SuccessReqSaveOrderAddress.AddressList addressList) {
         SuccessReqSaveOrderAddress successReqSaveOrderAddress = new SuccessReqSaveOrderAddress();
         RequestSpecification requestSpecification = preparedRequest();
-        if(authToken !=null){
+        if (authToken != null) {
             requestSpecification.header("Authorization", String.format("Bearer %s", authToken));
         }
         return requestSpecification

@@ -50,7 +50,7 @@ public class SignUpPersonWithoutVerifyEmailTest extends TestRun {
                 .loadData()
                 .clickSignIn();
         String actual = new SignInComponent(driver).getErrorPasswordMessage();
-        softAssert.assertEquals(actual,"Bad email or password");
+        softAssert.assertEquals(actual, "Bad email or password");
         EcoNewsVerifyEmailsEntity recordInVerifyEmails = ecoNewsVerifyEmailsService.selectByUserId(userEmail);
         boolean isInDB = recordInVerifyEmails != null;
         softAssert.assertTrue(isInDB, "User is not in Data Base!");

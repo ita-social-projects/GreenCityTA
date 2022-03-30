@@ -1,8 +1,8 @@
 package com.ita.edu.greencity.tests.api.order_cancellation;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
-import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.CancellationReason;
+import com.ita.edu.greencity.api.models.ubs.client.order_cancellation.OrderCancellationReason;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;

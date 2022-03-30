@@ -1,10 +1,8 @@
 package com.ita.edu.greencity.ui.pages.orders;
 
 import com.ita.edu.greencity.ui.pages.BasePage;
-import com.ita.edu.greencity.ui.pages.orders.payment.PaymentByFondyPage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -364,11 +362,12 @@ public class OrderPagePersonalData extends BasePage {
         driver.navigate().refresh();
         return new OrderDetailsPage(driver);
     }
-    
+
     @Step("Verify that the address is deleted")
-    public OrderPagePersonalData checkAddressIsDeleted(){
-            while (deleteSavedAddress.size()!=1){
-                clickOnDeleteCollectionAddressButton(1);
-            }  return this;
+    public OrderPagePersonalData checkAddressIsDeleted() {
+        while (deleteSavedAddress.size() != 1) {
+            clickOnDeleteCollectionAddressButton(1);
         }
+        return this;
+    }
 }

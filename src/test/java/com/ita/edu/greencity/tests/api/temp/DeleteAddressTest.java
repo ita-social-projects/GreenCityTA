@@ -16,12 +16,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 
 public class DeleteAddressTest extends ApiTestRunner {
-    private Authorization authorization;
-    private OrderClient orderClient;
-
     final Long NOT_FOUND_ID_ADDRESS = 12L;
     final Long ACTUAL_ID_ADDRESS = 207L;
-
+    private Authorization authorization;
+    private OrderClient orderClient;
 
     @BeforeClass
     public void beforeClass() throws IOException {

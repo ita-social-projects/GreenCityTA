@@ -16,6 +16,7 @@ public class ClientClient extends BaseClientUBS {
         this.baseApiURL += "/client";
 
     }
+
     @Step("get request {this.baseApiURL}/users-pointsToUse ")
     public Response getUserBonuses() {
         return preparedRequest()

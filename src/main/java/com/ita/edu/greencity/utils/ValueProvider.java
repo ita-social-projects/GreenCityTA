@@ -71,15 +71,6 @@ public class ValueProvider {
         return properties.getProperty("password");
     }
 
-
-    public String getUserWithoutOrdersEmail() {
-        return properties.getProperty("userWithoutOrdersEmail");
-    }
-
-    public String getUserWithOrdersEmail() {
-        return properties.getProperty("userWithOrdersEmail");
-    }
-
     public void setPassword(String newPassword) {
         FileReader reader = null;
         try {
@@ -92,6 +83,14 @@ public class ValueProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUserWithoutOrdersEmail() {
+        return properties.getProperty("userWithoutOrdersEmail");
+    }
+
+    public String getUserWithOrdersEmail() {
+        return properties.getProperty("userWithOrdersEmail");
     }
 
     public String getPasswordAdmin() {
@@ -146,9 +145,14 @@ public class ValueProvider {
         return properties.getProperty("baseUserApiURL");
     }
 
-    public String getSpinnerXpath() {return properties.getProperty("spinnerXpath");}
+    public String getSpinnerXpath() {
+        return properties.getProperty("spinnerXpath");
+    }
 
-    public String getCorrectData() {return properties.getProperty("correctData");}
+    public String getCorrectData() {
+        return properties.getProperty("correctData");
+    }
+
     public String getCorrectSignature() {
         return properties.getProperty("correctSignature");
     }
@@ -156,6 +160,7 @@ public class ValueProvider {
     public String getIncorrectData() {
         return properties.getProperty("incorrectData");
     }
+
     public String getIncorrectSignature() {
         return properties.getProperty("incorrectSignature");
     }
