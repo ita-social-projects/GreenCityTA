@@ -120,7 +120,7 @@ public class OrderDetailsPage extends BasePage {
 
     @Step("Number of 'Textile waste 120l' service input value {value}")
     public OrderDetailsPage EnterNumberOfTextileWaste120lInput(String value) {
-        sleep(5000);
+        sleep(3000);
         NumberOfTextileWaste120lInput.sendKeys(value, Keys.ENTER);
         return this;
     }
@@ -135,7 +135,6 @@ public class OrderDetailsPage extends BasePage {
 
     @Step("Number of 'Safe waste' service input value {value}")
     public OrderDetailsPage EnterNumberOfSafeWasteInput(String value) {
-        sleep(2000);
         NumberOfSafeWasteInput.sendKeys(value, Keys.ENTER);
         return this;
     }
@@ -286,7 +285,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderPagePersonalData clickOnNextButton() {
         nextButton.click();
-        sleep(10000);
+        sleep(3000);
         return new OrderPagePersonalData(driver);
     }
 
