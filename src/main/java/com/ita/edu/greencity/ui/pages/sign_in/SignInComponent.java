@@ -89,6 +89,13 @@ public class SignInComponent extends BasePage {
     }
 
     @Step("click on 'sign in' button after calling-up courier")
+    public UbsHomePage clickSignInAfterCourierCallUp() {
+        signIn.click();
+
+        return new UbsHomePage(driver);
+    }
+
+    @Step("click on 'sign in' button after calling-up courier")
     public SelectRegion clickSignInAfterCallUpCourier() {
         signIn.click();
 

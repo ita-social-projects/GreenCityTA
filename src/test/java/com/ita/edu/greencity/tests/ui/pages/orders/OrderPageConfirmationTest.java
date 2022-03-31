@@ -27,7 +27,7 @@ public class OrderPageConfirmationTest extends TestRun {
     final int FIRST_INDEX_OF_TOTAL_SUM = 0;
     final int SECOND_INDEX_OF_TOTAL_SUM = 1;
     final int FIRST_ECO_STORE_ORDER_NUMBER = 0;
-    final int SECOND_ECO_STORE_ORDER_NUMBER = 0;
+    final int SECOND_ECO_STORE_ORDER_NUMBER = 1;
     final int SUM_PART = 0;
     final int CURRENCY_PART = 1;
     final String TEXTILE_WASTE_120L_AMOUNT = "1";
@@ -54,14 +54,15 @@ public class OrderPageConfirmationTest extends TestRun {
     final String NEW_CORPUS_TO_ADD = "3";
     final String NEW_ENTRANCE_TO_ADD = "2";
 
-    @BeforeMethod(description = "Navigate to Order confirmation page")
+    @BeforeMethod()
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignInAfterCallUpCourier()
+                .clickSignInAfterCourierCallUp()
+                .pressOrderCourierLogin()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
@@ -197,17 +198,12 @@ public class OrderPageConfirmationTest extends TestRun {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
                 .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, "19", CORPUS_TO_ADD, ENTRANCE_TO_ADD)
-                .refreshPage()
-                .clickOnNextButton()
-                .refreshPage()
-                .clickOnNextButton()
                 .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "Cities don't match");
         softAssert.assertEquals(orderPageConfirmation.getDistrict(), "district Solom'yans'kyi", "Districts don't match");
         softAssert.assertEquals(orderPageConfirmation.getStreet(), "Sevastopol's'ka Square", "Streets don't match");
-        softAssert.assertEquals(orderPageConfirmation.getHouseNumber(), "19", "House numbers don't match");
         softAssert.assertEquals(orderPageConfirmation.getCorpus(), "corp 2", "Corpus numbers don't match");
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 3", "Entrances don't match");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Regions don't match");
@@ -220,9 +216,10 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "під'їзд 3", "Entrance is translated incorrectly");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Київська область", "Region is translated incorrectly");
         softAssert.assertAll();
-        orderPageConfirmation.clickOnBackButton()
-                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES).refreshPage()
-                .clickOnNextButton().checkAddressIsDeleted();
+        boolean resultOfDeletion = orderPageConfirmation.clickOnBackButton()
+                .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
+                .checkAddressIsDeleted();
+        Assert.assertTrue(resultOfDeletion);
     }
 
 
@@ -234,8 +231,6 @@ public class OrderPageConfirmationTest extends TestRun {
         OrderPageConfirmation orderPageConfirmation = new OrderPagePersonalData(driver)
                 .clickOnAddAddressButton()
                 .addFullAddress(INDEX_OF_CITY, INDEX_OF_DISTRICT, STREET_TO_ADD, INDEX_OF_STREET, "46", CORPUS_TO_ADD, ENTRANCE_TO_ADD)
-                .refreshPage()
-                .clickOnNextButton()
                 .clickOnChooseAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         SoftAssert softAssert = new SoftAssert();
@@ -249,8 +244,6 @@ public class OrderPageConfirmationTest extends TestRun {
 
         orderPageConfirmation.clickOnBackButton().clickOnAddAddressButton()
                 .addFullAddress(NEW_INDEX_OF_CITY, NEW_INDEX_OF_DISTRICT, NEW_STREET_TO_ADD, NEW_INDEX_OF_STREET, NEW_HOUSE_NUMBER_TO_ADD, NEW_CORPUS_TO_ADD, NEW_ENTRANCE_TO_ADD)
-                .refreshPage()
-                .clickOnNextButton()
                 .clickOnChooseAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnNextButton();
         softAssert.assertEquals(orderPageConfirmation.getCity(), "city Kyiv", "City is not changed");
@@ -261,11 +254,11 @@ public class OrderPageConfirmationTest extends TestRun {
         softAssert.assertEquals(orderPageConfirmation.getEntrance(), "entrance 2", "Entrance is not changed");
         softAssert.assertEquals(orderPageConfirmation.getRegion(), "Kyiv region", "Region is not changed");
         softAssert.assertAll();
-        orderPageConfirmation.clickOnBackButton()
+        boolean resultOfDeletion = orderPageConfirmation.clickOnBackButton()
                 .clickOnDeleteCollectionAddressButton(SECOND_INDEX_OF_SAVED_ADDRESSES)
                 .clickOnDeleteCollectionAddressButton(THIRD_INDEX_OF_SAVED_ADDRESSES)
-                .refreshPage().clickOnNextButton().checkAddressIsDeleted();
-
+                .checkAddressIsDeleted();
+        Assert.assertTrue(resultOfDeletion);
     }
 
     @Description("Verify that info about recipient is updated after changing")

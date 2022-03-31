@@ -119,7 +119,7 @@ public class UbsHomePage extends BasePage {
     }
 
     public SelectRegion pressOrderCourierLogin() {
-        sleep(20000);
+        sleep(3000);
         headerButtonOrderCourier.click();
         return new SelectRegion(driver);
     }
