@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.api.models.ubs.client;
+package com.ita.edu.greencity.api.models.ubs.order.getFondyStatus;
 
 import lombok.Data;
 

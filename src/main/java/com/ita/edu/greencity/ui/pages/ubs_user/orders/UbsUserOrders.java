@@ -28,7 +28,7 @@ public class UbsUserOrders extends BasePage {
     private WebElement orderHistoryTab;
     @FindBy(how = How.XPATH, using = ".//*[contains(@tabindex, '-1')]/*[contains(@class, 'mat-tab-label-content')]")
     private WebElement orderHistoryTabButton;
-    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-header')]")
+    @FindBy(how = How.XPATH, using = ".//*[contains(@class, 'mat-expansion-panel-header mat-focus-indicator')]")
     private List<WebElement> orders;
 
     public UbsUserOrders(WebDriver driver) {
@@ -132,13 +132,16 @@ public class UbsUserOrders extends BasePage {
     }
 
     public UbsUserOrders loadData() {
-        while (true) {
+        int count = 0;
+        while (count < 30) {
             try {
                 driver.findElement(By.xpath("//mat-spinner[@role = 'progressbar']"));
             } catch (Exception e) {
                 return this;
             }
+            count++;
             sleep(500);
         }
+        return null;
     }
 }

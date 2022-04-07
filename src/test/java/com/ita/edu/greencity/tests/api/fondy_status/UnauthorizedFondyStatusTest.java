@@ -4,6 +4,7 @@ import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
 import com.ita.edu.greencity.tests.api.ApiTestRunner;
 import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -25,6 +26,7 @@ public class UnauthorizedFondyStatusTest extends ApiTestRunner {
 
     @Test
     @Description("[API] verify 401 error with unauthorized user")
+    @Link("https://jira.softserve.academy/browse/GC-2526")
     public void unsuccessfulGettingOfFondyStatusWithUnauthorizedUser() {
         Response response = orderClient.getFondyStatus(ORDER_ID);
         String fondyStatus = response.then().extract().body().asString();
