@@ -304,15 +304,13 @@ public class OrderPageConfirmationTest extends TestRun {
         String secondOrderNumber = TestHelpersUtils.generateRandomOrderNumber();
         String actualFirstOrderNumber = orderDetailsPage
                 .clickOnYesWaitingStoreOrderCheckmark()
-<<<<<<< HEAD
+
                 .EnterOrderNumberInputs(0,firstOrderNumber)
                 .clickOnAddAnotherNumberButton()
                 .EnterOrderNumberInputs(1,secondOrderNumber)
-=======
-                .EnterOrderNumberInputs(firstOrderNumber, FIRST_INDEX_OF_ECO_STORE_ORDER)
+                .EnterOrderNumberInputs(FIRST_INDEX_OF_ECO_STORE_ORDER, firstOrderNumber)
                 .clickOnAddAnotherNumberButton()
-                .EnterOrderNumberInputs(secondOrderNumber, SECOND_INDEX_OF_ECO_STORE_ORDER)
->>>>>>> 6bacc8ce3c7659ccf886b391400922531b5f7ff2
+                .EnterOrderNumberInputs(SECOND_INDEX_OF_ECO_STORE_ORDER, secondOrderNumber)
                 .clickOnNextButton().clickOnNextButton()
                 .getEcoStoreNumber(FIRST_ECO_STORE_ORDER_NUMBER);
         String actualSecondOrderNumber = new OrderPageConfirmation(driver)

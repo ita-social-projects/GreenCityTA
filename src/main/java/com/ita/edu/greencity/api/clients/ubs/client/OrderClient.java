@@ -61,12 +61,11 @@ public class OrderClient extends BaseClientUBS {
                 .header("Authorization", String.format("Bearer %s", authToken))
                 .log().all()
                 .when()
-
                 .get(String.format("%s/findAll-order-address", baseApiURL));
     }
 
     @Step("post request {this.baseApiURL}/ubs/courier/{courierId}")
-    public Response getAllCourierLocations(String courierId) {
+    public Response getAllCourierLocations(int courierId) {
         return preparedRequest()
                 .header("Authorization", String.format("Bearer %s", authToken))
                 .log().all()

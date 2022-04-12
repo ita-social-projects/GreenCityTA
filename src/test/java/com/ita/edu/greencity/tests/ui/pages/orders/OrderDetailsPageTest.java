@@ -24,11 +24,13 @@ public class OrderDetailsPageTest extends TestRun {
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
-        ubsHomePage.pressOrderCourierUnlogin()
+        ubsHomePage.clickSingInButton()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignInAfterCallUpCourier()
-                .clickOnContinueButton();
+                .clickSignIn()
+                .pressOrderCourierLogin()
+                .clickOnContinueButton()
+        ;
     }
 
     @Description("Checks crevices alerts")

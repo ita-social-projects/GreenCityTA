@@ -20,22 +20,27 @@ import java.util.List;
 
 public class GetAllLocationWhereCourierIsWorkingTest extends ApiTestRunner {
     private OrderClient orderClient;
+    private OrderClient orderClientUnauthorized;
     UbsCourierService ubsCourierService = new UbsCourierService();
     private int correctCourierId = Integer.parseInt(ubsCourierService.selectRandomUbsCourier());
-    private String wrongCourierId = String.valueOf(TestHelpersUtils.generateRandomWrongCourierIdNumber());
+    private int wrongCourierId = TestHelpersUtils.generateRandomWrongCourierIdNumber();
     @BeforeClass
     public void beforeClass() throws IOException {
         Authorization authorization = new Authorization(provider.getEmail(), provider.getPassword());
         orderClient = new OrderClient(authorization.getToken());
+        orderClientUnauthorized = new OrderClient();
     }
     @Test
     public void successfulGetAllCourierAddressesTest() {
-        Response response = orderClient.getAllCourierLocations("correctCourierId");
+        Response response = orderClient.getAllCourierLocations(correctCourierId);
         List<CourierLocationsRoot> courierLocations = response.as(new TypeRef<>() {});//Тип данних є масивом тому робимо ліст і тайпреф
-        Assert.assertEquals(response.getStatusCode(), 200);
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(courierLocations.get(0).getCourierDtos().get(0).getCourierId(),correctCourierId);
+        softAssert.assertAll();
     }
     @Test
-    public void wrong400CourierIdGetAllCourierAddressesTest() {
+    public void wrong400GetAllCourierAddressesTest() {
         Response response = orderClient.getAllCourierLocations(wrongCourierId);
         ErrorMessage message = response.as(ErrorMessage.class);
         SoftAssert softAssert = new SoftAssert();
@@ -43,5 +48,16 @@ public class GetAllLocationWhereCourierIsWorkingTest extends ApiTestRunner {
         softAssert.assertEquals(message.getMessage(),"Couldn't found courier by id: "+ wrongCourierId);
         softAssert.assertAll();
     }
+
+    @Test
+    public void wrongUnauthorizedGetAllCourierAddressesTest() throws IOException {
+        Response response = orderClientUnauthorized.getAllCourierLocations(correctCourierId);
+        String message = response.asString();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 401);
+       softAssert.assertTrue(message.contains("N/A"));
+        softAssert.assertAll();
+    }
+
 
 }

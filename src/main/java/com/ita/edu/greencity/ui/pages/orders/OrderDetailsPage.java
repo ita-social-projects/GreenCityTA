@@ -198,6 +198,7 @@ public class OrderDetailsPage extends BasePage {
 
     public OrderDetailsPage clickOnCancelCertificateButton() {
         activateOrCancelCertificateButton.click();
+        sleep(1000);
         return this;
     }
 
@@ -210,7 +211,7 @@ public class OrderDetailsPage extends BasePage {
         }
 
         public String getCertificateInput () {
-            sleep(20000);
+            sleep(5000);
             return certificateInput.getAttribute("value");
         }
 

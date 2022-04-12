@@ -99,8 +99,9 @@ public class UbsHomePage extends BasePage {
         return listOfAllImgValue;
     }
 
-    public void clickSingInButton() {
+    public SignInComponent clickSingInButton() {
         singInButton.click();
+        return new SignInComponent(driver);
     }
 
 

@@ -1,5 +1,6 @@
 package com.ita.edu.greencity.tests.utils;
 
+import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import com.ita.edu.greencity.utils.jdbc.services.UbsCourierService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tika.langdetect.OptimaizeLangDetector;
@@ -35,6 +36,15 @@ public class TestHelpersUtils {
     public static String generateRandomCertificateNumber() {
         String number = RandomStringUtils.randomNumeric(4) + "-" + RandomStringUtils.randomNumeric(4);
         return number;
+    }
+
+    private static String generateNonExistCertificate() {
+        EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
+        String value = TestHelpersUtils.generateRandomCertificateNumber();
+        while ( ecoNewsCertificateService.checkIfCertificateExists(value)) {
+            value = TestHelpersUtils.generateRandomOrderNumber();
+        }
+        return value;
     }
     public static float checkIfNegative(float num){
         if(num > 0) return num;
