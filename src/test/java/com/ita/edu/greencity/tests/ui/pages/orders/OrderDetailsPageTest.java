@@ -1,20 +1,18 @@
 package com.ita.edu.greencity.tests.ui.pages.orders;
+
 import com.ita.edu.greencity.tests.ui.pages.testrunners.TestRun;
-import com.ita.edu.greencity.ui.pages.header.HeaderComponent;
 import com.ita.edu.greencity.tests.utils.TestHelpersUtils;
-import com.ita.edu.greencity.ui.pages.header.HeaderSignedOutComponent;
 import com.ita.edu.greencity.ui.pages.orders.OrderDetailsPage;
 import com.ita.edu.greencity.ui.pages.ubs_homepage.UbsHomePage;
-import com.ita.edu.greencity.utils.jdbc.services.EcoNewsCertificateService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Link;
 import org.testng.Assert;
 import org.testng.ITestContext;
-import org.testng.annotations.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.util.Arrays;
 
 public class OrderDetailsPageTest extends TestRun {
@@ -34,7 +32,7 @@ public class OrderDetailsPageTest extends TestRun {
     }
 
     @Description("Checks crevices alerts")
-   @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page#test-cycles-tab")
+    @Link("https://jira.softserve.academy/projects/GC?selectedItem=com.thed.zephyr.je:zephyr-tests-page#test-cycles-tab")
     @Test
     public void servicesAlertTest() {
         String MinimumOrderAmountAlertExpectedText = "The minimum order amount must be 500.00 UAH";
@@ -44,12 +42,12 @@ public class OrderDetailsPageTest extends TestRun {
         softAssert.assertFalse(orderDetailsPage.checkNextButtonStatus());
         orderDetailsPage
                 .EnterNumberOfTextileWaste20lInput("1");
-        softAssert.assertEquals(orderDetailsPage.getMinimumOrderAmountAlertText(),MinimumOrderAmountAlertExpectedText);
-        softAssert.assertEquals(orderDetailsPage.getMinimumOrderContainsAlertText(),MinimumOrderContainsAlertExpectedText);
+        softAssert.assertEquals(orderDetailsPage.getMinimumOrderAmountAlertText(), MinimumOrderAmountAlertExpectedText);
+        softAssert.assertEquals(orderDetailsPage.getMinimumOrderContainsAlertText(), MinimumOrderContainsAlertExpectedText);
         softAssert.assertFalse(orderDetailsPage.checkNextButtonStatus());
         orderDetailsPage
                 .EnterNumberOfTextileWaste20lInput("10");
-        softAssert.assertEquals(orderDetailsPage.getMinimumOrderContainsAlertText(),MinimumOrderContainsAlertExpectedText);
+        softAssert.assertEquals(orderDetailsPage.getMinimumOrderContainsAlertText(), MinimumOrderContainsAlertExpectedText);
         softAssert.assertFalse(orderDetailsPage.checkNextButtonStatus());
         orderDetailsPage
                 .EnterNumberOfSafeWasteInput("2");
@@ -75,7 +73,6 @@ public class OrderDetailsPageTest extends TestRun {
                 .getCommentInput();
         Assert.assertEquals(actual.trim(), expected);
     }
-
 
 
     @Description("Checks if 'Order amount' is counted properly")
@@ -124,9 +121,9 @@ public class OrderDetailsPageTest extends TestRun {
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
                 .clickOnYesWaitingStoreOrderCheckmark()
-                .EnterOrderNumberInputs( 0,orderNumber1)
+                .EnterOrderNumberInputs(orderNumber1, 0)
                 .clickOnAddAnotherNumberButton()
-                .EnterOrderNumberInputs(1,orderNumber2)
+                .EnterOrderNumberInputs(orderNumber2, 1)
                 .clickOnNextButton()
                 .clickOnBackButton()
                 .getOrderNumberInputs(0);
@@ -148,10 +145,10 @@ public class OrderDetailsPageTest extends TestRun {
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
                 .clickOnYesWaitingStoreOrderCheckmark()
-                .EnterOrderNumberInputs( 0,"2131")
+                .EnterOrderNumberInputs("2131", 0)
                 .EnterCommentInput("")
                 .getEcoStoreOrderAlert();
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
 
     }
 }

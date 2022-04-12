@@ -1,11 +1,10 @@
 package com.ita.edu.greencity.utils.jdbc.entity;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-enum UbsCourierEntityFields{
-ID(1), COURIER_STATUS(2), CREATE_DATE(3), CREATED_BY_ID(4);
+enum UbsCourierEntityFields {
+    ID(1), COURIER_STATUS(2), CREATE_DATE(3), CREATED_BY_ID(4);
     private final int number;
 
     UbsCourierEntityFields(int number) {
@@ -16,6 +15,7 @@ ID(1), COURIER_STATUS(2), CREATE_DATE(3), CREATED_BY_ID(4);
         return number;
     }
 }
+
 public class UbsCourierEntity {
     public static final String GET_RANDOM_COURIER_ID = "SELECT id FROM courier ORDER BY RANDOM() LIMIT 1";
     public static final String CHECK_IF_COURIER_ID_EXISTS = "SELECT COUNT(1) FROM courier WHERE id = '%s'";
@@ -30,6 +30,7 @@ public class UbsCourierEntity {
         this.date = date;
         this.created_by_id = created_by_id;
     }
+
     public UbsCourierEntity() {
         this.id = 0;
         this.courier_status = null;

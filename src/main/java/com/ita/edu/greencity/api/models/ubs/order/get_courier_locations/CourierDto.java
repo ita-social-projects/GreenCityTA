@@ -3,7 +3,6 @@ package com.ita.edu.greencity.api.models.ubs.order.get_courier_locations;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

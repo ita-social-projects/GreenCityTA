@@ -16,18 +16,22 @@ import java.io.IOException;
 
 public class GetAllAddressesForOrderTest extends ApiTestRunner {
     private OrderClient orderClient;
+
     private OrderClient unauthorizedOrderClient;
+
     @BeforeClass
     public void beforeClass() throws IOException {
         Authorization authorization = new Authorization(provider.getEmail(), provider.getPassword());
         orderClient = new OrderClient(authorization.getToken());
         unauthorizedOrderClient = new OrderClient();
     }
+
     @Description("Checks if GetAllAddressesForOrder response is 200 and if addresses in response really exists")
     @Test
     public void successfulGetAllAddressesForOrderTest() {
         UbsUserAddressService ubsUserAddressService = new UbsUserAddressService();
         Response response = orderClient.getAllAddressesForOrder();
+
        AddressListRoot addressList = response.then().extract().as(AddressListRoot.class);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 200);

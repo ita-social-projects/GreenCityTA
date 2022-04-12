@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
 public class OrderPageConfirmation extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//mat-step-header[@aria-posinset=1]/div[@class = 'mat-ripple mat-step-header-ripple']")

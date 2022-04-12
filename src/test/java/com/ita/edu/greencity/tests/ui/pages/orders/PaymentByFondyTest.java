@@ -33,14 +33,15 @@ public class PaymentByFondyTest extends TestRun {
     final String ENTRANCE_TO_ADD = "3";
 
 
-    @BeforeMethod(description = "Navigate to Order confirmation page")
+    @BeforeMethod()
     public void beforeMethod(ITestContext iTestContext) {
         super.beforeMethod(iTestContext);
         UbsHomePage ubsHomePage = new UbsHomePage(driver);
         ubsHomePage.pressOrderCourierUnlogin()
                 .inputEmail(provider.getEmail())
                 .inputPassword(provider.getPassword())
-                .clickSignInAfterCallUpCourier()
+                .clickSignInAfterCourierCallUp()
+                .pressOrderCourierLogin()
                 .clickOnContinueButton()
                 .EnterNumberOfTextileWaste120lInput(TEXTILE_WASTE_120L_AMOUNT)
                 .EnterNumberOfSafeWasteInput(SAFE_WASTE_AMOUNT)
@@ -84,9 +85,11 @@ public class PaymentByFondyTest extends TestRun {
                 .CVV2Input(provider.getCVV2()).emailInput(provider.getEmail()).clickOnPayButton()
                 .clickOnTheLink().clickOnContinueButton();
         String actualMessage = successPage.getTextFromSuccessfulOrderMessage();
+        boolean resultOfDeletion =
+                successPage.clickOnMakeOtherOrderButton().clickOnContinueButton().EnterNumberOfTextileWaste120lInput("4")
+                .clickOnNextButton().clickOnDeleteCollectionAddressButton(1).checkAddressIsDeleted();
         Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
-        successPage.clickOnMakeOtherOrderButton().clickOnContinueButton().EnterNumberOfTextileWaste120lInput("4")
-                .clickOnNextButton().clickOnDeleteCollectionAddressButton(1).refreshPage();
+        Assert.assertTrue(resultOfDeletion);
     }
 
     @Description("Verify order payment functionality by checking whether order with an appropriate number and " +

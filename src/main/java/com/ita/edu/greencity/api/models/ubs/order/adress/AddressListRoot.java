@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class AddressListRoot {
     private ArrayList<AddressList> addressList;
+
     public AddressListRoot() {
     }
 }

@@ -34,7 +34,7 @@ public class OrderPaymentTest extends TestRun {
 
     @DataProvider
     public Object[][] paymentStatuses() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Half paid"},
                 {"Unpaid"}
         };

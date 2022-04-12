@@ -13,7 +13,7 @@ public class Employees extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='employee-add']//button")
     public WebElement buttonAddEmployees;
-//    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-1']/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button")
+    //    @FindBy(how = How.XPATH, using = "//*[@id='mat-dialog-1']/app-auth-modal/div/div/div[2]/div/app-sign-in/form/button")
 //    private WebElement singInButton;
     @FindBy(how = How.XPATH, using = "//ul[@id='header_user-wrp']")
     private WebElement adminPopMenu;

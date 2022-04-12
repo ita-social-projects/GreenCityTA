@@ -38,6 +38,7 @@ public class TestHelpersUtils {
         return number;
     }
 
+
     private static String generateNonExistCertificate() {
         EcoNewsCertificateService ecoNewsCertificateService = new EcoNewsCertificateService();
         String value = TestHelpersUtils.generateRandomCertificateNumber();
@@ -48,8 +49,10 @@ public class TestHelpersUtils {
     }
     public static float checkIfNegative(float num){
         if(num > 0) return num;
+
         else return 0;
     }
+
     public static int generateRandomWrongCourierIdNumber() {
         UbsCourierService ubsCourierService = new UbsCourierService();
         int number = Integer.parseInt(RandomStringUtils.randomNumeric(1));

@@ -1,6 +1,5 @@
 package com.ita.edu.greencity.utils.jdbc.dao;
 
-import com.ita.edu.greencity.utils.jdbc.entity.EcoNewsCertificateEntity;
 import com.ita.edu.greencity.utils.jdbc.entity.UbsCourierEntity;
 
 import java.sql.ResultSet;
@@ -24,6 +23,7 @@ public class UbsCourierDao {
         ManagerDao.closeStatement(statement);
         return rows;
     }
+
     public List<String> checkIfCourierIdExists(int courierID) {
         Statement statement = ManagerDao.getUbs().getStatement();
         List<String> rows = new ArrayList<>();

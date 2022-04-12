@@ -14,12 +14,11 @@ import java.io.IOException;
 
 public class GetOrderHistorySuccessTest extends ApiTestRunner {
 
+    private final int orderId = 140;
+    private final int languageIdEn = 2;
+    private final int firstNumOfOrderHistory = 0;
     private Authorization authorization;
     private OrderClient orderClient;
-    private int orderId = 140;
-    private int languageIdEn = 2;
-    private int firstNumOfOrderHistory = 0;
-
 
     @BeforeClass
     public void beforeClass() throws IOException {

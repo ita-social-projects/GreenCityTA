@@ -11,9 +11,9 @@ import org.testng.asserts.SoftAssert;
 import java.io.IOException;
 
 public class GetOrderHistoryUnauthorizedTest extends ApiTestRunner {
+    private final int orderId = 89;
+    private final int languageIdEn = 2;
     private OrderClient orderClient;
-    private int orderId = 89;
-    private int languageIdEn = 2;
 
     @BeforeClass
     public void beforeClass() throws IOException {
