@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 public class OrderDetailsPageCertificateTest extends TestRun {
     private final String codeValueActive = TestHelpersUtils.generateRandomCertificateNumber();
-
     private final String statusValueActive = "ACTIVE";
     private final String expiration_dateValue = "2022-11-11 00:00:00";
     private final int pointsValue = 500;
@@ -26,16 +25,29 @@ public class OrderDetailsPageCertificateTest extends TestRun {
 
     private String nonExistCertificate() {
         String value = TestHelpersUtils.generateRandomCertificateNumber();
-        for (; ecoNewsCertificateService.checkIfCertificateExists(value); ) {
+        while ( ecoNewsCertificateService.checkIfCertificateExists(value)) {
             value = TestHelpersUtils.generateRandomOrderNumber();
         }
         return value;
     }
 
-    @BeforeTest
-    public void AddCertificate() throws Exception {
-        ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
-    }
+
+        @BeforeTest
+        public void AddCertificate () throws Exception {
+            ecoNewsCertificateService.addCertificate(codeValueActive, statusValueActive, expiration_dateValue, pointsValue);
+        }
+        @BeforeMethod
+        public void beforeMethod(ITestContext iTestContext) {
+            super.beforeMethod(iTestContext);
+            UbsHomePage ubsHomePage = new UbsHomePage(driver);
+            ubsHomePage.clickSingInButton()
+                    .inputEmail(provider.getEmail())
+                    .inputPassword(provider.getPassword())
+                    .clickSignIn()
+                    .pressOrderCourierLogin()
+                    .clickOnContinueButton()
+            ;
+
 
     @BeforeMethod
     public void beforeMethod(ITestContext iTestContext) {
@@ -113,6 +125,7 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                 .EnterNumberOfTextileWaste20lInput("1")
                 .EnterNumberOfTextileWaste120lInput("1")
                 .EnterCertificateInput(codeValueActive)
+                .clickOnActivateCertificateButton()
                 .clickOnCancelCertificateButton()
                 .getCertificateInput();
         Assert.assertEquals(actual, "");
@@ -130,7 +143,6 @@ public class OrderDetailsPageCertificateTest extends TestRun {
                 .EnterNumberOfTextileWaste120lInput("1")
                 .EnterCertificateInput(codeValueActive)
                 .clickOnActivateCertificateButton();
-        Thread.sleep(15000);
         float certificatePoints = Float.parseFloat(activeCertificatePoints);
         float actualAmount = Float.parseFloat(Arrays.stream(orderDetailsPage.getOrderAmount().split("\s")).toList().get(0));
         float actualAmountDue = Float.parseFloat(Arrays.stream(orderDetailsPage.getAmountDue().split("\s")).toList().get(0));

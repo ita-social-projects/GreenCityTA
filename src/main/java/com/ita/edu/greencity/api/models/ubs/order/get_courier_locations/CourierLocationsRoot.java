@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CourierLocationsRoot {
-    private ArrayList<CourierDto> courierDtos;
+    private List<CourierDto> courierDtos;
     private String courierLimit;
     private int courierLocationId;
     private List<LocationInfoDto> locationInfoDtos;

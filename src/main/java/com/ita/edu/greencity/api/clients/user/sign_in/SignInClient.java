@@ -16,7 +16,6 @@ public class SignInClient extends BaseClientUser {
 
     @Step("get request {this.baseApiURL}ownSecurity/signIn credentials: {credentials}")
     public Response successSignInRequest(UserCredentials credentials) {
-
         return preparedRequest()
                 .body(credentials)
                 .when()
