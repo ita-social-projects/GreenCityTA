@@ -37,7 +37,7 @@ public class ReceiveLiqPayPaymentTest extends ApiTestRunner {
         Assert.assertEquals(response.getStatusCode(), 400, "Mismatched status codes");
         Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_BAD_REQUEST, "Mismatched HTTP status codes");
         SuccessLiqPayPayment successLiqPayPayment = response.then().extract().as(SuccessLiqPayPayment.class);
-        Assert.assertEquals(successLiqPayPayment.getMessage(),"The received payment data is not valid.","Mismatched messages");
+        Assert.assertEquals(successLiqPayPayment.getMessage(), "The received payment data is not valid.", "Mismatched messages");
     }
 
 }

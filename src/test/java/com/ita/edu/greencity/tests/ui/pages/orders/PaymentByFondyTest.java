@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class PaymentByFondyTest extends TestRun {
 
     final int FIRST_INDEX_OF_SAVED_ADDRESSES = 0;
+    final int SUM_PART = 0;
     final String TEXTILE_WASTE_120L_AMOUNT = "1";
     final String SAFE_WASTE_AMOUNT = "1";
     final String TEXTILE_WASTE_20l_AMOUNT = "2";
@@ -70,6 +71,7 @@ public class PaymentByFondyTest extends TestRun {
         Assert.assertTrue(actualMessage.contains(expectedMessage), "Messages do not match");
     }
 
+
     @Description("Verify that order is made using new added address")
     @Issue("GC-2485")
     @Test
@@ -112,6 +114,7 @@ public class PaymentByFondyTest extends TestRun {
                 .clickUserMenu()
                 .clickUbsUser()
                 .getOrderByNumber(numberOfOrder).getOrderId();
+
         String expectedPaymentStatus = "Paid";
         String actualPaymentStatus = new HeaderSignedInComponent(driver)
                 .clickUserMenu()
@@ -130,7 +133,7 @@ public class PaymentByFondyTest extends TestRun {
                 .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton();
         double orderAmountInUbs = orderPageConfirmation
                 .transformToDoubleValue(Arrays.stream(orderPageConfirmation
-                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(0));
+                        .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(SUM_PART));
 
         double orderAmountInFondy = orderPageConfirmation
                 .transformToDoubleValue(orderPageConfirmation

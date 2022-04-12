@@ -13,10 +13,6 @@ import java.io.IOException;
 
 public class OrderClient extends BaseClientUBS {
     private final String authToken;
-    SuccessReqSaveOrderAddress successReqSaveOrderAddress = new SuccessReqSaveOrderAddress();
-    SuccessReqSaveOrderAddress addressList = new SuccessReqSaveOrderAddress();
-    ReqUpdateRecipientsData reqUpdateRecipientsData = new ReqUpdateRecipientsData();
-    ReqUpdateRecipientsData upDataList = new ReqUpdateRecipientsData();
 
     public OrderClient() throws IOException {
         super();
@@ -47,19 +43,6 @@ public class OrderClient extends BaseClientUBS {
                 .when()
                 .get(String.format("%s/order-details", baseApiURL));
     }
-
-    @Step("post request {this.baseApiURL}/receiveLiqPayPayment")
-    public Response receiveLiqPayPayment(String data, String signature) {
-        return preparedRequest()
-                .header("Authorization", String.format("Bearer %s", authToken))
-                .contentType("multipart/form-data")
-                .multiPart("data", data)
-                .multiPart("signature", signature)
-                .log().all()
-                .when()
-                .post(String.format("%s/receiveLiqPayPayment", baseApiURL));
-    }
-
 
     @Step("post request {this.baseApiURL}/ubs/findAll-order-address")
     public Response getAllAddressesForOrder() {
@@ -111,17 +94,6 @@ public class OrderClient extends BaseClientUBS {
                 .get(String.format("certificate/%s", certificate));
 
     }
-
-    @Step("post request {this.baseApiURL}/processOrder")
-    public Response processUserOrder(UserOrder userOrder) {
-        return preparedRequest()
-                .header("Authorization", String.format("Bearer %s", authToken))
-                .body(userOrder)
-                .log().all()
-                .when()
-                .post(String.format("%s/processOrder", baseApiURL));
-    }
-
 
     @Step("get request {this.baseApiURL}/delete-order-address ")
     public Response deleteOrderAddressById(Long id) {
@@ -195,4 +167,27 @@ public class OrderClient extends BaseClientUBS {
                 .when()
                 .get(String.format("%s/getLiqPayStatus/%s", baseApiURL, orderId));
     }
+
+    @Step("post request {this.baseApiURL}/processOrder")
+    public Response processUserOrder(UserOrder userOrder) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .body(userOrder)
+                .log().all()
+                .when()
+                .post(String.format("%s/processOrder", baseApiURL));
+    }
+
+    @Step("post request {this.baseApiURL}/receiveLiqPayPayment")
+    public Response receiveLiqPayPayment(String data, String signature) {
+        return preparedRequest()
+                .header("Authorization", String.format("Bearer %s", authToken))
+                .contentType("multipart/form-data")
+                .multiPart("data", data)
+                .multiPart("signature", signature)
+                .log().all()
+                .when()
+                .post(String.format("%s/receiveLiqPayPayment", baseApiURL));
+    }
+
 }

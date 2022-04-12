@@ -73,6 +73,7 @@ public class OrderPageConfirmationTest extends TestRun {
                 .enterPhoneNumber(USER_PHONE_NUMBER);
     }
 
+
     @Description("Verify whether the result of addition all types of wastes is the same as one calculated in UBS")
     @Issue("GC-2473")
     @Test
@@ -184,7 +185,7 @@ public class OrderPageConfirmationTest extends TestRun {
         String actualResultAfterLanguageChange = Arrays.stream(new OrderDetailsPage(driver)
                 .clickOnNextButton()
                 .clickOnChooseAddressButton(FIRST_INDEX_OF_SAVED_ADDRESSES).clickOnNextButton()
-                .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(1);
+                .getTotalSumWithCurrency(FIRST_INDEX_OF_TOTAL_SUM).split("\s")).toList().get(CURRENCY_PART);
         String expectedResultAfterLanguageChange = "грн";
         softAssert.assertEquals(actualResultAfterLanguageChange, expectedResultAfterLanguageChange, "Currencies are different after language change");
         softAssert.assertAll();
