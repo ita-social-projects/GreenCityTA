@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class OrderClient extends BaseClientUBS {
     private final String authToken;
-
+  
     public OrderClient() throws IOException {
         super();
         authToken = null;

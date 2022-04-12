@@ -1,4 +1,4 @@
-package com.ita.edu.greencity.tests.api.temp;
+package com.ita.edu.greencity.tests.api.order_client;
 
 import com.ita.edu.greencity.api.clients.ubs.client.OrderClient;
 import com.ita.edu.greencity.api.clients.user.sign_in.Authorization;
@@ -95,7 +95,13 @@ public class CertificateTests extends ApiTestRunner {
     public void unauthorizedCertificateTest() throws IOException {
         orderClient = new OrderClient();
         Response response = orderClient.getCertificatesInfo(ACTIVE_CERTIFICATE);
-        Assert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
+        SoftAssert softAssert = new SoftAssert();
+
+        String unauthorizedMessage = response.then().extract().asString();
+        softAssert.assertEquals(response.getStatusCode(), HttpURLConnection.HTTP_UNAUTHORIZED, "Status code not equals");
+        softAssert.assertEquals(unauthorizedMessage, "<html><body><h2>Error Page</h2><div>Status code: <b>401</b></div><div>Exception Message: <b>N/A</b></div><body></html>");
+
+        softAssert.assertAll();
     }
 
     @Description("[API] Check the receipt of information about the incorrect certificate")
