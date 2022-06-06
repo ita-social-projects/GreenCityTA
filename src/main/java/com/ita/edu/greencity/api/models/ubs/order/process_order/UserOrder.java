@@ -19,5 +19,4 @@ public class UserOrder {
     private Long pointsToUse;
     private Boolean shouldBePaid;
 
-
 }

@@ -224,7 +224,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on choose saved address button")
     public OrderPagePersonalData clickOnChooseAddressButton(int indexOfSavedAddress) {
-        sleep(5000);
+        sleep(3000);
         chooseSavedAddress.get(indexOfSavedAddress).click();
         return this;
     }
@@ -240,7 +240,7 @@ public class OrderPagePersonalData extends BasePage {
 
     @Step("click on next button")
     public OrderPageConfirmation clickOnNextButton() {
-        sleep(5000);
+        sleep(3000);
         nextButton.click();
         //sleep(5000);
         return new OrderPageConfirmation(driver);

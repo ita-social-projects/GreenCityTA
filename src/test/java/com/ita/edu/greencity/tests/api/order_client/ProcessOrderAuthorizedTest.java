@@ -369,5 +369,4 @@ public class ProcessOrderAuthorizedTest extends ApiTestRunner {
         softAssert.assertAll();
     }
 
-
 }

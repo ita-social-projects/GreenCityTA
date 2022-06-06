@@ -226,8 +226,6 @@ public class AddNewAddress extends BasePage {
                 .enterHouseNumber(numberOfHouse)
                 .enterHouseCorpus(corpusNumber)
                 .enterEntranceNumber(entranceNumber)
-                .enterStreet(street)
-                .chooseStreet(indexStreet)
                 .clickOnAddAddressButton();
         sleep(20000);
         return new OrderPagePersonalData(driver);
